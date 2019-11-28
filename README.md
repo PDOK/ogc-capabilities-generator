@@ -1,1 +1,1 @@
-# ogc-capabilities-gen
+# ogc-capabilities-generator
