@@ -1,0 +1,202 @@
+organization: PDOK
+identification: kadastralekaart
+dataset: kadastralekaart
+inspire: true
+urlwms: https://geodata.nationaalgeoregister.nl/kadastralekaart/wms/v4_0
+urlwfs: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0
+urlwmts: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0
+boundingbox: WGS84
+metadata-resource-id: 97cf6a64-9cfc-4ce6-9741-2db44fd27fca
+features:
+  - name: kadastralekaartv4:kadastralegrens
+    title: kadastralegrens
+    abstract: Een Kadastrale Grens is de weergave van een grens op de kadastrale kaart die door de dienst van
+      het Kadaster tussen percelen vastgesteld wordt, op basis van inlichtingen van belanghebbenden en met
+      gebruikmaking van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de
+      landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven.
+    keywords:
+      - Kadastrale percelen
+      - infoMapAccessService
+    bounding-box: WGS84
+    crs:
+      - 'EPSG:28992'
+      - 'EPSG:3035'
+      - 'EPSG:3038'
+
+layers:
+  - name: 'kadastralekaart'
+    title: 'kadastralekaartv4'
+    abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.
+    keywords:
+      - Kadastrale percelen
+      - Kadaster
+    bounding-box: NED
+
+    crs:
+      - 'EPSG:28992'
+      - 'EPSG:25831'
+      - 'EPSG:25832'
+      - 'EPSG:3034'
+      - 'EPSG:3035'
+      - 'EPSG:3857'
+      - 'EPSG:4258'
+      - 'EPSG:4326'
+      - 'CRS:84'
+    srs:
+      - 'EPSG:28992'
+      - 'EPSG:25831'
+      - 'EPSG:25832'
+      - 'EPSG:3034'
+      - 'EPSG:3035'
+      - 'EPSG:3857'
+      - 'EPSG:4258'
+      - 'EPSG:4326'
+      - 'CRS:84'
+
+    styles:
+      - name: 'kadastralekaartv4'
+        title: Visualisatie KadastraleKaartv4
+
+    layers:
+      - name: 'Perceel'
+        title: 'Perceel'
+        abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein
+          en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan
+          de gebruiker eigen informatie kan vastleggen en presenteren.
+        keywords:
+          - Kadastrale percelen
+        bounding-box: NED
+
+        crs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+        srs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+        styles:
+          - name: 'titlekadastralekaartv4:perceel_print'
+            title: Visualisatie van het perceel ten behoeve van afdrukken op 180 dpi
+          - name: kadastralekaartv4:perceel
+            title: Visualisatie van het perceel
+
+      - name: 'KadastraleGrens'
+        title: 'KadastraleGrens'
+        abstract: Een Kadastrale Grens is de weergave van een grens op de kadastrale kaart die door de dienst van het
+          Kadaster tussen percelen vastgesteld wordt, op basis van inlichtingen van belanghebbenden en met gebruikmaking
+          van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de landmeetkundige gegevens
+          bevatten van hetgeen op die kaart wordt weergegeven.
+        keywords:
+          - Kadastrale percelen
+        bounding-box: NED
+
+        crs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+        srs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+          -
+        styles:
+          - name: 'kadastralekaartv4:kadastralegrens_print'
+            title: Visualisatie van de grens op basis van type (definitief, voorlopig of administratief) ten behoeve van afdrukken op 180 dpi
+          - name: kadastralekaartv4:kadastralegrens
+            title: Visualisatie van de grens op basis van type (definitief, voorlopig of administratief
+
+      - name: 'Bebouwing'
+        title: 'Bebouwing'
+        abstract: De laag Bebouwing is een selectie op panden van de BGT met een bgt-status “bestaand” die een huisnummer hebben.
+          bevatten van hetgeen op die kaart wordt weergegeven.
+        keywords:
+          - bebouwing
+        bounding-box: NED
+
+        crs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+        srs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+        styles:
+          - name: 'kadastralekaartv4:bebouwing'
+            title: Visualisatie van de bebouwing
+          - name: kadastralekaartv4:kadastralegrens
+            title: Visualisatie van de grens op basis van type (definitief, voorlopig of administratief
+
+
+      - name: 'OpenbareRuimteNaam'
+        title: 'OpenbareRuimteNaam'
+        abstract: De laag Openbareruimtenaam  is een selectie op de openbare ruimte labels van de BGT met een bgt-status
+          “bestaand” die een classificatie (openbareruimtetype) Weg en Water hebben.
+        keywords:
+          - openbareruimtenaam
+        bounding-box: NED
+
+        crs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+        srs:
+          - 'EPSG:28992'
+          - 'EPSG:25831'
+          - 'EPSG:25832'
+          - 'EPSG:3034'
+          - 'EPSG:3035'
+          - 'EPSG:3857'
+          - 'EPSG:4258'
+          - 'EPSG:4326'
+          - 'CRS:84'
+        styles:
+          - name: kadastralekaartv4:openbareruimtenaam_print
+            title: Visualisatie van openbareruimtenaam ten behoeve van afdrukken op 180 dpi
+          - name: kadastralekaartv4:openbareruimtenaam
+            title: Visualisatie van de openbareruimtenaam
+
+
