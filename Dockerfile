@@ -1,4 +1,4 @@
-FROM golang:1.13-alpine3.10 AS  build-env
+FROM golang:1.13-alpine3.10 AS build-env
 
 RUN apk update && apk upgrade && \
    apk add --no-cache bash git pkgconfig go gcc g++ libc-dev
