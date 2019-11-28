@@ -13,7 +13,6 @@ const TplWmts100 = "wmts_1_0_0.tpl"
 const TplTilematrixset28992 = "tilematrixset_28992.tpl"
 const TplTilematrixset3857 = "tilematrixset_3857.tpl"
 const TplTilematrixset25831 = "tilematrixset_25831.tpl"
-const OperationsMetadata = "operations_metadata.tpl"
 const TplLayersWmts = "layer.tpl"
 
 type WmtsCapabilities struct {
@@ -48,11 +47,6 @@ func (c *WmtsCapabilities) BuildWmts(version string, writer io.Writer) error {
 func (c *WmtsCapabilities) buildWmts1(writer io.Writer) error {
 
 	capabilitiesMap := make(map[string]interface{})
-
-	operationsMetadata, err := c.GenerateOperationsMetadata(OperationsMetadata)
-	if capabilitiesMap[OperationsMetadata] = operationsMetadata; err != nil {
-		return err
-	}
 
 	layers, err := c.GenerateLayers(TplLayersWmts)
 	if capabilitiesMap[TplLayersWmts] = layers; err != nil {
