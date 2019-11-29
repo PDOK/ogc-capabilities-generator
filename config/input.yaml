@@ -5,6 +5,7 @@ inspire: true
 urlwms: https://geodata.nationaalgeoregister.nl/kadastralekaart/wms/v4_0
 urlwfs: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0
 urlwmts: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0
+pathwmts: /kadastralekaart/wmts/v4_0
 boundingbox: WGS84
 metadata-resource-id: 97cf6a64-9cfc-4ce6-9741-2db44fd27fca
 features:

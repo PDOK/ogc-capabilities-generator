@@ -9,10 +9,10 @@
         <ows:AccessConstraints>none</ows:AccessConstraints>
     </ows:ServiceIdentification>
     <Contents>
-    {{index . "layer.tpl" }}
+    {{ index . "layer.tpl" }}
     {{ index . "tilematrixset_28992.tpl" }}
     {{ index . "tilematrixset_3857.tpl" }}
     {{ index . "tilematrixset_25831.tpl" }}
     </Contents>
-    <ServiceMetadataURL xlink:href="https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/WMTSCapabilities.xml"/>
+    <ServiceMetadataURL xlink:href="{{ .onlineresourceurl }}{{ .service.PathWMTS }}/WMTSCapabilities.xml"/>
 </Capabilities>
