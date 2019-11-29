@@ -68,8 +68,8 @@ func TestCapabilities_BuildOrder_wmts(t *testing.T) {
 
 	c.Version = "1.0.0"
 
-	orderTemplates := []string{"operations_metadata.tpl", "layer.tpl", "tilematrixset_28992.tpl", "tilematrixset_3857.tpl", "tilematrixset_25831.tpl", "wmts_1_0_0.tpl"}
-	orderInterface := []string{"map[string]interface {}", "map[string]interface {}", "[]builder.Tilematrixset", "[]builder.Tilematrixset", "[]builder.Tilematrixset", "map[string]interface {}"}
+	orderTemplates := []string{"layer.tpl", "tilematrixset_28992.tpl", "tilematrixset_3857.tpl", "tilematrixset_25831.tpl", "wmts_1_0_0.tpl"}
+	orderInterface := []string{"map[string]interface {}", "[]builder.Tilematrixset", "[]builder.Tilematrixset", "[]builder.Tilematrixset", "map[string]interface {}"}
 	t.Run("test Build", func(t *testing.T) {
 		var buff bytes.Buffer
 		err := c.Build(&buff)

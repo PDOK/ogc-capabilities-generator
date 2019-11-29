@@ -13,7 +13,6 @@ const TplWmts100 = "wmts_1_0_0.tpl"
 const TplTilematrixset28992 = "tilematrixset_28992.tpl"
 const TplTilematrixset3857 = "tilematrixset_3857.tpl"
 const TplTilematrixset25831 = "tilematrixset_25831.tpl"
-const OperationsMetadata = "operations_metadata.tpl"
 const TplLayersWmts = "layer.tpl"
 
 type WmtsCapabilities struct {
@@ -25,14 +24,15 @@ type WmtsCapabilities struct {
 	ServiceProvider       Organization
 	Layers                []Layer
 	ServiceDef            ServiceDef
+	OnlineResourceURL     string
 }
 
 func (c *WmtsCapabilities) Build(writer io.Writer) error {
 	return c.BuildWmts(c.Version, writer)
 }
 
-func NewWmtsCapabilities(wmts *template.Template, def ServiceDef, serviceVersion string) *WmtsCapabilities {
-	c := &WmtsCapabilities{wmtsTemplates: TemplateExecutor{wmts}, ServiceDef: def, Version: serviceVersion}
+func NewWmtsCapabilities(wmts *template.Template, def ServiceDef, serviceVersion string, onlineResourceURL string) *WmtsCapabilities {
+	c := &WmtsCapabilities{wmtsTemplates: TemplateExecutor{wmts}, ServiceDef: def, Version: serviceVersion, OnlineResourceURL: onlineResourceURL}
 	return c
 }
 
@@ -48,11 +48,8 @@ func (c *WmtsCapabilities) BuildWmts(version string, writer io.Writer) error {
 func (c *WmtsCapabilities) buildWmts1(writer io.Writer) error {
 
 	capabilitiesMap := make(map[string]interface{})
-
-	operationsMetadata, err := c.GenerateOperationsMetadata(OperationsMetadata)
-	if capabilitiesMap[OperationsMetadata] = operationsMetadata; err != nil {
-		return err
-	}
+	capabilitiesMap["dataset"] = c.Dataset
+	capabilitiesMap["onlineresourceurl"] = c.OnlineResourceURL
 
 	layers, err := c.GenerateLayers(TplLayersWmts)
 	if capabilitiesMap[TplLayersWmts] = layers; err != nil {
@@ -73,8 +70,6 @@ func (c *WmtsCapabilities) buildWmts1(writer io.Writer) error {
 	if capabilitiesMap[TplTilematrixset25831] = tilematrixset25831; err != nil {
 		return err
 	}
-
-	capabilitiesMap["dataset"] = c.Dataset
 
 	capabilities, err := c.generate(TplWmts100, capabilitiesMap)
 	if err != nil {

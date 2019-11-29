@@ -54,6 +54,7 @@ type Service struct {
 	UrlWms             string        `yaml:"urlwms"`
 	UrlWfs             string        `yaml:"urlwfs"`
 	UrlWmts            string        `yaml:"urlwmts"`
+	PathWMTS           string        `yaml:"pathwmts"`
 	MetadataResourceId string        `yaml:"metadata-resource-id"`
 	Operations         []string      `yaml:"operations"`
 	Boundingbox        string        `yaml:"boundingbox"`

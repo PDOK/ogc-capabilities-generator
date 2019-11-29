@@ -1,6 +1,13 @@
 # ogc-capabilities-generator
 
-### Config aanroep
+## TL;DR
+
+```docker
+docker build -t pdok/ogc-capabilities-generator
+docker run -v `pwd`/config:/config -v `pwd`:/output -e SERVICE_TYPE=wfs -e SERVICE_VERSION=2.0.0 -e SERVICE_CONFIG_PATH=/config/input.yaml -e SERVICE_CAPABILITIES_PATH=/output/capabilities_wfs_200.xml pdok/ogc-capabilities-generator
+```
+
+## Config aanroep
 
 ```go
 typePtr := flag.String("service-type", envString("SERVICE_TYPE", ""), "wfs or wms or wmts")
@@ -8,7 +15,6 @@ versionPtr := flag.String("service-version", envString("SERVICE_VERSION", ""), "
 serviceConfigPathPtr := flag.String("service-config", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
 serviceDefConfigPathPtr := flag.String("service-def-config", envString("SERVICE_DEF_CONFIG_PATH", "config/serviceDef.yaml"), "location of the service definition config")
 outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
-
 ```
 
 service definition file bevat alle lookups
@@ -75,9 +81,3 @@ layers:
     style_title: Visualisatie van het perceel ten behoeve van afdrukken op 180 dpi.
 
 ```
-
-### example:
-
-```shell script
-docker build -t test
-docker run -v $(pwd)/config:/config -v $(pwd):/output -e SERVICE_TYPE=wfs -e SERVICE_VERSION=2.0.0 -e SERVICE_CONFIG_PATH=/config/input.yaml -e SERVICE_CAPABILITIES_PATH=/output/capabilities_wfs_200.xml test:latest 

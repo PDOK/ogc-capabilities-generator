@@ -60,7 +60,7 @@ func Test_validate(t *testing.T) {
 		{"wms_is_not_ok", args{
 			typeStr:    "wmds",
 			versionStr: "1.3.0",
-		}, fmt.Errorf("service type unknown : 'wmds', possible values are : wfs, wmf, wmts")},
+		}, fmt.Errorf("service type unknown : 'wmds', possible values are : wfs, wms, wmts")},
 		{"wMts_is_ok", args{
 			typeStr:    "wMts",
 			versionStr: "1.0.0",
@@ -87,12 +87,12 @@ func Test_validate(t *testing.T) {
 			}
 
 			if tt.want != nil && err == nil || err != nil && tt.want == nil {
-				t.Errorf("Got %v, but want %v", err, tt.want)
+				t.Errorf("Got: \"%v\", but want: \"%v\"", err, tt.want)
 				return
 			}
 
 			if err.Error() != tt.want.Error() {
-				t.Errorf("Got %v, but want %v", err, tt.want)
+				t.Errorf("Got: \"%v\", but want: \"%v\"", err, tt.want)
 			}
 		})
 	}

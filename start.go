@@ -4,13 +4,14 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"os"
 	"pdok-capabilities-gen/builder"
 	"pdok-capabilities-gen/util"
 	"strings"
+
+	"gopkg.in/yaml.v2"
 )
 
 var wfs = util.GetTemplates("templates/wfs/*")
@@ -24,6 +25,7 @@ func main() {
 	serviceConfigPathPtr := flag.String("service-config", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
 	serviceDefConfigPathPtr := flag.String("service-def-config", envString("SERVICE_DEF_CONFIG_PATH", "config/serviceDef.yaml"), "location of the service definition config")
 	outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
+	onlineResourceURL := flag.String("service-online-resource", envString("SERVICE_CAPABILITIES_ONLINERESOURCE", ""), "onlineresource URL used in documents")
 	flag.Parse()
 
 	if err := validate(*typePtr, *versionPtr); err != nil {
@@ -41,7 +43,7 @@ func main() {
 	}
 
 	serviceDef := getServiceDef(*serviceDefConfigPathPtr)
-	capabilitiesBuilder := createBuilder(serviceDef, service, *typePtr, *versionPtr)
+	capabilitiesBuilder := createBuilder(serviceDef, service, *typePtr, *versionPtr, *onlineResourceURL)
 	if capabilitiesBuilder == nil {
 		log.Fatalf("Could not create capabilitiesBuilder with %s[%s]", *typePtr, *versionPtr)
 	}
@@ -55,7 +57,7 @@ func main() {
 
 }
 
-func createBuilder(serviceDef builder.ServiceDef, service builder.Service, serviceType, serviceVersion string) builder.Builder {
+func createBuilder(serviceDef builder.ServiceDef, service builder.Service, serviceType, serviceVersion string, onlineResourceURL string) builder.Builder {
 
 	if serviceType == "wfs" {
 		return builder.NewWfsCapabilities(wfs, serviceDef, serviceVersion).
@@ -75,7 +77,7 @@ func createBuilder(serviceDef builder.ServiceDef, service builder.Service, servi
 	}
 
 	if serviceType == "wmts" {
-		return builder.NewWmtsCapabilities(wmts, serviceDef, serviceVersion).
+		return builder.NewWmtsCapabilities(wmts, serviceDef, serviceVersion, onlineResourceURL).
 			AddDataset(serviceDef.Datasets[service.Dataset]).
 			AddLayers(serviceDef.Datasets[service.Dataset], service.Layers, serviceDef, service)
 	}
