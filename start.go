@@ -3,13 +3,11 @@ package main
 import (
 	"bytes"
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"pdok-capabilities-gen/builder"
 	"pdok-capabilities-gen/util"
-	"strings"
 
 	"gopkg.in/yaml.v2"
 )
@@ -18,72 +16,33 @@ var wfs = util.GetTemplates("templates/wfs/*")
 var wms = util.GetTemplates("templates/wms/*")
 var wmts = util.GetTemplates("templates/wmts/*")
 
-func main() {
+// func createBuilder(service builder.Service, onlineResourceURL string) builder.Builder {
 
-	typePtr := flag.String("service-type", envString("SERVICE_TYPE", ""), "wfs or wms or wmts")
-	versionPtr := flag.String("service-version", envString("SERVICE_VERSION", ""), "wfs[1.1.0, 2.0.0] or wms[1.3.0] or wmts[1.0.0]")
-	serviceConfigPathPtr := flag.String("service-config", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
-	serviceDefConfigPathPtr := flag.String("service-def-config", envString("SERVICE_DEF_CONFIG_PATH", "config/serviceDef.yaml"), "location of the service definition config")
-	outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
-	onlineResourceURL := flag.String("service-online-resource", envString("SERVICE_CAPABILITIES_ONLINERESOURCE", ""), "onlineresource URL used in documents")
-	flag.Parse()
+// 	if serviceType == "wfs" {
+// 		return builder.NewWfsCapabilities(wfs, serviceDef, serviceVersion).
+// 			AddServiceIdentification(serviceDef.Identification[service.Identification]).
+// 			AddDataset(serviceDef.Datasets[service.Dataset]).
+// 			AddServiceProvider(serviceDef.Organizations[service.Organization]).
+// 			AddFeatures(serviceDef.Datasets[service.Dataset], service.Features, serviceDef).
+// 			AddOperationsMetadata(serviceDef.Datasets[service.Dataset], service)
+// 	}
 
-	if err := validate(*typePtr, *versionPtr); err != nil {
-		log.Fatalf("error: %v", err)
-	}
+// 	if serviceType == "wms" {
+// 		return builder.NewWmsCapabilities(wms, serviceDef, serviceVersion).
+// 			AddDataset(serviceDef.Datasets[service.Dataset]).
+// 			AddServiceProvider(serviceDef.Organizations[service.Organization], serviceDef.Identification[service.Identification]).
+// 			AddLayers(serviceDef.Datasets[service.Dataset], service.Layers, serviceDef, service).
+// 			AddCapabilityRequest(serviceDef.Datasets[service.Dataset], service).AddInspireCommon(service)
+// 	}
 
-	serviceConfig, err := ioutil.ReadFile(*serviceConfigPathPtr)
-	if err != nil {
-		log.Fatalf("error: %v", err)
-	}
+// 	if serviceType == "wmts" {
+// 		return builder.NewWmtsCapabilities(wmts, serviceDef, serviceVersion, onlineResourceURL).
+// 			AddDataset(serviceDef.Datasets[service.Dataset]).
+// 			AddLayers(serviceDef.Datasets[service.Dataset], service.Layers, serviceDef, service)
+// 	}
 
-	service := builder.Service{}
-	if err = yaml.Unmarshal(serviceConfig, &service); err != nil {
-		log.Fatalf("error: %v", err)
-	}
-
-	serviceDef := getServiceDef(*serviceDefConfigPathPtr)
-	capabilitiesBuilder := createBuilder(serviceDef, service, *typePtr, *versionPtr, *onlineResourceURL)
-	if capabilitiesBuilder == nil {
-		log.Fatalf("Could not create capabilitiesBuilder with %s[%s]", *typePtr, *versionPtr)
-	}
-
-	var writer bytes.Buffer
-	err = capabilitiesBuilder.Build(&writer)
-	if err != nil {
-		log.Fatalf("error: %v", err)
-	}
-	writeFile(*outputCapabilitiesPtr, writer.Bytes())
-
-}
-
-func createBuilder(serviceDef builder.ServiceDef, service builder.Service, serviceType, serviceVersion string, onlineResourceURL string) builder.Builder {
-
-	if serviceType == "wfs" {
-		return builder.NewWfsCapabilities(wfs, serviceDef, serviceVersion).
-			AddServiceIdentification(serviceDef.Identification[service.Identification]).
-			AddDataset(serviceDef.Datasets[service.Dataset]).
-			AddServiceProvider(serviceDef.Organizations[service.Organization]).
-			AddFeatures(serviceDef.Datasets[service.Dataset], service.Features, serviceDef).
-			AddOperationsMetadata(serviceDef.Datasets[service.Dataset], service)
-	}
-
-	if serviceType == "wms" {
-		return builder.NewWmsCapabilities(wms, serviceDef, serviceVersion).
-			AddDataset(serviceDef.Datasets[service.Dataset]).
-			AddServiceProvider(serviceDef.Organizations[service.Organization], serviceDef.Identification[service.Identification]).
-			AddLayers(serviceDef.Datasets[service.Dataset], service.Layers, serviceDef, service).
-			AddCapabilityRequest(serviceDef.Datasets[service.Dataset], service).AddInspireCommon(service)
-	}
-
-	if serviceType == "wmts" {
-		return builder.NewWmtsCapabilities(wmts, serviceDef, serviceVersion, onlineResourceURL).
-			AddDataset(serviceDef.Datasets[service.Dataset]).
-			AddLayers(serviceDef.Datasets[service.Dataset], service.Layers, serviceDef, service)
-	}
-
-	return nil
-}
+// 	return nil
+// }
 
 func writeFile(name string, data []byte) {
 	err := ioutil.WriteFile(name, data, 0777)
@@ -102,22 +61,6 @@ func getServiceDef(serviceDefConfigPath string) builder.ServiceDef {
 		log.Fatalf("error: %v", err)
 	}
 	return serviceDef
-}
-
-func validate(typeStr, versionStr string) error {
-	tsl := strings.ToLower(typeStr)
-	serviceMap := getServiceMap()
-
-	versions, ok := serviceMap[tsl]
-	if !ok {
-		return fmt.Errorf("service type unknown : '%s', possible values are : wfs, wms, wmts", typeStr)
-	}
-
-	vpl := strings.ToLower(versionStr)
-	if !contains(vpl, versions) {
-		return fmt.Errorf("version unknown for %s['%s'], possible versions are %s", typeStr, versionStr, arrayToString(serviceMap[typeStr], ", "))
-	}
-	return nil
 }
 
 func envString(key, defaultValue string) string {
@@ -156,4 +99,35 @@ func arrayToString(aList []string, delim string) string {
 	}
 
 	return buffer.String()
+}
+
+func main() {
+
+	serviceConfigPathPtr := flag.String("service-config", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
+	// outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
+	// onlineResourceURL := flag.String("service-online-resource", envString("SERVICE_CAPABILITIES_ONLINERESOURCE", ""), "onlineresource URL used in documents")
+	flag.Parse()
+
+	serviceConfig, err := ioutil.ReadFile(*serviceConfigPathPtr)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+
+	service := builder.Service{}
+	if err = yaml.Unmarshal(serviceConfig, &service); err != nil {
+		log.Fatalf("error: %v", err)
+	}
+
+	// capabilitiesBuilder := createBuilder(service, *onlineResourceURL)
+	// if capabilitiesBuilder == nil {
+	// 	log.Fatalf("Could not create capabilitiesBuilder")
+	// }
+
+	// var writer bytes.Buffer
+	// err = capabilitiesBuilder.Build(&writer)
+	// if err != nil {
+	// 	log.Fatalf("error: %v", err)
+	// }
+	// writeFile(*outputCapabilitiesPtr, writer.Bytes())
+
 }
