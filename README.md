@@ -13,6 +13,8 @@ https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/WMTSCapabiliti
 https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?request=getcapabilities&service=wfs&version=2.0.0
 https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?request=getcapabilities&service=wfs&version=1.1.0
 
+https://www.onlinetool.io/xmltogo/
+
 ## Config aanroep
 
 ```go

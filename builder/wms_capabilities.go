@@ -20,17 +20,17 @@ type WmsCapabilities struct {
 	Dataset               Dataset
 	Service               Service
 	Inspire               bool
-	ServiceIdentification Identification
+	ServiceIdentification string
 	ServiceProvider       Organization
 	Layers                []Layer
-	ServiceDef            ServiceDef
+	ServiceDef            string
 }
 
 func (c *WmsCapabilities) Build(writer io.Writer) error {
 	return c.BuildWms(c.Version, writer)
 }
 
-func NewWmsCapabilities(wms *template.Template, def ServiceDef, serviceVersion string) *WmsCapabilities {
+func NewWmsCapabilities(wms *template.Template, def string, serviceVersion string) *WmsCapabilities {
 	c := &WmsCapabilities{wmsTemplates: TemplateExecutor{wms}, ServiceDef: def, Version: serviceVersion}
 	return c
 }
@@ -88,7 +88,7 @@ func (c *WmsCapabilities) buildWms(writer io.Writer) error {
 	return nil
 }
 
-func (c *WmsCapabilities) AddLayers(dataset Dataset, layers []Layer, def ServiceDef, service Service) *WmsCapabilities {
+func (c *WmsCapabilities) AddLayers(dataset Dataset, layers []Layer, def string, service Service) *WmsCapabilities {
 
 	c.Service = service
 	c.Dataset = dataset
@@ -126,7 +126,7 @@ func (c *WmsCapabilities) generateNestedLayers(t *template.Template, parentLayer
 
 type LayersStruct struct {
 	Layer      Layer
-	ServiceDef ServiceDef
+	ServiceDef string
 	Dataset    Dataset
 	Service    Service
 }
@@ -160,7 +160,7 @@ func (c *WmsCapabilities) AddDataset(dataset Dataset) *WmsCapabilities {
 	return c
 }
 
-func (c *WmsCapabilities) AddServiceProvider(organization Organization, identification Identification) *WmsCapabilities {
+func (c *WmsCapabilities) AddServiceProvider(organization Organization, identification string) *WmsCapabilities {
 	c.ServiceProvider = organization
 	c.ServiceIdentification = identification
 

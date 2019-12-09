@@ -3,11 +3,12 @@ package builder
 import (
 	"bytes"
 	"fmt"
-	"github.com/antchfx/xmlquery"
 	"io"
 	"log"
 	"strings"
 	"text/template"
+
+	"github.com/antchfx/xmlquery"
 )
 
 const TplServiceidentification = "service-identification.tpl"
@@ -27,18 +28,18 @@ type WfsCapabilities struct {
 	Dataset               Dataset
 	Service               Service
 	Inspire               bool
-	ServiceIdentification Identification
+	ServiceIdentification string
 	ServiceProvider       Organization
 	Features              []Feature
-	ServiceDef            ServiceDef
+	ServiceDef            string
 }
 
 func (c *WfsCapabilities) Build(writer io.Writer) error {
 	return c.buildWfs(c.Version, writer)
 }
 
-func NewWfsCapabilities(wfs *template.Template, def ServiceDef, version string) *WfsCapabilities {
-	c := &WfsCapabilities{wfsTemplates: TemplateExecutor{wfs}, ServiceDef: def, Version: version}
+func NewWfsCapabilities(wfs *template.Template, version string) *WfsCapabilities {
+	c := &WfsCapabilities{wfsTemplates: TemplateExecutor{wfs}, ServiceDef: "", Version: version}
 	return c
 }
 
@@ -151,17 +152,17 @@ func (c *WfsCapabilities) buildWfs2(writer io.Writer) error {
 	return nil
 }
 
-func (c *WfsCapabilities) AddServiceIdentification(serviceIdentification Identification) *WfsCapabilities {
+func (c *WfsCapabilities) AddServiceIdentification(serviceIdentification string) *WfsCapabilities {
 	c.ServiceIdentification = serviceIdentification
 	return c
 }
 
 func (c *WfsCapabilities) GenerateServiceIdentification() (string, error) {
-	c.ServiceIdentification.Version = c.Version
+	c.ServiceIdentification = c.Version
 	return c.generate(TplServiceidentification, c.ServiceIdentification)
 }
 
-func (c *WfsCapabilities) AddFeatures(dataset Dataset, features []Feature, def ServiceDef) *WfsCapabilities {
+func (c *WfsCapabilities) AddFeatures(dataset Dataset, features []Feature, def string) *WfsCapabilities {
 
 	c.Dataset = dataset
 	c.Features = features
@@ -174,8 +175,8 @@ func (c *WfsCapabilities) GenerateFeatures(template string) (string, error) {
 
 	data["features"] = c.Features
 	data["dataset"] = c.Dataset
-	data["crs"] = c.ServiceDef.Crs
-	data["boundingbox"] = c.ServiceDef.Boundingbox
+	data["crs"] = c.ServiceDef
+	data["boundingbox"] = c.ServiceDef
 
 	return c.generate(template, data)
 }

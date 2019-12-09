@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bytes"
+	"encoding/xml"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -9,6 +9,7 @@ import (
 	"os"
 	"pdok-capabilities-gen/builder"
 	"pdok-capabilities-gen/util"
+	"strings"
 
 	"gopkg.in/yaml.v2"
 )
@@ -52,17 +53,17 @@ func writeFile(name string, data []byte) {
 	}
 }
 
-func getServiceDef(serviceDefConfigPath string) builder.ServiceDef {
-	serviceDefConfig, err := ioutil.ReadFile(serviceDefConfigPath)
-	if err != nil {
-		log.Fatalf("error: %v", err)
-	}
-	serviceDef := builder.ServiceDef{}
-	if err = yaml.Unmarshal(serviceDefConfig, &serviceDef); err != nil {
-		log.Fatalf("error: %v", err)
-	}
-	return serviceDef
-}
+// func getServiceDef(serviceDefConfigPath string) builder.ServiceDef {
+// 	serviceDefConfig, err := ioutil.ReadFile(serviceDefConfigPath)
+// 	if err != nil {
+// 		log.Fatalf("error: %v", err)
+// 	}
+// 	serviceDef := builder.ServiceDef{}
+// 	if err = yaml.Unmarshal(serviceDefConfig, &serviceDef); err != nil {
+// 		log.Fatalf("error: %v", err)
+// 	}
+// 	return serviceDef
+// }
 
 func envString(key, defaultValue string) string {
 	value := os.Getenv(key)
@@ -72,41 +73,41 @@ func envString(key, defaultValue string) string {
 	return defaultValue
 }
 
-func getServiceMap() map[string][]string {
-	serviceMap := map[string][]string{
-		"wms":  {"1.3.0"},
-		"wmts": {"1.0.0"},
-		"wfs":  {"1.1.0", "2.0.0"},
-	}
-	return serviceMap
-}
+// func getServiceMap() map[string][]string {
+// 	serviceMap := map[string][]string{
+// 		"wms":  {"1.3.0"},
+// 		"wmts": {"1.0.0"},
+// 		"wfs":  {"1.1.0", "2.0.0"},
+// 	}
+// 	return serviceMap
+// }
 
-func contains(value string, list []string) bool {
-	for _, version := range list {
-		if version == value {
-			return true
-		}
-	}
-	return false
-}
+// func contains(value string, list []string) bool {
+// 	for _, version := range list {
+// 		if version == value {
+// 			return true
+// 		}
+// 	}
+// 	return false
+// }
 
-func arrayToString(aList []string, delim string) string {
-	var buffer bytes.Buffer
-	for i := 0; i < len(aList); i++ {
-		buffer.WriteString(aList[i])
-		if i != len(aList)-1 {
-			buffer.WriteString(delim)
-		}
-	}
+// func arrayToString(aList []string, delim string) string {
+// 	var buffer bytes.Buffer
+// 	for i := 0; i < len(aList); i++ {
+// 		buffer.WriteString(aList[i])
+// 		if i != len(aList)-1 {
+// 			buffer.WriteString(delim)
+// 		}
+// 	}
 
-	return buffer.String()
-}
+// 	return buffer.String()
+// }
 
 func main() {
 
-	serviceConfigPath := flag.String("c", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
+	serviceConfigPath := flag.String("c", envString("SERVICECONFIG", ""), "location of the service config")
 	// outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
-	// onlineResourceURL := flag.String("service-online-resource", envString("SERVICE_CAPABILITIES_ONLINERESOURCE", ""), "onlineresource URL used in documents")
+	onlineResourceURL := flag.String("h", envString("ONLINERESOURCE", ""), "onlineresource URL used in documents")
 	flag.Parse()
 
 	serviceConfig, err := ioutil.ReadFile(*serviceConfigPath)
@@ -120,7 +121,36 @@ func main() {
 		log.Fatalf("error: %v", err)
 	}
 
-	fmt.Println(service)
+	// overwrite onlineresourceurl
+	if *onlineResourceURL != "" {
+		service.Global.Onlineresourceurl = *onlineResourceURL
+	}
+
+	for _, w := range service.Service.WFS {
+		fmt.Println(w)
+
+		if w.Version == "2.0.0" {
+			wfs := builder.WFS_2_0_0{}
+			wfs.XmlnsGML = "http://www.opengis.net/gml/3.2"
+			wfs.XmlnsWFS = "http://www.opengis.net/wfs/2.0"
+			wfs.XmlnsOWS = "http://www.opengis.net/ows/1.1"
+			wfs.XmlnsXlink = "http://www.w3.org/1999/xlink"
+			wfs.XmlnsXSI = "http://www.w3.org/2001/XMLSchema-instance"
+			wfs.XmlnsFes = "http://www.opengis.net/fes/2.0"
+			wfs.XmlnsPrefix = "namespace_uri"
+			wfs.Version = w.Version
+			wfs.SchemaLocation = "http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd"
+			wfs.ServiceIdentification.Title = service.Global.Title
+
+			si, _ := xml.MarshalIndent(wfs, "", " ")
+			siFixed := strings.ReplaceAll(string(si), "xmlns:prefix=\"namespace_uri\"", "xmlns:kadastralekaartv4=\"http://kadastralekaartv4.geonovum.nl\"")
+			fmt.Println(siFixed)
+		}
+	}
+
+	// for _, wms := range service.Service.WMS {
+	// 	fmt.Println(wms)
+	// }
 
 	// capabilitiesBuilder := createBuilder(service, *onlineResourceURL)
 	// if capabilitiesBuilder == nil {

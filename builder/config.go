@@ -6,11 +6,19 @@ type Config struct {
 }
 
 type Global struct {
-	Organization Organization `yaml:"organization"`
-	Boundingbox  []float64    `yaml:"boundingbox"`
-	Title        string       `yaml:"title"`
-	Abstract     string       `yaml:"abstract"`
-	Path         string       `yaml:"path"`
+	Onlineresourceurl string           `yaml:"onlineresourceurl"`
+	Organization      Organization     `yaml:"organization"`
+	WGS84Boundingbox  WGS84Boundingbox `yaml:"WGS84Boundingbox"`
+	Title             string           `yaml:"title"`
+	Abstract          string           `yaml:"abstract"`
+	Path              string           `yaml:"path"`
+}
+
+type WGS84Boundingbox struct {
+	WestBoundLongitude float64 `yaml:"westBoundLongitude"`
+	EastBoundLongitude float64 `yaml:"eastBoundLongitude"`
+	SouthBoundLatitude float64 `yaml:"southBoundLatitude"`
+	NorthBoundLatitude float64 `yaml:"northBoundLatitude"`
 }
 
 type Organization struct {
@@ -19,12 +27,12 @@ type Organization struct {
 	Position   string `yaml:"position"`
 	City       string `yaml:"city"`
 	Country    string `yaml:"country"`
-	Email      string `yaml:"e-mail"`
+	Email      string `yaml:"email"`
 }
 
 type Service struct {
 	WFS []WFS `yaml:"wfs"`
-	// WMS  []WMS  `yaml:"wms"`
+	WMS []WMS `yaml:"wms"`
 	// WMTS []WMTS `yaml:"wmts"`
 }
 
@@ -33,6 +41,14 @@ type WFS struct {
 	Version      string         `yaml:"version"`
 	Outputformat []Outputformat `yaml:"outputformat"`
 	Features     []Feature      `yaml:"features"`
+}
+
+type WMS struct {
+	CRS          CRS            `yaml:"crs"`
+	Version      string         `yaml:"version"`
+	Boundingbox  []Boundingbox  `yaml:"boundingbox"`
+	Outputformat []Outputformat `yaml:"outputformat"`
+	Layers       []Layer        `yaml:"layers"`
 }
 
 type CRS struct {
@@ -46,9 +62,34 @@ type Outputformat struct {
 }
 
 type Feature struct {
-	Name        string    `yaml:"name"`
-	Title       string    `yaml:"title"`
-	Abstract    string    `yaml:"abstract"`
-	Boundingbox []float64 `yaml:"boundingbox"`
-	Keywords    []string  `yaml:"keywords"`
+	Name     string   `yaml:"name"`
+	Title    string   `yaml:"title"`
+	Abstract string   `yaml:"abstract"`
+	Keywords []string `yaml:"keywords"`
+}
+
+type Boundingbox struct {
+	Crs  string  `yaml:"crs"`
+	Minx float64 `yaml:"minx"`
+	Miny float64 `yaml:"miny"`
+	Maxx float64 `yaml:"maxx"`
+	Maxy float64 `yaml:"maxy"`
+}
+
+type Layer struct {
+	Name        string   `yaml:"name"`
+	Title       string   `yaml:"title", omitempty`
+	Abstract    string   `yaml:"abstract", omitempty`
+	Keywords    []string `yaml:"keywords", omitempty`
+	Boundingbox string   `yaml:"bounding-box", omitempty`
+	Crs         []string `yaml:"crs", omitempty`
+	Srs         []string `yaml:"srs", omitempty`
+	Styles      []Style  `yaml:"styles", omitempty`
+	Layers      []Layer  `yaml:"layers", omitempty`
+	Nested      string
+}
+
+type Style struct {
+	Name  string `yaml:"name"`
+	Title string `yaml:"title"`
 }

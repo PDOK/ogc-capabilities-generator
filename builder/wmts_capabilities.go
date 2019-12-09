@@ -20,10 +20,10 @@ type WmtsCapabilities struct {
 	Version               string
 	Dataset               Dataset
 	Service               Service
-	ServiceIdentification Identification
+	ServiceIdentification string
 	ServiceProvider       Organization
 	Layers                []Layer
-	ServiceDef            ServiceDef
+	ServiceDef            string
 	OnlineResourceURL     string
 }
 
@@ -31,7 +31,7 @@ func (c *WmtsCapabilities) Build(writer io.Writer) error {
 	return c.BuildWmts(c.Version, writer)
 }
 
-func NewWmtsCapabilities(wmts *template.Template, def ServiceDef, serviceVersion string, onlineResourceURL string) *WmtsCapabilities {
+func NewWmtsCapabilities(wmts *template.Template, def string, serviceVersion string, onlineResourceURL string) *WmtsCapabilities {
 	c := &WmtsCapabilities{wmtsTemplates: TemplateExecutor{wmts}, ServiceDef: def, Version: serviceVersion, OnlineResourceURL: onlineResourceURL}
 	return c
 }
@@ -125,7 +125,7 @@ func (c WmtsCapabilities) generate(templateName string, data interface{}) (strin
 	return string(out.Bytes()), err
 }
 
-func (c *WmtsCapabilities) AddLayers(dataset Dataset, layers []Layer, def ServiceDef, service Service) *WmtsCapabilities {
+func (c *WmtsCapabilities) AddLayers(dataset Dataset, layers []Layer, def string, service Service) *WmtsCapabilities {
 
 	c.Service = service
 	c.Dataset = dataset
@@ -139,9 +139,9 @@ func (c *WmtsCapabilities) GenerateLayers(template string) (string, error) {
 
 	data["layers"] = c.Layers
 	data["dataset"] = c.Dataset
-	data["crs"] = c.ServiceDef.Crs
-	data["srs"] = c.ServiceDef.Srs
-	data["boundingbox"] = c.ServiceDef.Boundingbox
+	data["crs"] = c.ServiceDef
+	data["srs"] = c.ServiceDef
+	data["boundingbox"] = c.ServiceDef
 	data["service"] = c.Service
 
 	return c.generate(template, data)
