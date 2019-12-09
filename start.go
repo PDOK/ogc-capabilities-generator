@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -103,20 +104,23 @@ func arrayToString(aList []string, delim string) string {
 
 func main() {
 
-	serviceConfigPathPtr := flag.String("service-config", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
+	serviceConfigPath := flag.String("c", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
 	// outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
 	// onlineResourceURL := flag.String("service-online-resource", envString("SERVICE_CAPABILITIES_ONLINERESOURCE", ""), "onlineresource URL used in documents")
 	flag.Parse()
 
-	serviceConfig, err := ioutil.ReadFile(*serviceConfigPathPtr)
+	serviceConfig, err := ioutil.ReadFile(*serviceConfigPath)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	service := builder.Service{}
+	//service := builder.Service{}
+	service := builder.Config{}
 	if err = yaml.Unmarshal(serviceConfig, &service); err != nil {
 		log.Fatalf("error: %v", err)
 	}
+
+	fmt.Println(service)
 
 	// capabilitiesBuilder := createBuilder(service, *onlineResourceURL)
 	// if capabilitiesBuilder == nil {

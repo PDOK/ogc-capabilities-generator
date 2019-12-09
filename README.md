@@ -7,14 +7,16 @@ docker build -t pdok/ogc-capabilities-generator
 docker run -v `pwd`/config:/config -v `pwd`:/output -e SERVICE_TYPE=wfs -e SERVICE_VERSION=2.0.0 -e SERVICE_CONFIG_PATH=/config/input.yaml -e SERVICE_CAPABILITIES_PATH=/output/capabilities_wfs_200.xml pdok/ogc-capabilities-generator
 ```
 
+https://geodata.nationaalgeoregister.nl/kadastralekaart/wms/v4_0?request=getcapabilities&service=wms
+https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0?request=GetCapabilities&service=WMTS
+https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/WMTSCapabilities.xml
+https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?request=getcapabilities&service=wfs&version=2.0.0
+https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?request=getcapabilities&service=wfs&version=1.1.0
+
 ## Config aanroep
 
 ```go
-typePtr := flag.String("service-type", envString("SERVICE_TYPE", ""), "wfs or wms or wmts")
-versionPtr := flag.String("service-version", envString("SERVICE_VERSION", ""), "wfs[1.1.0, 2.0.0] or wms[1.3.0] or wmts[1.0.0]")
-serviceConfigPathPtr := flag.String("service-config", envString("SERVICE_CONFIG_PATH", ""), "location of the service config")
-serviceDefConfigPathPtr := flag.String("service-def-config", envString("SERVICE_DEF_CONFIG_PATH", "config/serviceDef.yaml"), "location of the service definition config")
-outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
+go run . -c ./config/input-new.yaml
 ```
 
 service definition file bevat alle lookups

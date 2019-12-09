@@ -46,30 +46,23 @@ type Constraints struct {
 	Name         string `yaml:"name"`
 	DefaultValue bool   `yaml:"default-value"`
 }
-type Service struct {
-	Dataset            string        `yaml:"dataset"`
-	Organization       string        `yaml:"organization"`
-	Identification     string        `yaml:"identification"`
-	Inspire            bool          `yaml:"inspire"`
-	UrlWms             string        `yaml:"urlwms"`
-	UrlWfs             string        `yaml:"urlwfs"`
-	UrlWmts            string        `yaml:"urlwmts"`
-	PathWMTS           string        `yaml:"pathwmts"`
-	MetadataResourceId string        `yaml:"metadata-resource-id"`
-	Operations         []string      `yaml:"operations"`
-	Boundingbox        string        `yaml:"boundingbox"`
-	Constraints        []Constraints `yaml:"constraints"`
-	Features           []Feature     `yaml:"features"`
-	Layers             []Layer       `yaml:"layers"`
-}
-type Organization struct {
-	Name       string `yaml:"name"`
-	Individual string `yaml:"individual"`
-	Position   string `yaml:"position"`
-	City       string `yaml:"city"`
-	Country    string `yaml:"country"`
-	Email      string `yaml:"e-mail"`
-}
+
+// type Service struct {
+// 	Dataset            string        `yaml:"dataset"`
+// 	Organization       string        `yaml:"organization"`
+// 	Identification     string        `yaml:"identification"`
+// 	Inspire            bool          `yaml:"inspire"`
+// 	UrlWms             string        `yaml:"urlwms"`
+// 	UrlWfs             string        `yaml:"urlwfs"`
+// 	UrlWmts            string        `yaml:"urlwmts"`
+// 	PathWMTS           string        `yaml:"pathwmts"`
+// 	MetadataResourceId string        `yaml:"metadata-resource-id"`
+// 	Operations         []string      `yaml:"operations"`
+// 	Boundingbox        string        `yaml:"boundingbox"`
+// 	Constraints        []Constraints `yaml:"constraints"`
+// 	Features           []Feature     `yaml:"features"`
+// 	Layers             []Layer       `yaml:"layers"`
+// }
 
 type Identification struct {
 	Title    string   `yaml:"title"`
@@ -88,16 +81,6 @@ type ServiceDef struct {
 	Boundingbox    map[string]Boundingbox    `yaml:"boundingbox"`
 	Operations     map[string]Operation      `yaml:"operations"`
 	Constraints    []Constraints             `yaml:"constraints"`
-}
-
-type Feature struct {
-	Name        string   `yaml:"name"`
-	Title       string   `yaml:"title"`
-	Abstract    string   `yaml:"abstract"`
-	Keywords    []string `yaml:"keywords"`
-	Boundingbox string   `yaml:"bounding-box"`
-	Crs         []string `yaml:"crs"`
-	Srs         []string `yaml:"srs"`
 }
 
 type Layer struct {
