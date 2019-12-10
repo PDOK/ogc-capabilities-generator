@@ -3,27 +3,27 @@ package builder
 import "encoding/xml"
 
 type WFS_2_0_0 struct {
-	XMLName xml.Name `xml:"wfs:WFS_Capabilities"`
-	WFS_Namespaces
-	ServiceIdentification ServiceIdentification `xml:"ows:ServiceIdentification"`
-	ServiceProvider       ServiceProvider       `xml:"ows:ServiceProvider"`
-	OperationsMetadata    OperationsMetadata    `xml:"ows:OperationsMetadata"`
-	FeatureTypeList       FeatureTypeList       `xml:"FeatureTypeList"`
-	FilterCapabilities    FilterCapabilities    `xml:"fes:Filter_Capabilities"`
+	XMLName               xml.Name `xml:"wfs:WFS_Capabilities"`
+	WFS_Namespaces        `yaml:"namespaces"`
+	ServiceIdentification ServiceIdentification `xml:"ows:ServiceIdentification" yaml:"serviceidentification"`
+	ServiceProvider       ServiceProvider       `xml:"ows:ServiceProvider" yaml:"serviceprovider"`
+	OperationsMetadata    OperationsMetadata    `xml:"ows:OperationsMetadata" yaml:"operationsmetadata"`
+	FeatureTypeList       FeatureTypeList       `xml:"FeatureTypeList" yaml:"featuretypelist"`
+	FilterCapabilities    FilterCapabilities    `xml:"fes:Filter_Capabilities" yaml:"filtercapabilities"`
 }
 
 type WFS_Namespaces struct {
-	XmlnsGML           string `xml:"xmlns:gml,attr"`                      //http://www.opengis.net/gml/3.2
-	XmlnsWFS           string `xml:"xmlns:wfs,attr"`                      //http://www.opengis.net/wfs/2.0
-	XmlnsOWS           string `xml:"xmlns:ows,attr"`                      //http://www.opengis.net/ows/1.1
-	XmlnsXlink         string `xml:"xmlns:xlink,attr"`                    //http://www.w3.org/1999/xlink
-	XmlnsXSI           string `xml:"xmlns:xsi,attr"`                      //http://www.w3.org/2001/XMLSchema-instance
-	XmlnsFes           string `xml:"xmlns:fes,attr"`                      //http://www.opengis.net/fes/2.0
-	XmlnsInspireCommon string `xml:"xmlns:inspire_common,attr,omitempty"` //http://inspire.ec.europa.eu/schemas/common/1.0
-	XmlnsInspireDls    string `xml:"xmlns:inspire_dls,attr,omitempty"`    //http://inspire.ec.europa.eu/schemas/inspire_dls/1.0
-	XmlnsPrefix        string `xml:"xmlns:prefix,attr"`                   //namespace_uri placeholder
-	Version            string `xml:"version,attr"`
-	SchemaLocation     string `xml:"xsi:schemaLocation,attr"`
+	XmlnsGML           string `xml:"xmlns:gml,attr" yaml:"gml"`                                //http://www.opengis.net/gml/3.2
+	XmlnsWFS           string `xml:"xmlns:wfs,attr" yaml:"wfs"`                                //http://www.opengis.net/wfs/2.0
+	XmlnsOWS           string `xml:"xmlns:ows,attr" yaml:"ows"`                                //http://www.opengis.net/ows/1.1
+	XmlnsXlink         string `xml:"xmlns:xlink,attr" yaml:"xlink"`                            //http://www.w3.org/1999/xlink
+	XmlnsXSI           string `xml:"xmlns:xsi,attr" yaml:"xsi"`                                //http://www.w3.org/2001/XMLSchema-instance
+	XmlnsFes           string `xml:"xmlns:fes,attr" yaml:"fes"`                                //http://www.opengis.net/fes/2.0
+	XmlnsInspireCommon string `xml:"xmlns:inspire_common,attr,omitempty" yaml:"inspirecommon"` //http://inspire.ec.europa.eu/schemas/common/1.0
+	XmlnsInspireDls    string `xml:"xmlns:inspire_dls,attr,omitempty" yaml:"inspiredls"`       //http://inspire.ec.europa.eu/schemas/inspire_dls/1.0
+	XmlnsPrefix        string `xml:"xmlns:prefix,attr" yaml:"prefix"`                          //namespace_uri placeholder
+	Version            string `xml:"version,attr" yaml:"version"`
+	SchemaLocation     string `xml:"xsi:schemaLocation,attr" yaml:"schemalocation"`
 }
 
 type ServiceIdentification struct {
@@ -41,6 +41,53 @@ type ServiceIdentification struct {
 	AccessConstraints  string `xml:"ows:AccessConstraints"`
 }
 
+type ServiceProvider struct {
+	XMLName      xml.Name `xml:"ows:ServiceProvider"`
+	Text         string   `xml:",chardata"`
+	ProviderName string   `xml:"ows:ProviderName" yaml:"providername"`
+	ProviderSite struct {
+		Text string `xml:",chardata"`
+		Type string `xml:"xlink:type,attr" yaml:"type"`
+		Href string `xml:"xlink:href,attr" yaml:"href"`
+	} `xml:"ows:ProviderSite" yaml:"providersite"`
+	ServiceContact struct {
+		Text           string `xml:",chardata"`
+		IndividualName string `xml:"ows:IndividualName" yaml:"individualname"`
+		PositionName   string `xml:"ows:PositionName" yaml:"positionname"`
+		ContactInfo    struct {
+			Text  string `xml:",chardata"`
+			Phone struct {
+				Text      string `xml:",chardata"`
+				Voice     string `xml:"ows:Voice" yaml:"voice"`
+				Facsimile string `xml:"ows:Facsimile" yaml:"facsmile"`
+			} `xml:"ows:Phone" yaml:"phone"`
+			Address struct {
+				Text                  string `xml:",chardata"`
+				DeliveryPoint         string `xml:"ows:DeliveryPoint" yaml:"deliverypoint"`
+				City                  string `xml:"ows:City" yaml:"city"`
+				AdministrativeArea    string `xml:"ows:AdministrativeArea" yaml:"administrativearea"`
+				PostalCode            string `xml:"ows:PostalCode" yaml:"postalcode"`
+				Country               string `xml:"ows:Country" yaml:"country"`
+				ElectronicMailAddress string `xml:"ows:ElectronicMailAddress" yaml:electronicmailaddress`
+			} `xml:"ows:Address" yaml:"address"`
+			OnlineResource struct {
+				Text string `xml:",chardata"`
+				Type string `xml:"xlink:type,attr" yaml:"type"`
+				Href string `xml:"xlink:href,attr" yaml:"href"`
+			} `xml:"ows:OnlineResource" yaml:"onlineresource"`
+			HoursOfService      string `xml:"ows:HoursOfService" yaml:"hoursofservice"`
+			ContactInstructions string `xml:"ows:ContactInstructions" yaml:"contactinstructions"`
+		} `xml:"ows:ContactInfo" yaml:"contactinfo"`
+		Role string `xml:"ows:Role" yaml:"role"`
+	} `xml:"ows:ServiceContact" yaml:"servicecontact"`
+}
+
+type Post struct {
+	Text string `xml:",chardata"`
+	Type string `xml:"xlink:type,attr" yaml:"type"`
+	Href string `xml:"xlink:href,attr" yaml:"href"`
+}
+
 type OperationsMetadata struct {
 	XMLName   xml.Name `xml:"ows:OperationsMetadata"`
 	Text      string   `xml:",chardata"`
@@ -53,16 +100,12 @@ type OperationsMetadata struct {
 				Text string `xml:",chardata"`
 				Get  struct {
 					Text string `xml:",chardata"`
-					Type string `xml:"xlink:type,attr"`
-					Href string `xml:"xlink:href,attr"`
-				} `xml:"ows:Get"`
-				Post struct {
-					Text string `xml:",chardata"`
-					Type string `xml:"xlink:type,attr"`
-					Href string `xml:"xlink:href,attr"`
-				} `xml:"ows:Post"`
-			} `xml:"ows:HTTP"`
-		} `xml:"ows:DCP"`
+					Type string `xml:"xlink:type,attr" yaml:"type"`
+					Href string `xml:"xlink:href,attr" yaml:"href"`
+				} `xml:"ows:Get" yaml:"get"`
+				Post *Post `xml:"ows:Post",omitempty yaml:"post"`
+			} `xml:"ows:HTTP" yaml:"http"`
+		} `xml:"ows:DCP" yaml:"dcp"`
 		Parameter []struct {
 			Text          string `xml:",chardata"`
 			Name          string `xml:"name,attr"`

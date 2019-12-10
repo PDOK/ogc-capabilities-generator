@@ -131,34 +131,41 @@ func main() {
 
 		if w.Version == "2.0.0" {
 			wfs := builder.WFS_2_0_0{}
-			wfs.XmlnsGML = "http://www.opengis.net/gml/3.2"
-			wfs.XmlnsWFS = "http://www.opengis.net/wfs/2.0"
-			wfs.XmlnsOWS = "http://www.opengis.net/ows/1.1"
-			wfs.XmlnsXlink = "http://www.w3.org/1999/xlink"
-			wfs.XmlnsXSI = "http://www.w3.org/2001/XMLSchema-instance"
-			wfs.XmlnsFes = "http://www.opengis.net/fes/2.0"
-			wfs.XmlnsPrefix = "namespace_uri"
-			wfs.Version = w.Version
-			wfs.SchemaLocation = "http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd"
-			wfs.ServiceIdentification.Title = service.Global.Title
 
 			wfsconfig, err := ioutil.ReadFile("./config/wfs_2_0_0.yaml")
 			if err != nil {
 				log.Fatalf("error: %v", err)
 			}
 
-			filter := builder.FilterCapabilities{}
-			if err = yaml.Unmarshal(wfsconfig, &filter); err != nil {
+			if err = yaml.Unmarshal(wfsconfig, &wfs); err != nil {
 				log.Fatalf("error: %v", err)
 			}
 
-			fmt.Println(filter)
-			wfs.FilterCapabilities = filter
-			wfs.ServiceProvider = service.ServiceProvider
+			// serviceprovider, err := ioutil.ReadFile("./config/serviceprovider_2_0_0.yaml")
+			// if err != nil {
+			// 	log.Fatalf("error: %v", err)
+			// }
+
+			// spc := builder.ServiceProvider{}
+			// if err = yaml.Unmarshal(serviceprovider, &spc); err != nil {
+			// 	log.Fatalf("error: %v", err)
+			// }
+
+			// loop over operations and set the Href for GET and (if available) POST requests
+			for i := range wfs.OperationsMetadata.Operation {
+				if wfs.OperationsMetadata.Operation[i].DCP.HTTP.Get.Type != "" {
+					wfs.OperationsMetadata.Operation[i].DCP.HTTP.Get.Href = "https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&"
+				}
+				if wfs.OperationsMetadata.Operation[i].DCP.HTTP.Post != nil {
+					wfs.OperationsMetadata.Operation[i].DCP.HTTP.Post = &builder.Post{Type: "simple", Href: "https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&"}
+				}
+			}
 
 			si, _ := xml.MarshalIndent(wfs, "", " ")
-			siFixed := strings.ReplaceAll(string(si), "xmlns:prefix=\"namespace_uri\"", "xmlns:kadastralekaartv4=\"http://kadastralekaartv4.geonovum.nl\"")
+			// fix placeholder xmlns:prefix="namespace_uri" with dataset namespace
+			siFixed := strings.ReplaceAll(xml.Header+string(si), "xmlns:prefix=\"namespace_uri\"", "xmlns:kadastralekaartv4=\"http://kadastralekaartv4.geonovum.nl\"")
 			fmt.Println(siFixed)
+
 		}
 	}
 

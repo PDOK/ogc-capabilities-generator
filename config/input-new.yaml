@@ -12,32 +12,6 @@ global:
     landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven.  
   path: /kadastralekaart
 
-serviceprovider:
-  providername: PDOK
-  providersite: 
-    type: simple
-    href: https://pdok.nl
-  servicecontact: 
-    individualname: KlantContactCenter PDOK
-    positionname: pointOfContact
-    contactinfo:
-      phone:
-        voice: "06-123456789"
-        facsmile: "0900-1234"
-      address:
-        deliverypoint: Postbus 9046 7300 GH Apeldoorn
-        city: Apeldoorn
-        administrativearea: Gelderland
-        postalcode: 7334 DP
-        country: Nederland
-        electronicmailaddress: BeheerPDOK@kadaster.nl
-      onlineresource: 
-        type: simple
-        href: https://geodata.nationaalgeoregister.nl
-      hoursofservice: "09:00-17:00"
-      contactinstructions: "don't call"
-    role: serviceprovider
-
 service:
   wfs:
   - crs:
@@ -52,14 +26,7 @@ service:
         - urn:ogc:def:crs:EPSG::3857
         - urn:ogc:def:crs:EPSG::4258
         - urn:ogc:def:crs:EPSG::4326
-    version: "1.1.0"
-    outputformat:
-      - name: gml3
-        mime_type: application/gml+xml; version=3.2
-      - name: geojson
-        mime_type: application/json; subtype=geojson    
-      - name: json
-        mime_type: application/json        
+    version: "1.1.0"     
     features:
       - name: kadastralekaart:kadastralegrens
         title: kadastralegrens
@@ -72,13 +39,6 @@ service:
           - infoFeatureAccessService
 
   - version: "2.0.0"
-    outputformat:
-      - name: gml3
-        mime_type: application/gml+xml; version=3.2
-      - name: geojson
-        mime_type: application/json; subtype=geojson
-      - name: json
-        mime_type: application/json
     features:
       - name: kadastralekaart:kadastralegrens
         title: kadastralegrens

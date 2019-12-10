@@ -1,19 +1,58 @@
+namespaces:
+  gml: http://www.opengis.net/gml/3.2
+  wfs: http://www.opengis.net/wfs/2.0
+  ows: http://www.opengis.net/ows/1.1
+  xlink: http://www.w3.org/1999/xlink
+  xsi: http://www.w3.org/2001/XMLSchema-instance
+  fes: http://www.opengis.net/fes/2.0
+  inspirecommon:
+  inspiredls:
+  prefix: namespace_uri  # don't edit! maybe different solution in code....?
+  version: 2.0.0
+  schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd
+
+serviceprovider:
+  providername: PDOK
+  providersite: 
+    type: simple
+    href: https://pdok.nl
+  servicecontact: 
+    individualname: KlantContactCenter PDOK
+    positionname: pointOfContact
+    contactinfo:
+      phone:
+        voice: "06-123456789"
+        facsmile: "0900-1234"
+      address:
+        deliverypoint: Postbus 9046 7300 GH Apeldoorn
+        city: Apeldoorn
+        administrativearea: Gelderland
+        postalcode: 7334 DP
+        country: Nederland
+        electronicmailaddress: BeheerPDOK@kadaster.nl
+      onlineresource: 
+        type: simple
+        href: https://geodata.nationaalgeoregister.nl
+      hoursofservice: "09:00-17:00"
+      contactinstructions: "don't call"
+    role: serviceprovider
+
 operationsmetadata:
   operation: 
     - name: GetCapabilities
-      DCP:
-        HTTP:
-          GET:
+      dcp:
+        http:
+          get:
             type: simple
-            href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
           #POST: no POST for GetCapabilities
       parameter:
         - name: AcceptVersions
           allowedvalues: 
             value: 
             - 2.0.0
-            - 1.1.0
-            - 1.0.0
+            # - 1.1.0
+            # - 1.0.0
         - name: AcceptFormats
           allowedvalues: 
             value: 
@@ -27,12 +66,12 @@ operationsmetadata:
             - FeatureTypeList
             - Filter_Capabilities
     - name: DescribeFeatureType
-      DCP:
-        HTTP:
-          GET:
+      dcp:
+        http:
+          get:
             type: simple
-            href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
-          # POST: no POST for DescribeFeatureType
+            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+          # post: no POST for DescribeFeatureType
       parameter:
         - name: outputFormat
           allowedvalues: 
@@ -42,14 +81,14 @@ operationsmetadata:
             - text/xml; subtype=gml/3.1.1
             - text/xml; subtype=gml/2.1.2
     - name: GetFeature
-      DCP:
-        HTTP:
-          GET:
+      dcp:
+        http:
+          get:
             type: simple
-            href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
-          POST:
+            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+          post:
             type: simple
-            href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&            
+            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&            
       parameter:
         - name: outputFormat
           allowedvalues: 
@@ -60,105 +99,105 @@ operationsmetadata:
             - text/xml; subtype=gml/2.1.2
             - application/json; subtype=geojson
             - application/json
-    # - name: GetPropertyValue 
+    # - name: GetPropertyValue no GetPropertyValue
     - name: ListStoredQueries
-      DCP:
-        HTTP:
-          GET:
+      dcp:
+        http:
+          get:
             type: simple
-            href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
-          # POST: no POST for ListStoredQueries
+            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+          # post: no POST for ListStoredQueries
     - name: DescribeStoredQueries
-      DCP:
-        HTTP:
-          GET:
+      dcp:
+        http:
+          get:
             type: simple
-            href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
-          # POST: no POST for DescribeStoredQueries
+            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+          # post: no POST for DescribeStoredQueries
 
+filtercapabilities:
+  conformance:
+    constraint:
+    - name: ImplementsQuery
+      defaultvalue: "TRUE"
+    - name: ImplementsAdHocQuery
+      defaultvalue: "TRUE"
+    - name: ImplementsFunctions
+      defaultvalue: "FALSE"
+    - name: ImplementsResourceId
+      defaultvalue: "TRUE"
+    - name: ImplementsMinStandardFilter
+      defaultvalue: "TRUE"
+    - name: ImplementsStandardFilter
+      defaultvalue: "TRUE"
+    - name: ImplementsMinSpatialFilter
+      defaultvalue: "TRUE"
+    - name: ImplementsSpatialFilter
+      defaultvalue: "FALSE"
+    - name: ImplementsMinTemporalFilter
+      defaultvalue: "TRUE"
+    - name: ImplementsTemporalFilter
+      defaultvalue: "FALSE"
+    - name: ImplementsVersionNav
+      defaultvalue: "FALSE"
+    - name: ImplementsSorting
+      defaultvalue: "TRUE"
+    - name: ImplementsExtendedOperators
+      defaultvalue: "FALSE"
+    - name: ImplementsMinimumXPath
+      defaultvalue: "TRUE"
+    - name: ImplementsSchemaElementFunc
+      defaultvalue: "FALSE"
 
-conformance:
-  constraint:
-  - name: ImplementsQuery
-    defaultvalue: "TRUE"
-  - name: ImplementsAdHocQuery
-    defaultvalue: "TRUE"
-  - name: ImplementsFunctions
-    defaultvalue: "FALSE"
-  - name: ImplementsResourceId
-    defaultvalue: "TRUE"
-  - name: ImplementsMinStandardFilter
-    defaultvalue: "TRUE"
-  - name: ImplementsStandardFilter
-    defaultvalue: "TRUE"
-  - name: ImplementsMinSpatialFilter
-    defaultvalue: "TRUE"
-  - name: ImplementsSpatialFilter
-    defaultvalue: "FALSE"
-  - name: ImplementsMinTemporalFilter
-    defaultvalue: "TRUE"
-  - name: ImplementsTemporalFilter
-    defaultvalue: "FALSE"
-  - name: ImplementsVersionNav
-    defaultvalue: "FALSE"
-  - name: ImplementsSorting
-    defaultvalue: "TRUE"
-  - name: ImplementsExtendedOperators
-    defaultvalue: "FALSE"
-  - name: ImplementsMinimumXPath
-    defaultvalue: "TRUE"
-  - name: ImplementsSchemaElementFunc
-    defaultvalue: "FALSE"
+  idcapabilities:
+    resourceidentifier:
+      name: fes:ResourceId
 
-idcapabilities:
-  resourceidentifier:
-    name: fes:ResourceId
+  scalarcapabilities:
+    logicaloperators:
+    comparisonoperators:
+      comparisonoperator:
+      - name: PropertyIsEqualTo
+      - name: PropertyIsNotEqualTo
+      - name: PropertyIsLessThan
+      - name: PropertyIsGreaterThan
+      - name: PropertyIsLessThanOrEqualTo
+      - name: PropertyIsGreaterThanOrEqualTo
+      - name: PropertyIsLike
+      - name: PropertyIsBetween
 
-scalarcapabilities:
-  logicaloperators:
-  comparisonoperators:
-    comparisonoperator:
-    - name: PropertyIsEqualTo
-    - name: PropertyIsNotEqualTo
-    - name: PropertyIsLessThan
-    - name: PropertyIsGreaterThan
-    - name: PropertyIsLessThanOrEqualTo
-    - name: PropertyIsGreaterThanOrEqualTo
-    - name: PropertyIsLike
-    - name: PropertyIsBetween
+  spatialcapabilities:
+    geometryoperands:
+      geometryoperand:
+      - name: gml:Point
+      - name: gml:MultiPoint
+      - name: gml:LineString
+      - name: gml:MultiLineString
+      - name: gml:Curve
+      - name: gml:MultiCurve
+      - name: gml:Polygon
+      - name: gml:MultiPolygon
+      - name: gml:Surface
+      - name: gml:MultiSurface
+      - name: gml:Box
+      - name: gml:Envelope
 
-spatialcapabilities:
-  geometryoperands:
-    geometryoperand:
-    - name: gml:Point
-    - name: gml:MultiPoint
-    - name: gml:LineString
-    - name: gml:MultiLineString
-    - name: gml:Curve
-    - name: gml:MultiCurve
-    - name: gml:Polygon
-    - name: gml:MultiPolygon
-    - name: gml:Surface
-    - name: gml:MultiSurface
-    - name: gml:Box
-    - name: gml:Envelope
+    spatialoperators:
+      spatialoperator:
+      - name: Equals
+      - name: Disjoint
+      - name: Touches
+      - name: Within
+      - name: Overlaps
+      - name: Crosses
+      - name: Intersects
+      - name: Contains
+      - name: DWithin
+      - name: Beyond
+      - name: BBOX
 
-  spatialoperators:
-    spatialoperator:
-    - name: Equals
-    - name: Disjoint
-    - name: Touches
-    - name: Within
-    - name: Overlaps
-    - name: Crosses
-    - name: Intersects
-    - name: Contains
-    - name: DWithin
-    - name: Beyond
-    - name: BBOX
-
-# temporalcapabilities:
-#   temporaloperands:
-#     temporaloperand:
-#   temporaloperators:
-#     temporaloperator:
+  # temporalcapabilities:
+  #   temporaloperands:
+  #     temporaloperand:
+  #   temporaloperators:
+  #     temporaloperator:
