@@ -1,12 +1,5 @@
 global:
   onlineresourceurl: http://geodata.nationaalgeoregister.nl
-  organization:    
-    name: PDOK
-    individual: KlantContactCenter PDOK
-    position: pointOfContact
-    city: Apeldoorn
-    country: Nederland
-    email: BeheerPDOK@kadaster.nl
   WGS84Boundingbox:
     westBoundLongitude: 3.206235952734
     eastBoundLongitude: 7.2452582753351
@@ -18,6 +11,32 @@ global:
     gebruikmaking van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de
     landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven.  
   path: /kadastralekaart
+
+serviceprovider:
+  providername: PDOK
+  providersite: 
+    type: simple
+    href: https://pdok.nl
+  servicecontact: 
+    individualname: KlantContactCenter PDOK
+    positionname: pointOfContact
+    contactinfo:
+      phone:
+        voice: "06-123456789"
+        facsmile: "0900-1234"
+      address:
+        deliverypoint: Postbus 9046 7300 GH Apeldoorn
+        city: Apeldoorn
+        administrativearea: Gelderland
+        postalcode: 7334 DP
+        country: Nederland
+        electronicmailaddress: BeheerPDOK@kadaster.nl
+      onlineresource: 
+        type: simple
+        href: https://geodata.nationaalgeoregister.nl
+      hoursofservice: "09:00-17:00"
+      contactinstructions: "don't call"
+    role: serviceprovider
 
 service:
   wfs:
@@ -181,15 +200,16 @@ service:
                 title: Visualisatie van openbareruimtenaam ten behoeve van afdrukken op 180 dpi
               - name: kadastralekaart:openbareruimtenaam
                 title: Visualisatie van de openbareruimtenaam        
-  # - wmts:
-  #     version: "1.0.0"
-  #     layers:
-  #       - name: 'kadastralekaart'
-  #         title: 'kadastralekaart'
-  #         abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.
-  #         keywords:
-  #           - Kadastrale percelen
-  #           - Kadaster
-  #         # styles:
-  #         #   - name: 'default'
-  #         #     title: Visualisatie KadastraleKaart  
+                
+  - wmts:
+      version: "1.0.0"
+      layers:
+        - name: 'kadastralekaart'
+          title: 'kadastralekaart'
+          abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.
+          keywords:
+            - Kadastrale percelen
+            - Kadaster
+          # styles:
+          #   - name: 'default'
+          #     title: Visualisatie KadastraleKaart  

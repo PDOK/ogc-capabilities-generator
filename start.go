@@ -127,7 +127,7 @@ func main() {
 	}
 
 	for _, w := range service.Service.WFS {
-		fmt.Println(w)
+		//fmt.Println(w)
 
 		if w.Version == "2.0.0" {
 			wfs := builder.WFS_2_0_0{}
@@ -141,6 +141,20 @@ func main() {
 			wfs.Version = w.Version
 			wfs.SchemaLocation = "http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd"
 			wfs.ServiceIdentification.Title = service.Global.Title
+
+			wfsconfig, err := ioutil.ReadFile("./config/wfs_2_0_0.yaml")
+			if err != nil {
+				log.Fatalf("error: %v", err)
+			}
+
+			filter := builder.FilterCapabilities{}
+			if err = yaml.Unmarshal(wfsconfig, &filter); err != nil {
+				log.Fatalf("error: %v", err)
+			}
+
+			fmt.Println(filter)
+			wfs.FilterCapabilities = filter
+			wfs.ServiceProvider = service.ServiceProvider
 
 			si, _ := xml.MarshalIndent(wfs, "", " ")
 			siFixed := strings.ReplaceAll(string(si), "xmlns:prefix=\"namespace_uri\"", "xmlns:kadastralekaartv4=\"http://kadastralekaartv4.geonovum.nl\"")

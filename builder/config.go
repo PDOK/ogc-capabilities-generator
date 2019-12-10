@@ -1,13 +1,13 @@
 package builder
 
 type Config struct {
-	Global  Global  `yaml:"global"`
-	Service Service `yaml:"service"`
+	Global          Global          `yaml:"global"`
+	ServiceProvider ServiceProvider `yaml:"serviceprovider"`
+	Service         Service         `yaml:"service"`
 }
 
 type Global struct {
 	Onlineresourceurl string           `yaml:"onlineresourceurl"`
-	Organization      Organization     `yaml:"organization"`
 	WGS84Boundingbox  WGS84Boundingbox `yaml:"WGS84Boundingbox"`
 	Title             string           `yaml:"title"`
 	Abstract          string           `yaml:"abstract"`
