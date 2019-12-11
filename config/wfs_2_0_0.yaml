@@ -11,6 +11,16 @@ namespaces:
   version: 2.0.0
   schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd
 
+serviceidentification:
+  title:
+  abstract:
+  servicetype: 
+    name: WFS
+    codespace: OGC
+  servicetypeversion: 2.0.0
+  fees: none
+  accesscontraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
+
 serviceprovider:
   providername: PDOK
   providersite: 

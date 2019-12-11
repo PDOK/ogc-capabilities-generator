@@ -11,6 +11,8 @@ import (
 	"pdok-capabilities-gen/util"
 	"strings"
 
+	//"github.com/imdario/mergo"
+	"github.com/jinzhu/copier"
 	"gopkg.in/yaml.v2"
 )
 
@@ -130,13 +132,21 @@ func main() {
 		//fmt.Println(w)
 
 		if w.Version == "2.0.0" {
+
+			var masterYaml interface{}
+			yamlBytes, _ := ioutil.ReadFile("./config/wfs_2_0_0.yaml")
+			yaml.Unmarshal(yamlBytes, &masterYaml)
+
+			var overrideYaml interface{}
+			yamlBytes, _ = ioutil.ReadFile("./config/kadastralekaart.yaml")
+			yaml.Unmarshal(yamlBytes, &overrideYaml)
+
 			wfs := builder.WFS_2_0_0{}
 
 			wfsconfig, err := ioutil.ReadFile("./config/wfs_2_0_0.yaml")
 			if err != nil {
 				log.Fatalf("error: %v", err)
 			}
-
 			if err = yaml.Unmarshal(wfsconfig, &wfs); err != nil {
 				log.Fatalf("error: %v", err)
 			}
@@ -150,6 +160,18 @@ func main() {
 			// if err = yaml.Unmarshal(serviceprovider, &spc); err != nil {
 			// 	log.Fatalf("error: %v", err)
 			// }
+
+			dkk := builder.WFS_2_0_0{}
+			dkkconfig, err := ioutil.ReadFile("./config/kadastralekaart.yaml")
+			if err != nil {
+				log.Fatalf("error: %v", err)
+			}
+			if err = yaml.Unmarshal(dkkconfig, &dkk); err != nil {
+				log.Fatalf("error: %v", err)
+			}
+
+			copier.Copy(&wfs.ServiceIdentification, &dkk.ServiceIdentification)
+			//mergo.Merge(&wfs.ServiceIdentification, dkk.ServiceIdentification)
 
 			// loop over operations and set the Href for GET and (if available) POST requests
 			for i := range wfs.OperationsMetadata.Operation {

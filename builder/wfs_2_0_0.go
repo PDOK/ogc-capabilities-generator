@@ -28,17 +28,18 @@ type WFS_Namespaces struct {
 
 type ServiceIdentification struct {
 	XMLName  xml.Name `xml:"ows:ServiceIdentification"`
-	Title    string   `xml:"ows:Title"`
-	Abstract string   `xml:"ows:Abstract"`
+	Title    string   `xml:"ows:Title" yaml:"title"`
+	Abstract string   `xml:"ows:Abstract" yaml:"abstract"`
 	Keywords struct {
-		Keyword []string `xml:"ows:Keyword"`
-	} `xml:"ows:Keywords"`
+		Keyword []string `xml:"ows:Keyword" yaml:"keyword"`
+	} `xml:"ows:Keywords" yaml:"keywords"`
 	ServiceType struct {
-		CodeSpace string `xml:"codeSpace,attr"`
-	} `xml:"ows:ServiceType"`
-	ServiceTypeVersion string `xml:"ows:ServiceTypeVersion"`
-	Fees               string `xml:"ows:Fees"`
-	AccessConstraints  string `xml:"ows:AccessConstraints"`
+		Text      string `xml:",chardata" yaml:"text"`
+		CodeSpace string `xml:"codeSpace,attr" yaml:"codespace"`
+	} `xml:"ows:servicetype"`
+	ServiceTypeVersion string `xml:"ows:ServiceTypeVersion" yaml:"servicetypeversion"`
+	Fees               string `xml:"ows:Fees" yaml:"fees"`
+	AccessConstraints  string `xml:"ows:AccessConstraints" yaml:"accesscontraints"`
 }
 
 type ServiceProvider struct {
