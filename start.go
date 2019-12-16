@@ -1,52 +1,19 @@
 package main
 
 import (
+	"bytes"
 	"encoding/xml"
 	"flag"
-	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"os"
 	"pdok-capabilities-gen/builder"
-	"pdok-capabilities-gen/util"
-	"strings"
+	"regexp"
 
-	//"github.com/imdario/mergo"
-	"github.com/jinzhu/copier"
+	"github.com/imdario/mergo"
 	"gopkg.in/yaml.v2"
 )
-
-var wfs = util.GetTemplates("templates/wfs/*")
-var wms = util.GetTemplates("templates/wms/*")
-var wmts = util.GetTemplates("templates/wmts/*")
-
-// func createBuilder(service builder.Service, onlineResourceURL string) builder.Builder {
-
-// 	if serviceType == "wfs" {
-// 		return builder.NewWfsCapabilities(wfs, serviceDef, serviceVersion).
-// 			AddServiceIdentification(serviceDef.Identification[service.Identification]).
-// 			AddDataset(serviceDef.Datasets[service.Dataset]).
-// 			AddServiceProvider(serviceDef.Organizations[service.Organization]).
-// 			AddFeatures(serviceDef.Datasets[service.Dataset], service.Features, serviceDef).
-// 			AddOperationsMetadata(serviceDef.Datasets[service.Dataset], service)
-// 	}
-
-// 	if serviceType == "wms" {
-// 		return builder.NewWmsCapabilities(wms, serviceDef, serviceVersion).
-// 			AddDataset(serviceDef.Datasets[service.Dataset]).
-// 			AddServiceProvider(serviceDef.Organizations[service.Organization], serviceDef.Identification[service.Identification]).
-// 			AddLayers(serviceDef.Datasets[service.Dataset], service.Layers, serviceDef, service).
-// 			AddCapabilityRequest(serviceDef.Datasets[service.Dataset], service).AddInspireCommon(service)
-// 	}
-
-// 	if serviceType == "wmts" {
-// 		return builder.NewWmtsCapabilities(wmts, serviceDef, serviceVersion, onlineResourceURL).
-// 			AddDataset(serviceDef.Datasets[service.Dataset]).
-// 			AddLayers(serviceDef.Datasets[service.Dataset], service.Layers, serviceDef, service)
-// 	}
-
-// 	return nil
-// }
 
 func writeFile(name string, data []byte) {
 	err := ioutil.WriteFile(name, data, 0777)
@@ -54,18 +21,6 @@ func writeFile(name string, data []byte) {
 		log.Fatalf("Could not write to file %s : %v ", name, err)
 	}
 }
-
-// func getServiceDef(serviceDefConfigPath string) builder.ServiceDef {
-// 	serviceDefConfig, err := ioutil.ReadFile(serviceDefConfigPath)
-// 	if err != nil {
-// 		log.Fatalf("error: %v", err)
-// 	}
-// 	serviceDef := builder.ServiceDef{}
-// 	if err = yaml.Unmarshal(serviceDefConfig, &serviceDef); err != nil {
-// 		log.Fatalf("error: %v", err)
-// 	}
-// 	return serviceDef
-// }
 
 func envString(key, defaultValue string) string {
 	value := os.Getenv(key)
@@ -75,118 +30,53 @@ func envString(key, defaultValue string) string {
 	return defaultValue
 }
 
-// func getServiceMap() map[string][]string {
-// 	serviceMap := map[string][]string{
-// 		"wms":  {"1.3.0"},
-// 		"wmts": {"1.0.0"},
-// 		"wfs":  {"1.1.0", "2.0.0"},
-// 	}
-// 	return serviceMap
-// }
-
-// func contains(value string, list []string) bool {
-// 	for _, version := range list {
-// 		if version == value {
-// 			return true
-// 		}
-// 	}
-// 	return false
-// }
-
-// func arrayToString(aList []string, delim string) string {
-// 	var buffer bytes.Buffer
-// 	for i := 0; i < len(aList); i++ {
-// 		buffer.WriteString(aList[i])
-// 		if i != len(aList)-1 {
-// 			buffer.WriteString(delim)
-// 		}
-// 	}
-
-// 	return buffer.String()
-// }
-
 func main() {
 
-	serviceConfigPath := flag.String("c", envString("SERVICECONFIG", ""), "location of the service config")
-	// outputCapabilitiesPtr := flag.String("service-output-path", envString("SERVICE_CAPABILITIES_PATH", ""), "location of service config")
-	onlineResourceURL := flag.String("h", envString("ONLINERESOURCE", ""), "onlineresource URL used in documents")
+	serviceconfigpath := flag.String("c", envString("SERVICECONFIG", ""), "path of the service configuration")
 	flag.Parse()
 
-	serviceConfig, err := ioutil.ReadFile(*serviceConfigPath)
+	serviceconfig, err := ioutil.ReadFile(*serviceconfigpath)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	//service := builder.Service{}
-	service := builder.Config{}
-	if err = yaml.Unmarshal(serviceConfig, &service); err != nil {
+	config := builder.Config{}
+	if err = yaml.Unmarshal(serviceconfig, &config); err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	// overwrite onlineresourceurl
-	if *onlineResourceURL != "" {
-		service.Global.Onlineresourceurl = *onlineResourceURL
-	}
-
-	for _, w := range service.Service.WFS {
-		//fmt.Println(w)
+	for _, w := range config.Services.WFS {
 
 		if w.Version == "2.0.0" {
 
-			var masterYaml interface{}
-			yamlBytes, _ := ioutil.ReadFile("./config/wfs_2_0_0.yaml")
-			yaml.Unmarshal(yamlBytes, &masterYaml)
-
-			var overrideYaml interface{}
-			yamlBytes, _ = ioutil.ReadFile("./config/kadastralekaart.yaml")
-			yaml.Unmarshal(yamlBytes, &overrideYaml)
-
-			wfs := builder.WFS_2_0_0{}
-
-			wfsconfig, err := ioutil.ReadFile("./config/wfs_2_0_0.yaml")
+			basewfs2_0_0 := builder.WFS_2_0_0{}
+			base, err := ioutil.ReadFile("./base/wfs_2_0_0.yaml")
 			if err != nil {
 				log.Fatalf("error: %v", err)
 			}
-			if err = yaml.Unmarshal(wfsconfig, &wfs); err != nil {
+			if err = yaml.Unmarshal(base, &basewfs2_0_0); err != nil {
 				log.Fatalf("error: %v", err)
 			}
 
-			// serviceprovider, err := ioutil.ReadFile("./config/serviceprovider_2_0_0.yaml")
-			// if err != nil {
-			// 	log.Fatalf("error: %v", err)
-			// }
+			mergo.Merge(&basewfs2_0_0.ServiceIdentification, &w.ServiceIdentification)
+			mergo.Merge(&basewfs2_0_0.FeatureTypeList, &w.FeatureTypeList)
 
-			// spc := builder.ServiceProvider{}
-			// if err = yaml.Unmarshal(serviceprovider, &spc); err != nil {
-			// 	log.Fatalf("error: %v", err)
-			// }
+			// si, _ := xml.MarshalIndent(basewfs2_0_0, "", " ")
+			// re := regexp.MustCompile(`><.*>`)
+			// t := template.Must(template.New("capabilities").Parse(re.ReplaceAllString(xml.Header+string(si), "/>")))
+			// buf := new(bytes.Buffer)
+			// err = t.Execute(buf, config.Global)
 
-			dkk := builder.WFS_2_0_0{}
-			dkkconfig, err := ioutil.ReadFile("./config/kadastralekaart.yaml")
-			if err != nil {
-				log.Fatalf("error: %v", err)
-			}
-			if err = yaml.Unmarshal(dkkconfig, &dkk); err != nil {
-				log.Fatalf("error: %v", err)
-			}
+			si, _ := xml.MarshalIndent(basewfs2_0_0, "", " ")
+			t := template.Must(template.New("capabilities").Parse(string(si)))
+			buf := new(bytes.Buffer)
+			err = t.Execute(buf, config.Global)
 
-			copier.Copy(&wfs.ServiceIdentification, &dkk.ServiceIdentification)
-			//mergo.Merge(&wfs.ServiceIdentification, dkk.ServiceIdentification)
+			re := regexp.MustCompile(`><.*>`)
 
-			// loop over operations and set the Href for GET and (if available) POST requests
-			for i := range wfs.OperationsMetadata.Operation {
-				if wfs.OperationsMetadata.Operation[i].DCP.HTTP.Get.Type != "" {
-					wfs.OperationsMetadata.Operation[i].DCP.HTTP.Get.Href = "https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&"
-				}
-				if wfs.OperationsMetadata.Operation[i].DCP.HTTP.Post != nil {
-					wfs.OperationsMetadata.Operation[i].DCP.HTTP.Post = &builder.Post{Type: "simple", Href: "https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&"}
-				}
-			}
+			//fmt.Println(buf.String())
 
-			si, _ := xml.MarshalIndent(wfs, "", " ")
-			// fix placeholder xmlns:prefix="namespace_uri" with dataset namespace
-			siFixed := strings.ReplaceAll(xml.Header+string(si), "xmlns:prefix=\"namespace_uri\"", "xmlns:kadastralekaartv4=\"http://kadastralekaartv4.geonovum.nl\"")
-			fmt.Println(siFixed)
+			writeFile("wfs_2_0_0.xml", []byte(xml.Header+re.ReplaceAllString(buf.String(), "/>")))
 
 		}
 	}

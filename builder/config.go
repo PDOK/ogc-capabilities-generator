@@ -1,17 +1,20 @@
 package builder
 
 type Config struct {
-	Global          Global          `yaml:"global"`
-	ServiceProvider ServiceProvider `yaml:"serviceprovider"`
-	Service         Service         `yaml:"service"`
+	Global   Global   `yaml:"global"`
+	Services Services `yaml:"services"`
 }
 
 type Global struct {
-	Onlineresourceurl string           `yaml:"onlineresourceurl"`
-	WGS84Boundingbox  WGS84Boundingbox `yaml:"WGS84Boundingbox"`
-	Title             string           `yaml:"title"`
-	Abstract          string           `yaml:"abstract"`
-	Path              string           `yaml:"path"`
+	Prefix            string `yaml:"prefix"`
+	Namespace         string `yaml:"namespace"`
+	Onlineresourceurl string `yaml:"onlineresourceurl"`
+	// WGS84Boundingbox  WGS84Boundingbox `yaml:"WGS84Boundingbox"`
+	// Title             string           `yaml:"title"`
+	// Abstract          string           `yaml:"abstract"`
+	Path    string `yaml:"path"`
+	Version string `yaml:"version"`
+	Empty   string
 }
 
 type WGS84Boundingbox struct {
@@ -30,18 +33,24 @@ type Organization struct {
 	Email      string `yaml:"email"`
 }
 
-type Service struct {
+type Services struct {
 	WFS []WFS `yaml:"wfs"`
 	WMS []WMS `yaml:"wms"`
 	// WMTS []WMTS `yaml:"wmts"`
 }
 
 type WFS struct {
-	CRS          CRS            `yaml:"crs"`
-	Version      string         `yaml:"version"`
-	Outputformat []Outputformat `yaml:"outputformat"`
-	Features     []Feature      `yaml:"features"`
+	// CRS                   CRS                   `yaml:"crs"`
+	Version string `yaml:"version"`
+	// Outputformat          []Outputformat        `yaml:"outputformat"`
+	// Features              []Feature             `yaml:"features"`
+	ServiceIdentification ServiceIdentification `yaml:"serviceidentification"`
+	FeatureTypeList       FeatureTypeList       `yaml:"featuretypelist"`
 }
+
+// type ServiceIdentification struct {
+// 	Title string `yaml:"title"`
+// }
 
 type WMS struct {
 	CRS          CRS            `yaml:"crs"`

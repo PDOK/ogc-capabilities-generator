@@ -8,7 +8,7 @@ type WFS_2_0_0 struct {
 	ServiceIdentification ServiceIdentification `xml:"ows:ServiceIdentification" yaml:"serviceidentification"`
 	ServiceProvider       ServiceProvider       `xml:"ows:ServiceProvider" yaml:"serviceprovider"`
 	OperationsMetadata    OperationsMetadata    `xml:"ows:OperationsMetadata" yaml:"operationsmetadata"`
-	FeatureTypeList       FeatureTypeList       `xml:"FeatureTypeList" yaml:"featuretypelist"`
+	FeatureTypeList       FeatureTypeList       `xml:"wfs:FeatureTypeList" yaml:"featuretypelist"`
 	FilterCapabilities    FilterCapabilities    `xml:"fes:Filter_Capabilities" yaml:"filtercapabilities"`
 }
 
@@ -21,7 +21,7 @@ type WFS_Namespaces struct {
 	XmlnsFes           string `xml:"xmlns:fes,attr" yaml:"fes"`                                //http://www.opengis.net/fes/2.0
 	XmlnsInspireCommon string `xml:"xmlns:inspire_common,attr,omitempty" yaml:"inspirecommon"` //http://inspire.ec.europa.eu/schemas/common/1.0
 	XmlnsInspireDls    string `xml:"xmlns:inspire_dls,attr,omitempty" yaml:"inspiredls"`       //http://inspire.ec.europa.eu/schemas/inspire_dls/1.0
-	XmlnsPrefix        string `xml:"xmlns:prefix,attr" yaml:"prefix"`                          //namespace_uri placeholder
+	XmlnsPrefix        string `xml:"xmlns:{{.Prefix}},attr" yaml:"prefix"`                     //namespace_uri placeholder
 	Version            string `xml:"version,attr" yaml:"version"`
 	SchemaLocation     string `xml:"xsi:schemaLocation,attr" yaml:"schemalocation"`
 }
@@ -36,7 +36,7 @@ type ServiceIdentification struct {
 	ServiceType struct {
 		Text      string `xml:",chardata" yaml:"text"`
 		CodeSpace string `xml:"codeSpace,attr" yaml:"codespace"`
-	} `xml:"ows:servicetype"`
+	} `xml:"ows:ServiceType"`
 	ServiceTypeVersion string `xml:"ows:ServiceTypeVersion" yaml:"servicetypeversion"`
 	Fees               string `xml:"ows:Fees" yaml:"fees"`
 	AccessConstraints  string `xml:"ows:AccessConstraints" yaml:"accesscontraints"`
@@ -69,7 +69,7 @@ type ServiceProvider struct {
 				AdministrativeArea    string `xml:"ows:AdministrativeArea" yaml:"administrativearea"`
 				PostalCode            string `xml:"ows:PostalCode" yaml:"postalcode"`
 				Country               string `xml:"ows:Country" yaml:"country"`
-				ElectronicMailAddress string `xml:"ows:ElectronicMailAddress" yaml:electronicmailaddress`
+				ElectronicMailAddress string `xml:"ows:ElectronicMailAddress" yaml:"electronicmailaddress"`
 			} `xml:"ows:Address" yaml:"address"`
 			OnlineResource struct {
 				Text string `xml:",chardata"`
@@ -118,23 +118,25 @@ type OperationsMetadata struct {
 	} `xml:"ows:Operation"`
 	Parameter struct {
 		Text          string `xml:",chardata"`
-		Name          string `xml:"name,attr"`
+		Name          string `xml:"name,attr" yaml:"name"`
 		AllowedValues struct {
 			Text  string   `xml:",chardata"`
-			Value []string `xml:"ows:Value"`
-		} `xml:"ows:AllowedValues"`
-	} `xml:"ows:Parameter"`
+			Value []string `xml:"ows:Value" yaml:"value"`
+		} `xml:"ows:AllowedValues" yaml:"allowedvalues"`
+	} `xml:"ows:Parameter" yaml:"parameter"`
 	Constraint []struct {
-		Text          string `xml:",chardata"`
-		Name          string `xml:"name,attr"`
-		NoValues      string `xml:"ows:NoValues"`
-		DefaultValue  string `xml:"ows:DefaultValue"`
-		AllowedValues struct {
-			Text  string   `xml:",chardata"`
-			Value []string `xml:"ows:Value"`
-		} `xml:"ows:AllowedValues"`
-	} `xml:"ows:Constraint"`
+		Text          string         `xml:",chardata"`
+		Name          string         `xml:"name,attr" yaml:"name"`
+		NoValues      *string        `xml:"ows:NoValues" yaml:"novalue"`
+		DefaultValue  *string        `xml:"ows:DefaultValue" yaml:"defaultvalue"`
+		AllowedValues *AllowedValues `xml:"ows:AllowedValues" yaml:"allowedvalues"`
+	} `xml:"ows:Constraint" yaml:"constraint"`
 	ExtendedCapabilities *ExtendedCapabilities `xml:"ows:ExtendedCapabilities"`
+}
+
+type AllowedValues struct {
+	Text  string   `xml:",chardata"`
+	Value []string `xml:"ows:Value" yaml:"value"`
 }
 
 type ExtendedCapabilities struct {
@@ -166,6 +168,34 @@ type ExtendedCapabilities struct {
 }
 
 type FeatureTypeList struct {
+	XMLName     xml.Name `xml:"wfs:FeatureTypeList"`
+	Text        string   `xml:",chardata"`
+	FeatureType []struct {
+		Text     string `xml:",chardata"`
+		Name     string `xml:"wfs:Name" yaml:"name"`
+		Title    string `xml:"wfs:Title" yaml:"title"`
+		Abstract string `xml:"wfs:Abstract" yaml:"abstract"`
+		Keywords struct {
+			Text    string   `xml:",chardata"`
+			Keyword []string `xml:"ows:Keyword" yaml:"keyword"`
+		} `xml:"ows:Keywords" yaml:"keywords"`
+		DefaultCRS    string   `xml:"wfs:DefaultCRS" yaml:"defaultcrs"`
+		OtherCRS      []string `xml:"wfs:OtherCRS" yaml:"othercrs"`
+		OutputFormats struct {
+			Text   string   `xml:",chardata"`
+			Format []string `xml:"wfs:Format" yaml:"format"`
+		} `xml:"wfs:OutputFormats" yaml:"outputformats"`
+		WGS84BoundingBox struct {
+			Text        string `xml:",chardata"`
+			Dimensions  string `xml:"dimensions,attr" yaml:"dimensions"`
+			LowerCorner string `xml:"ows:LowerCorner" yaml:"lowercorner"`
+			UpperCorner string `xml:"ows:UpperCorner" yaml:"uppercorner"`
+		} `xml:"ows:WGS84BoundingBox" yaml:"wgs84boundingbox"`
+		MetadataURL struct {
+			Text string `xml:",chardata"`
+			Href string `xml:"xlink:href,attr" yaml:"href"`
+		} `xml:"wfs:MetadataURL" yaml:"metadataurl"`
+	} `xml:"wfs:FeatureType" yaml:"featuretype"`
 }
 
 type FilterCapabilities struct {
@@ -182,7 +212,7 @@ type FilterCapabilities struct {
 		} `xml:"fes:ResourceIdentifier" yaml:"resourceidentifier"`
 	} `xml:"fes:Id_Capabilities" yaml:"idcapabilities"`
 	ScalarCapabilities struct {
-		LogicalOperators    string `xml:"LogicalOperators" yaml:"logicaloperators"`
+		LogicalOperators    string `xml:"fes:LogicalOperators" yaml:"logicaloperators"`
 		ComparisonOperators struct {
 			ComparisonOperator []struct {
 				Name string `xml:"name,attr"`

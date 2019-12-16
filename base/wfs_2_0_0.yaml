@@ -7,7 +7,7 @@ namespaces:
   fes: http://www.opengis.net/fes/2.0
   inspirecommon:
   inspiredls:
-  prefix: namespace_uri  # don't edit! maybe different solution in code....?
+  prefix: "{{.Namespace}}" #namespace_uri  # don't edit! maybe different solution in code....?
   version: 2.0.0
   schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd
 
@@ -54,7 +54,7 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+            href: "{{.Onlineresourceurl}}{{.Path}}/{{.Version}}?SERVICE=WFS"
           #POST: no POST for GetCapabilities
       parameter:
         - name: AcceptVersions
@@ -80,7 +80,7 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+            href: "{{.Onlineresourceurl}}{{.Path}}/{{.Version}}?SERVICE=WFS"
           # post: no POST for DescribeFeatureType
       parameter:
         - name: outputFormat
@@ -89,16 +89,15 @@ operationsmetadata:
             - application/gml+xml; version=3.2
             - text/xml; subtype=gml/3.2.1
             - text/xml; subtype=gml/3.1.1
-            - text/xml; subtype=gml/2.1.2
     - name: GetFeature
       dcp:
         http:
           get:
             type: simple
-            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+            href: "{{.Onlineresourceurl}}{{.Path}}/{{.Version}}?SERVICE=WFS"
           post:
             type: simple
-            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&            
+            href: "{{.Onlineresourceurl}}{{.Path}}/{{.Version}}?SERVICE=WFS"
       parameter:
         - name: outputFormat
           allowedvalues: 
@@ -106,7 +105,6 @@ operationsmetadata:
             - application/gml+xml; version=3.2
             - text/xml; subtype=gml/3.2.1
             - text/xml; subtype=gml/3.1.1
-            - text/xml; subtype=gml/2.1.2
             - application/json; subtype=geojson
             - application/json
     # - name: GetPropertyValue no GetPropertyValue
@@ -115,15 +113,76 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+            href: "{{.Onlineresourceurl}}{{.Path}}/{{.Version}}?SERVICE=WFS"
           # post: no POST for ListStoredQueries
     - name: DescribeStoredQueries
       dcp:
         http:
           get:
             type: simple
-            href: #https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&language=eng&
+            href: "{{.Onlineresourceurl}}{{.Path}}/{{.Version}}?SERVICE=WFS"
           # post: no POST for DescribeStoredQueries
+
+  parameter:
+    name: version
+    allowedvalues: 
+      value: 
+      - 2.0.0
+
+  constraint:
+  - name: ImplementsBasicWFS
+    novalue: "{{ .Empty }}"
+    defaultvalue: "TRUE"
+  - name: ImplementsTransactionalWFS
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ImplementsLockingWFS
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: KVPEncoding
+    novalue: "{{ .Empty }}"
+    defaultvalue: "TRUE"
+  - name: XMLEncoding
+    novalue: "{{ .Empty }}"
+    defaultvalue: "TRUE"
+  - name: SOAPEncoding
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ImplementsInheritance
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ImplementsRemoteResolve
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ImplementsResultPaging
+    novalue: "{{ .Empty }}"
+    defaultvalue: "TRUE"
+  - name: ImplementsStandardJoins
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ImplementsSpatialJoins
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ImplementsTemporalJoins
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ImplementsFeatureVersioning
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: ManageStoredQueries
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: PagingIsTransactionSafe
+    novalue: "{{ .Empty }}"
+    defaultvalue: "FALSE"
+  - name: CountDefault
+    novalue: "{{ .Empty }}"
+    defaultvalue: 1000
+  - name: QueryExpressions
+    allowedvalues:
+      value:
+      - wfs:Query
+      - wfs:StoredQuery
 
 filtercapabilities:
   conformance:

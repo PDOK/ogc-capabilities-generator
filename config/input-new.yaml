@@ -18,8 +18,8 @@ service:
       default: urn:ogc:def:crs:EPSG::28992
       other:
         - urn:ogc:def:crs:EPSG::25831
-        - urn:ogc:def:crs:EPSG::25832    
-        - urn:ogc:def:crs:EPSG::3034    
+        - urn:ogc:def:crs:EPSG::25832
+        - urn:ogc:def:crs:EPSG::3034
         - urn:ogc:def:crs:EPSG::3035
         - urn:ogc:def:crs:EPSG::3038
         - urn:ogc:def:crs:EPSG::5709

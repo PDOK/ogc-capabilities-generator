@@ -1,9 +1,54 @@
-serviceidentification:
-    title: kadastralekaart
-    abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.
-    keywords:
-      keyword:
-      - PDOK        
-      - Kadaster
-      - Kadastrale percelen
-    accesscontraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
+global:
+  namespace: http://kadastralekaartv4.geonovum.nl
+  prefix: kadastralekaartv4
+  onlineresourceurl: http://geodata.nationaalgeoregister.nl
+  path: /kadastralekaart
+  version: v4_0
+
+services:
+  wfs:
+  - version: 2.0.0
+    serviceidentification:
+      title: kadastralekaart
+      abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.
+      keywords:
+        keyword:
+        - PDOK        
+        - Kadaster
+        - Kadastrale percelen
+      accesscontraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
+    
+    featuretypelist:
+      featuretype:
+        - name: kadastralekaartv4:kadastralegrens
+          title: kadastralegrens
+          abstract: Een Kadastrale Grens is de weergave van een grens op de kadastrale kaart die door de dienst van het Kadaster tussen percelen vastgesteld wordt, op basis van inlichtingen van belanghebbenden en met gebruikmaking van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven.
+          keywords:
+            keyword:
+              - Kadastrale grenzen
+              - Grenzen
+              - infoFeatureAccessService
+          defaultcrs: urn:ogc:def:crs:EPSG::28992
+          othercrs:
+            - urn:ogc:def:crs:EPSG::25831
+            - urn:ogc:def:crs:EPSG::25832
+            - urn:ogc:def:crs:EPSG::3034
+            - urn:ogc:def:crs:EPSG::3035
+            - urn:ogc:def:crs:EPSG::3038
+            - urn:ogc:def:crs:EPSG::5709
+            - urn:ogc:def:crs:EPSG::3857
+            - urn:ogc:def:crs:EPSG::4258
+            - urn:ogc:def:crs:EPSG::4326
+          outputformats:
+            format:
+              - application/gml+xml; version=3.2
+              - text/xml; subtype=gml/3.2.1
+              - text/xml; subtype=gml/3.1.1
+              - application/json; subtype=geojson
+              - application/json
+          wgs84boundingbox:
+            dimensions: 2
+            lowercorner: 2.52712538742158 50.2128625669452
+            uppercorner: 7.37402550506231 55.7211602557705
+          metadataurl:
+            href: https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=a29917b9-3426-4041-a11b-69bcb2256904
