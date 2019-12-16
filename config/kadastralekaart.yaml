@@ -6,8 +6,7 @@ global:
   version: v4_0
 
 services:
-  wfs:
-  - version: 2.0.0
+  wfs_2_0_0:
     serviceidentification:
       title: kadastralekaart
       abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.
@@ -66,3 +65,52 @@ services:
           language: eng
         spatialdatasetidentifier:
           code: 06b6c650-cdb1-11dd-ad8b-0800200c9a64
+
+  wms_1_3_0:
+    service: 
+      name: WMS
+      title: KadastraleKaartv4
+      abstract: Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.
+      keywordlist:
+        keyword:
+          - Kadaster
+          - kadastrale percelen
+          - infoMapAccessService 
+          - PDOK
+      onlineresource:
+        xlink: http://www.w3.org/1999/xlink
+        href: https://geodata.nationaalgeoregister.nl
+      contactinformation:
+        contactpersonprimary:
+          contactperson: KlantContactCenter PDOK
+          contactorganization: PDOK
+        contactposition: pointOfContact
+        contactaddress:
+          addresstype: Work
+          address:
+          city: Apeldoorn
+          stateorprovince: Gelderland
+          postalcode: 7334 DP
+          country: Netherlands
+        contactvoicetelephone: 0123-123456
+        contactfacsimiletelephone: 987-632458
+        contactelectronicmailaddress: BeheerPDOK@kadaster.nl
+      fees: NONE
+      accessconstraints:
+      maxwidth: 4000
+      maxheight: 4000
+    
+    capability:
+      request:
+      exception:
+      extendedcapabilities:
+        metadataurl:
+          type: inspire_common:resourceLocatorType
+          url: http://www.nationaalgeoregister.nl/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=97cf6a64-9cfc-4ce6-9741-2db44fd27fca
+          mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
+        supportedlanguages:
+          defaultlanguage:
+            language: dut
+        responselanguage:
+          language: dut
+      layer:

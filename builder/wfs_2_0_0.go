@@ -44,26 +44,21 @@ type ServiceIdentification struct {
 
 type ServiceProvider struct {
 	XMLName      xml.Name `xml:"ows:ServiceProvider"`
-	Text         string   `xml:",chardata"`
 	ProviderName string   `xml:"ows:ProviderName" yaml:"providername"`
 	ProviderSite struct {
-		Text string `xml:",chardata"`
 		Type string `xml:"xlink:type,attr" yaml:"type"`
 		Href string `xml:"xlink:href,attr" yaml:"href"`
 	} `xml:"ows:ProviderSite" yaml:"providersite"`
 	ServiceContact struct {
-		Text           string `xml:",chardata"`
 		IndividualName string `xml:"ows:IndividualName" yaml:"individualname"`
 		PositionName   string `xml:"ows:PositionName" yaml:"positionname"`
 		ContactInfo    struct {
 			Text  string `xml:",chardata"`
 			Phone struct {
-				Text      string `xml:",chardata"`
 				Voice     string `xml:"ows:Voice" yaml:"voice"`
 				Facsimile string `xml:"ows:Facsimile" yaml:"facsmile"`
 			} `xml:"ows:Phone" yaml:"phone"`
 			Address struct {
-				Text                  string `xml:",chardata"`
 				DeliveryPoint         string `xml:"ows:DeliveryPoint" yaml:"deliverypoint"`
 				City                  string `xml:"ows:City" yaml:"city"`
 				AdministrativeArea    string `xml:"ows:AdministrativeArea" yaml:"administrativearea"`
@@ -72,7 +67,6 @@ type ServiceProvider struct {
 				ElectronicMailAddress string `xml:"ows:ElectronicMailAddress" yaml:"electronicmailaddress"`
 			} `xml:"ows:Address" yaml:"address"`
 			OnlineResource struct {
-				Text string `xml:",chardata"`
 				Type string `xml:"xlink:type,attr" yaml:"type"`
 				Href string `xml:"xlink:href,attr" yaml:"href"`
 			} `xml:"ows:OnlineResource" yaml:"onlineresource"`
@@ -84,23 +78,17 @@ type ServiceProvider struct {
 }
 
 type Post struct {
-	Text string `xml:",chardata"`
 	Type string `xml:"xlink:type,attr" yaml:"type"`
 	Href string `xml:"xlink:href,attr" yaml:"href"`
 }
 
 type OperationsMetadata struct {
 	XMLName   xml.Name `xml:"ows:OperationsMetadata"`
-	Text      string   `xml:",chardata"`
 	Operation []struct {
-		Text string `xml:",chardata"`
 		Name string `xml:"name,attr"`
 		DCP  struct {
-			Text string `xml:",chardata"`
 			HTTP struct {
-				Text string `xml:",chardata"`
-				Get  struct {
-					Text string `xml:",chardata"`
+				Get struct {
 					Type string `xml:"xlink:type,attr" yaml:"type"`
 					Href string `xml:"xlink:href,attr" yaml:"href"`
 				} `xml:"ows:Get" yaml:"get"`
@@ -108,19 +96,15 @@ type OperationsMetadata struct {
 			} `xml:"ows:HTTP" yaml:"http"`
 		} `xml:"ows:DCP" yaml:"dcp"`
 		Parameter []struct {
-			Text          string `xml:",chardata"`
 			Name          string `xml:"name,attr"`
 			AllowedValues struct {
-				Text  string   `xml:",chardata"`
 				Value []string `xml:"ows:Value"`
 			} `xml:"ows:AllowedValues"`
 		} `xml:"ows:Parameter"`
 	} `xml:"ows:Operation"`
 	Parameter struct {
-		Text          string `xml:",chardata"`
 		Name          string `xml:"name,attr" yaml:"name"`
 		AllowedValues struct {
-			Text  string   `xml:",chardata"`
 			Value []string `xml:"ows:Value" yaml:"value"`
 		} `xml:"ows:AllowedValues" yaml:"allowedvalues"`
 	} `xml:"ows:Parameter" yaml:"parameter"`
@@ -131,37 +115,30 @@ type OperationsMetadata struct {
 		DefaultValue  *string        `xml:"ows:DefaultValue" yaml:"defaultvalue"`
 		AllowedValues *AllowedValues `xml:"ows:AllowedValues" yaml:"allowedvalues"`
 	} `xml:"ows:Constraint" yaml:"constraint"`
-	ExtendedCapabilities *ExtendedCapabilities `xml:"ows:ExtendedCapabilities" yaml:"extendedcapabilities"`
+	ExtendedCapabilities *WFS_2_0_0_ExtendedCapabilities `xml:"ows:ExtendedCapabilities" yaml:"extendedcapabilities"`
 }
 
 type AllowedValues struct {
-	Text  string   `xml:",chardata"`
 	Value []string `xml:"ows:Value" yaml:"value"`
 }
 
-type ExtendedCapabilities struct {
-	Text                 string `xml:",chardata"`
+type WFS_2_0_0_ExtendedCapabilities struct {
 	ExtendedCapabilities struct {
 		Text        string `xml:",chardata"`
 		MetadataUrl struct {
-			Text      string `xml:",chardata"`
 			Type      string `xml:"xsi:type,attr" yaml:"type"`
 			URL       string `xml:"inspire_common:URL" yaml:"url"`
 			MediaType string `xml:"inspire_common:MediaType" yaml:"mediatype"`
 		} `xml:"inspire_common:MetadataUrl" yaml:"metadataurl"`
 		SupportedLanguages struct {
-			Text            string `xml:",chardata"`
 			DefaultLanguage struct {
-				Text     string `xml:",chardata"`
 				Language string `xml:"inspire_common:Language" yaml:"language"`
 			} `xml:"inspire_common:DefaultLanguage" yaml:"defaultlanguage"`
 		} `xml:"inspire_common:SupportedLanguages" yaml:"supportedlanguages"`
 		ResponseLanguage struct {
-			Text     string `xml:",chardata"`
 			Language string `xml:"inspire_common:Language" yaml:"language"`
 		} `xml:"inspire_common:ResponseLanguage" yaml:"responselanguage"`
 		SpatialDataSetIdentifier struct {
-			Text string `xml:",chardata"`
 			Code string `xml:"inspire_common:Code" yaml:"code"`
 		} `xml:"inspire_dls:SpatialDataSetIdentifier" yaml:"spatialdatasetidentifier"`
 	} `xml:"inspire_dls:ExtendedCapabilities" yaml:"extendedcapabilities"`
@@ -169,30 +146,24 @@ type ExtendedCapabilities struct {
 
 type FeatureTypeList struct {
 	XMLName     xml.Name `xml:"wfs:FeatureTypeList"`
-	Text        string   `xml:",chardata"`
 	FeatureType []struct {
-		Text     string `xml:",chardata"`
 		Name     string `xml:"wfs:Name" yaml:"name"`
 		Title    string `xml:"wfs:Title" yaml:"title"`
 		Abstract string `xml:"wfs:Abstract" yaml:"abstract"`
 		Keywords struct {
-			Text    string   `xml:",chardata"`
 			Keyword []string `xml:"ows:Keyword" yaml:"keyword"`
 		} `xml:"ows:Keywords" yaml:"keywords"`
 		DefaultCRS    string   `xml:"wfs:DefaultCRS" yaml:"defaultcrs"`
 		OtherCRS      []string `xml:"wfs:OtherCRS" yaml:"othercrs"`
 		OutputFormats struct {
-			Text   string   `xml:",chardata"`
 			Format []string `xml:"wfs:Format" yaml:"format"`
 		} `xml:"wfs:OutputFormats" yaml:"outputformats"`
 		WGS84BoundingBox struct {
-			Text        string `xml:",chardata"`
 			Dimensions  string `xml:"dimensions,attr" yaml:"dimensions"`
 			LowerCorner string `xml:"ows:LowerCorner" yaml:"lowercorner"`
 			UpperCorner string `xml:"ows:UpperCorner" yaml:"uppercorner"`
 		} `xml:"ows:WGS84BoundingBox" yaml:"wgs84boundingbox"`
 		MetadataURL struct {
-			Text string `xml:",chardata"`
 			Href string `xml:"xlink:href,attr" yaml:"href"`
 		} `xml:"wfs:MetadataURL" yaml:"metadataurl"`
 	} `xml:"wfs:FeatureType" yaml:"featuretype"`

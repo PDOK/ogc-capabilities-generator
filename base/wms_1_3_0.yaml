@@ -1,0 +1,36 @@
+namespaces:
+  wms: http://www.opengis.net/wms
+  sld: http://www.opengis.net/sld
+  ows: http://www.opengis.net/ows/1.1
+  xlink: http://www.w3.org/1999/xlink
+  xsi: http://www.w3.org/2001/XMLSchema-instance
+  inspirecommon: 
+  inspirevs: 
+  version: 1.3.0
+  schemalocation: http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://inspire.ec.europa.eu/schemas/inspire_vs/1.0  http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd
+
+service:
+  onlineresource:
+    xlink: http://www.w3.org/1999/xlink
+    href: https://geodata.nationaalgeoregister.nl
+  contactinformation:
+    contactpersonprimary:
+      contactperson: KlantContactCenter PDOK
+      contactorganization: PDOK
+    contactposition: pointOfContact
+    contactaddress:
+      addresstype: Work
+      address:
+      city: Apeldoorn
+      stateorprovince: Gelderland
+      postalcode: 7334 DP
+      country: Netherlands
+    contactvoicetelephone:
+    contactfacsimiletelephone:
+    contactelectronicmailaddress: BeheerPDOK@kadaster.nl
+  fees:
+  accessconstraints:
+  maxwidth: 4000
+  maxheight: 4000
+
+capabilities:

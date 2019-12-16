@@ -29,7 +29,7 @@
      <ows:City>Apeldoorn</ows:City>
      <ows:AdministrativeArea>Gelderland</ows:AdministrativeArea>
      <ows:PostalCode>7334 DP</ows:PostalCode>
-     <ows:Country>Nederland</ows:Country>
+     <ows:Country>Netherlands</ows:Country>
      <ows:ElectronicMailAddress>BeheerPDOK@kadaster.nl</ows:ElectronicMailAddress>
     </ows:Address>
     <ows:OnlineResource xlink:type="simple" xlink:href="https://geodata.nationaalgeoregister.nl"/>

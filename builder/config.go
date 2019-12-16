@@ -34,31 +34,23 @@ type Organization struct {
 }
 
 type Services struct {
-	WFS []WFS `yaml:"wfs"`
-	WMS []WMS `yaml:"wms"`
+	WFS_2_0_0 WFS_2_0_0_config `yaml:"wfs_2_0_0"`
+	WMS_1_3_0 WMS_1_3_0_config `yaml:"wms_1_3_0"`
 	// WMTS []WMTS `yaml:"wmts"`
 }
 
-type WFS struct {
+type WFS_2_0_0_config struct {
 	// CRS                   CRS                   `yaml:"crs"`
-	Version string `yaml:"version"`
 	// Outputformat          []Outputformat        `yaml:"outputformat"`
 	// Features              []Feature             `yaml:"features"`
-	ServiceIdentification ServiceIdentification `yaml:"serviceidentification"`
-	FeatureTypeList       FeatureTypeList       `yaml:"featuretypelist"`
-	ExtendedCapabilities  ExtendedCapabilities  `yaml:"extendedcapabilities"`
+	ServiceIdentification ServiceIdentification          `yaml:"serviceidentification"`
+	FeatureTypeList       FeatureTypeList                `yaml:"featuretypelist"`
+	ExtendedCapabilities  WFS_2_0_0_ExtendedCapabilities `yaml:"extendedcapabilities"`
 }
 
-// type ServiceIdentification struct {
-// 	Title string `yaml:"title"`
-// }
-
-type WMS struct {
-	CRS          CRS            `yaml:"crs"`
-	Version      string         `yaml:"version"`
-	Boundingbox  []Boundingbox  `yaml:"boundingbox"`
-	Outputformat []Outputformat `yaml:"outputformat"`
-	Layers       []Layer        `yaml:"layers"`
+type WMS_1_3_0_config struct {
+	Service    Service    `yaml:"service"`
+	Capability Capability `yaml:"capability"`
 }
 
 type CRS struct {
