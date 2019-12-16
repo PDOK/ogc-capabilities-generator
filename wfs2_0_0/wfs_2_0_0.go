@@ -1,4 +1,4 @@
-package builder
+package wfs2_0_0
 
 import "encoding/xml"
 
@@ -125,7 +125,7 @@ type AllowedValues struct {
 type WFS_2_0_0_ExtendedCapabilities struct {
 	ExtendedCapabilities struct {
 		Text        string `xml:",chardata"`
-		MetadataUrl struct {
+		MetadataURL struct {
 			Type      string `xml:"xsi:type,attr" yaml:"type"`
 			URL       string `xml:"inspire_common:URL" yaml:"url"`
 			MediaType string `xml:"inspire_common:MediaType" yaml:"mediatype"`

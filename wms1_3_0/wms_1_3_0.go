@@ -1,4 +1,4 @@
-package builder
+package wms1_3_0
 
 import "encoding/xml"
 
@@ -58,66 +58,21 @@ type Service struct {
 type Capability struct {
 	Request struct {
 		GetCapabilities struct {
-			Format  string `xml:"Format"`
-			DCPType struct {
-				HTTP struct {
-					Get struct {
-						OnlineResource struct {
-							Xlink string `xml:"xlink,attr"`
-							Href  string `xml:"href,attr"`
-						} `xml:"OnlineResource"`
-					} `xml:"Get"`
-					Post struct {
-						OnlineResource struct {
-							Xlink string `xml:"xlink,attr"`
-							Href  string `xml:"href,attr"`
-						} `xml:"OnlineResource"`
-					} `xml:"Post"`
-				} `xml:"HTTP"`
-			} `xml:"DCPType"`
-		} `xml:"GetCapabilities"`
+			Format  string  `xml:"Format" yaml:"format"`
+			DCPType DCPType `xml:"DCPType" yaml:"dcptype"`
+		} `xml:"GetCapabilities" yaml:"format"`
 		GetMap struct {
-			Format  []string `xml:"Format"`
-			DCPType struct {
-				HTTP struct {
-					Get struct {
-						OnlineResource struct {
-							Xlink string `xml:"xlink,attr"`
-							Href  string `xml:"href,attr"`
-						} `xml:"OnlineResource"`
-					} `xml:"Get"`
-					Post struct {
-						OnlineResource struct {
-							Xlink string `xml:"xlink,attr"`
-							Href  string `xml:"href,attr"`
-						} `xml:"OnlineResource"`
-					} `xml:"Post"`
-				} `xml:"HTTP"`
-			} `xml:"DCPType"`
-		} `xml:"GetMap"`
+			Format  []string `xml:"Format" yaml:"format"`
+			DCPType DCPType  `xml:"DCPType" yaml:"dcptype"`
+		} `xml:"GetMap" yaml:"format"`
 		GetFeatureInfo struct {
-			Format  []string `xml:"Format"`
-			DCPType struct {
-				HTTP struct {
-					Get struct {
-						OnlineResource struct {
-							Xlink string `xml:"xlink,attr"`
-							Href  string `xml:"href,attr"`
-						} `xml:"OnlineResource"`
-					} `xml:"Get"`
-					Post struct {
-						OnlineResource struct {
-							Xlink string `xml:"xlink,attr"`
-							Href  string `xml:"href,attr"`
-						} `xml:"OnlineResource"`
-					} `xml:"Post"`
-				} `xml:"HTTP"`
-			} `xml:"DCPType"`
-		} `xml:"GetFeatureInfo"`
-	} `xml:"Request"`
+			Format  []string `xml:"Format" yaml:"format"`
+			DCPType DCPType  `xml:"DCPType" yaml:"dcptype"`
+		} `xml:"GetFeatureInfo" yaml:"getfeatureinfo"`
+	} `xml:"Request" yaml:"request"`
 	Exception struct {
-		Format []string `xml:"Format"`
-	} `xml:"Exception"`
+		Format []string `xml:"Format"" yaml:"format"`
+	} `xml:"Exception"" yaml:"exception"`
 	ExtendedCapabilities *WMS_1_3_0_ExtendedCapabilities `xml:"ExtendedCapabilities"`
 	Layer                struct {
 		Queryable   string `xml:"queryable,attr"`
@@ -125,60 +80,21 @@ type Capability struct {
 		Title       string `xml:"Title"`
 		Abstract    string `xml:"Abstract"`
 		KeywordList struct {
-			Keyword []struct {
-				Vocabulary string `xml:"vocabulary,attr"`
-			} `xml:"Keyword"`
+			Keyword []string `xml:"Keyword"`
 		} `xml:"KeywordList"`
-		CRS                     []string `xml:"CRS"`
-		EXGeographicBoundingBox struct {
-			WestBoundLongitude string `xml:"westBoundLongitude"`
-			EastBoundLongitude string `xml:"eastBoundLongitude"`
-			SouthBoundLatitude string `xml:"southBoundLatitude"`
-			NorthBoundLatitude string `xml:"northBoundLatitude"`
-		} `xml:"EX_GeographicBoundingBox"`
-		BoundingBox []struct {
-			CRS  string `xml:"CRS,attr"`
-			Minx string `xml:"minx,attr"`
-			Miny string `xml:"miny,attr"`
-			Maxx string `xml:"maxx,attr"`
-			Maxy string `xml:"maxy,attr"`
-		} `xml:"BoundingBox"`
-		Style struct {
-			Name      string `xml:"Name"`
-			Title     string `xml:"Title"`
-			LegendURL struct {
-				Width          string `xml:"width,attr"`
-				Height         string `xml:"height,attr"`
-				Format         string `xml:"Format"`
-				OnlineResource struct {
-					Xlink string `xml:"xlink,attr"`
-					Type  string `xml:"type,attr"`
-					Href  string `xml:"href,attr"`
-				} `xml:"OnlineResource"`
-			} `xml:"LegendURL"`
-		} `xml:"Style"`
-		Layer []struct {
-			Queryable string `xml:"queryable,attr"`
-			Opaque    string `xml:"opaque,attr"`
-			Cascaded  string `xml:"cascaded,attr"`
-			Name      string `xml:"Name"`
-			Title     string `xml:"Title"`
-			Abstract  string `xml:"Abstract"`
-			Style     []struct {
-				Name      string `xml:"Name"`
-				Title     string `xml:"Title"`
-				LegendURL struct {
-					Width          string `xml:"width,attr"`
-					Height         string `xml:"height,attr"`
-					Format         string `xml:"Format"`
-					OnlineResource struct {
-						Xlink string `xml:"xlink,attr"`
-						Type  string `xml:"type,attr"`
-						Href  string `xml:"href,attr"`
-					} `xml:"OnlineResource"`
-				} `xml:"LegendURL"`
-			} `xml:"Style"`
-			Layer []struct {
+		CRS                     []string                `xml:"CRS"`
+		EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox"`
+		BoundingBox             []BoundingBox           `xml:"BoundingBox"`
+		Style                   Style                   `xml:"Style"`
+		Layer                   []struct {
+			Queryable string  `xml:"queryable,attr"`
+			Opaque    string  `xml:"opaque,attr"`
+			Cascaded  string  `xml:"cascaded,attr"`
+			Name      string  `xml:"Name"`
+			Title     string  `xml:"Title"`
+			Abstract  string  `xml:"Abstract"`
+			Style     []Style `xml:"Style"`
+			Layer     []struct {
 				Queryable   string `xml:"queryable,attr"`
 				Opaque      string `xml:"opaque,attr"`
 				Cascaded    string `xml:"cascaded,attr"`
@@ -188,20 +104,9 @@ type Capability struct {
 				KeywordList struct {
 					Keyword []string `xml:"Keyword"`
 				} `xml:"KeywordList"`
-				EXGeographicBoundingBox struct {
-					WestBoundLongitude string `xml:"westBoundLongitude"`
-					EastBoundLongitude string `xml:"eastBoundLongitude"`
-					SouthBoundLatitude string `xml:"southBoundLatitude"`
-					NorthBoundLatitude string `xml:"northBoundLatitude"`
-				} `xml:"EX_GeographicBoundingBox"`
-				BoundingBox []struct {
-					CRS  string `xml:"CRS,attr"`
-					Minx string `xml:"minx,attr"`
-					Miny string `xml:"miny,attr"`
-					Maxx string `xml:"maxx,attr"`
-					Maxy string `xml:"maxy,attr"`
-				} `xml:"BoundingBox"`
-				AuthorityURL struct {
+				EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox"`
+				BoundingBox             []BoundingBox           `xml:"BoundingBox"`
+				AuthorityURL            struct {
 					Name           string `xml:"name,attr"`
 					OnlineResource struct {
 						Xlink string `xml:"xlink,attr"`
@@ -220,38 +125,14 @@ type Capability struct {
 						Href  string `xml:"href,attr"`
 					} `xml:"OnlineResource"`
 				} `xml:"MetadataURL"`
-				Style []struct {
-					Name      string `xml:"Name"`
-					Title     string `xml:"Title"`
-					LegendURL struct {
-						Width          string `xml:"width,attr"`
-						Height         string `xml:"height,attr"`
-						Format         string `xml:"Format"`
-						OnlineResource struct {
-							Xlink string `xml:"xlink,attr"`
-							Type  string `xml:"type,attr"`
-							Href  string `xml:"href,attr"`
-						} `xml:"OnlineResource"`
-					} `xml:"LegendURL"`
-				} `xml:"Style"`
+				Style []Style `xml:"Style"`
 			} `xml:"Layer"`
 			KeywordList struct {
 				Keyword []string `xml:"Keyword"`
 			} `xml:"KeywordList"`
-			EXGeographicBoundingBox struct {
-				WestBoundLongitude string `xml:"westBoundLongitude"`
-				EastBoundLongitude string `xml:"eastBoundLongitude"`
-				SouthBoundLatitude string `xml:"southBoundLatitude"`
-				NorthBoundLatitude string `xml:"northBoundLatitude"`
-			} `xml:"EX_GeographicBoundingBox"`
-			BoundingBox []struct {
-				CRS  string `xml:"CRS,attr"`
-				Minx string `xml:"minx,attr"`
-				Miny string `xml:"miny,attr"`
-				Maxx string `xml:"maxx,attr"`
-				Maxy string `xml:"maxy,attr"`
-			} `xml:"BoundingBox"`
-			AuthorityURL struct {
+			EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox"`
+			BoundingBox             []BoundingBox           `xml:"BoundingBox"`
+			AuthorityURL            struct {
 				Name           string `xml:"name,attr"`
 				OnlineResource struct {
 					Xlink string `xml:"xlink,attr"`
@@ -288,4 +169,53 @@ type WMS_1_3_0_ExtendedCapabilities struct {
 	ResponseLanguage struct {
 		Language string `xml:"inspire_common:Language" yaml:"language"`
 	} `xml:"inspire_vs:ResponseLanguage" yaml:"responselanguage"`
+}
+
+type EXGeographicBoundingBox struct {
+	WestBoundLongitude string `xml:"westBoundLongitude"`
+	EastBoundLongitude string `xml:"eastBoundLongitude"`
+	SouthBoundLatitude string `xml:"southBoundLatitude"`
+	NorthBoundLatitude string `xml:"northBoundLatitude"`
+}
+
+type BoundingBox struct {
+	CRS  string `xml:"CRS,attr"`
+	Minx string `xml:"minx,attr"`
+	Miny string `xml:"miny,attr"`
+	Maxx string `xml:"maxx,attr"`
+	Maxy string `xml:"maxy,attr"`
+}
+
+type Style struct {
+	Name      string `xml:"Name"`
+	Title     string `xml:"Title"`
+	LegendURL struct {
+		Width          string `xml:"width,attr"`
+		Height         string `xml:"height,attr"`
+		Format         string `xml:"Format"`
+		OnlineResource struct {
+			Xlink string `xml:"xlink,attr"`
+			Type  string `xml:"type,attr"`
+			Href  string `xml:"href,attr"`
+		} `xml:"OnlineResource"`
+	} `xml:"LegendURL"`
+}
+
+type DCPType struct {
+	HTTP struct {
+		Get struct {
+			OnlineResource struct {
+				Xlink string `xml:"xmlns:xlink,attr" yaml:"xlink"`
+				Href  string `xml:"href,attr" yaml:"href"`
+			} `xml:"OnlineResource" yaml:"onlineresource"`
+		} `xml:"Get" yaml:"Get"`
+		Post *Post `xml:"Post" yaml:"post"`
+	} `xml:"HTTP" yaml:"http"`
+}
+
+type Post struct {
+	OnlineResource struct {
+		Xlink string `xml:"xmlns:xlink,attr" yaml:"xlink"`
+		Href  string `xml:"href,attr" yaml:"href"`
+	} `xml:"OnlineResource" yaml:"onlineresource"`
 }

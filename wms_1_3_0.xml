@@ -41,11 +41,8 @@
     <DCPType>
      <HTTP>
       <Get>
-       <OnlineResource xlink="" href=""/>
+       <OnlineResource xmlns:xlink="" href=""/>
       </Get>
-      <Post>
-       <OnlineResource xlink="" href=""/>
-      </Post>
      </HTTP>
     </DCPType>
    </GetCapabilities>
@@ -53,11 +50,8 @@
     <DCPType>
      <HTTP>
       <Get>
-       <OnlineResource xlink="" href=""/>
+       <OnlineResource xmlns:xlink="" href=""/>
       </Get>
-      <Post>
-       <OnlineResource xlink="" href=""/>
-      </Post>
      </HTTP>
     </DCPType>
    </GetMap>
@@ -65,11 +59,8 @@
     <DCPType>
      <HTTP>
       <Get>
-       <OnlineResource xlink="" href=""/>
+       <OnlineResource xmlns:xlink="" href=""/>
       </Get>
-      <Post>
-       <OnlineResource xlink="" href=""/>
-      </Post>
      </HTTP>
     </DCPType>
    </GetFeatureInfo>

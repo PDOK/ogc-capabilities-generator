@@ -9,6 +9,8 @@ import (
 	"log"
 	"os"
 	"pdok-capabilities-gen/builder"
+	"pdok-capabilities-gen/wfs2_0_0"
+	"pdok-capabilities-gen/wms1_3_0"
 	"regexp"
 
 	"github.com/imdario/mergo"
@@ -33,7 +35,7 @@ func envString(key, defaultValue string) string {
 }
 
 func buildWMS1_3_0() {
-	basewms1_3_0 := builder.WMS_1_3_0{}
+	basewms1_3_0 := wms1_3_0.WMS_1_3_0{}
 	base, err := ioutil.ReadFile("./base/wms_1_3_0.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
@@ -47,8 +49,8 @@ func buildWMS1_3_0() {
 
 	// if &config.Services.WFS_2_0_0.ExtendedCapabilities != nil {
 	// 	basewms1_3_0.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-	// 	basewms1_3_0.WFS_Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
-	// 	basewms1_3_0.OperationsMetadata.ExtendedCapabilities = &config.Services.WFS_2_0_0.ExtendedCapabilities
+	// 	basewms1_3_0.WFS_Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+	// 	basewms1_3_0.OperationsMetadata.ExtendedCapabilities = &config.Services.WMS_1_3_0.ExtendedCapabilities
 	// }
 
 	si, _ := xml.MarshalIndent(basewms1_3_0, "", " ")
@@ -61,7 +63,7 @@ func buildWMS1_3_0() {
 }
 
 func buildWFS2_0_0() {
-	basewfs2_0_0 := builder.WFS_2_0_0{}
+	basewfs2_0_0 := wfs2_0_0.WFS_2_0_0{}
 	base, err := ioutil.ReadFile("./base/wfs_2_0_0.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
