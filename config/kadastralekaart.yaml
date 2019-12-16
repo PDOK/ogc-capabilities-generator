@@ -52,3 +52,17 @@ services:
             uppercorner: 7.37402550506231 55.7211602557705
           metadataurl:
             href: https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=a29917b9-3426-4041-a11b-69bcb2256904
+
+    extendedcapabilities:
+      extendedcapabilities:
+        metadataurl:
+          type: inspire_common:resourceLocatorType
+          url: http://www.nationaalgeoregister.nl/geonetwork/srv/eng/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputschema=http://www.isotc211.org/2005/gmd&amp;elementsetname=full&amp;id=ff9315c8-f25a-4d01-9245-5cf058314ebf
+          mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
+        supportedlanguages:
+          defaultlanguage:
+            language: eng
+        responselanguage:
+          language: eng
+        spatialdatasetidentifier:
+          code: 06b6c650-cdb1-11dd-ad8b-0800200c9a64

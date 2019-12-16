@@ -46,6 +46,7 @@ type WFS struct {
 	// Features              []Feature             `yaml:"features"`
 	ServiceIdentification ServiceIdentification `yaml:"serviceidentification"`
 	FeatureTypeList       FeatureTypeList       `yaml:"featuretypelist"`
+	ExtendedCapabilities  ExtendedCapabilities  `yaml:"extendedcapabilities"`
 }
 
 // type ServiceIdentification struct {

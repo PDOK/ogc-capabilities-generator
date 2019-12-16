@@ -131,7 +131,7 @@ type OperationsMetadata struct {
 		DefaultValue  *string        `xml:"ows:DefaultValue" yaml:"defaultvalue"`
 		AllowedValues *AllowedValues `xml:"ows:AllowedValues" yaml:"allowedvalues"`
 	} `xml:"ows:Constraint" yaml:"constraint"`
-	ExtendedCapabilities *ExtendedCapabilities `xml:"ows:ExtendedCapabilities"`
+	ExtendedCapabilities *ExtendedCapabilities `xml:"ows:ExtendedCapabilities" yaml:"extendedcapabilities"`
 }
 
 type AllowedValues struct {
@@ -145,26 +145,26 @@ type ExtendedCapabilities struct {
 		Text        string `xml:",chardata"`
 		MetadataUrl struct {
 			Text      string `xml:",chardata"`
-			Type      string `xml:"type,attr"`
-			URL       string `xml:"inspire_common:URL"`
-			MediaType string `xml:"inspire_common:MediaType"`
-		} `xml:"inspire_common:MetadataUrl"`
+			Type      string `xml:"xsi:type,attr" yaml:"type"`
+			URL       string `xml:"inspire_common:URL" yaml:"url"`
+			MediaType string `xml:"inspire_common:MediaType" yaml:"mediatype"`
+		} `xml:"inspire_common:MetadataUrl" yaml:"metadataurl"`
 		SupportedLanguages struct {
 			Text            string `xml:",chardata"`
 			DefaultLanguage struct {
 				Text     string `xml:",chardata"`
-				Language string `xml:"inspire_common:Language"`
-			} `xml:"inspire_common:DefaultLanguage"`
-		} `xml:"inspire_common:SupportedLanguages"`
+				Language string `xml:"inspire_common:Language" yaml:"language"`
+			} `xml:"inspire_common:DefaultLanguage" yaml:"defaultlanguage"`
+		} `xml:"inspire_common:SupportedLanguages" yaml:"supportedlanguages"`
 		ResponseLanguage struct {
 			Text     string `xml:",chardata"`
-			Language string `xml:"inspire_common:Language"`
-		} `xml:"inspire_common:ResponseLanguage"`
+			Language string `xml:"inspire_common:Language" yaml:"language"`
+		} `xml:"inspire_common:ResponseLanguage" yaml:"responselanguage"`
 		SpatialDataSetIdentifier struct {
 			Text string `xml:",chardata"`
-			Code string `xml:"inspire_common:Code"`
-		} `xml:"inspire_dls:SpatialDataSetIdentifier"`
-	} `xml:"inspire_dls:ExtendedCapabilities"`
+			Code string `xml:"inspire_common:Code" yaml:"code"`
+		} `xml:"inspire_dls:SpatialDataSetIdentifier" yaml:"spatialdatasetidentifier"`
+	} `xml:"inspire_dls:ExtendedCapabilities" yaml:"extendedcapabilities"`
 }
 
 type FeatureTypeList struct {

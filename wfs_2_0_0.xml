@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wfs:WFS_Capabilities xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:kadastralekaartv4="http://kadastralekaartv4.geonovum.nl" version="2.0.0" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd">
+<wfs:WFS_Capabilities xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0" xmlns:inspire_dls="http://inspire.ec.europa.eu/schemas/inspire_dls/1.0" xmlns:kadastralekaartv4="http://kadastralekaartv4.geonovum.nl" version="2.0.0" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd">
  <ows:ServiceIdentification>
   <ows:Title>kadastralekaart</ows:Title>
   <ows:Abstract>Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren.</ows:Abstract>
@@ -186,6 +186,25 @@
     <ows:Value>wfs:StoredQuery</ows:Value>
    </ows:AllowedValues>
   </ows:Constraint>
+  <ows:ExtendedCapabilities>
+   <inspire_dls:ExtendedCapabilities>
+    <inspire_common:MetadataUrl xsi:type="inspire_common:resourceLocatorType">
+     <inspire_common:URL>http://www.nationaalgeoregister.nl/geonetwork/srv/eng/csw?service=CSW&amp;amp;version=2.0.2&amp;amp;request=GetRecordById&amp;amp;outputschema=http://www.isotc211.org/2005/gmd&amp;amp;elementsetname=full&amp;amp;id=ff9315c8-f25a-4d01-9245-5cf058314ebf</inspire_common:URL>
+     <inspire_common:MediaType>application/vnd.ogc.csw.GetRecordByIdResponse_xml</inspire_common:MediaType>
+    </inspire_common:MetadataUrl>
+    <inspire_common:SupportedLanguages>
+     <inspire_common:DefaultLanguage>
+      <inspire_common:Language>eng</inspire_common:Language>
+     </inspire_common:DefaultLanguage>
+    </inspire_common:SupportedLanguages>
+    <inspire_common:ResponseLanguage>
+     <inspire_common:Language>eng</inspire_common:Language>
+    </inspire_common:ResponseLanguage>
+    <inspire_dls:SpatialDataSetIdentifier>
+     <inspire_common:Code>06b6c650-cdb1-11dd-ad8b-0800200c9a64</inspire_common:Code>
+    </inspire_dls:SpatialDataSetIdentifier>
+   </inspire_dls:ExtendedCapabilities>
+  </ows:ExtendedCapabilities>
  </ows:OperationsMetadata>
  <wfs:FeatureTypeList>
   <wfs:FeatureType>

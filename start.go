@@ -61,11 +61,11 @@ func main() {
 			mergo.Merge(&basewfs2_0_0.ServiceIdentification, &w.ServiceIdentification)
 			mergo.Merge(&basewfs2_0_0.FeatureTypeList, &w.FeatureTypeList)
 
-			// si, _ := xml.MarshalIndent(basewfs2_0_0, "", " ")
-			// re := regexp.MustCompile(`><.*>`)
-			// t := template.Must(template.New("capabilities").Parse(re.ReplaceAllString(xml.Header+string(si), "/>")))
-			// buf := new(bytes.Buffer)
-			// err = t.Execute(buf, config.Global)
+			if &w.ExtendedCapabilities != nil {
+				basewfs2_0_0.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+				basewfs2_0_0.WFS_Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+				basewfs2_0_0.OperationsMetadata.ExtendedCapabilities = &w.ExtendedCapabilities
+			}
 
 			si, _ := xml.MarshalIndent(basewfs2_0_0, "", " ")
 			t := template.Must(template.New("capabilities").Parse(string(si)))
@@ -73,28 +73,7 @@ func main() {
 			err = t.Execute(buf, config.Global)
 
 			re := regexp.MustCompile(`><.*>`)
-
-			//fmt.Println(buf.String())
-
 			writeFile("wfs_2_0_0.xml", []byte(xml.Header+re.ReplaceAllString(buf.String(), "/>")))
-
 		}
 	}
-
-	// for _, wms := range service.Service.WMS {
-	// 	fmt.Println(wms)
-	// }
-
-	// capabilitiesBuilder := createBuilder(service, *onlineResourceURL)
-	// if capabilitiesBuilder == nil {
-	// 	log.Fatalf("Could not create capabilitiesBuilder")
-	// }
-
-	// var writer bytes.Buffer
-	// err = capabilitiesBuilder.Build(&writer)
-	// if err != nil {
-	// 	log.Fatalf("error: %v", err)
-	// }
-	// writeFile(*outputCapabilitiesPtr, writer.Bytes())
-
 }
