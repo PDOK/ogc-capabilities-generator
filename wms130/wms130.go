@@ -8,6 +8,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// GetBase function to get a filled "template" based on the wms130.yaml config
 func GetBase() Wms130 {
 	wms130 := Wms130{}
 	base, err := ioutil.ReadFile("./wms130/wms130.yaml")
@@ -20,14 +21,16 @@ func GetBase() Wms130 {
 	return wms130
 }
 
+// Wms130 base struct
 type Wms130 struct {
-	XMLName        xml.Name `xml:"WMS_Capabilities"`
-	WMS_Namespaces `yaml:"namespaces"`
-	Service        Service    `xml:"Service" yaml:"service"`
-	Capability     Capability `xml:"Capability" yaml:"capability"`
+	XMLName    xml.Name `xml:"WMS_Capabilities"`
+	Namespaces `yaml:"namespaces"`
+	Service    Service    `xml:"Service" yaml:"service"`
+	Capability Capability `xml:"Capability" yaml:"capability"`
 }
 
-type WMS_Namespaces struct {
+// Namespaces struct containing the namespaces needed for the XML document
+type Namespaces struct {
 	XmlnsWMS           string `xml:"xmlns,attr" yaml:"wms"`                                    //http://www.opengis.net/wms
 	XmlnsSLD           string `xml:"xmlns:sld,attr" yaml:"sld"`                                //http://www.opengis.net/sld
 	XmlnsXlink         string `xml:"xmlns:xlink,attr" yaml:"xlink"`                            //http://www.w3.org/1999/xlink
@@ -38,6 +41,7 @@ type WMS_Namespaces struct {
 	SchemaLocation     string `xml:"xsi:schemaLocation,attr" yaml:"schemalocation"`
 }
 
+// Service struct containing the base service information filled from the template
 type Service struct {
 	Name        string `xml:"Name" yaml:"name"`
 	Title       string `xml:"Title" yaml:"title"`
@@ -73,108 +77,99 @@ type Service struct {
 	MaxHeight         string `xml:"MaxHeight" yaml:"maxheight"`
 }
 
+// Capability base struct
 type Capability struct {
-	Request struct {
-		GetCapabilities struct {
-			Format  string  `xml:"Format" yaml:"format"`
-			DCPType DCPType `xml:"DCPType" yaml:"dcptype"`
-		} `xml:"GetCapabilities" yaml:"getcapabilities"`
-		GetMap struct {
-			Format  []string `xml:"Format" yaml:"format"`
-			DCPType DCPType  `xml:"DCPType" yaml:"dcptype"`
-		} `xml:"GetMap" yaml:"format"`
-		GetFeatureInfo struct {
-			Format  []string `xml:"Format" yaml:"format"`
-			DCPType DCPType  `xml:"DCPType" yaml:"dcptype"`
-		} `xml:"GetFeatureInfo" yaml:"getfeatureinfo"`
-	} `xml:"Request" yaml:"request"`
-	Exception struct {
-		Format []string `xml:"Format" yaml:"format"`
-	} `xml:"Exception" yaml:"exception"`
-	ExtendedCapabilities *WMS_1_3_0_ExtendedCapabilities `xml:"ExtendedCapabilities"`
-	Layer                struct {
-		Queryable   string `xml:"queryable,attr"`
-		Name        string `xml:"Name"`
-		Title       string `xml:"Title"`
-		Abstract    string `xml:"Abstract"`
-		KeywordList struct {
-			Keyword []string `xml:"Keyword"`
-		} `xml:"KeywordList"`
-		CRS                     []string                `xml:"CRS"`
-		EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox"`
-		BoundingBox             []BoundingBox           `xml:"BoundingBox"`
-		Style                   Style                   `xml:"Style"`
-		Layer                   []struct {
-			Queryable string  `xml:"queryable,attr"`
-			Opaque    string  `xml:"opaque,attr"`
-			Cascaded  string  `xml:"cascaded,attr"`
-			Name      string  `xml:"Name"`
-			Title     string  `xml:"Title"`
-			Abstract  string  `xml:"Abstract"`
-			Style     []Style `xml:"Style"`
-			Layer     []struct {
-				Queryable   string `xml:"queryable,attr"`
-				Opaque      string `xml:"opaque,attr"`
-				Cascaded    string `xml:"cascaded,attr"`
-				Name        string `xml:"Name"`
-				Title       string `xml:"Title"`
-				Abstract    string `xml:"Abstract"`
-				KeywordList struct {
-					Keyword []string `xml:"Keyword"`
-				} `xml:"KeywordList"`
-				EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox"`
-				BoundingBox             []BoundingBox           `xml:"BoundingBox"`
-				AuthorityURL            struct {
-					Name           string `xml:"name,attr"`
-					OnlineResource struct {
-						Xlink string `xml:"xlink,attr"`
-						Href  string `xml:"href,attr"`
-					} `xml:"OnlineResource"`
-				} `xml:"AuthorityURL"`
-				Identifier struct {
-					Authority string `xml:"authority,attr"`
-				} `xml:"Identifier"`
-				MetadataURL struct {
-					Type           string `xml:"type,attr"`
-					Format         string `xml:"Format"`
-					OnlineResource struct {
-						Xlink string `xml:"xlink,attr"`
-						Type  string `xml:"type,attr"`
-						Href  string `xml:"href,attr"`
-					} `xml:"OnlineResource"`
-				} `xml:"MetadataURL"`
-				Style []Style `xml:"Style"`
-			} `xml:"Layer"`
-			KeywordList struct {
-				Keyword []string `xml:"Keyword"`
-			} `xml:"KeywordList"`
-			EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox"`
-			BoundingBox             []BoundingBox           `xml:"BoundingBox"`
-			AuthorityURL            struct {
-				Name           string `xml:"name,attr"`
-				OnlineResource struct {
-					Xlink string `xml:"xlink,attr"`
-					Href  string `xml:"href,attr"`
-				} `xml:"OnlineResource"`
-			} `xml:"AuthorityURL"`
-			Identifier struct {
-				Authority string `xml:"authority,attr"`
-			} `xml:"Identifier"`
-			MetadataURL struct {
-				Type           string `xml:"type,attr"`
-				Format         string `xml:"format"`
-				OnlineResource struct {
-					Xlink string `xml:"xlink,attr"`
-					Type  string `xml:"type,attr"`
-					Href  string `xml:"href,attr"`
-				} `xml:"OnlineResource"`
-			} `xml:"MetadataURL"`
-		} `xml:"Layer"`
-	} `xml:"Layer"`
+	Request              Request               `xml:"Request" yaml:"request"`
+	Exception            Exception             `xml:"Exception" yaml:"exception"`
+	ExtendedCapabilities *ExtendedCapabilities `xml:"inspire_vs:ExtendedCapabilities" yaml:"extendedcapabilities"`
+	Layer                Layers                `xml:"Layer" yaml:"layer"`
 }
 
-type WMS_1_3_0_ExtendedCapabilities struct {
-	MetadataUrl struct {
+// Request struct with the different operations, should be filled from the template
+type Request struct {
+	GetCapabilities RequestType `xml:"GetCapabilities" yaml:"getcapabilities"`
+	GetMap          RequestType `xml:"GetMap" yaml:"getmap"`
+	GetFeatureInfo  RequestType `xml:"GetFeatureInfo" yaml:"getfeatureinfo"`
+}
+
+// Exception struct containing the different available exceptions, should be filled from the template
+type Exception struct {
+	Format []string `xml:"Format" yaml:"format"`
+}
+
+// Layers containing the Layer configuration
+type Layers struct {
+	Queryable               *string                 `xml:"queryable,attr"`
+	Name                    string                  `xml:"Name" yaml:"name"`
+	Title                   string                  `xml:"Title" yaml:"title"`
+	Abstract                string                  `xml:"Abstract" yaml:"abstract"`
+	KeywordList             KeywordList             `xml:"KeywordList" yaml:"keywordlist"`
+	CRS                     []string                `xml:"CRS" yaml:"crs"`
+	EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox" yaml:"exgeographicboundingbox"`
+	BoundingBox             []BoundingBox           `xml:"BoundingBox" yaml:"boundingbox"`
+	Style                   []Style                 `xml:"Style" yaml:"style"`
+	Layer                   []Layer                 `xml:"Layer" yaml:"layer"`
+}
+
+// Layer contains the WMS 1.3.0 layer configuration
+type Layer struct {
+	Queryable               *string                  `xml:"queryable,attr" yaml:"queryable"`
+	Opaque                  *string                  `xml:"opaque,attr" yaml:"opaque"`
+	Cascaded                *string                  `xml:"cascaded,attr" yaml:"cascaded"`
+	Name                    string                   `xml:"Name" yaml:"name"`
+	Title                   string                   `xml:"Title" yaml:"title"`
+	Abstract                string                   `xml:"Abstract" yaml:"abstract"`
+	KeywordList             *KeywordList             `xml:"KeywordList" yaml:"keywordlist"`
+	CRS                     []*string                `xml:"CRS" yaml:"crs"`
+	EXGeographicBoundingBox *EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox" yaml:"exgeographicboundingbox"`
+	BoundingBox             []*BoundingBox           `xml:"BoundingBox" yaml:"boundingbox"`
+	AuthorityURL            *AuthorityURL            `xml:"AuthorityURL" yaml:"authorityurl"`
+	Identifier              *Identifier              `xml:"Identifier" yaml:"identifier"`
+	MetadataURL             []*MetadataURL           `xml:"MetadataURL" yaml:"metadataurl"`
+	Style                   []*Style                 `xml:"Style" yaml:"style"`
+	Layer                   []*Layer                 `xml:"Layer" yaml:"layer"`
+}
+
+// RequestType containing the formats and DCPTypes available
+type RequestType struct {
+	Format  []string `xml:"Format" yaml:"format"`
+	DCPType DCPType  `xml:"DCPType" yaml:"dcptype"`
+}
+
+// Identifier in struct for repeatablity
+type Identifier struct {
+	Authority string `xml:"authority,attr" yaml:"authority"`
+	Value     string `xml:",chardata" yaml:"value"`
+}
+
+// KeywordList in struct for repeatablity
+type KeywordList struct {
+	Keyword []string `xml:"Keyword" yaml:"keyword"`
+}
+
+// OnlineResource in struct for repeatablity
+type OnlineResource struct {
+	Xlink *string `xml:"xmlns:xlink,attr" yaml:"xlink"`
+	Type  *string `xml:"xlink:type,attr" yaml:"type"`
+	Href  *string `xml:"xlink:href,attr" yaml:"href"`
+}
+
+// MetadataURL in struct for repeatablity
+type MetadataURL struct {
+	Type           *string         `xml:"type,attr" yaml:"type"`
+	Format         *string         `xml:"format" yaml:"format"`
+	OnlineResource *OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
+}
+
+// AuthorityURL in struct for repeatablity
+type AuthorityURL struct {
+	Name           string         `xml:"name,attr" yaml:"name"`
+	OnlineResource OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
+}
+
+// ExtendedCapabilities containing the inspire extendedcapbilities, when available
+type ExtendedCapabilities struct {
+	MetadataURL struct {
 		Type      string `xml:"xsi:type,attr" yaml:"type"`
 		URL       string `xml:"inspire_common:URL" yaml:"url"`
 		MediaType string `xml:"inspire_common:MediaType" yaml:"mediatype"`
@@ -189,6 +184,7 @@ type WMS_1_3_0_ExtendedCapabilities struct {
 	} `xml:"inspire_vs:ResponseLanguage" yaml:"responselanguage"`
 }
 
+// EXGeographicBoundingBox in struct for repeatablity
 type EXGeographicBoundingBox struct {
 	WestBoundLongitude string `xml:"westBoundLongitude"`
 	EastBoundLongitude string `xml:"eastBoundLongitude"`
@@ -196,6 +192,7 @@ type EXGeographicBoundingBox struct {
 	NorthBoundLatitude string `xml:"northBoundLatitude"`
 }
 
+// BoundingBox in struct for repeatablity
 type BoundingBox struct {
 	CRS  string `xml:"CRS,attr"`
 	Minx string `xml:"minx,attr"`
@@ -204,6 +201,7 @@ type BoundingBox struct {
 	Maxy string `xml:"maxy,attr"`
 }
 
+// Style in struct for repeatablity
 type Style struct {
 	Name      string `xml:"Name"`
 	Title     string `xml:"Title"`
@@ -219,6 +217,7 @@ type Style struct {
 	} `xml:"LegendURL"`
 }
 
+// DCPType in struct for repeatablity
 type DCPType struct {
 	HTTP struct {
 		Get struct {
@@ -231,9 +230,10 @@ type DCPType struct {
 	} `xml:"HTTP" yaml:"http"`
 }
 
+// Post in struct for repeatablity
 type Post struct {
 	OnlineResource struct {
 		Xlink string `xml:"xmlns:xlink,attr" yaml:"xlink"`
-		Href  string `xml:"href,attr" yaml:"href"`
+		Href  string `xml:"xlink:href,attr" yaml:"href"`
 	} `xml:"OnlineResource" yaml:"onlineresource"`
 }

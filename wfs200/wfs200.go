@@ -8,6 +8,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// GetBase function to get a filled "template" based on the wfs200.yaml config
 func GetBase() Wfs200 {
 	wfs200 := Wfs200{}
 	base, err := ioutil.ReadFile("./wfs200/wfs200.yaml")
@@ -20,9 +21,10 @@ func GetBase() Wfs200 {
 	return wfs200
 }
 
+// Wfs200 base struct
 type Wfs200 struct {
 	XMLName               xml.Name `xml:"wfs:WFS_Capabilities"`
-	WFS_Namespaces        `yaml:"namespaces"`
+	Namespaces            `yaml:"namespaces"`
 	ServiceIdentification ServiceIdentification `xml:"ows:ServiceIdentification" yaml:"serviceidentification"`
 	ServiceProvider       ServiceProvider       `xml:"ows:ServiceProvider" yaml:"serviceprovider"`
 	OperationsMetadata    OperationsMetadata    `xml:"ows:OperationsMetadata" yaml:"operationsmetadata"`
@@ -30,7 +32,8 @@ type Wfs200 struct {
 	FilterCapabilities    FilterCapabilities    `xml:"fes:Filter_Capabilities" yaml:"filtercapabilities"`
 }
 
-type WFS_Namespaces struct {
+// Namespaces struct containing the namespaces needed for the XML document
+type Namespaces struct {
 	XmlnsGML           string `xml:"xmlns:gml,attr" yaml:"gml"`                                //http://www.opengis.net/gml/3.2
 	XmlnsWFS           string `xml:"xmlns:wfs,attr" yaml:"wfs"`                                //http://www.opengis.net/wfs/2.0
 	XmlnsOWS           string `xml:"xmlns:ows,attr" yaml:"ows"`                                //http://www.opengis.net/ows/1.1
@@ -44,6 +47,7 @@ type WFS_Namespaces struct {
 	SchemaLocation     string `xml:"xsi:schemaLocation,attr" yaml:"schemalocation"`
 }
 
+// ServiceIdentification struct should only be fill by the "template" configuration wfs200.yaml
 type ServiceIdentification struct {
 	XMLName  xml.Name `xml:"ows:ServiceIdentification"`
 	Title    string   `xml:"ows:Title" yaml:"title"`
@@ -60,6 +64,7 @@ type ServiceIdentification struct {
 	AccessConstraints  string `xml:"ows:AccessConstraints" yaml:"accesscontraints"`
 }
 
+// ServiceProvider struct containing the provider/organization information should only be fill by the "template" configuration wfs200.yaml
 type ServiceProvider struct {
 	XMLName      xml.Name `xml:"ows:ServiceProvider"`
 	ProviderName string   `xml:"ows:ProviderName" yaml:"providername"`
@@ -95,11 +100,13 @@ type ServiceProvider struct {
 	} `xml:"ows:ServiceContact" yaml:"servicecontact"`
 }
 
+// Post in seperated struct so to use it as a Pointer
 type Post struct {
 	Type string `xml:"xlink:type,attr" yaml:"type"`
 	Href string `xml:"xlink:href,attr" yaml:"href"`
 }
 
+// OperationsMetadata struct for the WFS 2.0.0
 type OperationsMetadata struct {
 	XMLName   xml.Name `xml:"ows:OperationsMetadata"`
 	Operation []struct {
@@ -110,7 +117,7 @@ type OperationsMetadata struct {
 					Type string `xml:"xlink:type,attr" yaml:"type"`
 					Href string `xml:"xlink:href,attr" yaml:"href"`
 				} `xml:"ows:Get" yaml:"get"`
-				Post *Post `xml:"ows:Post",omitempty yaml:"post"`
+				Post *Post `xml:"ows:Post,omitempty" yaml:"post"`
 			} `xml:"ows:HTTP" yaml:"http"`
 		} `xml:"ows:DCP" yaml:"dcp"`
 		Parameter []struct {
@@ -133,14 +140,16 @@ type OperationsMetadata struct {
 		DefaultValue  *string        `xml:"ows:DefaultValue" yaml:"defaultvalue"`
 		AllowedValues *AllowedValues `xml:"ows:AllowedValues" yaml:"allowedvalues"`
 	} `xml:"ows:Constraint" yaml:"constraint"`
-	ExtendedCapabilities *WFS_2_0_0_ExtendedCapabilities `xml:"ows:ExtendedCapabilities" yaml:"extendedcapabilities"`
+	ExtendedCapabilities *ExtendedCapabilities `xml:"ows:ExtendedCapabilities" yaml:"extendedcapabilities"`
 }
 
+// AllowedValues struct so it can be used as a pointer
 type AllowedValues struct {
 	Value []string `xml:"ows:Value" yaml:"value"`
 }
 
-type WFS_2_0_0_ExtendedCapabilities struct {
+// ExtendedCapabilities struct for the WFS 2.0.0
+type ExtendedCapabilities struct {
 	ExtendedCapabilities struct {
 		Text        string `xml:",chardata"`
 		MetadataURL struct {
@@ -162,6 +171,7 @@ type WFS_2_0_0_ExtendedCapabilities struct {
 	} `xml:"inspire_dls:ExtendedCapabilities" yaml:"extendedcapabilities"`
 }
 
+// FeatureTypeList struct for the WFS 2.0.0
 type FeatureTypeList struct {
 	XMLName     xml.Name `xml:"wfs:FeatureTypeList"`
 	FeatureType []struct {
@@ -187,6 +197,7 @@ type FeatureTypeList struct {
 	} `xml:"wfs:FeatureType" yaml:"featuretype"`
 }
 
+// FilterCapabilities struct for the WFS 2.0.0
 type FilterCapabilities struct {
 	Conformance struct {
 		Constraint []struct {
@@ -224,6 +235,7 @@ type FilterCapabilities struct {
 	TemporalCapabilities *TemporalCapabilities `xml:"fes:Temporal_Capabilities" yaml:"temporalcapabilities"`
 }
 
+// TemporalCapabilities define but not used
 type TemporalCapabilities struct {
 	TemporalOperands struct {
 		TemporalOperand []struct {

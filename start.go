@@ -57,8 +57,8 @@ func buildWFS2_0_0(config config.Config) {
 	mergo.Merge(&wfs200.FeatureTypeList, &config.Services.Wfs200.FeatureTypeList)
 
 	if &config.Services.Wfs200.ExtendedCapabilities != nil {
-		wfs200.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-		wfs200.WFS_Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+		wfs200.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		wfs200.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
 		wfs200.OperationsMetadata.ExtendedCapabilities = &config.Services.Wfs200.ExtendedCapabilities
 	}
 

@@ -29,14 +29,38 @@ service:
     contactfacsimiletelephone:
     contactelectronicmailaddress: BeheerPDOK@kadaster.nl
   fees:
-  accessconstraints:
+  accessconstraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
   maxwidth: 4000
   maxheight: 4000
 
 capability:
   request:
     getcapabilities:
+      format:
+        - text/xml   
+      dcptype:
+        http:
+          get:
+            onlineresource:
+              xlink: http://www.w3.org/1999/xlink
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
     getmap:
+      format:
+        - image/png
+        - image/jpeg
+        - image/png; mode=8bit
+        - image/vnd.jpeg-png
+        - image/vnd.jpeg-png8  
+      dcptype:
+        http:
+          get:
+            onlineresource:
+              xlink: http://www.w3.org/1999/xlink
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
+          post:
+            onlineresource:
+              xlink: http://www.w3.org/1999/xlink
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"        
     getfeatureinfo:
       format:
       - application/json
@@ -53,6 +77,9 @@ capability:
               xlink: http://www.w3.org/1999/xlink
               href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
           post:
+            onlineresource:
+              xlink: http://www.w3.org/1999/xlink
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"            
   exception:
     format:
     - XML

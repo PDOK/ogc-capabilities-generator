@@ -1,7 +1,9 @@
 package config
 
-import "pdok-capabilities-gen/wfs200"
-import "pdok-capabilities-gen/wms130"
+import (
+	"pdok-capabilities-gen/wfs200"
+	"pdok-capabilities-gen/wms130"
+)
 
 // Config is the base struct for the config yaml
 type Config struct {
@@ -27,9 +29,9 @@ type Services struct {
 
 // The WFS200Config service struct
 type WFS200Config struct {
-	ServiceIdentification wfs200.ServiceIdentification          `yaml:"serviceidentification"`
-	FeatureTypeList       wfs200.FeatureTypeList                `yaml:"featuretypelist"`
-	ExtendedCapabilities  wfs200.WFS_2_0_0_ExtendedCapabilities `yaml:"extendedcapabilities"`
+	ServiceIdentification wfs200.ServiceIdentification `yaml:"serviceidentification"`
+	FeatureTypeList       wfs200.FeatureTypeList       `yaml:"featuretypelist"`
+	ExtendedCapabilities  wfs200.ExtendedCapabilities  `yaml:"extendedcapabilities"`
 }
 
 // The WMS130Config service struct
