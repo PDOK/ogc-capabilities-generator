@@ -33,4 +33,28 @@ service:
   maxwidth: 4000
   maxheight: 4000
 
-capabilities:
+capability:
+  request:
+    getcapabilities:
+    getmap:
+    getfeatureinfo:
+      format:
+      - application/json
+      - application/json; subtype=geojson
+      - application/vnd.ogc.gml
+      - text/html
+      - text/plain
+      - text/xml
+      - text/xml; subtype=gml/3.1.1
+      dcptype:
+        http:
+          get:
+            onlineresource:
+              xlink: http://www.w3.org/1999/xlink
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
+          post:
+  exception:
+    format:
+    - XML
+    - INIMAGE
+    - BLANK

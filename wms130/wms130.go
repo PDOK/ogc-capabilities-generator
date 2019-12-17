@@ -78,7 +78,7 @@ type Capability struct {
 		GetCapabilities struct {
 			Format  string  `xml:"Format" yaml:"format"`
 			DCPType DCPType `xml:"DCPType" yaml:"dcptype"`
-		} `xml:"GetCapabilities" yaml:"format"`
+		} `xml:"GetCapabilities" yaml:"getcapabilities"`
 		GetMap struct {
 			Format  []string `xml:"Format" yaml:"format"`
 			DCPType DCPType  `xml:"DCPType" yaml:"dcptype"`
@@ -162,7 +162,7 @@ type Capability struct {
 			} `xml:"Identifier"`
 			MetadataURL struct {
 				Type           string `xml:"type,attr"`
-				Format         string `xml:"Format"`
+				Format         string `xml:"format"`
 				OnlineResource struct {
 					Xlink string `xml:"xlink,attr"`
 					Type  string `xml:"type,attr"`
@@ -224,9 +224,9 @@ type DCPType struct {
 		Get struct {
 			OnlineResource struct {
 				Xlink string `xml:"xmlns:xlink,attr" yaml:"xlink"`
-				Href  string `xml:"href,attr" yaml:"href"`
+				Href  string `xml:"xlink:href,attr" yaml:"href"`
 			} `xml:"OnlineResource" yaml:"onlineresource"`
-		} `xml:"Get" yaml:"Get"`
+		} `xml:"Get" yaml:"get"`
 		Post *Post `xml:"Post" yaml:"post"`
 	} `xml:"HTTP" yaml:"http"`
 }
