@@ -16,7 +16,7 @@ services:
         - Kadaster
         - Kadastrale percelen
       accesscontraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
-    
+
     featuretypelist:
       featuretype:
         - name: kadastralekaartv4:kadastralegrens
@@ -99,7 +99,7 @@ services:
       accessconstraints:
       maxwidth: 4000
       maxheight: 4000
-    
+
     capability:      
       extendedcapabilities:
         metadataurl:
@@ -151,7 +151,7 @@ services:
           minx: 62461.6
           miny: 5.56555e+06
           maxx: 397827
-          maxy: 6.19042e+06       
+          maxy: 6.19042e+06
         - crs: EPSG:3034
           minx: 2.61336e+06
           miny: 3.509e+06
@@ -243,7 +243,7 @@ services:
               minx: 62461.6
               miny: 5.56555e+06
               maxx: 397827
-              maxy: 6.19042e+06       
+              maxy: 6.19042e+06
             - crs: EPSG:3034
               minx: 2.61336e+06
               miny: 3.509e+06
@@ -315,4 +315,4 @@ services:
                 onlineresource:
                   xlink: http://www.w3.org/1999/xlink
                   type: simple
-                  href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS&language=dut&version=1.3.0&request=GetLegendGraphic&sld_version=1.1.0&layer=Perceelvlak&format=image/png&STYLE=kadastralekaartv4:perceel"            
+                  href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS&language=dut&version=1.3.0&request=GetLegendGraphic&sld_version=1.1.0&layer=Perceelvlak&format=image/png&STYLE=kadastralekaartv4:perceel"
