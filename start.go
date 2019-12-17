@@ -8,16 +8,14 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"pdok-capabilities-gen/builder"
-	"pdok-capabilities-gen/wfs2_0_0"
-	"pdok-capabilities-gen/wms1_3_0"
+	"pdok-capabilities-gen/config"
+	"pdok-capabilities-gen/wfs200"
+	"pdok-capabilities-gen/wms130"
 	"regexp"
 
 	"github.com/imdario/mergo"
 	"gopkg.in/yaml.v2"
 )
-
-var config builder.Config
 
 func writeFile(name string, data []byte) {
 	err := ioutil.WriteFile(name, data, 0777)
@@ -34,9 +32,9 @@ func envString(key, defaultValue string) string {
 	return defaultValue
 }
 
-func buildWMS1_3_0() {
-	basewms1_3_0 := wms1_3_0.WMS_1_3_0{}
-	base, err := ioutil.ReadFile("./base/wms_1_3_0.yaml")
+func buildWMS1_3_0(config config.Config) {
+	basewms1_3_0 := wms130.Wms130{}
+	base, err := ioutil.ReadFile("./wms130/wms130.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -44,8 +42,8 @@ func buildWMS1_3_0() {
 		log.Fatalf("error: %v", err)
 	}
 
-	mergo.Merge(&basewms1_3_0.Service, &config.Services.WMS_1_3_0.Service)
-	mergo.Merge(&basewms1_3_0.Capability, &config.Services.WMS_1_3_0.Capability)
+	mergo.Merge(&basewms1_3_0.Service, &config.Services.Wms130.Service)
+	mergo.Merge(&basewms1_3_0.Capability, &config.Services.Wms130.Capability)
 
 	// if &config.Services.WFS_2_0_0.ExtendedCapabilities != nil {
 	// 	basewms1_3_0.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
@@ -62,9 +60,9 @@ func buildWMS1_3_0() {
 	writeFile("wms_1_3_0.xml", []byte(xml.Header+re.ReplaceAllString(buf.String(), "/>")))
 }
 
-func buildWFS2_0_0() {
-	basewfs2_0_0 := wfs2_0_0.WFS_2_0_0{}
-	base, err := ioutil.ReadFile("./base/wfs_2_0_0.yaml")
+func buildWFS2_0_0(config config.Config) {
+	basewfs2_0_0 := wfs200.Wfs200{}
+	base, err := ioutil.ReadFile("./wfs200/wfs200.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -72,13 +70,13 @@ func buildWFS2_0_0() {
 		log.Fatalf("error: %v", err)
 	}
 
-	mergo.Merge(&basewfs2_0_0.ServiceIdentification, &config.Services.WFS_2_0_0.ServiceIdentification)
-	mergo.Merge(&basewfs2_0_0.FeatureTypeList, &config.Services.WFS_2_0_0.FeatureTypeList)
+	mergo.Merge(&basewfs2_0_0.ServiceIdentification, &config.Services.Wfs200.ServiceIdentification)
+	mergo.Merge(&basewfs2_0_0.FeatureTypeList, &config.Services.Wfs200.FeatureTypeList)
 
-	if &config.Services.WFS_2_0_0.ExtendedCapabilities != nil {
+	if &config.Services.Wfs200.ExtendedCapabilities != nil {
 		basewfs2_0_0.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
 		basewfs2_0_0.WFS_Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
-		basewfs2_0_0.OperationsMetadata.ExtendedCapabilities = &config.Services.WFS_2_0_0.ExtendedCapabilities
+		basewfs2_0_0.OperationsMetadata.ExtendedCapabilities = &config.Services.Wfs200.ExtendedCapabilities
 	}
 
 	si, _ := xml.MarshalIndent(basewfs2_0_0, "", " ")
@@ -99,15 +97,16 @@ func main() {
 		log.Fatalf("error: %v", err)
 	}
 
+	var config config.Config
 	if err = yaml.Unmarshal(serviceconfig, &config); err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	if &config.Services.WFS_2_0_0 != nil {
-		buildWFS2_0_0()
+	if &config.Services.Wfs200 != nil {
+		buildWFS2_0_0(config)
 	}
 
-	if &config.Services.WMS_1_3_0 != nil {
-		buildWMS1_3_0()
+	if &config.Services.Wms130 != nil {
+		buildWMS1_3_0(config)
 	}
 }

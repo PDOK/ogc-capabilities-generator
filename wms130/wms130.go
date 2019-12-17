@@ -1,8 +1,8 @@
-package wms1_3_0
+package wms130
 
 import "encoding/xml"
 
-type WMS_1_3_0 struct {
+type Wms130 struct {
 	XMLName        xml.Name `xml:"WMS_Capabilities"`
 	WMS_Namespaces `yaml:"namespaces"`
 	Service        Service    `xml:"Service" yaml:"service"`

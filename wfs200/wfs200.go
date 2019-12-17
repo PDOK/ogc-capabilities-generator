@@ -1,8 +1,8 @@
-package wfs2_0_0
+package wfs200
 
 import "encoding/xml"
 
-type WFS_2_0_0 struct {
+type Wfs200 struct {
 	XMLName               xml.Name `xml:"wfs:WFS_Capabilities"`
 	WFS_Namespaces        `yaml:"namespaces"`
 	ServiceIdentification ServiceIdentification `xml:"ows:ServiceIdentification" yaml:"serviceidentification"`

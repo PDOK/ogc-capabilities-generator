@@ -29,7 +29,7 @@ https://www.onlinetool.io/xmltogo/
 ## Config aanroep
 
 ```go
-go run . -c ./config/kadastralekaart.yaml
+go run . -c ./kadastralekaart.yaml
 ```
 
 service definition file bevat alle lookups
