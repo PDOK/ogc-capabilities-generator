@@ -1,6 +1,24 @@
 package wfs200
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"io/ioutil"
+	"log"
+
+	"gopkg.in/yaml.v2"
+)
+
+func GetBase() Wfs200 {
+	wfs200 := Wfs200{}
+	base, err := ioutil.ReadFile("./wfs200/wfs200.yaml")
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+	if err = yaml.Unmarshal(base, &wfs200); err != nil {
+		log.Fatalf("error: %v", err)
+	}
+	return wfs200
+}
 
 type Wfs200 struct {
 	XMLName               xml.Name `xml:"wfs:WFS_Capabilities"`

@@ -1,6 +1,24 @@
 package wms130
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"io/ioutil"
+	"log"
+
+	"gopkg.in/yaml.v2"
+)
+
+func GetBase() Wms130 {
+	wms130 := Wms130{}
+	base, err := ioutil.ReadFile("./wms130/wms130.yaml")
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+	if err = yaml.Unmarshal(base, &wms130); err != nil {
+		log.Fatalf("error: %v", err)
+	}
+	return wms130
+}
 
 type Wms130 struct {
 	XMLName        xml.Name `xml:"WMS_Capabilities"`
@@ -71,8 +89,8 @@ type Capability struct {
 		} `xml:"GetFeatureInfo" yaml:"getfeatureinfo"`
 	} `xml:"Request" yaml:"request"`
 	Exception struct {
-		Format []string `xml:"Format"" yaml:"format"`
-	} `xml:"Exception"" yaml:"exception"`
+		Format []string `xml:"Format" yaml:"format"`
+	} `xml:"Exception" yaml:"exception"`
 	ExtendedCapabilities *WMS_1_3_0_ExtendedCapabilities `xml:"ExtendedCapabilities"`
 	Layer                struct {
 		Queryable   string `xml:"queryable,attr"`

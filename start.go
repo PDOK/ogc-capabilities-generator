@@ -17,13 +17,6 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-func writeFile(name string, data []byte) {
-	err := ioutil.WriteFile(name, data, 0777)
-	if err != nil {
-		log.Fatalf("Could not write to file %s : %v ", name, err)
-	}
-}
-
 func envString(key, defaultValue string) string {
 	value := os.Getenv(key)
 	if value != "" {
@@ -32,60 +25,44 @@ func envString(key, defaultValue string) string {
 	return defaultValue
 }
 
-func buildWMS1_3_0(config config.Config) {
-	basewms1_3_0 := wms130.Wms130{}
-	base, err := ioutil.ReadFile("./wms130/wms130.yaml")
+func writeCapabilitiesFile(filename string, v interface{}, g config.Global) {
+	si, _ := xml.MarshalIndent(v, "", " ")
+	t := template.Must(template.New("capabilities").Parse(string(si)))
+	buf := new(bytes.Buffer)
+	err := t.Execute(buf, g)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	if err = yaml.Unmarshal(base, &basewms1_3_0); err != nil {
-		log.Fatalf("error: %v", err)
-	}
-
-	mergo.Merge(&basewms1_3_0.Service, &config.Services.Wms130.Service)
-	mergo.Merge(&basewms1_3_0.Capability, &config.Services.Wms130.Capability)
-
-	// if &config.Services.WFS_2_0_0.ExtendedCapabilities != nil {
-	// 	basewms1_3_0.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-	// 	basewms1_3_0.WFS_Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
-	// 	basewms1_3_0.OperationsMetadata.ExtendedCapabilities = &config.Services.WMS_1_3_0.ExtendedCapabilities
-	// }
-
-	si, _ := xml.MarshalIndent(basewms1_3_0, "", " ")
-	t := template.Must(template.New("capabilities").Parse(string(si)))
-	buf := new(bytes.Buffer)
-	err = t.Execute(buf, config.Global)
 
 	re := regexp.MustCompile(`><.*>`)
-	writeFile("wms_1_3_0.xml", []byte(xml.Header+re.ReplaceAllString(buf.String(), "/>")))
+	err = ioutil.WriteFile(filename, []byte(xml.Header+re.ReplaceAllString(buf.String(), "/>")), 0777)
+	if err != nil {
+		log.Fatalf("Could not write to file %s : %v ", filename, err)
+	}
+}
+
+func buildWMS1_3_0(config config.Config) {
+	wms130 := wms130.GetBase()
+
+	mergo.Merge(&wms130.Service, &config.Services.Wms130.Service)
+	mergo.Merge(&wms130.Capability, &config.Services.Wms130.Capability)
+
+	writeCapabilitiesFile("wms130.xml", wms130, config.Global)
 }
 
 func buildWFS2_0_0(config config.Config) {
-	basewfs2_0_0 := wfs200.Wfs200{}
-	base, err := ioutil.ReadFile("./wfs200/wfs200.yaml")
-	if err != nil {
-		log.Fatalf("error: %v", err)
-	}
-	if err = yaml.Unmarshal(base, &basewfs2_0_0); err != nil {
-		log.Fatalf("error: %v", err)
-	}
+	wfs200 := wfs200.GetBase()
 
-	mergo.Merge(&basewfs2_0_0.ServiceIdentification, &config.Services.Wfs200.ServiceIdentification)
-	mergo.Merge(&basewfs2_0_0.FeatureTypeList, &config.Services.Wfs200.FeatureTypeList)
+	mergo.Merge(&wfs200.ServiceIdentification, &config.Services.Wfs200.ServiceIdentification)
+	mergo.Merge(&wfs200.FeatureTypeList, &config.Services.Wfs200.FeatureTypeList)
 
 	if &config.Services.Wfs200.ExtendedCapabilities != nil {
-		basewfs2_0_0.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-		basewfs2_0_0.WFS_Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
-		basewfs2_0_0.OperationsMetadata.ExtendedCapabilities = &config.Services.Wfs200.ExtendedCapabilities
+		wfs200.WFS_Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		wfs200.WFS_Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+		wfs200.OperationsMetadata.ExtendedCapabilities = &config.Services.Wfs200.ExtendedCapabilities
 	}
 
-	si, _ := xml.MarshalIndent(basewfs2_0_0, "", " ")
-	t := template.Must(template.New("capabilities").Parse(string(si)))
-	buf := new(bytes.Buffer)
-	err = t.Execute(buf, config.Global)
-
-	re := regexp.MustCompile(`><.*>`)
-	writeFile("wfs_2_0_0.xml", []byte(xml.Header+re.ReplaceAllString(buf.String(), "/>")))
+	writeCapabilitiesFile("wfs200.xml", wfs200, config.Global)
 }
 
 func main() {
