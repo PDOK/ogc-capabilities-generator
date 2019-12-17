@@ -47,6 +47,12 @@ func buildWMS1_3_0(config config.Config) {
 	mergo.Merge(&wms130.Service, &config.Services.Wms130.Service)
 	mergo.Merge(&wms130.Capability, &config.Services.Wms130.Capability)
 
+	if &config.Services.Wms130.Capability.ExtendedCapabilities != nil {
+		wms130.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		wms130.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+		wms130.Namespaces.SchemaLocation = wms130.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
+	}
+
 	writeCapabilitiesFile("wms130.xml", wms130, config.Global)
 }
 
