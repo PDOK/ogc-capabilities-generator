@@ -94,5 +94,4 @@ layers:
 
     style_name: kadastralekaartv4:perceel_print
     style_title: Visualisatie van het perceel ten behoeve van afdrukken op 180 dpi.
-
 ```

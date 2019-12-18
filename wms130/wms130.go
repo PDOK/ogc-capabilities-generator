@@ -79,7 +79,7 @@ type Capability struct {
 	Request              Request               `xml:"Request" yaml:"request"`
 	Exception            Exception             `xml:"Exception" yaml:"exception"`
 	ExtendedCapabilities *ExtendedCapabilities `xml:"inspire_vs:ExtendedCapabilities" yaml:"extendedcapabilities"`
-	Layer                Layers                `xml:"Layer" yaml:"layer"`
+	Layer                []Layer               `xml:"Layer" yaml:"layer"`
 }
 
 // Request struct with the different operations, should be filled from the template
@@ -92,20 +92,6 @@ type Request struct {
 // Exception struct containing the different available exceptions, should be filled from the template
 type Exception struct {
 	Format []string `xml:"Format" yaml:"format"`
-}
-
-// Layers containing the Layer configuration
-type Layers struct {
-	Queryable               *string                 `xml:"queryable,attr"`
-	Name                    string                  `xml:"Name" yaml:"name"`
-	Title                   string                  `xml:"Title" yaml:"title"`
-	Abstract                string                  `xml:"Abstract" yaml:"abstract"`
-	KeywordList             KeywordList             `xml:"KeywordList" yaml:"keywordlist"`
-	CRS                     []string                `xml:"CRS" yaml:"crs"`
-	EXGeographicBoundingBox EXGeographicBoundingBox `xml:"EX_GeographicBoundingBox" yaml:"exgeographicboundingbox"`
-	BoundingBox             []BoundingBox           `xml:"BoundingBox" yaml:"boundingbox"`
-	Style                   []Style                 `xml:"Style" yaml:"style"`
-	Layer                   []Layer                 `xml:"Layer" yaml:"layer"`
 }
 
 // Layer contains the WMS 1.3.0 layer configuration
