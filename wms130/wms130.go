@@ -49,10 +49,7 @@ type Service struct {
 	KeywordList struct {
 		Keyword []string `xml:"Keyword" yaml:"keyword"`
 	} `xml:"KeywordList" yaml:"keywordlist"`
-	OnlineResource struct {
-		Xlink string `xml:"xlink,attr" yaml:"xlink"`
-		Href  string `xml:"href,attr" yaml:"href"`
-	} `xml:"OnlineResource" yaml:"onlineresource"`
+	OnlineResource     OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
 	ContactInformation struct {
 		ContactPersonPrimary struct {
 			ContactPerson       string `xml:"ContactPerson" yaml:"contactperson"`
@@ -113,9 +110,11 @@ type Layers struct {
 
 // Layer contains the WMS 1.3.0 layer configuration
 type Layer struct {
-	Queryable               *string                  `xml:"queryable,attr" yaml:"queryable"`
-	Opaque                  *string                  `xml:"opaque,attr" yaml:"opaque"`
-	Cascaded                *string                  `xml:"cascaded,attr" yaml:"cascaded"`
+	Queryable *string `xml:"queryable,attr" yaml:"queryable"`
+	// layer has a full/complete map coverage
+	Opaque *string `xml:"opaque,attr" yaml:"opaque"`
+	// no cascaded attr in Layer element, because we don't do cascaded services e.g. wms services "proxying" and/or combining other wms services
+	//Cascaded                *string                  `xml:"cascaded,attr" yaml:"cascaded"`
 	Name                    string                   `xml:"Name" yaml:"name"`
 	Title                   string                   `xml:"Title" yaml:"title"`
 	Abstract                string                   `xml:"Abstract" yaml:"abstract"`
@@ -151,13 +150,13 @@ type KeywordList struct {
 type OnlineResource struct {
 	Xlink *string `xml:"xmlns:xlink,attr" yaml:"xlink"`
 	Type  *string `xml:"xlink:type,attr" yaml:"type"`
-	Href  *string `xml:"xlink:href,attr" yaml:"href"`
+	Href  string  `xml:"xlink:href,attr" yaml:"href"`
 }
 
 // MetadataURL in struct for repeatablity
 type MetadataURL struct {
 	Type           *string         `xml:"type,attr" yaml:"type"`
-	Format         *string         `xml:"format" yaml:"format"`
+	Format         *string         `xml:"Format" yaml:"format"`
 	OnlineResource *OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
 }
 
@@ -181,7 +180,7 @@ type ExtendedCapabilities struct {
 	} `xml:"inspire_common:SupportedLanguages" yaml:"supportedlanguages"`
 	ResponseLanguage struct {
 		Language string `xml:"inspire_common:Language" yaml:"language"`
-	} `xml:"inspire_vs:ResponseLanguage" yaml:"responselanguage"`
+	} `xml:"inspire_common:ResponseLanguage" yaml:"responselanguage"`
 }
 
 // EXGeographicBoundingBox in struct for repeatablity
@@ -194,7 +193,8 @@ type EXGeographicBoundingBox struct {
 
 // BoundingBox in struct for repeatablity
 type BoundingBox struct {
-	CRS  string `xml:"CRS,attr"`
+	CRS string `xml:"CRS,attr"`
+
 	Minx string `xml:"minx,attr"`
 	Miny string `xml:"miny,attr"`
 	Maxx string `xml:"maxx,attr"`
@@ -206,14 +206,10 @@ type Style struct {
 	Name      string `xml:"Name"`
 	Title     string `xml:"Title"`
 	LegendURL struct {
-		Width          string `xml:"width,attr"`
-		Height         string `xml:"height,attr"`
-		Format         string `xml:"Format"`
-		OnlineResource struct {
-			Xlink string `xml:"xlink,attr"`
-			Type  string `xml:"type,attr"`
-			Href  string `xml:"href,attr"`
-		} `xml:"OnlineResource"`
+		Width          string         `xml:"width,attr"`
+		Height         string         `xml:"height,attr"`
+		Format         string         `xml:"Format"`
+		OnlineResource OnlineResource `xml:"OnlineResource"`
 	} `xml:"LegendURL"`
 }
 
@@ -221,10 +217,7 @@ type Style struct {
 type DCPType struct {
 	HTTP struct {
 		Get struct {
-			OnlineResource struct {
-				Xlink string `xml:"xmlns:xlink,attr" yaml:"xlink"`
-				Href  string `xml:"xlink:href,attr" yaml:"href"`
-			} `xml:"OnlineResource" yaml:"onlineresource"`
+			OnlineResource OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
 		} `xml:"Get" yaml:"get"`
 		Post *Post `xml:"Post" yaml:"post"`
 	} `xml:"HTTP" yaml:"http"`
@@ -232,8 +225,5 @@ type DCPType struct {
 
 // Post in struct for repeatablity
 type Post struct {
-	OnlineResource struct {
-		Xlink string `xml:"xmlns:xlink,attr" yaml:"xlink"`
-		Href  string `xml:"xlink:href,attr" yaml:"href"`
-	} `xml:"OnlineResource" yaml:"onlineresource"`
+	OnlineResource OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
 }
