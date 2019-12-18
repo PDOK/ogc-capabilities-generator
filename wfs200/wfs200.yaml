@@ -42,7 +42,7 @@ serviceprovider:
         electronicmailaddress: BeheerPDOK@kadaster.nl
       onlineresource: 
         type: simple
-        href: https://geodata.nationaalgeoregister.nl
+        href: "{{.Onlineresourceurl}}"
       hoursofservice: "09:00-17:00"
       contactinstructions: "don't call"
     role: serviceprovider

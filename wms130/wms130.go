@@ -136,14 +136,14 @@ type KeywordList struct {
 type OnlineResource struct {
 	Xlink *string `xml:"xmlns:xlink,attr" yaml:"xlink"`
 	Type  *string `xml:"xlink:type,attr" yaml:"type"`
-	Href  string  `xml:"xlink:href,attr" yaml:"href"`
+	Href  *string `xml:"xlink:href,attr" yaml:"href"`
 }
 
 // MetadataURL in struct for repeatablity
 type MetadataURL struct {
-	Type           *string         `xml:"type,attr" yaml:"type"`
-	Format         *string         `xml:"Format" yaml:"format"`
-	OnlineResource *OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
+	Type           *string        `xml:"type,attr" yaml:"type"`
+	Format         *string        `xml:"Format" yaml:"format"`
+	OnlineResource OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
 }
 
 // AuthorityURL in struct for repeatablity
@@ -171,32 +171,31 @@ type ExtendedCapabilities struct {
 
 // EXGeographicBoundingBox in struct for repeatablity
 type EXGeographicBoundingBox struct {
-	WestBoundLongitude string `xml:"westBoundLongitude"`
-	EastBoundLongitude string `xml:"eastBoundLongitude"`
-	SouthBoundLatitude string `xml:"southBoundLatitude"`
-	NorthBoundLatitude string `xml:"northBoundLatitude"`
+	WestBoundLongitude string `xml:"westBoundLongitude" yaml:"westboundlongitude"`
+	EastBoundLongitude string `xml:"eastBoundLongitude" yaml:"eastboundlongitude"`
+	SouthBoundLatitude string `xml:"southBoundLatitude" yaml:"southboundlatitude"`
+	NorthBoundLatitude string `xml:"northBoundLatitude" yaml:"northboundlatitude"`
 }
 
 // BoundingBox in struct for repeatablity
 type BoundingBox struct {
-	CRS string `xml:"CRS,attr"`
-
-	Minx string `xml:"minx,attr"`
-	Miny string `xml:"miny,attr"`
-	Maxx string `xml:"maxx,attr"`
-	Maxy string `xml:"maxy,attr"`
+	CRS  string `xml:"CRS,attr" yaml:"crs"`
+	Minx string `xml:"minx,attr" yaml:"minx"`
+	Miny string `xml:"miny,attr" yaml:"miny"`
+	Maxx string `xml:"maxx,attr" yaml:"maxx"`
+	Maxy string `xml:"maxy,attr" yaml:"maxy"`
 }
 
 // Style in struct for repeatablity
 type Style struct {
-	Name      string `xml:"Name"`
-	Title     string `xml:"Title"`
+	Name      string `xml:"Name" yaml:"name"`
+	Title     string `xml:"Title" yaml:"title"`
 	LegendURL struct {
-		Width          string         `xml:"width,attr"`
-		Height         string         `xml:"height,attr"`
-		Format         string         `xml:"Format"`
-		OnlineResource OnlineResource `xml:"OnlineResource"`
-	} `xml:"LegendURL"`
+		Width          string         `xml:"width,attr" yaml:"width"`
+		Height         string         `xml:"height,attr" yaml:"height"`
+		Format         string         `xml:"Format" yaml:"format"`
+		OnlineResource OnlineResource `xml:"OnlineResource" yaml:"onlineresource"`
+	} `xml:"LegendURL" yaml:"legendurl"`
 }
 
 // DCPType in struct for repeatablity

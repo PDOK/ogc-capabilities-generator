@@ -27,8 +27,8 @@ func envString(key, defaultValue string) string {
 
 func writeCapabilitiesFile(filename string, v interface{}, g config.Global) {
 	si, _ := xml.MarshalIndent(v, "", " ")
-	t := template.Must(template.New("capabilities").Parse(string(si)))
-	buf := new(bytes.Buffer)
+	t := template.Must(template.New(filename).Parse(string(si)))
+	buf := &bytes.Buffer{}
 	err := t.Execute(buf, g)
 	if err != nil {
 		log.Fatalf("error: %v", err)
