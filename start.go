@@ -25,9 +25,16 @@ func envString(key, defaultValue string) string {
 	return defaultValue
 }
 
-func writeCapabilitiesFile(filename string, v interface{}, g config.Global) {
+func writeFile(filename string, buffer []byte) {
+	err := ioutil.WriteFile(filename, buffer, 0777)
+	if err != nil {
+		log.Fatalf("Could not write to file %s : %v ", filename, err)
+	}
+}
+
+func buildCapabilities(v interface{}, g config.Global) []byte {
 	si, _ := xml.MarshalIndent(v, "", " ")
-	t := template.Must(template.New(filename).Parse(string(si)))
+	t := template.Must(template.New("capabilities").Parse(string(si)))
 	buf := &bytes.Buffer{}
 	err := t.Execute(buf, g)
 	if err != nil {
@@ -35,10 +42,7 @@ func writeCapabilitiesFile(filename string, v interface{}, g config.Global) {
 	}
 
 	re := regexp.MustCompile(`><.*>`)
-	err = ioutil.WriteFile(filename, []byte(xml.Header+re.ReplaceAllString(buf.String(), "/>")), 0777)
-	if err != nil {
-		log.Fatalf("Could not write to file %s : %v ", filename, err)
-	}
+	return []byte(xml.Header + re.ReplaceAllString(buf.String(), "/>"))
 }
 
 func buildWMS1_3_0(config config.Config) {
@@ -53,7 +57,8 @@ func buildWMS1_3_0(config config.Config) {
 		wms130.Namespaces.SchemaLocation = wms130.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
 	}
 
-	writeCapabilitiesFile("wms130.xml", wms130, config.Global)
+	buf := buildCapabilities(wms130, config.Global)
+	writeFile("wms130.xml", buf)
 }
 
 func buildWFS2_0_0(config config.Config) {
@@ -68,7 +73,8 @@ func buildWFS2_0_0(config config.Config) {
 		wfs200.OperationsMetadata.ExtendedCapabilities = &config.Services.Wfs200.ExtendedCapabilities
 	}
 
-	writeCapabilitiesFile("wfs200.xml", wfs200, config.Global)
+	buf := buildCapabilities(wfs200, config.Global)
+	writeFile("wfs200.xml", buf)
 }
 
 func main() {
