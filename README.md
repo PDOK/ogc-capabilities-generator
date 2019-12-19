@@ -15,16 +15,18 @@ https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?request=getcapa
 
 https://www.onlinetool.io/xmltogo/
 
-| | wms 1.3.0 | wmts 1.0.0 | wfs 1.1.0 | wfs 2.0.0 |
-|---|---|---|---|---|
-| Service | X | - | - | - |
-| Capability | X | - | - | - |
-| ServiceIdentification | - | X | X | X |
-| ServiceProvider | - | - | X | X |
-| OperationsMetadata | - | X | X | X |
-| FeatureTypeList | - | - | X | X |
-| Filter_Capabilities | - | - | X (ogc) | X (fes) |
-| ServiceMetadataURL | - | X | - | - |
+| | wms 1.3.0 | wmts 1.0.0 | wfs 1.1.0 | wfs 2.0.0 | wcs 2.0.1 |
+|---|---|---|---|---|---|
+| Service | X | - | - | - | - |
+| Capability | X | - | - | - | - |
+| ServiceIdentification | - | X | X | X | X |
+| ServiceProvider | - | - | X | X | X |
+| OperationsMetadata | - | X | X | X | X |
+| FeatureTypeList | - | - | X | X | - |
+| Filter_Capabilities | - | - | X (ogc) | X (fes) | - |
+| ServiceMetadata | - | - | - | - | X |
+| Contents | - | - | - | - | X |
+| ServiceMetadataURL | - | X | - | - | - |
 
 ## Config aanroep
 

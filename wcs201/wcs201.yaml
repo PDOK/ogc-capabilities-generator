@@ -1,0 +1,14 @@
+namespaces:
+  wcs: http://www.opengis.net/wcs/2.0
+  ows: http://www.opengis.net/ows/1.1
+  ogc: http://www.opengis.net/ogc
+  xlink: http://www.w3.org/1999/xlink
+  xsi: http://www.w3.org/2001/XMLSchema-instance
+  gml: http://www.opengis.net/gml/3.2
+  gmlcov: http://www.opengis.net/gmlcov/1.0
+  crs: http://www.opengis.net/wcs/crs/1.0
+  int: http://www.opengis.net/wcs/interpolation/1.0
+  inspirecommon:
+  inspiredls: 
+  version: 2.0.1
+  schemalocation: http://www.opengis.net/wcs/2.0 https://geodata.nationaalgeoregister.nl/wcs/2.0/wcsAll.xsd http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd

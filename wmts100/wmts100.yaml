@@ -1,0 +1,8 @@
+namespaces:
+  xmlns: http://www.opengis.net/wmts/1.0
+  ows: http://www.opengis.net/ows/1.1
+  xlink: http://www.w3.org/1999/xlink
+  xsi: http://www.w3.org/2001/XMLSchema-instance
+  gml: http://www.opengis.net/gml
+  version: 1.0.0
+  schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd
