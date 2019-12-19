@@ -83,7 +83,7 @@ func main() {
 
 	serviceconfig, err := ioutil.ReadFile(*serviceconfigpath)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		log.Fatalf("error: %v, with file: %v", err, *serviceconfigpath)
 	}
 
 	var config config.Config

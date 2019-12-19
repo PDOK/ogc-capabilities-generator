@@ -33,12 +33,13 @@ ENV TZ Europe/Amsterdam
 
 WORKDIR /
 ENV PATH=/
+ENV SERVICECONFIG=/
 
 # Import from builder.
 COPY --from=build-env /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build-env  /start /
 
-ADD ./templates /templates
-ADD ./config /config
+ADD ./wfs200 /wfs200
+ADD ./wms130 /wms130
 
 CMD ["start"]
