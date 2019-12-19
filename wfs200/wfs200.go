@@ -49,12 +49,10 @@ type Namespaces struct {
 
 // ServiceIdentification struct should only be fill by the "template" configuration wfs200.yaml
 type ServiceIdentification struct {
-	XMLName  xml.Name `xml:"ows:ServiceIdentification"`
-	Title    string   `xml:"ows:Title" yaml:"title"`
-	Abstract string   `xml:"ows:Abstract" yaml:"abstract"`
-	Keywords struct {
-		Keyword []string `xml:"ows:Keyword" yaml:"keyword"`
-	} `xml:"ows:Keywords" yaml:"keywords"`
+	XMLName     xml.Name `xml:"ows:ServiceIdentification"`
+	Title       string   `xml:"ows:Title" yaml:"title"`
+	Abstract    string   `xml:"ows:Abstract" yaml:"abstract"`
+	Keywords    Keywords `xml:"ows:Keywords" yaml:"keywords"`
 	ServiceType struct {
 		Text      string `xml:",chardata" yaml:"text"`
 		CodeSpace string `xml:"codeSpace,attr" yaml:"codespace"`
@@ -175,14 +173,12 @@ type ExtendedCapabilities struct {
 type FeatureTypeList struct {
 	XMLName     xml.Name `xml:"wfs:FeatureTypeList"`
 	FeatureType []struct {
-		Name     string `xml:"wfs:Name" yaml:"name"`
-		Title    string `xml:"wfs:Title" yaml:"title"`
-		Abstract string `xml:"wfs:Abstract" yaml:"abstract"`
-		Keywords struct {
-			Keyword []string `xml:"ows:Keyword" yaml:"keyword"`
-		} `xml:"ows:Keywords" yaml:"keywords"`
-		DefaultCRS    string   `xml:"wfs:DefaultCRS" yaml:"defaultcrs"`
-		OtherCRS      []string `xml:"wfs:OtherCRS" yaml:"othercrs"`
+		Name          string    `xml:"wfs:Name" yaml:"name"`
+		Title         string    `xml:"wfs:Title" yaml:"title"`
+		Abstract      string    `xml:"wfs:Abstract" yaml:"abstract"`
+		Keywords      *Keywords `xml:"ows:Keywords" yaml:"keywords"`
+		DefaultCRS    string    `xml:"wfs:DefaultCRS" yaml:"defaultcrs"`
+		OtherCRS      []string  `xml:"wfs:OtherCRS" yaml:"othercrs"`
 		OutputFormats struct {
 			Format []string `xml:"wfs:Format" yaml:"format"`
 		} `xml:"wfs:OutputFormats" yaml:"outputformats"`
@@ -247,4 +243,9 @@ type TemporalCapabilities struct {
 			Name string `xml:"name,attr,omitempty" yaml:"name"`
 		} `xml:"fes:TemporalOperator" yaml:"temporaloperator"`
 	} `xml:"fes:TemporalOperators" yaml:"temporaloperators"`
+}
+
+// Keywords in struct for repeatablity
+type Keywords struct {
+	Keyword []string `xml:"ows:Keyword" yaml:"keyword"`
 }

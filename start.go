@@ -58,7 +58,7 @@ func buildWMS1_3_0(config config.Config) {
 	}
 
 	buf := buildCapabilities(wms130, config.Global)
-	writeFile("wms130.xml", buf)
+	writeFile(config.Services.Wms130.Filename, buf)
 }
 
 func buildWFS2_0_0(config config.Config) {
@@ -74,7 +74,7 @@ func buildWFS2_0_0(config config.Config) {
 	}
 
 	buf := buildCapabilities(wfs200, config.Global)
-	writeFile("wfs200.xml", buf)
+	writeFile(config.Services.Wfs200.Filename, buf)
 }
 
 func main() {
@@ -91,11 +91,11 @@ func main() {
 		log.Fatalf("error: %v", err)
 	}
 
-	if &config.Services.Wfs200 != nil {
+	if config.Services.Wfs200.Filename != "" {
 		buildWFS2_0_0(config)
 	}
 
-	if &config.Services.Wms130 != nil {
+	if config.Services.Wms130.Filename != "" {
 		buildWMS1_3_0(config)
 	}
 }

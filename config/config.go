@@ -29,6 +29,7 @@ type Services struct {
 
 // The WFS200Config service struct
 type WFS200Config struct {
+	Filename              string                       `yaml:"filename"`
 	ServiceIdentification wfs200.ServiceIdentification `yaml:"serviceidentification"`
 	FeatureTypeList       wfs200.FeatureTypeList       `yaml:"featuretypelist"`
 	ExtendedCapabilities  wfs200.ExtendedCapabilities  `yaml:"extendedcapabilities"`
@@ -36,6 +37,7 @@ type WFS200Config struct {
 
 // The WMS130Config service struct
 type WMS130Config struct {
+	Filename   string            `yaml:"filename"`
 	Service    wms130.Service    `yaml:"service"`
 	Capability wms130.Capability `yaml:"capability"`
 }
