@@ -41,6 +41,7 @@ type Namespaces struct {
 	SchemaLocation string `xml:"xsi:schemaLocation,attr" yaml:"schemalocation"`
 }
 
+// ServiceIdentification struct should only be fill by the "template" configuration wmts100.yaml
 type ServiceIdentification struct {
 	Title              string `xml:"ows:Title" yaml:"title"`
 	Abstract           string `xml:"ows:Abstract" yaml:"abstract"`
@@ -50,11 +51,13 @@ type ServiceIdentification struct {
 	AccessConstraints  string `xml:"ows:AccessConstraints" yaml:"accessconstraints"`
 }
 
+// Contents struct for the WMTS 1.0.0
 type Contents struct {
 	Layer         []Layer         `xml:"Layer" yaml:"layer"`
 	TileMatrixSet []TileMatrixSet `xml:"TileMatrixSet" yaml:"tilematrixset"`
 }
 
+// GetTilematrixsets helper function for collecting the provided TileMatrixSets, so th base can be cleanup for unused TileMatrixSets
 func (c Contents) GetTilematrixsets() map[string]bool {
 	tilematrixsets := make(map[string]bool)
 	for _, l := range c.Layer {
@@ -65,6 +68,7 @@ func (c Contents) GetTilematrixsets() map[string]bool {
 	return tilematrixsets
 }
 
+// Layer in struct for repeatablity
 type Layer struct {
 	Title            string `xml:"ows:Title" yaml:"title"`
 	Abstract         string `xml:"ows:Abstract" yaml:"abstract"`
@@ -85,24 +89,19 @@ type Layer struct {
 	} `xml:"ResourceURL" yaml:"resourceurl"`
 }
 
-func (l Layer) GetTilematrixsets() map[string]string {
-	tilematrixsets := make(map[string]string)
-	for _, t := range l.TileMatrixSetLink {
-		tilematrixsets[t.TileMatrixSet] = t.TileMatrixSet
-	}
-	return tilematrixsets
-}
-
+// TileMatrixSetLink in struct for repeatablity
 type TileMatrixSetLink struct {
 	TileMatrixSet string `xml:"TileMatrixSet" yaml:"tilematrixset"`
 }
 
+// TileMatrixSet in struct for repeatablity
 type TileMatrixSet struct {
 	Identifier   string       `xml:"ows:Identifier" yaml:"identifier"`
 	SupportedCRS string       `xml:"ows:SupportedCRS" yaml:"supportedcrs"`
 	TileMatrix   []TileMatrix `xml:"TileMatrix" yaml:"tilematrix"`
 }
 
+// TileMatrix in struct for repeatablity
 type TileMatrix struct {
 	Identifier       string `xml:"ows:Identifier" yaml:"identifier"`
 	ScaleDenominator string `xml:"ScaleDenominator" yaml:"scaledenominator"`
@@ -113,6 +112,7 @@ type TileMatrix struct {
 	MatrixHeight     string `xml:"MatrixHeight" yaml:"matrixheight"`
 }
 
+// ServiceMetadataURL in struct for repeatablity
 type ServiceMetadataURL struct {
 	Href string `xml:"xlink:href,attr" yaml:"href"`
 }

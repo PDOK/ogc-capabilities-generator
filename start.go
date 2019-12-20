@@ -101,9 +101,12 @@ func buildWMTS1_0_0(config config.Config) {
 }
 
 func buildWCS2_0_1(config config.Config) {
-	wcs201 := wcs201.GetBase()
+	wcs201base := wcs201.GetBase()
 
-	mergo.Merge(&wcs201.ServiceIdentification, &config.Services.Wcs201.ServiceIdentification)
+	mergo.Merge(&wcs201base.ServiceIdentification, &config.Services.Wcs201.ServiceIdentification)
+
+	buf := buildCapabilities(wcs201base, config.Global)
+	writeFile(config.Services.Wcs201.Filename, buf)
 }
 
 func main() {

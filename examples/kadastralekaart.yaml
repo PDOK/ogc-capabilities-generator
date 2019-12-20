@@ -969,3 +969,6 @@ services:
 
     servicemetadataurl: 
       href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/WMTSCapabilities.xml
+
+  wcs201:
+    filename: ./output/kadastralekaart-wcs201.xml    
