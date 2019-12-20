@@ -41,7 +41,7 @@ type Namespaces struct {
 	XmlnsXlink         string `xml:"xmlns:xlink,attr" yaml:"xlink"`                            //http://www.w3.org/1999/xlink
 	XmlnsGML           string `xml:"xmlns:gml,attr" yaml:"gml"`                                //http://www.opengis.net/gml/3.2
 	XmlnsGMLcov        string `xml:"xmlns:gmlcov,attr" yaml:"gmlcov"`                          //http://www.opengis.net/gmlcov/1.0
-	XmlnsSWE           string `xml:"xmlns:swe,attr"`                                           //http://www.opengis.net/swe/2.0
+	XmlnsSWE           string `xml:"xmlns:swe,attr" yaml:"swe"`                                //http://www.opengis.net/swe/2.0
 	XmlnsInspireCommon string `xml:"xmlns:inspire_common,attr,omitempty" yaml:"inspirecommon"` //http://inspire.ec.europa.eu/schemas/common/1.0
 	XmlnsInspireDls    string `xml:"xmlns:inspire_dls,attr,omitempty" yaml:"inspiredls"`       //http://inspire.ec.europa.eu/schemas/inspire_dls/1.0
 	XmlnsCrs           string `xml:"xmlns:crs,attr" yaml:"crs"`                                //http://www.opengis.net/wcs/crs/1.0
@@ -103,34 +103,34 @@ type ServiceProvider struct {
 
 // OperationsMetadata struct for the WCS 2.0.1
 type OperationsMetadata struct {
-	Operation            []Operation          `xml:"ows:Operation"`
-	ExtendedCapabilities ExtendedCapabilities `xml:"ows:ExtendedCapabilities"`
+	Operation            []Operation           `xml:"ows:Operation" yaml:"operation"`
+	ExtendedCapabilities *ExtendedCapabilities `xml:"ows:ExtendedCapabilities" yaml:"extendedcapabilities"`
 }
 
 // Operation in struct for repeatablity
 type Operation struct {
-	Name string `xml:"name,attr"`
+	Name string `xml:"name,attr" yaml:"name"`
 	DCP  struct {
 		HTTP struct {
 			Get struct {
-				Type string `xml:"xlink:type,attr"`
-				Href string `xml:"xlink:href,attr"`
-			} `xml:"ows:Get"`
-			Post *Post `xml:"ows:Post"`
-		} `xml:"ows:HTTP"`
-	} `xml:"ows:DCP"`
+				Type string `xml:"xlink:type,attr" yaml:"type"`
+				Href string `xml:"xlink:href,attr" yaml:"href"`
+			} `xml:"ows:Get" yaml:"get"`
+			Post *Post `xml:"ows:Post" yaml:"post"`
+		} `xml:"ows:HTTP"  yaml:"http"`
+	} `xml:"ows:DCP" yaml:"dcp"`
 }
 
 // Post in seperated struct so to use it as a Pointer
 type Post struct {
-	Type       string `xml:"xlink:type,attr"`
-	Href       string `xml:"xlink:href,attr"`
+	Type       string `xml:"xlink:type,attr" yaml:"type"`
+	Href       string `xml:"xlink:href,attr" yaml:"href"`
 	Constraint struct {
-		Name          string `xml:"name,attr"`
+		Name          string `xml:"name,attr" yaml:"name"`
 		AllowedValues struct {
-			Value string `xml:"ows:Value"`
-		} `xml:"ows:AllowedValues"`
-	} `xml:"ows:Constraint"`
+			Value []string `xml:"ows:Value" yaml:"value"`
+		} `xml:"ows:AllowedValues" yaml:"allowedvalues"`
+	} `xml:"ows:Constraint" yaml:"constraint"`
 }
 
 // ExtendedCapabilities struct for the WCS 2.0.1

@@ -61,8 +61,42 @@ serviceprovider:
       contactinstructions: "{{ .Empty}}"
     role: "{{ .Empty}}"
 
-
-# operationsmetadata
+operationsmetadata:
+  operation: 
+    - name: GetCapabilities
+      dcp:
+        http:
+          get:
+            type: simple
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+    - name: DescribeCoverage
+      dcp:
+        http:
+          get:
+            type: simple
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+          post:
+            type: simple
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+            constraint:
+              name: PostEncoding
+              allowedvalues: 
+                value: 
+                - XML
+    - name: GetCoverage
+      dcp:
+        http:
+          get:
+            type: simple
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+          post:
+            type: simple
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+            constraint:
+              name: PostEncoding
+              allowedvalues: 
+                value: 
+                - XML                  
 
 # servicemetadata
 
