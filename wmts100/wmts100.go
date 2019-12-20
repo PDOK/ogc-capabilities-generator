@@ -25,7 +25,7 @@ func GetBase() Wmts100 {
 type Wmts100 struct {
 	XMLName               xml.Name `xml:"Capabilities"`
 	Namespaces            `yaml:"namespaces"`
-	ServiceIdentification ServiceIdentification `xml:"ServiceIdentification" yaml:"serviceidentification"`
+	ServiceIdentification ServiceIdentification `xml:"ows:ServiceIdentification" yaml:"serviceidentification"`
 	Contents              Contents              `xml:"Contents" yaml:"contents"`
 	ServiceMetadataURL    ServiceMetadataURL    `xml:"ServiceMetadataURL" yaml:"servicemetadataurl"`
 }
@@ -42,51 +42,77 @@ type Namespaces struct {
 }
 
 type ServiceIdentification struct {
-	Title              string `xml:"Title"`
-	Abstract           string `xml:"Abstract"`
-	ServiceType        string `xml:"ServiceType"`
-	ServiceTypeVersion string `xml:"ServiceTypeVersion"`
-	Fees               string `xml:"Fees"`
-	AccessConstraints  string `xml:"AccessConstraints"`
+	Title              string `xml:"ows:Title" yaml:"title"`
+	Abstract           string `xml:"ows:Abstract" yaml:"abstract"`
+	ServiceType        string `xml:"ows:ServiceType" yaml:"servicetype"`
+	ServiceTypeVersion string `xml:"ows:ServiceTypeVersion" yaml:"servicetypeversion"`
+	Fees               string `xml:"ows:Fees" yaml:"fees"`
+	AccessConstraints  string `xml:"ows:AccessConstraints" yaml:"accessconstraints"`
 }
 
 type Contents struct {
-	Layer struct {
-		Title            string `xml:"Title"`
-		Abstract         string `xml:"Abstract"`
-		WGS84BoundingBox struct {
-			LowerCorner string `xml:"LowerCorner"`
-			UpperCorner string `xml:"UpperCorner"`
-		} `xml:"WGS84BoundingBox"`
-		Identifier string `xml:"Identifier"`
-		Style      struct {
-			Identifier string `xml:"Identifier"`
-		} `xml:"Style"`
-		Format            string `xml:"Format"`
-		TileMatrixSetLink []struct {
-			TileMatrixSet string `xml:"TileMatrixSet"`
-		} `xml:"TileMatrixSetLink"`
-		ResourceURL struct {
-			Format       string `xml:"format,attr"`
-			ResourceType string `xml:"resourceType,attr"`
-			Template     string `xml:"template,attr"`
-		} `xml:"ResourceURL"`
-	} `xml:"Layer"`
-	TileMatrixSet []struct {
-		Identifier   string `xml:"Identifier"`
-		SupportedCRS string `xml:"SupportedCRS"`
-		TileMatrix   []struct {
-			Identifier       string `xml:"Identifier"`
-			ScaleDenominator string `xml:"ScaleDenominator"`
-			TopLeftCorner    string `xml:"TopLeftCorner"`
-			TileWidth        string `xml:"TileWidth"`
-			TileHeight       string `xml:"TileHeight"`
-			MatrixWidth      string `xml:"MatrixWidth"`
-			MatrixHeight     string `xml:"MatrixHeight"`
-		} `xml:"TileMatrix"`
-	} `xml:"TileMatrixSet"`
+	Layer         []Layer         `xml:"Layer" yaml:"layer"`
+	TileMatrixSet []TileMatrixSet `xml:"TileMatrixSet" yaml:"tilematrixset"`
+}
+
+func (c Contents) GetTilematrixsets() map[string]bool {
+	tilematrixsets := make(map[string]bool)
+	for _, l := range c.Layer {
+		for _, t := range l.TileMatrixSetLink {
+			tilematrixsets[t.TileMatrixSet] = true
+		}
+	}
+	return tilematrixsets
+}
+
+type Layer struct {
+	Title            string `xml:"ows:Title" yaml:"title"`
+	Abstract         string `xml:"ows:Abstract" yaml:"abstract"`
+	WGS84BoundingBox struct {
+		LowerCorner string `xml:"ows:LowerCorner" yaml:"lowercorner"`
+		UpperCorner string `xml:"ows:UpperCorner" yaml:"uppercorner"`
+	} `xml:"ows:WGS84BoundingBox" yaml:"wgs84boundingbox"`
+	Identifier string `xml:"ows:Identifier" yaml:"identifier"`
+	Style      struct {
+		Identifier string `xml:"ows:Identifier" yaml:"identifier"`
+	} `xml:"Style" yaml:"style"`
+	Format            string              `xml:"Format" yaml:"format"`
+	TileMatrixSetLink []TileMatrixSetLink `xml:"TileMatrixSetLink" yaml:"tilematrixsetlink"`
+	ResourceURL       struct {
+		Format       string `xml:"format,attr" yaml:"format"`
+		ResourceType string `xml:"resourceType,attr" yaml:"resourcetype"`
+		Template     string `xml:"template,attr" yaml:"template"`
+	} `xml:"ResourceURL" yaml:"resourceurl"`
+}
+
+func (l Layer) GetTilematrixsets() map[string]string {
+	tilematrixsets := make(map[string]string)
+	for _, t := range l.TileMatrixSetLink {
+		tilematrixsets[t.TileMatrixSet] = t.TileMatrixSet
+	}
+	return tilematrixsets
+}
+
+type TileMatrixSetLink struct {
+	TileMatrixSet string `xml:"TileMatrixSet" yaml:"tilematrixset"`
+}
+
+type TileMatrixSet struct {
+	Identifier   string       `xml:"ows:Identifier" yaml:"identifier"`
+	SupportedCRS string       `xml:"ows:SupportedCRS" yaml:"supportedcrs"`
+	TileMatrix   []TileMatrix `xml:"TileMatrix" yaml:"tilematrix"`
+}
+
+type TileMatrix struct {
+	Identifier       string `xml:"ows:Identifier" yaml:"identifier"`
+	ScaleDenominator string `xml:"ScaleDenominator" yaml:"scaledenominator"`
+	TopLeftCorner    string `xml:"TopLeftCorner" yaml:"topleftcorner"`
+	TileWidth        string `xml:"TileWidth" yaml:"tilewidth"`
+	TileHeight       string `xml:"TileHeight" yaml:"tileheight"`
+	MatrixWidth      string `xml:"MatrixWidth" yaml:"matrixwidth"`
+	MatrixHeight     string `xml:"MatrixHeight" yaml:"matrixheight"`
 }
 
 type ServiceMetadataURL struct {
-	Href string `xml:"href,attr"`
+	Href string `xml:"xlink:href,attr" yaml:"href"`
 }

@@ -1,8 +1,10 @@
 package config
 
 import (
+	"pdok-capabilities-gen/wcs201"
 	"pdok-capabilities-gen/wfs200"
 	"pdok-capabilities-gen/wms130"
+	"pdok-capabilities-gen/wmts100"
 )
 
 // Config is the base struct for the config yaml
@@ -23,8 +25,10 @@ type Global struct {
 
 // Services contain a single service struct for every service type
 type Services struct {
-	Wfs200 WFS200Config `yaml:"wfs200"`
-	Wms130 WMS130Config `yaml:"wms130"`
+	Wfs200  WFS200Config  `yaml:"wfs200"`
+	Wms130  WMS130Config  `yaml:"wms130"`
+	Wmts100 WMTS100Config `yaml:"wmts100"`
+	Wcs201  WCS201Config  `yaml:"wcs201"`
 }
 
 // The WFS200Config service struct
@@ -40,4 +44,18 @@ type WMS130Config struct {
 	Filename   string            `yaml:"filename"`
 	Service    wms130.Service    `yaml:"service"`
 	Capability wms130.Capability `yaml:"capability"`
+}
+
+// The WMTS100Config service struct
+type WMTS100Config struct {
+	Filename              string                        `yaml:"filename"`
+	ServiceIdentification wmts100.ServiceIdentification `yaml:"serviceidentification"`
+	Contents              wmts100.Contents              `yaml:"contents"`
+	ServiceMetadataURL    wmts100.ServiceMetadataURL    `yaml:"servicemetadataurl"`
+}
+
+// The WCS201Config service struct
+type WCS201Config struct {
+	Filename              string                       `yaml:"filename"`
+	ServiceIdentification wcs201.ServiceIdentification `yaml:"serviceidentification"`
 }

@@ -920,3 +920,52 @@ services:
                 xlink: http://www.w3.org/1999/xlink
                 type: simple
                 href: http://geodata.nationaalgeoregister.nl/kadastralekaart/wms/v4_0?SERVICE=WMS&language=dut&version=1.3.0&request=GetLegendGraphic&sld_version=1.1.0&layer=OpenbareRuimteNaam&format=image/png&STYLE=kadastralekaartv4:openbareruimtenaam
+
+  wmts100:
+    filename: ./output/kadastralekaart-wmts100.xml
+    serviceidentification:
+      title: kadastralekaart
+      abstract: "Een Kadastrale Grens is de weergave van een grens op de kadastrale kaart die door de dienst van het Kadaster tussen percelen vastgesteld wordt, op basis van inlichtingen van belanghebbenden en met gebruikmaking van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven."
+      fees: none
+      accessconstraints: none
+    
+    contents:
+      layer:
+      - title: Kadastralekaart
+        abstract: Kadastralekaart
+        identifier: Kadastralekaart          
+        wgs84boundingbox:
+          lowercorner: -1.65729160235 48.0405018704
+          uppercorner: 12.4317272654 56.1105896442
+        style:
+          identifier: default
+        format: image/png
+        tilematrixsetlink:
+        - tilematrixset: EPSG:28992
+        - tilematrixset: EPSG:25831
+        # - tilematrixset: EPSG:3857
+        resourceurl:
+          format: image/png
+          resourcetype: tile
+          template: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/Kadastralekaart/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png
+
+      - title: Kadastralekaart
+        abstract: Kadastralekaart
+        identifier: Kadastralekaart          
+        wgs84boundingbox:
+          lowercorner: -1.65729160235 48.0405018704
+          uppercorner: 12.4317272654 56.1105896442
+        style:
+          identifier: default
+        format: image/png
+        tilematrixsetlink:
+        - tilematrixset: EPSG:28992
+        - tilematrixset: EPSG:25831
+        # - tilematrixset: EPSG:3857
+        resourceurl:
+          format: image/png
+          resourcetype: tile
+          template: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/Kadastralekaart/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png
+
+    servicemetadataurl: 
+      href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/WMTSCapabilities.xml

@@ -41,5 +41,7 @@ COPY --from=build-env  /start /
 
 ADD ./wfs200 /wfs200
 ADD ./wms130 /wms130
+ADD ./wmts100 /wmts100
+ADD ./wcs201 /wcs201
 
 CMD ["start"]
