@@ -101,7 +101,7 @@ type Layer struct {
 	Opaque *string `xml:"opaque,attr" yaml:"opaque"`
 	// no cascaded attr in Layer element, because we don't do cascaded services e.g. wms services "proxying" and/or combining other wms services
 	//Cascaded                *string                  `xml:"cascaded,attr" yaml:"cascaded"`
-	Name                    string                   `xml:"Name" yaml:"name"`
+	Name                    *string                  `xml:"Name" yaml:"name"`
 	Title                   string                   `xml:"Title" yaml:"title"`
 	Abstract                string                   `xml:"Abstract" yaml:"abstract"`
 	KeywordList             *KeywordList             `xml:"KeywordList" yaml:"keywordlist"`
