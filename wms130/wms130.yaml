@@ -12,7 +12,7 @@ namespaces:
 service:
   onlineresource:
     xlink: http://www.w3.org/1999/xlink
-    href: https://geodata.nationaalgeoregister.nl
+    href: "{{.Onlineresourceurl}}"
   contactinformation:
     contactpersonprimary:
       contactperson: KlantContactCenter PDOK
