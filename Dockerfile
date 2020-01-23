@@ -1,7 +1,7 @@
 FROM golang:1.13-alpine3.10 AS build-env
 
 RUN apk update && apk upgrade && \
-   apk add --no-cache bash git pkgconfig go gcc g++ libc-dev
+   apk add --no-cache bash git pkgconfig gcc g++ libc-dev
 
 ENV GO111MODULE=on
 ENV GOPROXY=https://proxy.golang.org
@@ -28,7 +28,7 @@ RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /start 
 
 FROM scratch
 
-# important for time conversion in transit reader
+# important for time conversion
 ENV TZ Europe/Amsterdam
 
 WORKDIR /
@@ -37,11 +37,8 @@ ENV SERVICECONFIG=/
 
 # Import from builder.
 COPY --from=build-env /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build-env  /start /
+COPY --from=build-env /start /
 
-ADD ./wfs200 /wfs200
-ADD ./wms130 /wms130
-ADD ./wmts100 /wmts100
-ADD ./wcs201 /wcs201
+ADD ./base /.base
 
 CMD ["start"]
