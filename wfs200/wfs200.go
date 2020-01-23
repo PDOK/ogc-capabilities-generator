@@ -2,16 +2,16 @@ package wfs200
 
 import (
 	"encoding/xml"
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
-
-	"gopkg.in/yaml.v2"
+	"reflect"
 )
 
 // GetBase function to get a filled "template" based on the wfs200.yaml config
 func GetBase() Wfs200 {
 	wfs200 := Wfs200{}
-	base, err := ioutil.ReadFile("./wfs200/wfs200.yaml")
+	base, err := ioutil.ReadFile("./base/wfs200.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -19,6 +19,20 @@ func GetBase() Wfs200 {
 		log.Fatalf("error: %v", err)
 	}
 	return wfs200
+}
+
+type Wfs201Transfomer struct {
+}
+
+// Skip FeatureTypeList when merging Base to config, this is a custom operation
+func (t Wfs201Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
+	if typ == reflect.TypeOf(FeatureTypeList{}) {
+		return func(dst, src reflect.Value) error {
+			// NOOP
+			return nil
+		}
+	}
+	return nil
 }
 
 // Wfs200 base struct

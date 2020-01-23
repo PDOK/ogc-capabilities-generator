@@ -48,65 +48,85 @@ func buildCapabilities(v interface{}, g config.Global) []byte {
 }
 
 func buildWFS2_0_0(config config.Config) {
+	// retrieve default set
 	wfs200base := wfs200.GetBase()
+	// merge with specific set skipping featuretypelist, this is a custom operation
+	mergo.Merge(&config.Services.WFS200Config.Wfs200, wfs200base, mergo.WithTransformers(wfs200.Wfs201Transfomer{}))
 
-	mergo.Merge(&wfs200base.ServiceIdentification, &config.Services.Wfs200.ServiceIdentification)
-	mergo.Merge(&wfs200base.FeatureTypeList, &config.Services.Wfs200.FeatureTypeList)
-
-	if &config.Services.Wfs200.ExtendedCapabilities != nil {
-		wfs200base.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-		wfs200base.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
-		wfs200base.OperationsMetadata.ExtendedCapabilities = &config.Services.Wfs200.ExtendedCapabilities
+	// can we apply generic base feature template to config ?
+	if len(wfs200base.FeatureTypeList.FeatureType) > 0 {
+		for index := range config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType {
+			mergo.Merge(&config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType[index], wfs200base.FeatureTypeList.FeatureType[0])
+		}
 	}
 
-	buf := buildCapabilities(wfs200base, config.Global)
-	writeFile(config.Services.Wfs200.Filename, buf)
+	if &config.Services.WFS200Config.Wfs200.OperationsMetadata.ExtendedCapabilities != nil {
+		config.Services.WFS200Config.Wfs200.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		config.Services.WFS200Config.Wfs200.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+	}
+
+	buf := buildCapabilities(config.Services.WFS200Config.Wfs200, config.Global)
+	writeFile(config.Services.WFS200Config.Filename, buf)
 }
 
 func buildWMS1_3_0(config config.Config) {
 	wms130base := wms130.GetBase()
 
-	mergo.Merge(&wms130base.Service, &config.Services.Wms130.Service)
-	mergo.Merge(&wms130base.Capability, &config.Services.Wms130.Capability)
+	// merge with specific set skipping layer, this is a custom operation
+	mergo.Merge(&config.Services.WMS130Config.Wms130, wms130base, mergo.WithTransformers(wms130.Wms130Transfomer{}))
 
-	if &config.Services.Wms130.Capability.ExtendedCapabilities != nil {
-		wms130base.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-		wms130base.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
-		wms130base.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
+	if len(wms130base.Capability.Layer) > 0 {
+		for index := range config.Services.WMS130Config.Wms130.Capability.Layer {
+			merge(&config.Services.WMS130Config.Wms130.Capability.Layer[index], wms130base.Capability.Layer[0])
+		}
 	}
 
-	buf := buildCapabilities(wms130base, config.Global)
-	writeFile(config.Services.Wms130.Filename, buf)
+	if &config.Services.WMS130Config.Wms130.Capability.ExtendedCapabilities != nil {
+		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+		config.Services.WMS130Config.Wms130.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
+	}
+
+	buf := buildCapabilities(config.Services.WMS130Config.Wms130, config.Global)
+	writeFile(config.Services.WMS130Config.Filename, buf)
+}
+
+// recursive fill
+func merge(dst *wms130.Layer, src wms130.Layer) {
+
+	if len(dst.Layer) > 0 {
+		for index := range dst.Layer {
+			merge(dst.Layer[index], src)
+		}
+	}
+	mergo.Merge(dst, src)
 }
 
 func buildWMTS1_0_0(config config.Config) {
 	wmts100base := wmts100.GetBase()
 
-	mergo.Merge(&wmts100base.ServiceIdentification, &config.Services.Wmts100.ServiceIdentification)
-	mergo.Merge(&wmts100base.Contents, &config.Services.Wmts100.Contents)
+	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(wmts100.Wmts100Transfomer{}))
 
 	// Cleanup unused TileMatrixSets
 	var tms []wmts100.TileMatrixSet
-	for i, t := range wmts100base.Contents.TileMatrixSet {
-		if !config.Services.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
-			tms = append(wmts100base.Contents.TileMatrixSet[:i], wmts100base.Contents.TileMatrixSet[i+1:]...)
+	for i, t := range config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet {
+		if !config.Services.WMTS100Config.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
+			tms = append(config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet[:i], wmts100base.Contents.TileMatrixSet[i+1:]...)
 		}
 	}
-	wmts100base.Contents.TileMatrixSet = tms
+	config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet = tms
 
-	mergo.Merge(&wmts100base.ServiceMetadataURL, &config.Services.Wmts100.ServiceMetadataURL)
-
-	buf := buildCapabilities(wmts100base, config.Global)
-	writeFile(config.Services.Wmts100.Filename, buf)
+	buf := buildCapabilities(config.Services.WMTS100Config.Wmts100, config.Global)
+	writeFile(config.Services.WMTS100Config.Filename, buf)
 }
 
 func buildWCS2_0_1(config config.Config) {
 	wcs201base := wcs201.GetBase()
 
-	mergo.Merge(&wcs201base.ServiceIdentification, &config.Services.Wcs201.ServiceIdentification)
+	mergo.Merge(&config.Services.WCS201Config.Wcs201, wcs201base)
 
-	buf := buildCapabilities(wcs201base, config.Global)
-	writeFile(config.Services.Wcs201.Filename, buf)
+	buf := buildCapabilities(config.Services.WCS201Config.Wcs201, config.Global)
+	writeFile(config.Services.WCS201Config.Filename, buf)
 }
 
 func main() {
@@ -123,19 +143,19 @@ func main() {
 		log.Fatalf("error: %v", err)
 	}
 
-	if config.Services.Wfs200.Filename != "" {
+	if config.Services.WFS200Config.Filename != "" {
 		buildWFS2_0_0(config)
 	}
 
-	if config.Services.Wms130.Filename != "" {
+	if config.Services.WMS130Config.Filename != "" {
 		buildWMS1_3_0(config)
 	}
 
-	if config.Services.Wmts100.Filename != "" {
+	if config.Services.WMTS100Config.Filename != "" {
 		buildWMTS1_0_0(config)
 	}
 
-	if config.Services.Wcs201.Filename != "" {
+	if config.Services.WCS201Config.Filename != "" {
 		buildWCS2_0_1(config)
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"log"
+	"reflect"
 
 	"gopkg.in/yaml.v2"
 )
@@ -11,7 +12,7 @@ import (
 // GetBase function to get a filled "template" based on the wmts100.yaml config
 func GetBase() Wmts100 {
 	wmts100 := Wmts100{}
-	base, err := ioutil.ReadFile("./wmts100/wmts100.yaml")
+	base, err := ioutil.ReadFile("./base/wmts100.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -19,6 +20,20 @@ func GetBase() Wmts100 {
 		log.Fatalf("error: %v", err)
 	}
 	return wmts100
+}
+
+type Wmts100Transfomer struct {
+}
+
+// Skip FeatureTypeList when merging Base to config, this is a custom operation
+func (t Wmts100Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
+	if typ == reflect.TypeOf(TileMatrixSet{}) {
+		return func(dst, src reflect.Value) error {
+			// NOOP
+			return nil
+		}
+	}
+	return nil
 }
 
 // Wmts100 base struct

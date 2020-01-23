@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"log"
+	"reflect"
 
 	"gopkg.in/yaml.v2"
 )
@@ -11,7 +12,7 @@ import (
 // GetBase function to get a filled "template" based on the wms130.yaml config
 func GetBase() Wms130 {
 	wms130 := Wms130{}
-	base, err := ioutil.ReadFile("./wms130/wms130.yaml")
+	base, err := ioutil.ReadFile("./base/wms130.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -19,6 +20,20 @@ func GetBase() Wms130 {
 		log.Fatalf("error: %v", err)
 	}
 	return wms130
+}
+
+type Wms130Transfomer struct {
+}
+
+// Skip FeatureTypeList when merging Base to config, this is a custom operation
+func (t Wms130Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
+	if typ == reflect.TypeOf(Layer{}) {
+		return func(dst, src reflect.Value) error {
+			// NOOP
+			return nil
+		}
+	}
+	return nil
 }
 
 // Wms130 base struct

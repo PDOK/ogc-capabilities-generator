@@ -11,7 +11,7 @@ import (
 // GetBase function to get a filled "template" based on the wmts100.yaml config
 func GetBase() Wcs201 {
 	wcs201 := Wcs201{}
-	base, err := ioutil.ReadFile("./wcs201/wcs201.yaml")
+	base, err := ioutil.ReadFile("./base/wcs201.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}

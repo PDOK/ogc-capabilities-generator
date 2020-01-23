@@ -25,37 +25,32 @@ type Global struct {
 
 // Services contain a single service struct for every service type
 type Services struct {
-	Wfs200  WFS200Config  `yaml:"wfs200"`
-	Wms130  WMS130Config  `yaml:"wms130"`
-	Wmts100 WMTS100Config `yaml:"wmts100"`
-	Wcs201  WCS201Config  `yaml:"wcs201"`
+	WFS200Config  WFS200Config  `yaml:"wfs200"`
+	WMS130Config  WMS130Config  `yaml:"wms130"`
+	WMTS100Config WMTS100Config `yaml:"wmts100"`
+	WCS201Config  WCS201Config  `yaml:"wcs201"`
 }
 
 // The WFS200Config service struct
 type WFS200Config struct {
-	Filename              string                       `yaml:"filename"`
-	ServiceIdentification wfs200.ServiceIdentification `yaml:"serviceidentification"`
-	FeatureTypeList       wfs200.FeatureTypeList       `yaml:"featuretypelist"`
-	ExtendedCapabilities  wfs200.ExtendedCapabilities  `yaml:"extendedcapabilities"`
+	Filename string        `yaml:"filename"`
+	Wfs200   wfs200.Wfs200 `yaml:"definition"`
 }
 
 // The WMS130Config service struct
 type WMS130Config struct {
-	Filename   string            `yaml:"filename"`
-	Service    wms130.Service    `yaml:"service"`
-	Capability wms130.Capability `yaml:"capability"`
+	Filename string        `yaml:"filename"`
+	Wms130   wms130.Wms130 `yaml:"definition"`
 }
 
 // The WMTS100Config service struct
 type WMTS100Config struct {
-	Filename              string                        `yaml:"filename"`
-	ServiceIdentification wmts100.ServiceIdentification `yaml:"serviceidentification"`
-	Contents              wmts100.Contents              `yaml:"contents"`
-	ServiceMetadataURL    wmts100.ServiceMetadataURL    `yaml:"servicemetadataurl"`
+	Filename string          `yaml:"filename"`
+	Wmts100  wmts100.Wmts100 `yaml:"definition"`
 }
 
 // The WCS201Config service struct
 type WCS201Config struct {
-	Filename              string                       `yaml:"filename"`
-	ServiceIdentification wcs201.ServiceIdentification `yaml:"serviceidentification"`
+	Filename string        `yaml:"filename"`
+	Wcs201   wcs201.Wcs201 `yaml:"definition"`
 }

@@ -1,25 +1,25 @@
 namespaces:
-  gml: http://www.opengis.net/gml/3.2
-  wfs: http://www.opengis.net/wfs/2.0
-  ows: http://www.opengis.net/ows/1.1
-  xlink: http://www.w3.org/1999/xlink
-  xsi: http://www.w3.org/2001/XMLSchema-instance
-  fes: http://www.opengis.net/fes/2.0
+  gml: https://www.opengis.net/gml/3.2
+  wfs: https://www.opengis.net/wfs/2.0
+  ows: https://www.opengis.net/ows/1.1
+  xlink: https://www.w3.org/1999/xlink
+  xsi: https://www.w3.org/2001/XMLSchema-instance
+  fes: https://www.opengis.net/fes/2.0
   inspirecommon:
   inspiredls:
   prefix: "{{.Namespace}}" #namespace_uri  # don't edit! maybe different solution in code....?
   version: 2.0.0
-  schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd
+  schemalocation: https://www.opengis.net/wfs/2.0 https://schemas.opengis.net/wfs/2.0/wfs.xsd
 
 serviceidentification:
   title:
   abstract:
-  servicetype: 
-    name: WFS
+  servicetype:
+    text: WFS
     codespace: OGC
   servicetypeversion: 2.0.0
   fees: none
-  accesscontraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
+  accesscontraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
 
 serviceprovider:
   providername: PDOK
@@ -40,18 +40,43 @@ serviceprovider:
         postalcode: 7334 DP
         country: Netherlands
         electronicmailaddress: BeheerPDOK@kadaster.nl
-      onlineresource: 
+      onlineresource:
         type: simple
         href: "{{.Onlineresourceurl}}"
       hoursofservice: "09:00-17:00"
       contactinstructions: "don't call"
     role: serviceprovider
 
+featuretypelist:
+  featuretype:
+    - defaultcrs: urn:ogc:def:crs:EPSG::28992
+      othercrs:
+        - urn:ogc:def:crs:EPSG::25831
+        - urn:ogc:def:crs:EPSG::25832
+        - urn:ogc:def:crs:EPSG::3034
+        - urn:ogc:def:crs:EPSG::3035
+        - urn:ogc:def:crs:EPSG::3038
+        - urn:ogc:def:crs:EPSG::5709
+        - urn:ogc:def:crs:EPSG::3857
+        - urn:ogc:def:crs:EPSG::4258
+        - urn:ogc:def:crs:EPSG::4326
+      outputformats:
+        format:
+          - application/gml+xml; version=3.2
+          - text/xml; subtype=gml/3.2.1
+          - text/xml; subtype=gml/3.1.1
+          - application/json; subtype=geojson
+          - application/json
+      wgs84boundingbox:
+        dimensions: 2
+        lowercorner: 2.52712538742158 50.2128625669452
+        uppercorner: 7.37402550506231 55.7211602557705
+
 operationsmetadata:
-  operation: 
+  operation:
     - name: GetCapabilities
       dcp:
-        http:
+        https:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
@@ -77,7 +102,7 @@ operationsmetadata:
             - Filter_Capabilities
     - name: DescribeFeatureType
       dcp:
-        http:
+        https:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
@@ -91,7 +116,7 @@ operationsmetadata:
             - text/xml; subtype=gml/3.1.1
     - name: GetFeature
       dcp:
-        http:
+        https:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
@@ -110,14 +135,14 @@ operationsmetadata:
     # - name: GetPropertyValue no GetPropertyValue
     - name: ListStoredQueries
       dcp:
-        http:
+        https:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
           # post: no POST for ListStoredQueries
     - name: DescribeStoredQueries
       dcp:
-        http:
+        https:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
