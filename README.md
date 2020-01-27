@@ -4,7 +4,7 @@
 
 ```docker
 docker build -t pdok/ogc-capabilities-generator .
-docker run -d -v `pwd`/examples:/config -v `pwd`:/output -e SERVICECONFIG=/config/natura2000.yaml --name ocg pdok/ogc-capabilities-generator
+docker run -d -v `pwd`/examples:/config -v `pwd`:/output -e SERVICECONFIG=/config/kadastralekaart_v4.yaml --name ocg pdok/ogc-capabilities-generator
 ```
 
 https://geodata.nationaalgeoregister.nl/kadastralekaart/wms/v4_0?request=getcapabilities&service=wms

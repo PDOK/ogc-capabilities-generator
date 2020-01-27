@@ -24,7 +24,7 @@ ENV GOOS=linux
 # run tests
 RUN go test ./... -covermode=atomic
 
-RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /start start.go
+RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create create.go
 
 FROM scratch
 
@@ -37,8 +37,8 @@ ENV SERVICECONFIG=/
 
 # Import from builder.
 COPY --from=build-env /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build-env /start /
+COPY --from=build-env /create /
 
-ADD ./base /.base
+ADD /base /base
 
-CMD ["start"]
+CMD ["create"]
