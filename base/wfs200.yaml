@@ -76,7 +76,7 @@ operationsmetadata:
   operation:
     - name: GetCapabilities
       dcp:
-        https:
+        http:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
@@ -102,7 +102,7 @@ operationsmetadata:
             - Filter_Capabilities
     - name: DescribeFeatureType
       dcp:
-        https:
+        http:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
@@ -116,7 +116,7 @@ operationsmetadata:
             - text/xml; subtype=gml/3.1.1
     - name: GetFeature
       dcp:
-        https:
+        http:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
@@ -135,14 +135,14 @@ operationsmetadata:
     # - name: GetPropertyValue no GetPropertyValue
     - name: ListStoredQueries
       dcp:
-        https:
+        http:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
           # post: no POST for ListStoredQueries
     - name: DescribeStoredQueries
       dcp:
-        https:
+        http:
           get:
             type: simple
             href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
