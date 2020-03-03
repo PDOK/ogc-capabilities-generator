@@ -1,13 +1,13 @@
 namespaces:
-  wms: https://www.opengis.net/wms
-  sld: https://www.opengis.net/sld
-  ows: https://www.opengis.net/ows/1.1
-  xlink: https://www.w3.org/1999/xlink
-  xsi: https://www.w3.org/2001/XMLSchema-instance
+  wms: http://www.opengis.net/wms
+  sld: http://www.opengis.net/sld
+  ows: http://www.opengis.net/ows/1.1
+  xlink: http://www.w3.org/1999/xlink
+  xsi: http://www.w3.org/2001/XMLSchema-instance
   inspirecommon:
   inspirevs:
   version: 1.3.0
-  schemalocation: https://www.opengis.net/wms https://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd https://www.opengis.net/sld https://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd
+  schemalocation: http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd
 
 service:
   name: WMS

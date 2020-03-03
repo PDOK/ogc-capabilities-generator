@@ -1,15 +1,15 @@
 namespaces:
-  gml: https://www.opengis.net/gml/3.2
-  wfs: https://www.opengis.net/wfs/2.0
-  ows: https://www.opengis.net/ows/1.1
-  xlink: https://www.w3.org/1999/xlink
-  xsi: https://www.w3.org/2001/XMLSchema-instance
-  fes: https://www.opengis.net/fes/2.0
+  gml: http://www.opengis.net/gml/3.2
+  wfs: http://www.opengis.net/wfs/2.0
+  ows: http://www.opengis.net/ows/1.1
+  xlink: http://www.w3.org/1999/xlink
+  xsi: http://www.w3.org/2001/XMLSchema-instance
+  fes: http://www.opengis.net/fes/2.0
   inspirecommon:
   inspiredls:
   prefix: "{{.Namespace}}" #namespace_uri  # don't edit! maybe different solution in code....?
   version: 2.0.0
-  schemalocation: https://www.opengis.net/wfs/2.0 https://schemas.opengis.net/wfs/2.0/wfs.xsd
+  schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd
 
 serviceidentification:
   title:
