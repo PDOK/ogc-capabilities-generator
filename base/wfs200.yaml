@@ -79,7 +79,7 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
           #POST: no POST for GetCapabilities
       parameter:
         - name: AcceptVersions
@@ -105,7 +105,7 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
           # post: no POST for DescribeFeatureType
       parameter:
         - name: outputFormat
@@ -119,10 +119,10 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
           post:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}"
       parameter:
         - name: outputFormat
           allowedvalues: 
@@ -138,14 +138,14 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
           # post: no POST for ListStoredQueries
     - name: DescribeStoredQueries
       dcp:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?SERVICE=WFS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
           # post: no POST for DescribeStoredQueries
 
   parameter:

@@ -68,16 +68,16 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?"
     - name: DescribeCoverage
       dcp:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?"
           post:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}"
             constraint:
               name: PostEncoding
               allowedvalues: 
@@ -88,10 +88,10 @@ operationsmetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?"
           post:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?SERVICE=WCS"
+            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}"
             constraint:
               name: PostEncoding
               allowedvalues: 

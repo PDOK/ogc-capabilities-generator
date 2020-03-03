@@ -44,7 +44,7 @@ capability:
           get:
             onlineresource:
               xlink: http://www.w3.org/1999/xlink
-              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?"
     getmap:
       format:
         - image/png
@@ -57,11 +57,11 @@ capability:
           get:
             onlineresource:
               xlink: http://www.w3.org/1999/xlink
-              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?"
           post:
             onlineresource:
               xlink: http://www.w3.org/1999/xlink
-              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"        
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}"
     getfeatureinfo:
       format:
       - application/json
@@ -76,11 +76,11 @@ capability:
           get:
             onlineresource:
               xlink: http://www.w3.org/1999/xlink
-              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?"
           post:
             onlineresource:
               xlink: http://www.w3.org/1999/xlink
-              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?SERVICE=WMS"
+              href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}"
   layer:
     - crs:
         - EPSG:28992
