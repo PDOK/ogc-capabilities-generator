@@ -165,7 +165,7 @@ type ExtendedCapabilities struct {
 	ExtendedCapabilities struct {
 		Text        string `xml:",chardata"`
 		MetadataURL struct {
-			Type      string `xml:"xsi:type,attr" yaml:"type"`
+			Type      string `xml:"xsi:type,attr,omitempty" yaml:"type"`
 			URL       string `xml:"inspire_common:URL" yaml:"url"`
 			MediaType string `xml:"inspire_common:MediaType" yaml:"mediatype"`
 		} `xml:"inspire_common:MetadataUrl" yaml:"metadataurl"`
