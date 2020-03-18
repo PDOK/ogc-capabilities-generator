@@ -9,7 +9,7 @@ namespaces:
   inspiredls:
   prefix: "{{.Namespace}}" #namespace_uri  # don't edit! maybe different solution in code....?
   version: 2.0.0
-  schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd
+  schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd {{.AdditionalSchemaLocations}}
 
 serviceidentification:
   title:

@@ -15,12 +15,13 @@ type Config struct {
 
 // Global contains a collection of base var that are globally usable for the generation of the capabilities
 type Global struct {
-	Prefix            string `yaml:"prefix"`
-	Namespace         string `yaml:"namespace"`
-	Onlineresourceurl string `yaml:"onlineresourceurl"`
-	Path              string `yaml:"path"`
-	Version           string `yaml:"version"`
-	Empty             string
+	Prefix                    string `yaml:"prefix"`
+	Namespace                 string `yaml:"namespace"`
+	Onlineresourceurl         string `yaml:"onlineresourceurl"`
+	Path                      string `yaml:"path"`
+	Version                   string `yaml:"version"`
+	AdditionalSchemaLocations string `yaml:"additionalschemalocations"`
+	Empty                     string
 }
 
 // Services contain a single service struct for every service type

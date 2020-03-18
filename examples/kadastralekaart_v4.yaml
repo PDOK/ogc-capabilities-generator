@@ -4,6 +4,7 @@ global:
   onlineresourceurl: https://geodata.nationaalgeoregister.nl
   path: /kadastralekaart
   version: v4_0
+  additionalschemalocations: http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd http://inspire.ec.europa.eu/schemas/common/1.0 http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd
 
 services:
   wfs200:
@@ -77,7 +78,6 @@ services:
         extendedcapabilities:
           extendedcapabilities:
             metadataurl:
-              type: inspire_common:resourceLocatorType
               url: http://www.nationaalgeoregister.nl/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=ff9315c8-f25a-4d01-9245-5cf058314ebf
               mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
             supportedlanguages:
@@ -101,7 +101,6 @@ services:
       capability:
         extendedcapabilities:
           metadataurl:
-            type: inspire_common:resourceLocatorType
             url: http://www.nationaalgeoregister.nl/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=ff9315c8-f25a-4d01-9245-5cf058314ebf
             mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
           supportedlanguages:
