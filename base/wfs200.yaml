@@ -31,21 +31,21 @@ serviceprovider:
     positionname: pointOfContact
     contactinfo:
       phone:
-        voice: "06-123456789"
-        facsmile: "0900-1234"
+        voice: "{{ .Empty}}"
+        facsmile: "{{ .Empty}}"
       address:
-        deliverypoint: Postbus 9046 7300 GH Apeldoorn
+        deliverypoint: "{{ .Empty}}"
         city: Apeldoorn
-        administrativearea: Gelderland
-        postalcode: 7334 DP
+        administrativearea: "{{ .Empty}}"
+        postalcode: "{{ .Empty}}"
         country: Netherlands
         electronicmailaddress: BeheerPDOK@kadaster.nl
       onlineresource:
         type: simple
         href: "{{.Onlineresourceurl}}"
-      hoursofservice: "09:00-17:00"
-      contactinstructions: "don't call"
-    role: serviceprovider
+      hoursofservice: "{{ .Empty}}"
+      contactinstructions: "{{ .Empty}}"
+    role: "{{ .Empty}}"
 
 featuretypelist:
   featuretype:

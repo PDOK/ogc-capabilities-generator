@@ -39,7 +39,7 @@ serviceprovider:
   providername: PDOK
   providersite:
     type: simple
-    href: "{{.Onlineresourceurl}}"
+    href: https://pdok.nl
   servicecontact:
     individualname: KlantContactCenter PDOK
     positionname: pointOfContact

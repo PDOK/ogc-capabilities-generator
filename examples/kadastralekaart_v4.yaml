@@ -10,10 +10,6 @@ services:
   wfs200:
     filename: ./output/kadastralekaart-wfs200.xml
     definition:
-      serviceprovider:
-        providersite:
-          type: simple
-          href: https://geodata.nationaalgeoregister.nl
       serviceidentification:
         title: kadastralekaart
         abstract: "Overzicht van de ligging van de kadastrale percelen in Nederland. Fungeert als schakel tussen terrein en registratie, vervult voor externe gebruiker vaak een referentiefunctie, een ondergrond ten opzichte waarvan de gebruiker eigen informatie kan vastleggen en presenteren."
