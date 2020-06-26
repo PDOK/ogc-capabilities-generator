@@ -21,13 +21,13 @@ service:
     contactposition: pointOfContact
     contactaddress:
       addresstype: Work
-      address:
+      address: "{{ .Empty}}"
       city: Apeldoorn
-      stateorprovince: Gelderland
-      postalcode: 7334 DP
+      stateorprovince: "{{ .Empty}}"
+      postalcode: "{{ .Empty}}"
       country: Netherlands
-    contactvoicetelephone:
-    contactfacsimiletelephone:
+    contactvoicetelephone: "{{ .Empty}}"
+    contactfacsimiletelephone: "{{ .Empty}}"
     contactelectronicmailaddress: BeheerPDOK@kadaster.nl
   fees: NONE
   accessconstraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
