@@ -45,7 +45,7 @@ serviceprovider:
         href: "{{.Onlineresourceurl}}"
       hoursofservice: "{{ .Empty}}"
       contactinstructions: "{{ .Empty}}"
-    role: serviceprovider
+    role: "{{ .Empty}}"
 
 featuretypelist:
   featuretype:
