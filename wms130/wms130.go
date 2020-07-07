@@ -127,7 +127,7 @@ type Layer struct {
 	Identifier              *Identifier              `xml:"Identifier" yaml:"identifier"`
 	MetadataURL             []*MetadataURL           `xml:"MetadataURL" yaml:"metadataurl"`
 	Style                   []*Style                 `xml:"Style" yaml:"style"`
-	MaxScaleDenominator     string                   `xml:"MaxScaleDenominator" yaml:"maxScaleDenominator"`
+	MaxScaleDenominator     string                   `xml:"MaxScaleDenominator,omitempty" yaml:"maxScaleDenominator"`
 	Layer                   []*Layer                 `xml:"Layer" yaml:"layer"`
 }
 
