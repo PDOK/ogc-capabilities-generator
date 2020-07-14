@@ -31,6 +31,5 @@ https://www.onlinetool.io/xmltogo/
 ## Config aanroep
 
 ```go
-go run . -c ./examples/kadastralekaart.yaml
-go run . -c ./examples/natura2000.yaml
+go run . -c ./examples/kadastralekaart_v4.yaml
 ```
