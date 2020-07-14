@@ -20,8 +20,6 @@ serviceidentification:
     codespace: OGC
   servicetypeversion:
   - 2.0.1
-  - 1.1.1
-  - 1.0.0
   profile:
   - http://www.opengis.net/spec/WCS/2.0/conf/core
   - http://www.opengis.net/spec/WCS_protocol-binding_get-kvp/1.0/conf/get-kvp
