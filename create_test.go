@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/xml"
-	"pdok-capabilities-gen/config"
+	"ogc-capabilities-generator/config"
 	"strings"
 	"testing"
 )
