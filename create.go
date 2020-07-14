@@ -7,16 +7,19 @@ import (
 	"html/template"
 	"io/ioutil"
 	"log"
+	"ogc-capabilities-generator/config"
+	"ogc-capabilities-generator/wcs201"
+	"ogc-capabilities-generator/wfs200"
+	"ogc-capabilities-generator/wms130"
+	"ogc-capabilities-generator/wmts100"
 	"os"
-	"pdok-capabilities-gen/config"
-	"pdok-capabilities-gen/wcs201"
-	"pdok-capabilities-gen/wfs200"
-	"pdok-capabilities-gen/wms130"
-	"pdok-capabilities-gen/wmts100"
 	"regexp"
 
 	"github.com/imdario/mergo"
 	"gopkg.in/yaml.v2"
+
+	wms130_response "github.com/pdok/ogc-specifications/pkg/wms130/response"
+	wmts100_response "github.com/pdok/ogc-specifications/pkg/wmts100/response"
 )
 
 func envString(key, defaultValue string) string {
@@ -92,7 +95,7 @@ func buildWMS1_3_0(config config.Config) {
 }
 
 // recursive fill
-func merge(dst *wms130.Layer, src wms130.Layer) {
+func merge(dst *wms130_response.Layer, src wms130_response.Layer) {
 
 	if len(dst.Layer) > 0 {
 		for index := range dst.Layer {
@@ -108,7 +111,7 @@ func buildWMTS1_0_0(config config.Config) {
 	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(wmts100.Wmts100Transfomer{}))
 
 	// Cleanup unused TileMatrixSets
-	var tms []wmts100.TileMatrixSet
+	var tms []wmts100_response.TileMatrixSet
 	for i, t := range config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet {
 		if !config.Services.WMTS100Config.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
 			tms = append(config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet[:i], wmts100base.Contents.TileMatrixSet[i+1:]...)
