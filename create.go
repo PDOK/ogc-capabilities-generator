@@ -111,7 +111,7 @@ func buildWMTS1_0_0(config config.Config) {
 	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(wmts100.Wmts100Transfomer{}))
 
 	// Filter unused TileMatrixSets
-	tms := make([]wmts100_response.TileMatrixSet, 0)
+	var tms []wmts100_response.TileMatrixSet
 	for _, t := range config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet {
 		if config.Services.WMTS100Config.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
 			tms = append(tms, t)
