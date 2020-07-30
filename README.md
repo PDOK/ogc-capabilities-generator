@@ -6,7 +6,7 @@
 
 ## What will it do
 
-This application will give the user/developer 'full' control in the generation of a GetCapabilities document, instead of letting it be dictated by a specific application implementation. By configuring the input YAML files, one can enabled/disable certain operations, constraints or filters in the advertised OGC GetCapabilities response document. This generated file can then be used in a static http server like Apache/NGINX/Lighttpd/and so on. This solution make it also flexible to deploy a OGC in a 'microservice' like environment such as K8s.
+This application will give the user/developer 'full' control in the generation of a GetCapabilities document, instead of letting it be dictated by a specific application implementation. By configuring the input YAML files, one can enable/disable certain operations, constraints or filters in the advertised OGC GetCapabilities response document. This generated file can then be used in a static http server like Apache/NGINX/Lighttpd/and so on. This solution make it also flexible to deploy a OGC in a 'microservice' like environment such as K8s.
 
 ## How to run
 
