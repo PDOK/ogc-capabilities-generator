@@ -1,35 +1,33 @@
 # ogc-capabilities-generator
 
-## TL;DR
+![GitHub license](https://img.shields.io/github/license/PDOK/ogc-capabilities-generator)
+[![GitHub release](https://img.shields.io/github/release/PDOK/ogc-capabilities-generator.svg)](https://github.com/PDOK/ogc-capabilities-generator/releases)
+[![Go Report Card](https://goreportcard.com/badge/PDOK/ogc-capabilities-generator)](https://goreportcard.com/report/PDOK/ogc-capabilities-generator)
+
+## What will it do
+
+This application will give the user/developer 'full' control in the generation of a GetCapabilities document, instead of telling it be dictated by a specific application implementation. By configuring the input YAML files one can enabled/disable certain operations, constraints or filters in the advertised OGC GetCapabilities response document. This generated file can then be used in a static http server like Apache/NGINX/Lighttpd/and so on. This solution make it also flexible in deploying a OGC more 'microservice' like in a K8s environment.
+
+## How to run
+
+```go
+go run . -c ./examples/kadastralekaart_v4.yaml
+```
+
+When the binary is build the application can be run with parsing the configuration in two ways:
+
+1. parsing the configuration through -c {path/to/config.yaml}
+2. setting the ENV var SERVICECONFIG={path/to/config.yaml}
+
+## Test
+
+```go
+go test ./... -covermode=atomic
+```
+
+## Docker
 
 ```docker
 docker build -t pdok/ogc-capabilities-generator .
 docker run -d -v `pwd`/examples:/config -v `pwd`:/output -e SERVICECONFIG=/config/kadastralekaart_v4.yaml --name ocg pdok/ogc-capabilities-generator
-```
-
-https://geodata.nationaalgeoregister.nl/kadastralekaart/wms/v4_0?request=getcapabilities&service=wms
-https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0?request=GetCapabilities&service=WMTS
-https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/WMTSCapabilities.xml
-https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?request=getcapabilities&service=wfs&version=2.0.0
-https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?request=getcapabilities&service=wfs&version=1.1.0
-
-https://www.onlinetool.io/xmltogo/
-
-| | wms 1.3.0 | wmts 1.0.0 | wfs 1.1.0 | wfs 2.0.0 | wcs 2.0.1 |
-|---|---|---|---|---|---|
-| Service | X | - | - | - | - |
-| Capability | X | - | - | - | - |
-| ServiceIdentification | - | X | X | X | X |
-| ServiceProvider | - | - | X | X | X |
-| OperationsMetadata | - | X | X | X | X |
-| FeatureTypeList | - | - | X | X | - |
-| Filter_Capabilities | - | - | X (ogc) | X (fes) | - |
-| ServiceMetadata | - | - | - | - | X |
-| Contents | - | - | - | - | X |
-| ServiceMetadataURL | - | X | - | - | - |
-
-## Config aanroep
-
-```go
-go run . -c ./examples/kadastralekaart_v4.yaml
 ```
