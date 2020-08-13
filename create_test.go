@@ -32,10 +32,54 @@ func TestBuildCapabilities(t *testing.T) {
 	g := config.Global{Namespace: "namespace", Prefix: "prefix", Onlineresourceurl: "onlineresourceurl", Path: "path", Version: "version"}
 	d := dummy{Namespace: "{{.Namespace}}", Prefix: "{{.Prefix}}", Onlineresourceurl: "{{.Onlineresourceurl}}", Path: "{{.Path}}", Version: "{{.Version}}", Empty: "{{.Empty}}"}
 
-	buf := buildCapabilities(d, g)
+	buf, _ := buildCapabilities(d, g)
 
 	if expectedresult != string(buf) {
 		t.Errorf("Expected %s but was not, got: %s", expectedresult, string(buf))
+	}
+}
+
+func TestBuildPrefixCapabilities(t *testing.T) {
+
+	type prefixtest struct {
+		Prefix string `xml:"xmlns:{{.Prefix}},attr"`
+	}
+
+	expected := `<?xml version="1.0" encoding="UTF-8"?>
+<prefixtest xmlns:prefix="namespace"/>`
+
+	g := config.Global{Namespace: "namespace", Prefix: "prefix"}
+	d := prefixtest{Prefix: "{{.Namespace}}"}
+
+	buf, _ := buildCapabilities(d, g)
+
+	if expected != string(buf) {
+		t.Errorf("Expected %s but was not, got: %s", expected, string(buf))
+	}
+}
+
+func TestBuildEmptyPrefixCapabilities(t *testing.T) {
+
+	type prefixtest struct {
+		Prefix string `xml:"xmlns:{{.Prefix}},attr"`
+	}
+
+	expected := `<?xml version="1.0" encoding="UTF-8"?>
+<prefixtest xmlns:prefix="namespace"/>`
+
+	g := config.Global{}
+	d := prefixtest{Prefix: "{{.Namespace}}"}
+
+	_, err := buildCapabilities(d, g)
+
+	if err == nil {
+		t.Errorf("Expected %s but was not, got: %s", expected, err.Error())
+	}
+
+	if err != nil {
+		if err.Error() != "No dataset prefix defined" {
+			t.Errorf("Expected %s but was not, got: %s", expected, err.Error())
+		}
 	}
 }
 
@@ -44,7 +88,7 @@ func TestBuildCapabilitiesMissingEmpty(t *testing.T) {
 	g := config.Global{Namespace: "namespace", Prefix: "prefix", Onlineresourceurl: "onlineresourceurl", Path: "path", Version: "version"}
 	d := dummy{Namespace: "{{.Namespace}}", Prefix: "{{.Prefix}}", Onlineresourceurl: "{{.Onlineresourceurl}}", Path: "{{.Path}}", Version: "{{.Version}}"}
 
-	buf := buildCapabilities(d, g)
+	buf, _ := buildCapabilities(d, g)
 
 	result := string(buf)
 
