@@ -289,9 +289,3 @@ filtercapabilities:
       - name: DWithin
       - name: Beyond
       - name: BBOX
-
-  # temporalcapabilities:
-  #   temporaloperands:
-  #     temporaloperand:
-  #   temporaloperators:
-  #     temporaloperator:
