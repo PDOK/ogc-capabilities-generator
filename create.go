@@ -16,8 +16,8 @@ import (
 	"github.com/imdario/mergo"
 	"gopkg.in/yaml.v2"
 
-	wms130_response "github.com/pdok/ogc-specifications/pkg/wms130/response"
-	wmts100_response "github.com/pdok/ogc-specifications/pkg/wmts100/response"
+	wms130_capabilities "github.com/pdok/ogc-specifications/pkg/wms130/capabilities"
+	wmts100_capabilities "github.com/pdok/ogc-specifications/pkg/wmts100/capabilities"
 )
 
 func envString(key, defaultValue string) string {
@@ -61,9 +61,9 @@ func buildWFS2_0_0(config config.Config) error {
 	mergo.Merge(&config.Services.WFS200Config.Wfs200, wfs200base, mergo.WithTransformers(ows.WFS200Transfomer{}))
 
 	// can we apply generic base feature template to config ?
-	if len(wfs200base.FeatureTypeList.FeatureType) > 0 {
+	if len(wfs200base.Capabilities.FeatureTypeList.FeatureType) > 0 {
 		for index := range config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType {
-			mergo.Merge(&config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType[index], wfs200base.FeatureTypeList.FeatureType[0])
+			mergo.Merge(&config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType[index], wfs200base.Capabilities.FeatureTypeList.FeatureType[0])
 		}
 	}
 
@@ -88,13 +88,13 @@ func buildWMS1_3_0(config config.Config) error {
 	// merge with specific set skipping layer, this is a custom operation
 	mergo.Merge(&config.Services.WMS130Config.Wms130, wms130base, mergo.WithTransformers(ows.WMS130Transfomer{}))
 
-	if len(wms130base.Capability.Layer) > 0 {
-		for index := range config.Services.WMS130Config.Wms130.Capability.Layer {
-			merge(&config.Services.WMS130Config.Wms130.Capability.Layer[index], wms130base.Capability.Layer[0])
+	if len(wms130base.Capabilities.Layer) > 0 {
+		for index := range config.Services.WMS130Config.Wms130.Capabilities.Layer {
+			merge(&config.Services.WMS130Config.Wms130.Capabilities.Layer[index], wms130base.Capabilities.Layer[0])
 		}
 	}
 
-	if &config.Services.WMS130Config.Wms130.Capability.ExtendedCapabilities != nil {
+	if &config.Services.WMS130Config.Wms130.Capabilities.ExtendedCapabilities != nil {
 		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
 		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
 		config.Services.WMS130Config.Wms130.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
@@ -107,7 +107,7 @@ func buildWMS1_3_0(config config.Config) error {
 }
 
 // recursive fill
-func merge(dst *wms130_response.Layer, src wms130_response.Layer) {
+func merge(dst *wms130_capabilities.Layer, src wms130_capabilities.Layer) {
 
 	if len(dst.Layer) > 0 {
 		for index := range dst.Layer {
@@ -123,7 +123,7 @@ func buildWMTS1_0_0(config config.Config) error {
 	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(ows.WMTS100Transfomer{}))
 
 	// Filter unused TileMatrixSets
-	var tms []wmts100_response.TileMatrixSet
+	var tms []wmts100_capabilities.TileMatrixSet
 	for _, t := range config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet {
 		if config.Services.WMTS100Config.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
 			tms = append(tms, t)

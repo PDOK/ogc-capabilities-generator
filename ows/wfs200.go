@@ -7,6 +7,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
+	wfs200_capabilities "github.com/pdok/ogc-specifications/pkg/wfs200/capabilities"
 	wfs200_response "github.com/pdok/ogc-specifications/pkg/wfs200/response"
 )
 
@@ -31,7 +32,7 @@ type WFS200Transfomer struct {
 
 // Transformer skip FeatureTypeList when merging Base to config, this is a custom operation
 func (t WFS200Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
-	if typ == reflect.TypeOf(wfs200_response.FeatureTypeList{}) {
+	if typ == reflect.TypeOf(wfs200_capabilities.FeatureTypeList{}) {
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil

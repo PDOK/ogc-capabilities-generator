@@ -7,6 +7,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
+	wmts100_capabilities "github.com/pdok/ogc-specifications/pkg/wmts100/capabilities"
 	wmts100_response "github.com/pdok/ogc-specifications/pkg/wmts100/response"
 )
 
@@ -31,7 +32,7 @@ type WMTS100Transfomer struct {
 
 // Transformer skip FeatureTypeList when merging Base to config, this is a custom operation
 func (t WMTS100Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
-	if typ == reflect.TypeOf(wmts100_response.TileMatrixSet{}) {
+	if typ == reflect.TypeOf(wmts100_capabilities.TileMatrixSet{}) {
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil

@@ -7,6 +7,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
+	wms130_capabilities "github.com/pdok/ogc-specifications/pkg/wms130/capabilities"
 	wms130_response "github.com/pdok/ogc-specifications/pkg/wms130/response"
 )
 
@@ -31,7 +32,7 @@ type WMS130Transfomer struct {
 
 // Transformer skip FeatureTypeList when merging Base to config, this is a custom operation
 func (t WMS130Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
-	if typ == reflect.TypeOf(wms130_response.Layer{}) {
+	if typ == reflect.TypeOf(wms130_capabilities.Layer{}) {
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil
