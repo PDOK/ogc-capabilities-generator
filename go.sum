@@ -4,6 +4,8 @@ github.com/pdok/ogc-specifications v0.1.5-0.20200814120537-1774fafda490 h1:tX2sm
 github.com/pdok/ogc-specifications v0.1.5-0.20200814120537-1774fafda490/go.mod h1:lwr0Kt/FupJtg6mPruI4CjV5VYQJU+YCmJtcz4db5XE=
 github.com/pdok/ogc-specifications v0.1.5-0.20200814121611-d8d412dac285 h1:9iZ8nqrRJJncoRY2WLwn7fj+y89w8YWgZaa5T5ojEQM=
 github.com/pdok/ogc-specifications v0.1.5-0.20200814121611-d8d412dac285/go.mod h1:lwr0Kt/FupJtg6mPruI4CjV5VYQJU+YCmJtcz4db5XE=
+github.com/pdok/ogc-specifications v0.1.5 h1:PaZ3VJZ2HesODoIVs/hMzL84PHoHvUNhXjr/P8cyv6I=
+github.com/pdok/ogc-specifications v0.1.5/go.mod h1:lwr0Kt/FupJtg6mPruI4CjV5VYQJU+YCmJtcz4db5XE=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.3.0 h1:clyUAQHOM3G0M3f5vQj7LuJrETvjVot3Z5el9nffUtU=
