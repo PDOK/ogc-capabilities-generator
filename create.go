@@ -72,7 +72,11 @@ func buildWFS2_0_0(config config.Config) error {
 		config.Services.WFS200Config.Wfs200.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
 	}
 
-	buf, _ := buildCapabilities(config.Services.WFS200Config.Wfs200, config.Global)
+	buf, err := buildCapabilities(config.Services.WFS200Config.Wfs200, config.Global)
+	if err != nil {
+		return err
+	}
+
 	writeFile(config.Services.WFS200Config.Filename, buf)
 
 	return nil
