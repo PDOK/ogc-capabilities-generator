@@ -1,4 +1,4 @@
-package wmts100
+package ows
 
 import (
 	"io/ioutil"
@@ -10,8 +10,10 @@ import (
 	wmts100_response "github.com/pdok/ogc-specifications/pkg/wmts100/response"
 )
 
-// GetBase function to get a filled "template" based on the wmts100.yaml config
-func GetBase() wmts100_response.GetCapabilities {
+// WMTS100Base is the base WMTS 1.0.0 GetCapabilities doc
+var WMTS100Base wmts100_response.GetCapabilities
+
+func init() {
 	wmts100 := wmts100_response.GetCapabilities{}
 	base, err := ioutil.ReadFile("./base/wmts100.yaml")
 	if err != nil {
@@ -20,15 +22,15 @@ func GetBase() wmts100_response.GetCapabilities {
 	if err = yaml.Unmarshal(base, &wmts100); err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	return wmts100
+	WMTS100Base = wmts100
 }
 
-// Wmts100Transfomer struct
-type Wmts100Transfomer struct {
+// WMTS100Transfomer struct
+type WMTS100Transfomer struct {
 }
 
 // Transformer skip FeatureTypeList when merging Base to config, this is a custom operation
-func (t Wmts100Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
+func (t WMTS100Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
 	if typ == reflect.TypeOf(wmts100_response.TileMatrixSet{}) {
 		return func(dst, src reflect.Value) error {
 			// NOOP

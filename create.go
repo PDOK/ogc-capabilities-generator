@@ -9,10 +9,7 @@ import (
 	"io/ioutil"
 	"log"
 	"ogc-capabilities-generator/config"
-	"ogc-capabilities-generator/wcs201"
-	"ogc-capabilities-generator/wfs200"
-	"ogc-capabilities-generator/wms130"
-	"ogc-capabilities-generator/wmts100"
+	"ogc-capabilities-generator/ows"
 	"os"
 	"regexp"
 
@@ -59,9 +56,9 @@ func buildCapabilities(v interface{}, g config.Global) ([]byte, error) {
 func buildWFS2_0_0(config config.Config) error {
 
 	// retrieve default set
-	wfs200base := wfs200.GetBase()
+	wfs200base := ows.WFS200Base
 	// merge with specific set skipping featuretypelist, this is a custom operation
-	mergo.Merge(&config.Services.WFS200Config.Wfs200, wfs200base, mergo.WithTransformers(wfs200.Wfs201Transfomer{}))
+	mergo.Merge(&config.Services.WFS200Config.Wfs200, wfs200base, mergo.WithTransformers(ows.WFS200Transfomer{}))
 
 	// can we apply generic base feature template to config ?
 	if len(wfs200base.FeatureTypeList.FeatureType) > 0 {
@@ -82,10 +79,10 @@ func buildWFS2_0_0(config config.Config) error {
 }
 
 func buildWMS1_3_0(config config.Config) error {
-	wms130base := wms130.GetBase()
+	wms130base := ows.WMS130Base
 
 	// merge with specific set skipping layer, this is a custom operation
-	mergo.Merge(&config.Services.WMS130Config.Wms130, wms130base, mergo.WithTransformers(wms130.Wms130Transfomer{}))
+	mergo.Merge(&config.Services.WMS130Config.Wms130, wms130base, mergo.WithTransformers(ows.WMS130Transfomer{}))
 
 	if len(wms130base.Capability.Layer) > 0 {
 		for index := range config.Services.WMS130Config.Wms130.Capability.Layer {
@@ -117,9 +114,9 @@ func merge(dst *wms130_response.Layer, src wms130_response.Layer) {
 }
 
 func buildWMTS1_0_0(config config.Config) error {
-	wmts100base := wmts100.GetBase()
+	wmts100base := ows.WMTS100Base
 
-	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(wmts100.Wmts100Transfomer{}))
+	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(ows.WMTS100Transfomer{}))
 
 	// Filter unused TileMatrixSets
 	var tms []wmts100_response.TileMatrixSet
@@ -138,7 +135,7 @@ func buildWMTS1_0_0(config config.Config) error {
 }
 
 func buildWCS2_0_1(config config.Config) error {
-	wcs201base := wcs201.GetBase()
+	wcs201base := ows.WCS201Base
 
 	mergo.Merge(&config.Services.WCS201Config.Wcs201, wcs201base)
 
