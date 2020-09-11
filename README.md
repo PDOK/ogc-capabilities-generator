@@ -3,6 +3,8 @@
 ![GitHub license](https://img.shields.io/github/license/PDOK/ogc-capabilities-generator)
 [![GitHub release](https://img.shields.io/github/release/PDOK/ogc-capabilities-generator.svg)](https://github.com/PDOK/ogc-capabilities-generator/releases)
 [![Go Report Card](https://goreportcard.com/badge/PDOK/ogc-capabilities-generator)](https://goreportcard.com/report/PDOK/ogc-capabilities-generator)
+[![Docker Pulls](https://img.shields.io/docker/pulls/pdok/ogc-capabilities-gen.svg)](https://hub.docker.com/r/pdok/ogc-capabilities-gen)
+
 
 ## What will it do
 
