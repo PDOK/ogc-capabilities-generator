@@ -3,23 +3,21 @@ package main
 import (
 	"bytes"
 	"encoding/xml"
+	"errors"
 	"flag"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"ogc-capabilities-generator/config"
-	"ogc-capabilities-generator/wcs201"
-	"ogc-capabilities-generator/wfs200"
-	"ogc-capabilities-generator/wms130"
-	"ogc-capabilities-generator/wmts100"
+	"ogc-capabilities-generator/ows"
 	"os"
 	"regexp"
 
 	"github.com/imdario/mergo"
 	"gopkg.in/yaml.v2"
 
-	wms130_response "github.com/pdok/ogc-specifications/pkg/wms130/response"
-	wmts100_response "github.com/pdok/ogc-specifications/pkg/wmts100/response"
+	wms130_capabilities "github.com/pdok/ogc-specifications/pkg/wms130/capabilities"
+	wmts100_capabilities "github.com/pdok/ogc-specifications/pkg/wmts100/capabilities"
 )
 
 func envString(key, defaultValue string) string {
@@ -37,7 +35,12 @@ func writeFile(filename string, buffer []byte) {
 	}
 }
 
-func buildCapabilities(v interface{}, g config.Global) []byte {
+func buildCapabilities(v interface{}, g config.Global) ([]byte, error) {
+
+	if g.Prefix == `` {
+		return nil, errors.New("No dataset prefix defined")
+	}
+
 	si, _ := xml.MarshalIndent(v, "", " ")
 	t := template.Must(template.New("capabilities").Parse(string(si)))
 	buf := &bytes.Buffer{}
@@ -47,19 +50,20 @@ func buildCapabilities(v interface{}, g config.Global) []byte {
 	}
 
 	re := regexp.MustCompile(`><.*>`)
-	return []byte(xml.Header + re.ReplaceAllString(buf.String(), "/>"))
+	return []byte(xml.Header + re.ReplaceAllString(buf.String(), "/>")), nil
 }
 
-func buildWFS2_0_0(config config.Config) {
+func buildWFS2_0_0(config config.Config) error {
+
 	// retrieve default set
-	wfs200base := wfs200.GetBase()
+	wfs200base := ows.WFS200Base
 	// merge with specific set skipping featuretypelist, this is a custom operation
-	mergo.Merge(&config.Services.WFS200Config.Wfs200, wfs200base, mergo.WithTransformers(wfs200.Wfs201Transfomer{}))
+	mergo.Merge(&config.Services.WFS200Config.Wfs200, wfs200base, mergo.WithTransformers(ows.WFS200Transfomer{}))
 
 	// can we apply generic base feature template to config ?
-	if len(wfs200base.FeatureTypeList.FeatureType) > 0 {
+	if len(wfs200base.Capabilities.FeatureTypeList.FeatureType) > 0 {
 		for index := range config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType {
-			mergo.Merge(&config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType[index], wfs200base.FeatureTypeList.FeatureType[0])
+			mergo.Merge(&config.Services.WFS200Config.Wfs200.FeatureTypeList.FeatureType[index], wfs200base.Capabilities.FeatureTypeList.FeatureType[0])
 		}
 	}
 
@@ -68,34 +72,42 @@ func buildWFS2_0_0(config config.Config) {
 		config.Services.WFS200Config.Wfs200.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
 	}
 
-	buf := buildCapabilities(config.Services.WFS200Config.Wfs200, config.Global)
+	buf, err := buildCapabilities(config.Services.WFS200Config.Wfs200, config.Global)
+	if err != nil {
+		return err
+	}
+
 	writeFile(config.Services.WFS200Config.Filename, buf)
+
+	return nil
 }
 
-func buildWMS1_3_0(config config.Config) {
-	wms130base := wms130.GetBase()
+func buildWMS1_3_0(config config.Config) error {
+	wms130base := ows.WMS130Base
 
 	// merge with specific set skipping layer, this is a custom operation
-	mergo.Merge(&config.Services.WMS130Config.Wms130, wms130base, mergo.WithTransformers(wms130.Wms130Transfomer{}))
+	mergo.Merge(&config.Services.WMS130Config.Wms130, wms130base, mergo.WithTransformers(ows.WMS130Transfomer{}))
 
-	if len(wms130base.Capability.Layer) > 0 {
-		for index := range config.Services.WMS130Config.Wms130.Capability.Layer {
-			merge(&config.Services.WMS130Config.Wms130.Capability.Layer[index], wms130base.Capability.Layer[0])
+	if len(wms130base.Capabilities.Layer) > 0 {
+		for index := range config.Services.WMS130Config.Wms130.Capabilities.Layer {
+			merge(&config.Services.WMS130Config.Wms130.Capabilities.Layer[index], wms130base.Capabilities.Layer[0])
 		}
 	}
 
-	if &config.Services.WMS130Config.Wms130.Capability.ExtendedCapabilities != nil {
+	if &config.Services.WMS130Config.Wms130.Capabilities.ExtendedCapabilities != nil {
 		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
 		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
 		config.Services.WMS130Config.Wms130.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
 	}
 
-	buf := buildCapabilities(config.Services.WMS130Config.Wms130, config.Global)
+	buf, _ := buildCapabilities(config.Services.WMS130Config.Wms130, config.Global)
 	writeFile(config.Services.WMS130Config.Filename, buf)
+
+	return nil
 }
 
 // recursive fill
-func merge(dst *wms130_response.Layer, src wms130_response.Layer) {
+func merge(dst *wms130_capabilities.Layer, src wms130_capabilities.Layer) {
 
 	if len(dst.Layer) > 0 {
 		for index := range dst.Layer {
@@ -105,13 +117,13 @@ func merge(dst *wms130_response.Layer, src wms130_response.Layer) {
 	mergo.Merge(dst, src)
 }
 
-func buildWMTS1_0_0(config config.Config) {
-	wmts100base := wmts100.GetBase()
+func buildWMTS1_0_0(config config.Config) error {
+	wmts100base := ows.WMTS100Base
 
-	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(wmts100.Wmts100Transfomer{}))
+	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(ows.WMTS100Transfomer{}))
 
 	// Filter unused TileMatrixSets
-	var tms []wmts100_response.TileMatrixSet
+	var tms []wmts100_capabilities.TileMatrixSet
 	for _, t := range config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet {
 		if config.Services.WMTS100Config.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
 			tms = append(tms, t)
@@ -120,17 +132,21 @@ func buildWMTS1_0_0(config config.Config) {
 
 	config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet = tms
 
-	buf := buildCapabilities(config.Services.WMTS100Config.Wmts100, config.Global)
+	buf, _ := buildCapabilities(config.Services.WMTS100Config.Wmts100, config.Global)
 	writeFile(config.Services.WMTS100Config.Filename, buf)
+
+	return nil
 }
 
-func buildWCS2_0_1(config config.Config) {
-	wcs201base := wcs201.GetBase()
+func buildWCS2_0_1(config config.Config) error {
+	wcs201base := ows.WCS201Base
 
 	mergo.Merge(&config.Services.WCS201Config.Wcs201, wcs201base)
 
-	buf := buildCapabilities(config.Services.WCS201Config.Wcs201, config.Global)
+	buf, _ := buildCapabilities(config.Services.WCS201Config.Wcs201, config.Global)
 	writeFile(config.Services.WCS201Config.Filename, buf)
+
+	return nil
 }
 
 func main() {
@@ -148,7 +164,9 @@ func main() {
 	}
 
 	if config.Services.WFS200Config.Filename != "" {
-		buildWFS2_0_0(config)
+		if err := buildWFS2_0_0(config); err != nil {
+			log.Fatalf("error: %v", err)
+		}
 	}
 
 	if config.Services.WMS130Config.Filename != "" {

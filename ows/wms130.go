@@ -1,4 +1,4 @@
-package wms130
+package ows
 
 import (
 	"io/ioutil"
@@ -7,11 +7,14 @@ import (
 
 	"gopkg.in/yaml.v2"
 
+	wms130_capabilities "github.com/pdok/ogc-specifications/pkg/wms130/capabilities"
 	wms130_response "github.com/pdok/ogc-specifications/pkg/wms130/response"
 )
 
-// GetBase function to get a filled "template" based on the wms130.yaml config
-func GetBase() wms130_response.GetCapabilities {
+// WMS130Base is the base WMS 1.3.0 GetCapabilities doc
+var WMS130Base wms130_response.GetCapabilities
+
+func init() {
 	wms130 := wms130_response.GetCapabilities{}
 	base, err := ioutil.ReadFile("./base/wms130.yaml")
 	if err != nil {
@@ -20,16 +23,16 @@ func GetBase() wms130_response.GetCapabilities {
 	if err = yaml.Unmarshal(base, &wms130); err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	return wms130
+	WMS130Base = wms130
 }
 
-// Wms130Transfomer struct
-type Wms130Transfomer struct {
+// WMS130Transfomer struct
+type WMS130Transfomer struct {
 }
 
 // Transformer skip FeatureTypeList when merging Base to config, this is a custom operation
-func (t Wms130Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
-	if typ == reflect.TypeOf(wms130_response.Layer{}) {
+func (t WMS130Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
+	if typ == reflect.TypeOf(wms130_capabilities.Layer{}) {
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil
