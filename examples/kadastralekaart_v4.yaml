@@ -110,9 +110,6 @@ services:
           layerlimit: 5
           maxwidth: 2000
       capability:
-        optionalconstraints:
-          layerlimit: 6
-          maxwidth: 3000
         wmscapabilities:
           extendedcapabilities:
             metadataurl:
