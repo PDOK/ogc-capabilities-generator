@@ -106,6 +106,9 @@ services:
             - Kadaster
             - Kadastrale percelen
             - infoMapAccessService
+        optionalconstraints:
+          layerlimit: 5
+          maxwidth: 2000
       capability:
         wmscapabilities:
           extendedcapabilities:

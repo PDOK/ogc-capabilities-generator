@@ -31,9 +31,9 @@ service:
     contactelectronicmailaddress: BeheerPDOK@kadaster.nl
   fees: NONE
   accessconstraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
-  maxwidth: 4000
-  maxheight: 4000
-
+  optionalconstraints:
+    maxwidth: 4000
+    maxheight: 4000
 capability:
   wmscapabilities:
     request:
@@ -149,4 +149,3 @@ capability:
         - XML
         - INIMAGE
         - BLANK
-    
