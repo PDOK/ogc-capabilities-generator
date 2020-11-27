@@ -35,9 +35,6 @@ service:
     maxwidth: 4000
     maxheight: 4000
 capability:
-  optionalconstraints:
-    maxwidth: 4000
-    maxheight: 4000
   wmscapabilities:
     request:
       getcapabilities:
