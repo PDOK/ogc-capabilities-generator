@@ -58,6 +58,25 @@ func TestBuildPrefixCapabilities(t *testing.T) {
 	}
 }
 
+func TestBuildPrefixCapabilitiesWeirdCharacter(t *testing.T) {
+
+	type prefixtest struct {
+		Prefix string `xml:"xmlns:{{.Prefix}},attr"`
+	}
+
+	expected := `<?xml version="1.0" encoding="UTF-8"?>
+<prefixtest xmlns:prefix-prefix="namespace"/>`
+
+	g := config.Global{Namespace: "namespace", Prefix: "prefix-prefix"}
+	d := prefixtest{Prefix: "{{.Namespace}}"}
+
+	buf, _ := buildCapabilities(d, g)
+
+	if expected != string(buf) {
+		t.Errorf("Expected %s but was not, got: %s", expected, string(buf))
+	}
+}
+
 func TestBuildEmptyPrefixCapabilities(t *testing.T) {
 
 	type prefixtest struct {
