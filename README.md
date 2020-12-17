@@ -10,14 +10,30 @@ This application will give the user/developer 'full' control in the generation o
 
 ## How to run
 
+Building the binary
+
 ```go
-go run . -c ./examples/kadastralekaart_v4.yaml
+go build .
 ```
 
 When the binary is build the application can be run with parsing the configuration in two ways:
 
 1. parsing the configuration through -c {path/to/config.yaml}
 2. setting the ENV var SERVICECONFIG={path/to/config.yaml}
+
+```bash
+./ogc-capabilities-generator -c ./examples/kadastralekaart_v4.yaml
+```
+
+In dev mode through ```go run```
+
+```go
+go run . -c ./examples/kadastralekaart_v4.yaml
+```
+
+## How to configure
+
+The ogc-capabilities-generator makes usage of the [ogc-specifications](https://github.com/PDOK/ogc-specifications) package
 
 ## Test
 
