@@ -100,7 +100,11 @@ func buildWMS1_3_0(config config.Config) error {
 		config.Services.WMS130Config.Wms130.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
 	}
 
-	buf, _ := buildCapabilities(config.Services.WMS130Config.Wms130, config.Global)
+	buf, err := buildCapabilities(config.Services.WMS130Config.Wms130, config.Global)
+	if err != nil {
+		return err
+	}
+
 	writeFile(config.Services.WMS130Config.Filename, buf)
 
 	return nil
@@ -132,7 +136,10 @@ func buildWMTS1_0_0(config config.Config) error {
 
 	config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet = tms
 
-	buf, _ := buildCapabilities(config.Services.WMTS100Config.Wmts100, config.Global)
+	buf, err := buildCapabilities(config.Services.WMTS100Config.Wmts100, config.Global)
+	if err != nil {
+		return err
+	}
 	writeFile(config.Services.WMTS100Config.Filename, buf)
 
 	return nil
@@ -143,7 +150,10 @@ func buildWCS2_0_1(config config.Config) error {
 
 	mergo.Merge(&config.Services.WCS201Config.Wcs201, wcs201base)
 
-	buf, _ := buildCapabilities(config.Services.WCS201Config.Wcs201, config.Global)
+	buf, err := buildCapabilities(config.Services.WCS201Config.Wcs201, config.Global)
+	if err != nil {
+		return err
+	}
 	writeFile(config.Services.WCS201Config.Filename, buf)
 
 	return nil
@@ -170,14 +180,20 @@ func main() {
 	}
 
 	if config.Services.WMS130Config.Filename != "" {
-		buildWMS1_3_0(config)
+		if err := buildWMS1_3_0(config); err != nil {
+			log.Fatalf("error: %v", err)
+		}
 	}
 
 	if config.Services.WMTS100Config.Filename != "" {
-		buildWMTS1_0_0(config)
+		if err := buildWMTS1_0_0(config); err != nil {
+			log.Fatalf("error: %v", err)
+		}
 	}
 
 	if config.Services.WCS201Config.Filename != "" {
-		buildWCS2_0_1(config)
+		if err := buildWCS2_0_1(config); err != nil {
+			log.Fatalf("error: %v", err)
+		}
 	}
 }
