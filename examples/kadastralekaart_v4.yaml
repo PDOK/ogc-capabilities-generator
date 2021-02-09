@@ -443,7 +443,11 @@ services:
               lowercorner: -1.65729160235 48.0405018704
               uppercorner: 12.4317272654 56.1105896442
             style:
-              identifier: default
+              - identifier: default
+                # legendurl is optional
+                legendurl:
+                  - href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/Kadastralekaart/legend.png
+                    format: image/png
             format: image/png
             tilematrixsetlink:
               - tilematrixset: EPSG:28992
