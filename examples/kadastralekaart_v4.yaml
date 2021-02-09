@@ -442,12 +442,18 @@ services:
             wgs84boundingbox:
               lowercorner: -1.65729160235 48.0405018704
               uppercorner: 12.4317272654 56.1105896442
-            style:
+            style:  # identifier is the only required field, the rest are optional
               - identifier: default
-                # legendurl is optional
+                title: title
+                abstract: abstract
+                keywords:
+                  keyword:
+                    - keyword1
+                    - keyword2
                 legendurl:
                   - href: https://geodata.nationaalgeoregister.nl/kadastralekaart/wmts/v4_0/Kadastralekaart/legend.png
                     format: image/png
+                isdefault: true
             format: image/png
             tilematrixsetlink:
               - tilematrixset: EPSG:28992
