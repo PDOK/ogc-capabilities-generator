@@ -2,6 +2,9 @@ package main
 
 import (
 	"encoding/xml"
+	capabilities2 "github.com/pdok/ogc-specifications/pkg/wmts100/capabilities"
+	wmts100_response "github.com/pdok/ogc-specifications/pkg/wmts100/response"
+	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 	"ogc-capabilities-generator/config"
 	"strings"
 	"testing"
@@ -114,4 +117,35 @@ func TestBuildCapabilitiesMissingEmpty(t *testing.T) {
 	if expectedresult == result || strings.Contains(result, "<empty/>") {
 		t.Errorf("Expected <empty/> but was not, got nothing")
 	}
+}
+
+func TestBuildCapabilitiesWmtsValidate(t *testing.T) {
+
+	g := config.Global{Namespace: "namespace", Prefix: "prefix", Onlineresourceurl: "onlineresourceurl", Path: "path", Version: "version"}
+
+	layer := capabilities2.Layer{}
+	contents := capabilities2.Contents{Layer: []capabilities2.Layer{layer}}
+	namespaces := wmts100_response.Namespaces{"http://www.opengis.net/wmts/1.0", "http://www.opengis.net/ows/1.1", "http://www.w3.org/1999/xlink", "http://www.w3.org/2001/XMLSchema-instance", "http://www.opengis.net/gml", "1.0.0", "http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd"}
+	capabilities := wmts100_response.GetCapabilities{Contents: contents, Namespaces: namespaces}
+	//wmts100Config := config.WMTS100Config{"./output/test-wmts100.xml", capabilities}
+
+	buf, _ := buildCapabilities(capabilities, g)
+
+	xsdvalidate.Init()
+	defer xsdvalidate.Cleanup()
+	xsdhandler, err := xsdvalidate.NewXsdHandlerUrl("http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd", xsdvalidate.ParsErrDefault)
+	if err != nil {
+		panic(err)
+	}
+	defer xsdhandler.Free()
+
+	err = xsdhandler.ValidateMem(buf, xsdvalidate.ValidErrDefault)
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	//if expectedresult != string(buf) {
+	//	t.Errorf("Expected %s but was not, got: %s", expectedresult, string(buf))
+	//}
 }

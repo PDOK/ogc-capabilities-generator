@@ -1,7 +1,7 @@
-FROM golang:1.13-alpine3.10 AS build-env
+FROM golang:1.16.2-alpine3.13 AS build-env
 
 RUN apk update && apk upgrade && \
-   apk add --no-cache bash git pkgconfig gcc g++ libc-dev
+   apk add --no-cache bash git pkgconfig gcc g++ libc-dev libxml2 libxml2-dev
 
 ENV GO111MODULE=on
 ENV GOPROXY=https://proxy.golang.org
