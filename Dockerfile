@@ -17,8 +17,8 @@ ADD . /go/src/app
 # (or when we add another docker instruction this line)
 RUN go mod download
 
-# set crosscompiling fla 0/1 => disabled/enabled
-ENV CGO_ENABLED=0
+# set crosscompiling flag 0/1 => disabled/enabled
+ENV CGO_ENABLED=1
 # compile linux only
 ENV GOOS=linux
 # run tests
