@@ -1,13 +1,7 @@
 github.com/imdario/mergo v0.3.12 h1:b6R2BslTbIEToALKP7LxUvijTsNI9TAe80pLWN2g/HU=
 github.com/imdario/mergo v0.3.12/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
-github.com/pdok/ogc-specifications v0.1.8-0.20210511085956-3fd4dd3c09d4 h1:dX716awYJxzgAWphG3IRVXjnC9bzLZMcMSwTsdPIpE8=
-github.com/pdok/ogc-specifications v0.1.8-0.20210511085956-3fd4dd3c09d4/go.mod h1:KvRXEaE8/qNj+TGAuVHxBFTKWM5fKaINbrJ2m+zw12g=
-github.com/pdok/ogc-specifications v0.1.8-0.20210512075227-c547262040c2 h1:Cs7Yl8BMgr7KU6glLQi+oIBth/BAO4z/xtaigYQddxs=
-github.com/pdok/ogc-specifications v0.1.8-0.20210512075227-c547262040c2/go.mod h1:KvRXEaE8/qNj+TGAuVHxBFTKWM5fKaINbrJ2m+zw12g=
-github.com/pdok/ogc-specifications v0.1.8-0.20210512075431-59e4b15d8fa0 h1:E+7PlJkPYH1Ig3ywoKvTShFNsGgi1qaGqondcm34QWc=
-github.com/pdok/ogc-specifications v0.1.8-0.20210512075431-59e4b15d8fa0/go.mod h1:KvRXEaE8/qNj+TGAuVHxBFTKWM5fKaINbrJ2m+zw12g=
-github.com/pdok/ogc-specifications v0.1.8-0.20210514070719-8b3d12c69a62 h1:XaXRIQkSDfVbE70b9RYfPs6Na9BGGum0ayjq29i8xB8=
-github.com/pdok/ogc-specifications v0.1.8-0.20210514070719-8b3d12c69a62/go.mod h1:KvRXEaE8/qNj+TGAuVHxBFTKWM5fKaINbrJ2m+zw12g=
+github.com/pdok/ogc-specifications v0.2.3 h1:V7KX3F01bVVERkZEqDU9pkUFEs8MIqSV1NEmgwWrpIU=
+github.com/pdok/ogc-specifications v0.2.3/go.mod h1:rkrIwIBIUl4oyn3aMVtJLipDRtFHp3oa9dSu/MyDt1o=
 github.com/terminalstatic/go-xsd-validate v0.1.4 h1:fL4kJdcFCmDaIpy9kXZSv/NapJsJUC8RDO6P8TdOSQk=
 github.com/terminalstatic/go-xsd-validate v0.1.4/go.mod h1:e6HmA0iGH3en7FFUPH9iE6EtwbAw6oWWH4nn41hNozM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
