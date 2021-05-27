@@ -1,10 +1,10 @@
 package config
 
 import (
-	wcs201_response "github.com/pdok/ogc-specifications/pkg/wcs201/response"
-	wfs200_response "github.com/pdok/ogc-specifications/pkg/wfs200/response"
-	wms130_response "github.com/pdok/ogc-specifications/pkg/wms130/response"
-	wmts100_response "github.com/pdok/ogc-specifications/pkg/wmts100/response"
+	wcs201 "github.com/pdok/ogc-specifications/pkg/wcs201"
+	wfs200 "github.com/pdok/ogc-specifications/pkg/wfs200"
+	wms130 "github.com/pdok/ogc-specifications/pkg/wms130"
+	wmts100 "github.com/pdok/ogc-specifications/pkg/wmts100"
 )
 
 // Config is the base struct for the config yaml
@@ -34,24 +34,24 @@ type Services struct {
 
 // The WFS200Config service struct
 type WFS200Config struct {
-	Filename string                          `yaml:"filename"`
-	Wfs200   wfs200_response.GetCapabilities `yaml:"definition"`
+	Filename string                         `yaml:"filename"`
+	Wfs200   wfs200.GetCapabilitiesResponse `yaml:"definition"`
 }
 
 // The WMS130Config service struct
 type WMS130Config struct {
-	Filename string                          `yaml:"filename"`
-	Wms130   wms130_response.GetCapabilities `yaml:"definition"`
+	Filename string                         `yaml:"filename"`
+	Wms130   wms130.GetCapabilitiesResponse `yaml:"definition"`
 }
 
 // The WMTS100Config service struct
 type WMTS100Config struct {
-	Filename string                           `yaml:"filename"`
-	Wmts100  wmts100_response.GetCapabilities `yaml:"definition"`
+	Filename string                          `yaml:"filename"`
+	Wmts100  wmts100.GetCapabilitiesResponse `yaml:"definition"`
 }
 
 // The WCS201Config service struct
 type WCS201Config struct {
-	Filename string                          `yaml:"filename"`
-	Wcs201   wcs201_response.GetCapabilities `yaml:"definition"`
+	Filename string                         `yaml:"filename"`
+	Wcs201   wcs201.GetCapabilitiesResponse `yaml:"definition"`
 }

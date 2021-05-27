@@ -6,14 +6,14 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	wcs201_response "github.com/pdok/ogc-specifications/pkg/wcs201/response"
+	wcs201 "github.com/pdok/ogc-specifications/pkg/wcs201"
 )
 
 // WCS201Base is the base WCS 2.0.1 GetCapabilities doc
-var WCS201Base wcs201_response.GetCapabilities
+var WCS201Base wcs201.GetCapabilitiesResponse
 
 func init() {
-	wcs201 := wcs201_response.GetCapabilities{}
+	wcs201 := wcs201.GetCapabilitiesResponse{}
 	base, err := ioutil.ReadFile("./base/wcs201.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
