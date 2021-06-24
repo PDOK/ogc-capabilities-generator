@@ -1,6 +1,6 @@
 namespaces:
   wcs: http://www.opengis.net/wcs/2.0
-  ows: http://www.opengis.net/ows/1.1
+  common: http://www.opengis.net/ows/1.1
   ogc: http://www.opengis.net/ogc
   xlink: http://www.w3.org/1999/xlink
   xsi: http://www.w3.org/2001/XMLSchema-instance

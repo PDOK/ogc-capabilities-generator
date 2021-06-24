@@ -16,8 +16,8 @@ import (
 	"github.com/imdario/mergo"
 	"gopkg.in/yaml.v2"
 
-	wms130_capabilities "github.com/pdok/ogc-specifications/pkg/wms130/capabilities"
-	wmts100_capabilities "github.com/pdok/ogc-specifications/pkg/wmts100/capabilities"
+	wms130_capabilities "github.com/pdok/ogc-specifications/pkg/wms130"
+	wmts100_capabilities "github.com/pdok/ogc-specifications/pkg/wmts100"
 )
 
 func envString(key, defaultValue string) string {
