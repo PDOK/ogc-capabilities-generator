@@ -8,7 +8,6 @@ https://dev.kadaster.nl/jira/browse/PDOK-
 
 (Verwijder de opties die niet relevant zijn.)
 
-- Nieuwe dataset
 - Nieuwe feature
 - Upgrade van een component
 - Verbetering van de configuratie
@@ -23,5 +22,4 @@ https://dev.kadaster.nl/jira/browse/PDOK-
 - [ ] Ik heb de integratietest toegevoegd/uitgebreid indien nodig
 - [ ] Ik heb de integratietest gedraaid die de werking van mijn wijziging bewijst
 - [ ] Ik heb documentatie toegevoegd/uitgebreid voor niet-standaard onderdelen (=datasets)
-- [ ] De [PDOK documentatie](https://github.com/PDOK/interne-documentatie) is bijgewerkt indien nodig.
-- [ ] De secrets staan (indien van toepassing) in een .sec file en zijn geëncrypt
+- [ ] De [PDOK documentatie](https://github.com/PDOK/interne-documentatie) is bijgewerkt indien nodig
