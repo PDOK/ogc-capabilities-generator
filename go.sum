@@ -2,10 +2,8 @@ github.com/ajankovic/xdiff v0.0.1 h1:V1cj8t5xwYzm6ZGPqPOlAc9AIajXuTEn41D/1MJBWMM
 github.com/ajankovic/xdiff v0.0.1/go.mod h1:SUmEZ67uB97I0zkiuQ+lb+LOms9ipn8X+p+2RdJV710=
 github.com/imdario/mergo v0.3.11 h1:3tnifQM4i+fbajXKBHXWEH+KvNHqojZ778UH75j3bGA=
 github.com/imdario/mergo v0.3.11/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
-github.com/pdok/ogc-specifications v0.1.6 h1:4QohaoYIQDKvDc4K3dthigrpRmcUyJ5PSluf/py+vgw=
-github.com/pdok/ogc-specifications v0.1.6/go.mod h1:lwr0Kt/FupJtg6mPruI4CjV5VYQJU+YCmJtcz4db5XE=
-github.com/pdok/ogc-specifications v0.1.7 h1:P734umUng0DwqZO9eDdsNXCLnT6fWZ0jl4oZkAXi6Xg=
-github.com/pdok/ogc-specifications v0.1.7/go.mod h1:lwr0Kt/FupJtg6mPruI4CjV5VYQJU+YCmJtcz4db5XE=
+github.com/pdok/ogc-specifications v0.2.4 h1:kT3NwbXP8Cuy/oF14XuuYZ4+J3js2mUtEEjBN1qFyIk=
+github.com/pdok/ogc-specifications v0.2.4/go.mod h1:rkrIwIBIUl4oyn3aMVtJLipDRtFHp3oa9dSu/MyDt1o=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.3.0 h1:clyUAQHOM3G0M3f5vQj7LuJrETvjVot3Z5el9nffUtU=
