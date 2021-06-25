@@ -7,22 +7,22 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	wmts100 "github.com/pdok/ogc-specifications/pkg/wmts100"
+	"github.com/pdok/ogc-specifications/pkg/wmts100"
 )
 
 // WMTS100Base is the base WMTS 1.0.0 GetCapabilities doc
 var WMTS100Base wmts100.GetCapabilitiesResponse
 
 func init() {
-	wmts100 := wmts100.GetCapabilitiesResponse{}
+	wmts100Response := wmts100.GetCapabilitiesResponse{}
 	base, err := ioutil.ReadFile("./base/wmts100.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	if err = yaml.Unmarshal(base, &wmts100); err != nil {
+	if err = yaml.Unmarshal(base, &wmts100Response); err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	WMTS100Base = wmts100
+	WMTS100Base = wmts100Response
 }
 
 // WMTS100Transfomer struct

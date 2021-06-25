@@ -1,10 +1,10 @@
 package config
 
 import (
-	wcs201 "github.com/pdok/ogc-specifications/pkg/wcs201"
-	wfs200 "github.com/pdok/ogc-specifications/pkg/wfs200"
-	wms130 "github.com/pdok/ogc-specifications/pkg/wms130"
-	wmts100 "github.com/pdok/ogc-specifications/pkg/wmts100"
+	"github.com/pdok/ogc-specifications/pkg/wcs201"
+	"github.com/pdok/ogc-specifications/pkg/wfs200"
+	"github.com/pdok/ogc-specifications/pkg/wms130"
+	"github.com/pdok/ogc-specifications/pkg/wmts100"
 )
 
 // Config is the base struct for the config yaml

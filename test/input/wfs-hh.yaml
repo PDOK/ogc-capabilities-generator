@@ -1,0 +1,111 @@
+global:
+  namespace: "http://hh.geonovum.nl"
+  prefix: "hh"
+  onlineresourceurl: "https://service.pdok.nl"
+  path: "/cbs/hh"
+  version: "v1_0"
+  additionalschemalocations: "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0
+    http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd http://inspire.ec.europa.eu/schemas/common/1.0
+    http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd"
+services:
+  wfs200:
+    filename: "./test/output/wfs200_hh.xml"
+    definition:
+      serviceprovider:
+        providersite:
+          type: "simple"
+          href: "https://service.pdok.nl"
+      serviceidentification:
+        title: "Human
+    Health Statistics Netherlands (INSPIRE geharmoniseerd) WFS"
+        abstract: "This service refers to SDMX files with human Health data like total number of
+    death per 100.000 people or number of doctors in the Netherlands per NUTS2 region."
+        accesscontraints: "http://creativecommons.org/publicdomain/zero/1.0/deed.nl"
+        keywords:
+          keyword:
+            - "CBS"
+            - "statistics"
+            - "HH"
+            - "NL"
+            - "Human Health"
+            - "Netherlands"
+            - "SDMX"
+            - "Death"
+            - "NUTS2"
+            - "doctor"
+            - "death rate"
+            - "health"
+            - "infoFeatureAccessService"
+
+      capabilities:
+        featuretypelist:
+          featuretype:
+            - name: "hh:hh-nl-nuts2-doctors-2017"
+              title: "NL HH nrdoctors per 100000 in 2017 per NUTS2 region"
+              abstract: "NL HH number of doctors per 100000 inhabitants in 2017 per NUTS2 region"
+              keywords:
+                keyword:
+                  - "CBS"
+                  - "statistics"
+                  - "HH"
+                  - "NL"
+                  - "Human Health"
+                  - "Netherlands"
+                  - "SDMX"
+                  - "NUTS2"
+                  - "doctor"
+                  - "health"
+
+              metadataurl:
+                href: "https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=12bb57cd-73e0-41ba-a1e9-6d986b9109d3"
+              defaultcrs: "urn:ogc:def:crs:EPSG::3035"
+              othercrs:
+                - "urn:ogc:def:crs:EPSG::28992"
+                - "urn:ogc:def:crs:EPSG::25831"
+                - "urn:ogc:def:crs:EPSG::25832"
+                - "urn:ogc:def:crs:EPSG::3034"
+                - "urn:ogc:def:crs:EPSG::3857"
+                - "urn:ogc:def:crs:EPSG::4258"
+                - "urn:ogc:def:crs:EPSG::4326"
+
+            - name: "hh:hh-nl-nuts2-death-2016"
+              title: "NL HH nrdeath per 100000 in 2016 per NUTS2 region"
+              abstract: "NL HH number of death per 100000 inhabitants in 2016 per NUTS2 region"
+              keywords:
+                keyword:
+                  - "CBS"
+                  - "statistics"
+                  - "HH"
+                  - "NL"
+                  - "Human Health"
+                  - "Netherlands"
+                  - "SDMX"
+                  - "NUTS2"
+                  - "doctor"
+                  - "health"
+              metadataurl:
+                href: "https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=12bb57cd-73e0-41ba-a1e9-6d986b9109d3"
+              defaultcrs: "urn:ogc:def:crs:EPSG::3035"
+              othercrs:
+                - "urn:ogc:def:crs:EPSG::28992"
+                - "urn:ogc:def:crs:EPSG::25831"
+                - "urn:ogc:def:crs:EPSG::25832"
+                - "urn:ogc:def:crs:EPSG::3034"
+                - "urn:ogc:def:crs:EPSG::3857"
+                - "urn:ogc:def:crs:EPSG::4258"
+                - "urn:ogc:def:crs:EPSG::4326"
+        operationsmetadata:
+          extendedcapabilities:
+            extendedcapabilities:
+              metadataurl:
+                type: "inspire_common:resourceLocatorType"
+                url: "https://www.nationaalgeoregister.nl/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=8129296b-b9c1-489f-990a-df4a879e12b2"
+                mediatype: "application/vnd.ogc.csw.GetRecordByIdResponse_xml"
+              supportedlanguages:
+                defaultlanguage:
+                  language: "eng"
+              responselanguage:
+                language: "eng"
+              spatialdatasetidentifier:
+                code: "14076c36-c26d-2019-2015-7e65f530188d"
+

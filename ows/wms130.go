@@ -7,22 +7,22 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	wms130 "github.com/pdok/ogc-specifications/pkg/wms130"
+	"github.com/pdok/ogc-specifications/pkg/wms130"
 )
 
 // WMS130Base is the base WMS 1.3.0 GetCapabilities doc
 var WMS130Base wms130.GetCapabilitiesResponse
 
 func init() {
-	wms130 := wms130.GetCapabilitiesResponse{}
+	wms130Response := wms130.GetCapabilitiesResponse{}
 	base, err := ioutil.ReadFile("./base/wms130.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	if err = yaml.Unmarshal(base, &wms130); err != nil {
+	if err = yaml.Unmarshal(base, &wms130Response); err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	WMS130Base = wms130
+	WMS130Base = wms130Response
 }
 
 // WMS130Transfomer struct

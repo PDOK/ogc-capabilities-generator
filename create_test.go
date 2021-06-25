@@ -1,10 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"encoding/xml"
+	"github.com/ajankovic/xdiff"
+	"github.com/ajankovic/xdiff/parser"
 	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"log"
 	"ogc-capabilities-generator/config"
 	"strings"
 	"testing"
@@ -117,6 +121,34 @@ func TestBuildCapabilitiesMissingEmpty(t *testing.T) {
 	if expectedresult == result || strings.Contains(result, "<empty/>") {
 		t.Errorf("Expected <empty/> but was not, got nothing")
 	}
+}
+
+func compareXML(testResult string, expectedResult string) []xdiff.Delta {
+	p := parser.New()
+	// Parse the XTree.
+	left, err := p.ParseFile(testResult)
+	if err != nil {
+		log.Fatalf("unable to parse testResult %s. error: %v", testResult, err)
+	}
+	right, err := p.ParseFile(expectedResult)
+	if err != nil {
+		log.Fatalf("unable to parse expectedResult %s. error: %v", expectedResult, err)
+	}
+	diff, err := xdiff.Compare(left, right)
+	if err != nil {
+		log.Fatalf("unable to compare testResult %s with expectedResult %s. error: %v", testResult, expectedResult, err)
+	}
+
+	return diff
+}
+
+func writeDiff(diff []xdiff.Delta) string {
+	buf := new(bytes.Buffer)
+	enc := xdiff.NewTextEncoder(buf)
+	if err := enc.Encode(diff); err != nil {
+		log.Fatalf("unable to write diff. error: %v", err)
+	}
+	return buf.String()
 }
 
 func TestBuildCapabilitiesWmtsValidate(t *testing.T) {
