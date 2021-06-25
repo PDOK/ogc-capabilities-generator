@@ -5,11 +5,8 @@ import (
 	"io/ioutil"
 	"log"
 	"ogc-capabilities-generator/config"
-	"ogc-capabilities-generator/ows"
 	"testing"
 )
-
-var wfs200base = ows.WFS200Base
 
 func TestBuildWFSTest(t *testing.T) {
 	var serviceconfig, err = ioutil.ReadFile("./test/input/wfs-hh.yaml")
