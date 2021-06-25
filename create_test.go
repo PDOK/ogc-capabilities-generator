@@ -3,9 +3,11 @@ package main
 import (
 	"bytes"
 	"encoding/xml"
-	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 	"github.com/ajankovic/xdiff"
 	"github.com/ajankovic/xdiff/parser"
+	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 	"log"
 	"ogc-capabilities-generator/config"
 	"strings"
