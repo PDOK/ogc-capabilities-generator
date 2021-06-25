@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/xml"
+	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 	"github.com/ajankovic/xdiff"
 	"github.com/ajankovic/xdiff/parser"
 	"log"
@@ -146,4 +147,25 @@ func writeDiff(diff []xdiff.Delta) string {
 		log.Fatalf("unable to write diff. error: %v", err)
 	}
 	return buf.String()
+}
+
+func TestBuildCapabilitiesWmtsValidate(t *testing.T) {
+	bytes, _ := ioutil.ReadFile("examples/wmts_test.yaml")
+	configuration := config.Config{}
+	err := yaml.Unmarshal(bytes, &configuration)
+	xml, _ := buildCapabilities(configuration.Services.WMTS100Config.Wmts100, configuration.Global)
+
+	xsdvalidate.Init()
+	defer xsdvalidate.Cleanup()
+	xsdhandler, err := xsdvalidate.NewXsdHandlerUrl("http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd", xsdvalidate.ParsErrDefault)
+	if err != nil {
+		panic(err)
+	}
+	defer xsdhandler.Free()
+
+	err = xsdhandler.ValidateMem(xml, xsdvalidate.ValidErrDefault)
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
 }

@@ -16,8 +16,8 @@ import (
 	"github.com/imdario/mergo"
 	"gopkg.in/yaml.v2"
 
-	wms130_capabilities "github.com/pdok/ogc-specifications/pkg/wms130"
-	wmts100_capabilities "github.com/pdok/ogc-specifications/pkg/wmts100"
+	wms130 "github.com/pdok/ogc-specifications/pkg/wms130"
+	wmts100 "github.com/pdok/ogc-specifications/pkg/wmts100"
 )
 
 func envString(key, defaultValue string) string {
@@ -111,7 +111,7 @@ func buildWMS1_3_0(config config.Config) error {
 }
 
 // recursive fill
-func merge(dst *wms130_capabilities.Layer, src wms130_capabilities.Layer) {
+func merge(dst *wms130.Layer, src wms130.Layer) {
 
 	if len(dst.Layer) > 0 {
 		for index := range dst.Layer {
@@ -127,7 +127,7 @@ func buildWMTS1_0_0(config config.Config) error {
 	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(ows.WMTS100Transfomer{}))
 
 	// Filter unused TileMatrixSets
-	var tms []wmts100_capabilities.TileMatrixSet
+	var tms []wmts100.TileMatrixSet
 	for _, t := range config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet {
 		if config.Services.WMTS100Config.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
 			tms = append(tms, t)
