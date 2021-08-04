@@ -37,17 +37,19 @@ func (t WMTS100Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.V
 			// to include by examining 'dst'
 			content := make(map[string]map[string]bool)
 			for _, tms := range dst.Interface().([]wmts100.TileMatrixSet) {
-				content[tms.Identifier] = make(map[string]bool)
-				for _, tm := range tms.TileMatrix {
-					content[tms.Identifier][tm.Identifier] = true
+				if tms.TileMatrix != nil {
+					content[tms.Identifier] = make(map[string]bool)
+					for _, tm := range tms.TileMatrix {
+						content[tms.Identifier][tm.Identifier] = true
+					}
 				}
 			}
 			// obtain TileMatrixSet and TileMatrix items from 'src'
 			merged := []wmts100.TileMatrixSet{}
 			for _, tms := range src.Interface().([]wmts100.TileMatrixSet) {
 				tmsCopy := tms
-				tmsCopy.TileMatrix = []wmts100.TileMatrix{}
 				if _, ok := content[tms.Identifier]; ok {
+					tmsCopy.TileMatrix = []wmts100.TileMatrix{}
 					for _, tm := range tms.TileMatrix {
 						if _, ok := content[tms.Identifier][tm.Identifier]; ok {
 							tmsCopy.TileMatrix = append(tmsCopy.TileMatrix, tm)
