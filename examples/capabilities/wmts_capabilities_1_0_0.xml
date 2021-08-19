@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Capabilities xmlns="http://www.opengis.net/wmts/1.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml" version="1.0.0" xsi:schemaLocation="http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd">
+ <ows:ServiceIdentification>
+  <ows:Title>Web Map Tile Service</ows:Title>
+  <ows:Abstract>Service that contrains the map access interface to some TileMatrixSets</ows:Abstract>
+  <ows:Keywords>
+   <ows:Keyword>tile</ows:Keyword>
+   <ows:Keyword>tile matrix set</ows:Keyword>
+   <ows:Keyword>map</ows:Keyword>
+  </ows:Keywords>
+  <ows:ServiceType>OGC WMTS</ows:ServiceType>
+  <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+  <ows:Fees>none</ows:Fees>
+  <ows:AccessConstraints>none</ows:AccessConstraints>
+ </ows:ServiceIdentification>
+ <ows:ServiceProvider>
+  <ows:ProviderName>MiraMon</ows:ProviderName>
+  <ows:ProviderSite xlink:type="simple" xlink:href="http://www.creaf.uab.es/miramon"/>
+  <ows:ServiceContact>
+   <ows:IndividualName>Joan Maso Pau</ows:IndividualName>
+   <ows:PositionName>Senior Software Engineer</ows:PositionName>
+   <ows:ContactInfo>
+    <ows:Phone>
+     <ows:Voice>+34 93 581 1312</ows:Voice>
+     <ows:Facsimile/>
+    </ows:Phone>
+    <ows:Address>
+     <ows:DeliveryPoint>Fac Ciencies UAB</ows:DeliveryPoint>
+     <ows:City>Bellaterra</ows:City>
+     <ows:AdministrativeArea>Barcelona</ows:AdministrativeArea>
+     <ows:PostalCode>08193</ows:PostalCode>
+     <ows:Country>Spain</ows:Country>
+     <ows:ElectronicMailAddress>joan.maso@uab.es</ows:ElectronicMailAddress>
+    </ows:Address>
+   </ows:ContactInfo>
+  </ows:ServiceContact>
+ </ows:ServiceProvider>
+ <ows:OperationsMetadata>
+  <ows:Operation name="GetCapabilities">
+   <ows:DCP>
+    <ows:HTTP>
+     <ows:Get xlink:type="simple" xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi?">
+      <ows:Constraint name="GetEncoding">
+       <ows:AllowedValues>
+        <ows:Value>KVP</ows:Value>
+       </ows:AllowedValues>
+      </ows:Constraint>
+     </ows:Get>
+    </ows:HTTP>
+   </ows:DCP>
+  </ows:Operation>
+  <ows:Operation name="GetTile">
+   <ows:DCP>
+    <ows:HTTP>
+     <ows:Get xlink:type="simple" xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi?"/>
+    </ows:HTTP>
+   </ows:DCP>
+  </ows:Operation>
+  <ows:Operation name="GetFeatureInfo">
+   <ows:DCP>
+    <ows:HTTP>
+     <ows:Get xlink:type="simple" xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi?"/>
+    </ows:HTTP>
+   </ows:DCP>
+  </ows:Operation>
+ </ows:OperationsMetadata>
+ <Contents>
+  <Layer>
+   <ows:Title>Coastlines</ows:Title>
+   <ows:Abstract>Coastline/shorelines (BA010)</ows:Abstract>
+   <ows:WGS84BoundingBox>
+    <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
+    <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
+   </ows:WGS84BoundingBox>
+   <ows:Identifier>coastlines</ows:Identifier>
+   <Style isDefault="true">
+    <ows:Title>Dark Blue</ows:Title>
+    <ows:Identifier>DarkBlue</ows:Identifier>
+    <LegendURL format="image/png" xlink:href="http://www.miramon.uab.es/wmts/Coastlines/coastlines_darkBlue.png"/>
+   </Style>
+   <Style>
+    <ows:Title>Thick And Red</ows:Title>
+    <ows:Abstract>Specify this style if you want your maps to have thick red coastlines.</ows:Abstract>
+    <ows:Identifier>thickAndRed</ows:Identifier>
+   </Style>
+   <Format>image/png</Format>
+   <Format>image/gif</Format>
+   <TileMatrixSetLink>
+    <TileMatrixSet>BigWorld</TileMatrixSet>
+   </TileMatrixSetLink>
+  </Layer>
+  <TileMatrixSet>
+   <ows:Identifier>BigWorld</ows:Identifier>
+   <ows:SupportedCRS>urn:ogc:def:crs:EPSG::25831</ows:SupportedCRS>
+   <TileMatrix>
+    <ows:Identifier>00</ows:Identifier>
+    <ScaleDenominator>10000000.0</ScaleDenominator>
+    <TopLeftCorner>-2404683.40739 8298457.58466</TopLeftCorner>
+    <TileWidth>256</TileWidth>
+    <TileHeight>256</TileHeight>
+    <MatrixWidth>9</MatrixWidth>
+    <MatrixHeight>6</MatrixHeight>
+   </TileMatrix>
+   <TileMatrix>
+    <ows:Identifier>01</ows:Identifier>
+    <ScaleDenominator>5000000.0</ScaleDenominator>
+    <TopLeftCorner>-2404683.40739 8298457.58466</TopLeftCorner>
+    <TileWidth>256</TileWidth>
+    <TileHeight>256</TileHeight>
+    <MatrixWidth>18</MatrixWidth>
+    <MatrixHeight>12</MatrixHeight>
+   </TileMatrix>
+  </TileMatrixSet>
+ </Contents>
+</Capabilities>

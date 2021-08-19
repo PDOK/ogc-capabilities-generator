@@ -29,9 +29,20 @@ func init() {
 type WMS130Transfomer struct {
 }
 
-// Transformer skip FeatureTypeList when merging Base to config, this is a custom operation
+func setNilPtr2(i interface{}) {
+	v := reflect.ValueOf(i)
+	v.Elem().Set(reflect.Zero(v.Elem().Type()))
+}
+
+// Transformer skip LayerList when merging Base to config, this is a custom operation
 func (t WMS130Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
 	if typ == reflect.TypeOf(wms130.Layer{}) {
+		return func(dst, src reflect.Value) error {
+			// NOOP
+			return nil
+		}
+	}
+	if typ == reflect.TypeOf(wms130.DCPType{}) {
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil

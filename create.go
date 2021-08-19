@@ -10,6 +10,7 @@ import (
 	"ogc-capabilities-generator/config"
 	"ogc-capabilities-generator/ows"
 	"os"
+	"path/filepath"
 	"regexp"
 	"text/template"
 
@@ -17,7 +18,6 @@ import (
 	"gopkg.in/yaml.v2"
 
 	wms130 "github.com/pdok/ogc-specifications/pkg/wms130"
-	wmts100 "github.com/pdok/ogc-specifications/pkg/wmts100"
 )
 
 func envString(key, defaultValue string) string {
@@ -29,6 +29,7 @@ func envString(key, defaultValue string) string {
 }
 
 func writeFile(filename string, buffer []byte) {
+	makeDirIfNotExists(filename)
 	err := ioutil.WriteFile(filename, buffer, 0777)
 	if err != nil {
 		log.Fatalf("Could not write to file %s : %v ", filename, err)
@@ -121,25 +122,26 @@ func merge(dst *wms130.Layer, src wms130.Layer) {
 	mergo.Merge(dst, src)
 }
 
+func makeDirIfNotExists(filename string) {
+	dir, _ := filepath.Split(filename)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		err := os.Mkdir(dir, os.ModePerm)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+}
+
 func buildWMTS1_0_0(config config.Config) error {
 	wmts100base := ows.WMTS100Base
 
 	mergo.Merge(&config.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(ows.WMTS100Transfomer{}))
 
-	// Filter unused TileMatrixSets
-	var tms []wmts100.TileMatrixSet
-	for _, t := range config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet {
-		if config.Services.WMTS100Config.Wmts100.Contents.GetTilematrixsets()[t.Identifier] {
-			tms = append(tms, t)
-		}
-	}
-
-	config.Services.WMTS100Config.Wmts100.Contents.TileMatrixSet = tms
-
 	buf, err := buildCapabilities(config.Services.WMTS100Config.Wmts100, config.Global)
 	if err != nil {
 		return err
 	}
+
 	writeFile(config.Services.WMTS100Config.Filename, buf)
 
 	return nil

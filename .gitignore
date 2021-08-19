@@ -16,4 +16,7 @@
 .vscode
 
 # example output folder
-output
+output/
+
+# build binary
+ogc-capabilities-generator

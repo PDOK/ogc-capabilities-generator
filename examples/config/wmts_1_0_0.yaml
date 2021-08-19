@@ -1,0 +1,117 @@
+global:
+  prefix: prefix
+  namespace: http://namespace.geonovum.nl
+  onlineresourceurl: http://www.miramon.uab.es
+  path: /cgi-bin/MiraMon5_0.cgi
+  version: v1_0
+  additionalschemalocations: http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd http://inspire.ec.europa.eu/schemas/common/1.0 http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd
+services:
+  wmts100:
+    filename: ./output/wmts_capabilities_1_0_0.xml
+    definition:
+      namespaces:
+        xmlns: http://www.opengis.net/wmts/1.0
+        common: http://www.opengis.net/ows/1.1
+        xlink: http://www.w3.org/1999/xlink
+        xsi: http://www.w3.org/2001/XMLSchema-instance
+        gml: http://www.opengis.net/gml
+        version: 1.0.0
+        schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd
+      serviceidentification:
+        title: Web Map Tile Service
+        abstract: Service that contrains the map access interface to some TileMatrixSets
+        keywords:
+          keyword:
+            - tile
+            - tile matrix set
+            - map
+        servicetype: OGC WMTS
+        servicetypeversion: 1.0.0
+        fees: none
+        accessconstraints: none
+      serviceprovider:
+        providername: MiraMon
+        providersite: 
+          type: simple
+          href: http://www.creaf.uab.es/miramon
+        servicecontact: 
+          individualname: Joan Maso Pau
+          positionname: Senior Software Engineer
+          contactinfo:
+            phone:
+              voice: +34 93 581 1312
+              facsmile: +34 93 581 4151
+            address:
+              deliverypoint: Fac Ciencies UAB
+              city: Bellaterra
+              administrativearea: Barcelona
+              postalcode: 08193
+              country: Spain
+              electronicmailaddress: joan.maso@uab.es
+      operationsmetadata:
+          operation:
+            - name: GetCapabilities
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                    constraint:
+                      - name: GetEncoding
+                        allowedvalues:
+                          value:
+                            - KVP
+            - name: GetTile
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: GetFeatureInfo
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+      contents:
+        tilematrixset:
+          - identifier: "BigWorld"
+            supportedcrs: urn:ogc:def:crs:EPSG::25831
+            tilematrix:
+            - identifier: 00
+              scaledenominator: 10000000.0
+              topleftcorner: -2404683.40739 8298457.58466
+              tilewidth: 256
+              tileheight: 256
+              matrixwidth: 9
+              matrixheight: 6
+            - identifier: 01
+              scaledenominator: 5000000.0
+              topleftcorner: -2404683.40739 8298457.58466
+              tilewidth: 256
+              tileheight: 256
+              matrixwidth: 18
+              matrixheight: 12
+        layer:
+          - title: Coastlines
+            abstract: Coastline/shorelines (BA010)
+            wgs84boundingbox:
+              lowercorner: -180 -90
+              uppercorner: 180 90
+            identifier: coastlines
+            style:  # identifier is the only required field, the rest are optional
+              - identifier: DarkBlue
+                title: Dark Blue
+                legendurl:
+                  - format: image/png
+                    href: http://www.miramon.uab.es/wmts/Coastlines/coastlines_darkBlue.png
+                isdefault: true
+              - identifier: thickAndRed
+                title: Thick And Red
+                abstract: Specify this style if you want your maps to have thick red coastlines.
+            format: 
+              - image/png
+              - image/gif
+            tilematrixsetlink:
+              - tilematrixset: "BigWorld"        
+        

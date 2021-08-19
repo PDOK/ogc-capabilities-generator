@@ -69,7 +69,6 @@ capabilities:
             - application/json; subtype=geojson
             - application/json
         wgs84boundingbox:
-          dimensions: 2
           lowercorner: 2.52712538742158 50.2128625669452
           uppercorner: 7.37402550506231 55.7211602557705
 
@@ -276,7 +275,6 @@ capabilities:
         - name: gml:MultiSurface
         - name: gml:Box
         - name: gml:Envelope
-  
       spatialoperators:
         spatialoperator:
         - name: Equals
@@ -290,3 +288,11 @@ capabilities:
         - name: DWithin
         - name: Beyond
         - name: BBOX
+    temporalcapabilities:
+      temporaloperands:
+        temporaloperand:
+          - name: gml:TimePeriod
+          - name: gml:TimeInstant
+      temporaloperators:
+        temporaloperator:
+          - name: During

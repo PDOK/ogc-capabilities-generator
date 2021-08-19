@@ -1,0 +1,355 @@
+global:
+  prefix: bo
+  namespace: http://www.BlueOx.org/BlueOx
+  onlineresourceurl: http://www.BlueOx.org
+  path: /wfs/wfs.cgi
+  additionalschemalocations: http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd http://inspire.ec.europa.eu/schemas/common/1.0 http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd
+services:
+  wfs200:
+    filename: ./output/wfs_capabilities_2_0_0.xml
+    definition:
+      serviceidentification:
+        title: OGC Member WFS
+        abstract: "Web Feature Service maintained by NSDI data provider, serving FGDC framework layer XXX; contact Paul.Bunyon@BlueOx.org"
+        keywords:
+          keyword:
+            - Kadaster
+            - Kadastrale percelen
+            - FGDC
+            - NSDI
+            - Framework Data Layer
+            - BlueOx
+          type: string
+        fees: NONE
+        accesscontraints: NONE
+      serviceprovider:
+        providername: BlueOx Inc.
+        providersite: 
+          type: simple
+          href: http://www.cubewerx.com
+        servicecontact: 
+          individualname: Paul Bunyon
+          positionname: Mythology Manager
+          contactinfo:
+            phone:
+              voice: 1.800.BIG.WOOD
+              facsmile: 1.800.FAX.WOOD
+            address:
+              deliverypoint: North Country
+              city: Small Town
+              administrativearea: Rural County
+              postalcode: 12345
+              country: USA
+              electronicmailaddress: Paul.Bunyon@BlueOx.org
+            onlineresource:
+              type: simple
+              href: http://www.BlueOx.org/contactUs
+            hoursofservice: 24x7
+            contactinstructions: eMail Paul with normal requsts; Phone Paul for emergency
+               requests; if you get voice mail and your request can't wait,
+               contact another mythological figure listed on the contactUs
+               page of our web site.
+          role: PointOfContact
+      capabilities:
+        featuretypelist:
+          featuretype:
+            - name: kadastralekaartv4:kadastralegrens
+              title: kadastralegrens
+              abstract: Een Kadastrale Grens is de weergave van een grens op de kadastrale kaart die door de dienst van het Kadaster tussen percelen vastgesteld wordt, op basis van inlichtingen van belanghebbenden en met gebruikmaking van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven.
+              keywords:
+                keyword:
+                  - Kadastrale grenzen
+                  - Grenzen
+                  - infoFeatureAccessService
+              metadataurl:
+                href: https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=a29917b9-3426-4041-a11b-69bcb2256904
+        operationsmetadata:
+          operation:
+            - name: GetCapabilities
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+              parameter:
+                - name: AcceptVersions
+                  allowedvalues: 
+                    value: 
+                    - 2.0.0
+                - name: AcceptFormats
+                  allowedvalues: 
+                    value: 
+                    - text/xml
+            - name: DescribeFeatureType
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: ListStoredQueries
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: DescribeStoredQueries
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: GetPropertyValue
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: GetFeature
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: GetFeatureWithLock
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: Transaction
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+              constraints:
+              - name: AutomaticDataLocking
+                novalues: 
+                defaultvalue: TRUE
+              - name: PreservesSiblingOrder
+                novalues: 
+                defaultvalue: TRUE
+            - name: LockFeature
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: CreateStoredQuery
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+            - name: DropStoredQuery
+              dcp:
+                http:
+                  get:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  post:
+                    type: simple
+                    href: "{{.Onlineresourceurl}}{{.Path}}?"
+          constraint:
+            - name: ImplementsBasicWFS
+              novalue:
+              defaultvalue: TRUE
+            - name: ImplementsTransactionalWFS
+              novalue:
+              defaultvalue: FALSE
+            - name: ImplementsLockingWFS
+              novalue:
+              defaultvalue: FALSE
+            - name: KVPEncoding
+              novalue:
+              defaultvalue: TRUE
+            - name: XMLEncoding
+              novalue:
+              defaultvalue: TRUE
+            - name: SOAPEncoding
+              novalue:
+              defaultvalue: FALSE
+            - name: ImplementsInheritance
+              novalue:
+              defaultvalue: FALSE
+            - name: ImplementsRemoteResolve
+              novalue:
+              defaultvalue: FALSE
+            - name: ImplementsResultPaging
+              novalue:
+              defaultvalue: TRUE
+            - name: ImplementsStandardJoins
+              novalue:
+              defaultvalue: FALSE
+            - name: ImplementsSpatialJoins
+              novalue:
+              defaultvalue: FALSE
+            - name: ImplementsTemporalJoins
+              novalue:
+              defaultvalue: FALSE
+            - name: ImplementsFeatureVersioning
+              novalue:
+              defaultvalue: FALSE
+            - name: ManageStoredQueries
+              novalue:
+              defaultvalue: FALSE
+            - name: PagingIsTransactionSafe
+              novalue:
+              defaultvalue: FALSE
+            - name: CountDefault
+              novalue:
+              defaultvalue: 1000
+            - name: QueryExpressions
+              allowedvalues:
+                value:
+                  - wfs:Query
+                  - wfs:StoredQuery
+        featuretypelist:
+          featuretype:
+            - name: "{{.Prefix}}:Wood"
+              title: The Great Northern Forest
+              abstract: Describes the arborial diversity of the Great Northern Forest.
+              keywords:
+                keyword:
+                  - forest
+                  - north
+                  - woods
+                  - arborial
+                  - diversity
+              metadataurl:
+                href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:4ee8b2d3-9409-4a1d-b26b-6782e4fa3d59
+              defaultcrs: urn:ogc:def:crs:EPSG::6269
+              othercrs:
+                - urn:ogc:def:crs:EPSG::32615
+                - urn:ogc:def:crs:EPSG::32616
+                - urn:ogc:def:crs:EPSG::32617
+                - urn:ogc:def:crs:EPSG::32618
+              outputformats:
+                format:
+                  - application/gml+xml; version=3.2
+                  - text/xml; subtype=gml/3.2.1
+                  - text/xml; subtype=gml/3.1.1
+                  - application/json; subtype=geojson
+                  - application/json
+              wgs84boundingbox:
+                lowercorner: "-180 -90"
+                uppercorner: "180 90"
+            - name: "{{.Prefix}}:Lakes"
+              title: The Great Northern Lakes
+              abstract: Lake boundaries for all lakes in the 
+               Great Northern Forest.
+              keywords:
+                keyword:
+                  - lakes
+                  - boundaries
+                  - water
+                  - hydro
+              metadataurl:
+                href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:57973502-29cb-4114-8d64-9939627a0414
+              defaultcrs: urn:ogc:def:crs:EPSG::6269
+              othercrs:
+                - urn:ogc:def:crs:EPSG::32615
+                - urn:ogc:def:crs:EPSG::32616
+                - urn:ogc:def:crs:EPSG::32617
+                - urn:ogc:def:crs:EPSG::32618
+              outputformats:
+                format:
+                  - application/gml+xml; version=3.2
+                  - text/xml; subtype=gml/3.2.1
+                  - text/xml; subtype=gml/3.1.1
+                  - application/json; subtype=geojson
+                  - application/json
+              wgs84boundingbox:
+                lowercorner: "-180 -90"
+                uppercorner: "180 90"
+        filtercapabilities:
+          conformance:
+            constraint:
+            - name: ImplementsQuery
+              defaultvalue: "TRUE"
+            - name: ImplementsAdHocQuery
+              defaultvalue: "TRUE"
+            - name: ImplementsFunctions
+              defaultvalue: "TRUE"
+            - name: ImplementsResourceId
+              defaultvalue: "TRUE"
+            - name: ImplementsMinStandardFilter
+              defaultvalue: "TRUE"
+            - name: ImplementsStandardFilter
+              defaultvalue: "TRUE"
+            - name: ImplementsMinSpatialFilter
+              defaultvalue: "TRUE"
+            - name: ImplementsSpatialFilter
+              defaultvalue: "TRUE"
+            - name: ImplementsMinTemporalFilter
+              defaultvalue: "TRUE"
+            - name: ImplementsTemporalFilter
+              defaultvalue: "TRUE"
+            - name: ImplementsVersionNav
+              defaultvalue: "FALSE"
+            - name: ImplementsSorting
+              defaultvalue: "FALSE"
+            - name: ImplementsExtendedOperators
+              defaultvalue: "FALSE"
+          scalarcapabilities:
+            logicaloperators:
+            comparisonoperators:
+              comparisonoperator:
+              - name: PropertyIsEqualTo
+              - name: PropertyIsNotEqualTo
+              - name: PropertyIsLessThan
+              - name: PropertyIsGreaterThan
+              - name: PropertyIsLessThanOrEqualTo
+              - name: PropertyIsGreaterThanOrEqualTo
+              - name: PropertyIsLike
+              - name: PropertyIsBetween
+              - name: PropertyIsNull
+              - name: PropertyIsNil
+          spatialcapabilities:
+            geometryoperands:
+              geometryoperand:
+              - name: gml:Point
+              - name: gml:MultiPoint
+              - name: gml:LineString
+              - name: gml:MultiLineString
+              - name: gml:Curve
+              - name: gml:MultiCurve
+              - name: gml:Polygon
+              - name: gml:MultiPolygon
+              - name: gml:Surface
+              - name: gml:MultiSurface
+              - name: gml:MultiGeometry
+              - name: gml:Box
+              - name: gml:Envelope  
+
+        
