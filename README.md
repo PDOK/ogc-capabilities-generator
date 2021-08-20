@@ -1,5 +1,6 @@
 # ogc-capabilities-generator
 
+![build - GitHub Action Workflow](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/go.yml/badge.svg)
 ![GitHub license](https://img.shields.io/github/license/PDOK/ogc-capabilities-generator)
 [![GitHub release](https://img.shields.io/github/release/PDOK/ogc-capabilities-generator.svg)](https://github.com/PDOK/ogc-capabilities-generator/releases)
 [![Go Report Card](https://goreportcard.com/badge/PDOK/ogc-capabilities-generator)](https://goreportcard.com/report/PDOK/ogc-capabilities-generator)
