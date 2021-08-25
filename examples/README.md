@@ -24,7 +24,9 @@ go test -run TestIntegrationW -v
 
 ## WMS 1.3.0
 
-Example used: <http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xml>
+OGC Spec Example:
+- [external OGC link](http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xml)
+- [repo link](spec_capabilities/wms_capabilities_1_3_0.xml)
 
 Not Implemented (but validates against spec):
 
@@ -32,11 +34,13 @@ Not Implemented (but validates against spec):
   - cascaded
   - noSubsets
   - fixedWidth
-  - fixedHeigh
+  - fixedHeight
 
 ## WFS 2.0
 
-Example used: <http://schemas.opengis.net/wfs/2.0/examples/GetCapabilities/GetCapabilities_Res_01.xml>
+OGC Spec Example:
+- [external OGC link](http://schemas.opengis.net/wfs/2.0/examples/GetCapabilities/GetCapabilities_Res_01.xml)
+- [repo link](spec_capabilities/wfs_capabilities_2_0_0.xml)
 
 Not Implemented (but validates against spec):
 
@@ -54,8 +58,9 @@ Not Implemented (but validates against spec):
 
 ## WMTS 1.0.0
 
-Example used:
-<http://schemas.opengis.net/wmts/1.0/examples/wmtsGetCapabilities_response.xml>
+OGC Spec Example:
+- [external OGC link](http://schemas.opengis.net/wmts/1.0/examples/wmtsGetCapabilities_response.xml)
+- [repo link](spec_capabilities/wmts_capabilities_1_0_0.xml)
 
 Not Implemented (but validates against spec):
 

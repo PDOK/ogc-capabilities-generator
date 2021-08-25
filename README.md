@@ -1,7 +1,6 @@
 # ogc-capabilities-generator
 
-![build - GitHub Action 
-Workflow](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/go.yml/badge.svg)
+[![build](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/go.yml/badge.svg)](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/go.yml)
 ![GitHub
 license](https://img.shields.io/github/license/PDOK/ogc-capabilities-generator)
 [![GitHub
@@ -25,24 +24,24 @@ also flexible to deploy a OGC in a 'micro service' like environment such as K8s.
 
 Building the binary
 
-```go
+```sh
 go build .
 ```
 
-When the binary is build the application can be run with parsing the
+When the binary is built the application can be run with parsing the
 configuration in two ways:
 
 1. parsing the configuration through -c {path/to/config.yaml}
 2. setting the ENV var SERVICECONFIG={path/to/config.yaml}
 
-```bash
+```sh
 ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
 ```
 
-In dev mode through ```go run```
+In dev mode through `go run`:
 
-```go
-go run . -c ./examples/config/wmts_1_0_0.yaml
+```sh
+go run . -c ./examples/config/wms_1_3_0.yaml
 go run . -c ./examples/config/wfs_2_0_0.yaml
 go run . -c ./examples/config/wmts_1_0_0.yaml
 ```
@@ -54,13 +53,13 @@ The ogc-capabilities-generator makes usage of the
 
 ## Test
 
-```go
+```sh
 go test ./... -covermode=atomic -v
 ```
 
 ## Docker
 
-```docker
+```sh
 docker build -t pdok/ogc-capabilities-generator .
 
 docker run --rm -d -v `pwd`/examples/config:/config -v `pwd`:/output \
