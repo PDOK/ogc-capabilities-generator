@@ -31,34 +31,42 @@ type WMTS100Transfomer struct {
 
 // Transformer selectively includes TileMatrixSet and TileMatrix definitions
 func (t WMTS100Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
-	if typ == reflect.TypeOf([]wmts100.TileMatrixSet{}) {
+	// Transformer only copies over tilematrixsets from the base (src) if there is a layer present
+	// having a tilematrixlink referring to the tilematrixset identifier in the overlayer (dst).
+	// When a tilematrixset is present in both base (src) and overlay(dst) with matching identifiers,
+	// the tilematrixset from the overlay takes precendent.
+	if typ == reflect.TypeOf(wmts100.Contents{}) {
 		return func(dst, src reflect.Value) error {
-			// determine which TileMatrixSet and TileMatrix items
-			// to include by examining 'dst'
-			content := make(map[string]map[string]bool)
-			for _, tms := range dst.Interface().([]wmts100.TileMatrixSet) {
-				if tms.TileMatrix != nil {
-					content[tms.Identifier] = make(map[string]bool)
-					for _, tm := range tms.TileMatrix {
-						content[tms.Identifier][tm.Identifier] = true
-					}
+			// collect all tilematrixset references from Layer/TileMatrixSetLink
+			tms_links := make(map[string]bool)
+			src_contents := src.Interface().(wmts100.Contents)
+			contents := dst.Interface().(wmts100.Contents)
+			for _, lyr := range contents.Layer {
+				for _, tmsl := range lyr.TileMatrixSetLink {
+					tms_links[tmsl.TileMatrixSet] = true
 				}
 			}
-			// obtain TileMatrixSet and TileMatrix items from 'src'
+			// generate set of all tilematrixset definitions in both base and overlay
+			tms_set := make(map[string]wmts100.TileMatrixSet)
+			// overwrite tilematrixsets from src by dst; note the order of `append()`
+			for _, tms := range append(src_contents.TileMatrixSet, contents.TileMatrixSet...) {
+				tms_set[tms.Identifier] = tms
+			}
+			// iterate over the set of all tilematrixset definitions and check if a layer refers
+			// to this tilematrixset definition, if so include this tilematrix set in the output
 			merged := []wmts100.TileMatrixSet{}
-			for _, tms := range src.Interface().([]wmts100.TileMatrixSet) {
+			for _, tms := range tms_set {
 				tmsCopy := tms
-				if _, ok := content[tms.Identifier]; ok {
+				if _, ok := tms_links[tms.Identifier]; ok {
 					tmsCopy.TileMatrix = []wmts100.TileMatrix{}
 					for _, tm := range tms.TileMatrix {
-						if _, ok := content[tms.Identifier][tm.Identifier]; ok {
-							tmsCopy.TileMatrix = append(tmsCopy.TileMatrix, tm)
-						}
+						tmsCopy.TileMatrix = append(tmsCopy.TileMatrix, tm)
 					}
+					merged = append(merged, tmsCopy)
 				}
-				merged = append(merged, tmsCopy)
 			}
-			dst.Set(reflect.ValueOf(merged))
+			contents.TileMatrixSet = merged
+			dst.Set(reflect.ValueOf(contents))
 			return nil
 		}
 	}
