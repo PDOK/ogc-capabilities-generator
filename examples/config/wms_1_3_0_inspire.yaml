@@ -5,7 +5,7 @@ global:
   path: /path
 services:
   wms130:
-    filename: ./output/wms_capabilities_1_3_0.xml
+    filename: ./output/wms_capabilities_1_3_0_inspire.xml
     definition:
       service:
         title: Acme Corp. Map Server
@@ -41,10 +41,20 @@ services:
 
       capability:
         wmscapabilities:
+          extendedcapabilities:
+            metadataurl:
+              type: simple
+              url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
+              mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
+            supportedlanguages:
+              defaultlanguage:
+                language: dut
+            responselanguage:
+              language: dut
           request:
             getcapabilities:
               format:
-                - text/xml   
+                - text/xml
               dcptype:
                 http:
                   get:

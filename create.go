@@ -39,7 +39,7 @@ func writeFile(filename string, buffer []byte) {
 func buildCapabilities(v interface{}, g config.Global) ([]byte, error) {
 
 	if g.Prefix == `` {
-		return nil, errors.New("No dataset prefix defined")
+		return nil, errors.New("no dataset prefix defined")
 	}
 
 	si, _ := xml.MarshalIndent(v, "", " ")
@@ -68,7 +68,7 @@ func buildWFS2_0_0(config config.Config) error {
 		}
 	}
 
-	if &config.Services.WFS200Config.Wfs200.OperationsMetadata.ExtendedCapabilities != nil {
+	if config.Services.WFS200Config.Wfs200.Capabilities.OperationsMetadata.ExtendedCapabilities != nil {
 		config.Services.WFS200Config.Wfs200.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
 		config.Services.WFS200Config.Wfs200.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
 	}
@@ -95,7 +95,7 @@ func buildWMS1_3_0(config config.Config) error {
 		}
 	}
 
-	if &config.Services.WMS130Config.Wms130.Capabilities.ExtendedCapabilities != nil {
+	if config.Services.WMS130Config.Wms130.Capabilities.WMSCapabilities.ExtendedCapabilities != nil {
 		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
 		config.Services.WMS130Config.Wms130.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
 		config.Services.WMS130Config.Wms130.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
