@@ -96,7 +96,7 @@ func TestBuildEmptyPrefixCapabilities(t *testing.T) {
 	}
 
 	if err != nil {
-		if err.Error() != "No dataset prefix defined" {
+		if err.Error() != "no dataset prefix defined" {
 			t.Errorf("Expected %s but was not, got: %s", expected, err.Error())
 		}
 	}

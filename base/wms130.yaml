@@ -4,11 +4,8 @@ namespaces:
   common: http://www.opengis.net/ows/1.1
   xlink: http://www.w3.org/1999/xlink
   xsi: http://www.w3.org/2001/XMLSchema-instance
-  inspirecommon:
-  inspirevs:
   version: 1.3.0
   schemalocation: http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd
-
 service:
   name: WMS
   onlineresource:

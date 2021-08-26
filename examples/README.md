@@ -6,21 +6,25 @@ Folders:
   the official OGC specification.
 - `examples/capabilities`: altered versions of the official OGC specification
   examples, since the PDOK/OGC-Capabilities-Generator does not support all the
-  features showcased in the official OGC specification examples.
+  features showcased in the official OGC specification examples. Examples with 
+  INSPIRE extended capabilities can be found in the files with `_inspire` postfix.
 - `examples/config`: configuration files that can be used to generate the
   altered capabilities documents (stored in `examples/capabilities`). These are
   used in the integrations tests (`integration_test.go`)
 
 Missing examples:
 
-- WCS 2.0.0 example
-- INSPIRE compliant examples for the different service types
+- WCS 2.0.0 example, both regular and INSPIRE
 
 To only run the tests generating the examples run:
 
 ```go
 go test -run TestIntegrationW -v
 ```
+
+> **NOTE:** For each example an integration test case should be present in the 
+[integration_test.go](/integration_test.go) file.
+
 
 ## WMS 1.3.0
 

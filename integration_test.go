@@ -68,8 +68,24 @@ func TestIntegrationWMS130(t *testing.T) {
 	}
 	buildWMS1_3_0(*config)
 
-	testResultPath := path.Join(outputBasePath, "wms_capabilities_1_3_0.xml")
+	testResultPath := path.Join(config.Services.WMS130Config.Filename)
 	expectedresultPath := path.Join(expectedBasePath, "wms_capabilities_1_3_0.xml")
+	diff := compareXML(testResultPath, expectedresultPath)
+	if len(diff) > 0 {
+		t.Errorf("unexpected differences found between actual (%s) and expected (%s) output: %s", testResultPath, expectedresultPath, writeDiff(diff))
+	}
+}
+
+func TestIntegrationWMS130Inspire(t *testing.T) {
+	configPath := "wms_1_3_0_inspire.yaml"
+	config, err := readConfig(configPath)
+	if err != nil {
+		log.Fatalf("error: %v, with file: %v", err, configPath)
+	}
+	buildWMS1_3_0(*config)
+
+	testResultPath := path.Join(config.Services.WMS130Config.Filename)
+	expectedresultPath := path.Join(expectedBasePath, "wms_capabilities_1_3_0_inspire.xml")
 	diff := compareXML(testResultPath, expectedresultPath)
 	if len(diff) > 0 {
 		t.Errorf("unexpected differences found between actual (%s) and expected (%s) output: %s", testResultPath, expectedresultPath, writeDiff(diff))
@@ -83,8 +99,23 @@ func TestIntegrationWFS200(t *testing.T) {
 		log.Fatalf("error: %v, with file: %v", err, configPath)
 	}
 	buildWFS2_0_0(*config)
-	testResultPath := path.Join(outputBasePath, "wfs_capabilities_2_0_0.xml")
+	testResultPath := path.Join(config.Services.WFS200Config.Filename)
 	expectedresultPath := path.Join(expectedBasePath, "wfs_capabilities_2_0_0.xml")
+	diff := compareXML(testResultPath, expectedresultPath)
+	if len(diff) > 0 {
+		t.Errorf("unexpected differences found between actual (%s) and expected (%s) output: %s", testResultPath, expectedresultPath, writeDiff(diff))
+	}
+}
+
+func TestIntegrationWFS200Inspire(t *testing.T) {
+	configPath := "wfs_2_0_0_inspire.yaml"
+	config, err := readConfig(configPath)
+	if err != nil {
+		log.Fatalf("error: %v, with file: %v", err, configPath)
+	}
+	buildWFS2_0_0(*config)
+	testResultPath := path.Join(config.Services.WFS200Config.Filename)
+	expectedresultPath := path.Join(expectedBasePath, "wfs_capabilities_2_0_0_inspire.xml")
 	diff := compareXML(testResultPath, expectedresultPath)
 	if len(diff) > 0 {
 		t.Errorf("unexpected differences found between actual (%s) and expected (%s) output: %s", testResultPath, expectedresultPath, writeDiff(diff))
@@ -98,7 +129,7 @@ func TestIntegrationWMTS100(t *testing.T) {
 		log.Fatalf("error: %v, with file: %v", err, configPath)
 	}
 	buildWMTS1_0_0(*config)
-	testResultPath := path.Join(outputBasePath, "wmts_capabilities_1_0_0.xml")
+	testResultPath := path.Join(config.Services.WMTS100Config.Filename)
 	expectedresultPath := path.Join(expectedBasePath, "wmts_capabilities_1_0_0.xml")
 	diff := compareXML(testResultPath, expectedresultPath)
 	if len(diff) > 0 {

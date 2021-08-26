@@ -5,7 +5,7 @@ global:
   path: /wfs/wfs.cgi
 services:
   wfs200:
-    filename: ./output/wfs_capabilities_2_0_0.xml
+    filename: ./output/wfs_capabilities_2_0_0_inspire.xml
     definition:
       serviceidentification:
         title: OGC Member WFS
@@ -63,6 +63,19 @@ services:
               metadataurl:
                 href: https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=a29917b9-3426-4041-a11b-69bcb2256904
         operationsmetadata:
+          extendedcapabilities:
+            extendedcapabilities:
+              metadataurl:
+                type: simple
+                url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
+                mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
+              supportedlanguages:
+                defaultlanguage:
+                  language: dut
+              responselanguage:
+                language: dut
+              spatialdatasetidentifier:
+                code: 9ec26b36-84b0-4c39-a273-c2701d6c3087
           operation:
             - name: GetCapabilities
               dcp:
