@@ -65,3 +65,18 @@ docker build -t pdok/ogc-capabilities-generator .
 docker run --rm -d -v `pwd`/examples/config:/config -v `pwd`:/output \
 -e SERVICECONFIG=/config/wfs_2_0_0.yaml --name ogc pdok/ogc-capabilities-generator
 ```
+
+
+## Use the catalog
+
+You should have libxml2-utils installed: 
+
+```shell
+apt-get install libxml2-dev libxml2-utils
+```
+
+Now you can use the command with the catalog:
+
+```
+XML_CATALOG_FILES=./resources/xsd/catalog.xml ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
+```

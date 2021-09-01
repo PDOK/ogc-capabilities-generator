@@ -3,6 +3,7 @@ global:
   namespace: http://www.BlueOx.org/BlueOx
   onlineresourceurl: http://www.BlueOx.org
   path: /wfs/wfs.cgi
+  additionalschemalocations: "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd"
 services:
   wfs200:
     filename: ./output/wfs_capabilities_2_0_0_inspire.xml
@@ -66,7 +67,7 @@ services:
           extendedcapabilities:
             extendedcapabilities:
               metadataurl:
-                type: simple
+                type: inspire_common:resourceLocatorType
                 url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
                 mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
               supportedlanguages:

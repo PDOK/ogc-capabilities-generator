@@ -9,6 +9,7 @@ import (
 	"log"
 	"ogc-capabilities-generator/config"
 	"ogc-capabilities-generator/ows"
+	"ogc-capabilities-generator/validate"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -78,6 +79,8 @@ func buildWFS2_0_0(config config.Config) error {
 		return err
 	}
 
+	validate.ValidateCapabilities(&config, buf, config.Services.WFS200Config.Wfs200.SchemaLocation)
+
 	writeFile(config.Services.WFS200Config.Filename, buf)
 
 	return nil
@@ -105,6 +108,8 @@ func buildWMS1_3_0(config config.Config) error {
 	if err != nil {
 		return err
 	}
+
+	validate.ValidateCapabilities(&config, buf, config.Services.WMS130Config.Wms130.SchemaLocation)
 
 	writeFile(config.Services.WMS130Config.Filename, buf)
 
@@ -142,6 +147,8 @@ func buildWMTS1_0_0(config config.Config) error {
 		return err
 	}
 
+	validate.ValidateCapabilities(&config, buf, config.Services.WMTS100Config.Wmts100.SchemaLocation)
+
 	writeFile(config.Services.WMTS100Config.Filename, buf)
 
 	return nil
@@ -156,6 +163,9 @@ func buildWCS2_0_1(config config.Config) error {
 	if err != nil {
 		return err
 	}
+
+	validate.ValidateCapabilities(&config, buf, config.Services.WCS201Config.Wcs201.SchemaLocation)
+
 	writeFile(config.Services.WCS201Config.Filename, buf)
 
 	return nil
@@ -170,31 +180,31 @@ func main() {
 		log.Fatalf("error: %v, with file: %v", err, *serviceconfigpath)
 	}
 
-	var config config.Config
-	if err = yaml.Unmarshal(serviceconfig, &config); err != nil {
+	var cfg config.Config
+	if err = yaml.Unmarshal(serviceconfig, &cfg); err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	if config.Services.WFS200Config.Filename != "" {
-		if err := buildWFS2_0_0(config); err != nil {
+	if cfg.Services.WFS200Config.Filename != "" {
+		if err := buildWFS2_0_0(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
 	}
 
-	if config.Services.WMS130Config.Filename != "" {
-		if err := buildWMS1_3_0(config); err != nil {
+	if cfg.Services.WMS130Config.Filename != "" {
+		if err := buildWMS1_3_0(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
 	}
 
-	if config.Services.WMTS100Config.Filename != "" {
-		if err := buildWMTS1_0_0(config); err != nil {
+	if cfg.Services.WMTS100Config.Filename != "" {
+		if err := buildWMTS1_0_0(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
 	}
 
-	if config.Services.WCS201Config.Filename != "" {
-		if err := buildWCS2_0_1(config); err != nil {
+	if cfg.Services.WCS201Config.Filename != "" {
+		if err := buildWCS2_0_1(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
 	}

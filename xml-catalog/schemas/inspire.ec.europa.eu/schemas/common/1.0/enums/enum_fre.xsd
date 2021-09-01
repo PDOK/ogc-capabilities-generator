@@ -1,0 +1,106 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inspire.ec.europa.eu/schemas/common/1.0" targetNamespace="http://inspire.ec.europa.eu/schemas/common/1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.1">
+	<xs:complexType name="inspireTheme_fre">
+		<xs:complexContent>
+			<xs:restriction base="inspireTheme">
+				<xs:sequence>
+					<xs:element name="OriginatingControlledVocabulary" type="originatingControlledVocabularyGemetInspireThemes"/>
+					<xs:element name="KeywordValue">
+						<xs:simpleType>
+							<xs:restriction base="keywordValue">
+								<xs:enumeration value="Adresses"/>
+								<xs:enumeration value="Altitude"/>
+								<xs:enumeration value="B&#226;timents"/>
+								<xs:enumeration value="Caract&#233;ristiques g&#233;ographiques m&#233;t&#233;orologiques"/>
+								<xs:enumeration value="Caract&#233;ristiques g&#233;ographiques oc&#233;anographiques"/>
+								<xs:enumeration value="Conditions atmosph&#233;riques"/>
+								<xs:enumeration value="D&#233;nominations g&#233;ographiques"/>
+								<xs:enumeration value="G&#233;ologie"/>
+								<xs:enumeration value="Habitats et biotopes"/>
+								<xs:enumeration value="Hydrographie"/>
+								<xs:enumeration value="Installations agricoles et aquacoles"/>
+								<xs:enumeration value="Installations de suivi environnemental"/>
+								<xs:enumeration value="Lieux de production et sites industriels"/>
+								<xs:enumeration value="Occupation des terres"/>
+								<xs:enumeration value="Ortho-imagerie"/>
+								<xs:enumeration value="Parcelles cadastrales"/>
+								<xs:enumeration value="R&#233;f&#233;rentiels de coordonn&#233;es"/>
+								<xs:enumeration value="R&#233;gions biog&#233;ographiques"/>
+								<xs:enumeration value="R&#233;gions maritimes"/>
+								<xs:enumeration value="R&#233;partition de la population &#8212; d&#233;mographie"/>
+								<xs:enumeration value="R&#233;partition des esp&#232;ces"/>
+								<xs:enumeration value="R&#233;seaux de transport"/>
+								<xs:enumeration value="Ressources min&#233;rales"/>
+								<xs:enumeration value="Sant&#233; et s&#233;curit&#233; des personnes"/>
+								<xs:enumeration value="Services d'utilit&#233; publique et services publics"/>
+								<xs:enumeration value="Sites prot&#233;g&#233;s"/>
+								<xs:enumeration value="Sols"/>
+								<xs:enumeration value="Sources d'&#233;nergie"/>
+								<xs:enumeration value="Syst&#232;mes de maillage g&#233;ographique"/>
+								<xs:enumeration value="Unit&#233;s administratives"/>
+								<xs:enumeration value="Unit&#233;s statistiques"/>
+								<xs:enumeration value="Usage des sols"/>
+								<xs:enumeration value="Zones &#224; risque naturel"/>
+								<xs:enumeration value="Zones de gestion, de restriction ou de r&#233;glementation et unit&#233;s de d&#233;claration"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="resLocInspireInteroperabilityRegulation_fre">
+		<xs:complexContent>
+			<xs:restriction base="resourceLocatorType">
+				<xs:sequence>
+					<xs:element name="URL">
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:enumeration value="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2010:323:0011:0102:FR:PDF"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="MediaType">
+						<xs:simpleType>
+							<xs:restriction base="mediaType">
+								<xs:enumeration value="application/pdf"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="citationInspireInteroperabilityRegulation_fre">
+		<xs:complexContent>
+			<xs:restriction base="citationConformity">
+				<xs:sequence>
+					<xs:element name="Title">
+						<xs:simpleType>
+							<xs:restriction base="notEmptyString">
+								<xs:enumeration value="R&#200;GLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalit&#233;s d'application de la directive 2007/2/CE du Parlement europ&#233;en et du Conseil en ce qui concerne l'interop&#233;rabilit&#233; des s&#233;ries et des services de donn&#233;es g&#233;ographiques"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:choice>
+						<xs:element name="DateOfPublication">
+							<xs:simpleType>
+								<xs:restriction base="iso8601Date">
+									<xs:enumeration value="2010-12-08"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="URI" minOccurs="1" maxOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:enumeration value="OJ:L:2010:323:0011:0102:FR:PDF"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ResourceLocator" type="resLocInspireInteroperabilityRegulation_fre" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

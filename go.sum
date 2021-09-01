@@ -1,3 +1,5 @@
+bitbucket.org/jazzserve/go-xsd-validate v1.0.0 h1:2HZjr4yQO5Vgi6qbcz2eYPwH/rTWPk/3KsJ8xwNhv/k=
+bitbucket.org/jazzserve/go-xsd-validate v1.0.0/go.mod h1:xX9zUC8Y2+/Gl5Pz+QIs5+kxXYbByOymE3vxXbpdKbw=
 github.com/ajankovic/xdiff v0.0.1 h1:V1cj8t5xwYzm6ZGPqPOlAc9AIajXuTEn41D/1MJBWMM=
 github.com/ajankovic/xdiff v0.0.1/go.mod h1:SUmEZ67uB97I0zkiuQ+lb+LOms9ipn8X+p+2RdJV710=
 github.com/imdario/mergo v0.3.12 h1:b6R2BslTbIEToALKP7LxUvijTsNI9TAe80pLWN2g/HU=

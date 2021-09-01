@@ -1,4 +1,4 @@
-FROM golang:1.16.2-alpine3.13 AS build-env
+FROM golang:1.16.2-alpine3.14 AS build-env
 
 RUN apk update && apk upgrade && \
    apk add --no-cache bash git pkgconfig gcc g++ libc-dev libxml2 libxml2-dev
@@ -26,7 +26,9 @@ RUN go test ./... -covermode=atomic
 
 RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create create.go
 
-FROM scratch
+FROM alpine:3.14
+
+RUN /sbin/apk update && /sbin/apk upgrade && /sbin/apk add --no-cache libxml2
 
 # important for time conversion
 ENV TZ Europe/Amsterdam
@@ -37,8 +39,11 @@ ENV SERVICECONFIG=/
 
 # Import from builder.
 COPY --from=build-env /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build-env /go/src/app/xml-catalog /etc/xml-catalog
 COPY --from=build-env /create /
 
 ADD /base /base
+
+ENV XML_CATALOG_FILES=/etc/xml-catalog/ogc-catalog.xml
 
 CMD ["create"]

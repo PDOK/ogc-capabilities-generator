@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wfs:WFS_Capabilities xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:bo="http://www.BlueOx.org/BlueOx" version="2.0.0" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd ">
+<WFS_Capabilities xmlns:gml="http://www.opengis.net/gml/3.2" xmlns="http://www.opengis.net/wfs/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:bo="http://www.BlueOx.org/BlueOx" version="2.0.0" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd ">
  <ows:ServiceIdentification>
   <ows:Title>OGC Member WFS</ows:Title>
   <ows:Abstract>Web Feature Service maintained by NSDI data provider, serving FGDC framework layer XXX; contact Paul.Bunyon@BlueOx.org</ows:Abstract>
@@ -213,16 +213,16 @@
   </ows:Constraint>
   <ows:Constraint name="QueryExpressions">
    <ows:AllowedValues>
-    <ows:Value>wfs:Query</ows:Value>
-    <ows:Value>wfs:StoredQuery</ows:Value>
+    <ows:Value>Query</ows:Value>
+    <ows:Value>StoredQuery</ows:Value>
    </ows:AllowedValues>
   </ows:Constraint>
  </ows:OperationsMetadata>
- <wfs:FeatureTypeList>
-  <wfs:FeatureType>
-   <wfs:Name>bo:Wood</wfs:Name>
-   <wfs:Title>The Great Northern Forest</wfs:Title>
-   <wfs:Abstract>Describes the arborial diversity of the Great Northern Forest.</wfs:Abstract>
+ <FeatureTypeList>
+  <FeatureType>
+   <Name>bo:Wood</Name>
+   <Title>The Great Northern Forest</Title>
+   <Abstract>Describes the arborial diversity of the Great Northern Forest.</Abstract>
    <ows:Keywords>
     <ows:Keyword>forest</ows:Keyword>
     <ows:Keyword>north</ows:Keyword>
@@ -230,53 +230,53 @@
     <ows:Keyword>arborial</ows:Keyword>
     <ows:Keyword>diversity</ows:Keyword>
    </ows:Keywords>
-   <wfs:DefaultCRS>EPSG:6269</wfs:DefaultCRS>
-   <wfs:OtherCRS>EPSG:32615</wfs:OtherCRS>
-   <wfs:OtherCRS>EPSG:32616</wfs:OtherCRS>
-   <wfs:OtherCRS>EPSG:32617</wfs:OtherCRS>
-   <wfs:OtherCRS>EPSG:32618</wfs:OtherCRS>
-   <wfs:OutputFormats>
-    <wfs:Format>application/gml+xml; version=3.2</wfs:Format>
-    <wfs:Format>text/xml; subtype=gml/3.2.1</wfs:Format>
-    <wfs:Format>text/xml; subtype=gml/3.1.1</wfs:Format>
-    <wfs:Format>application/json; subtype=geojson</wfs:Format>
-    <wfs:Format>application/json</wfs:Format>
-   </wfs:OutputFormats>
+   <DefaultCRS>EPSG:6269</DefaultCRS>
+   <OtherCRS>EPSG:32615</OtherCRS>
+   <OtherCRS>EPSG:32616</OtherCRS>
+   <OtherCRS>EPSG:32617</OtherCRS>
+   <OtherCRS>EPSG:32618</OtherCRS>
+   <OutputFormats>
+    <Format>application/gml+xml; version=3.2</Format>
+    <Format>text/xml; subtype=gml/3.2.1</Format>
+    <Format>text/xml; subtype=gml/3.1.1</Format>
+    <Format>application/json; subtype=geojson</Format>
+    <Format>application/json</Format>
+   </OutputFormats>
    <ows:WGS84BoundingBox>
     <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
     <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
    </ows:WGS84BoundingBox>
-   <wfs:MetadataURL xlink:href="http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;amp;version=2.0.2&amp;amp;request=GetRecords&amp;amp;constraintlanguage=CQL&amp;amp;recordid=urn:uuid:4ee8b2d3-9409-4a1d-b26b-6782e4fa3d59"/>
-  </wfs:FeatureType>
-  <wfs:FeatureType>
-   <wfs:Name>bo:Lakes</wfs:Name>
-   <wfs:Title>The Great Northern Lakes</wfs:Title>
-   <wfs:Abstract>Lake boundaries for all lakes in the Great Northern Forest.</wfs:Abstract>
+   <MetadataURL xlink:href="http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;amp;version=2.0.2&amp;amp;request=GetRecords&amp;amp;constraintlanguage=CQL&amp;amp;recordid=urn:uuid:4ee8b2d3-9409-4a1d-b26b-6782e4fa3d59"/>
+  </FeatureType>
+  <FeatureType>
+   <Name>bo:Lakes</Name>
+   <Title>The Great Northern Lakes</Title>
+   <Abstract>Lake boundaries for all lakes in the Great Northern Forest.</Abstract>
    <ows:Keywords>
     <ows:Keyword>lakes</ows:Keyword>
     <ows:Keyword>boundaries</ows:Keyword>
     <ows:Keyword>water</ows:Keyword>
     <ows:Keyword>hydro</ows:Keyword>
    </ows:Keywords>
-   <wfs:DefaultCRS>EPSG:6269</wfs:DefaultCRS>
-   <wfs:OtherCRS>EPSG:32615</wfs:OtherCRS>
-   <wfs:OtherCRS>EPSG:32616</wfs:OtherCRS>
-   <wfs:OtherCRS>EPSG:32617</wfs:OtherCRS>
-   <wfs:OtherCRS>EPSG:32618</wfs:OtherCRS>
-   <wfs:OutputFormats>
-    <wfs:Format>application/gml+xml; version=3.2</wfs:Format>
-    <wfs:Format>text/xml; subtype=gml/3.2.1</wfs:Format>
-    <wfs:Format>text/xml; subtype=gml/3.1.1</wfs:Format>
-    <wfs:Format>application/json; subtype=geojson</wfs:Format>
-    <wfs:Format>application/json</wfs:Format>
-   </wfs:OutputFormats>
+   <DefaultCRS>EPSG:6269</DefaultCRS>
+   <OtherCRS>EPSG:32615</OtherCRS>
+   <OtherCRS>EPSG:32616</OtherCRS>
+   <OtherCRS>EPSG:32617</OtherCRS>
+   <OtherCRS>EPSG:32618</OtherCRS>
+   <OutputFormats>
+    <Format>application/gml+xml; version=3.2</Format>
+    <Format>text/xml; subtype=gml/3.2.1</Format>
+    <Format>text/xml; subtype=gml/3.1.1</Format>
+    <Format>application/json; subtype=geojson</Format>
+    <Format>application/json</Format>
+   </OutputFormats>
    <ows:WGS84BoundingBox>
     <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
     <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
    </ows:WGS84BoundingBox>
-   <wfs:MetadataURL xlink:href="http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;amp;version=2.0.2&amp;amp;request=GetRecords&amp;amp;constraintlanguage=CQL&amp;amp;recordid=urn:uuid:57973502-29cb-4114-8d64-9939627a0414"/>
-  </wfs:FeatureType>
- </wfs:FeatureTypeList>
+   <MetadataURL xlink:href="http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;amp;version=2.0.2&amp;amp;request=GetRecords&amp;amp;constraintlanguage=CQL&amp;amp;recordid=urn:uuid:57973502-29cb-4114-8d64-9939627a0414"/>
+  </FeatureType>
+ </FeatureTypeList>
  <fes:Filter_Capabilities>
   <fes:Conformance>
    <fes:Constraint name="ImplementsQuery">
@@ -390,4 +390,4 @@
    </fes:TemporalOperators>
   </fes:Temporal_Capabilities>
  </fes:Filter_Capabilities>
-</wfs:WFS_Capabilities>
+</WFS_Capabilities>
