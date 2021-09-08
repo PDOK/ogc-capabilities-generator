@@ -41,32 +41,44 @@
     <DCPType>
      <HTTP>
       <Get>
-       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path?"/>
+       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/?"/>
       </Get>
      </HTTP>
     </DCPType>
    </GetCapabilities>
    <GetMap>
-    <Format>image/gif</Format>
     <Format>image/png</Format>
     <Format>image/jpeg</Format>
+    <Format>image/png; mode=8bit</Format>
+    <Format>image/vnd.jpeg-png</Format>
+    <Format>image/vnd.jpeg-png8</Format>
     <DCPType>
      <HTTP>
       <Get>
-       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path?"/>
+       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/?"/>
       </Get>
+      <Post>
+       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/"/>
+      </Post>
      </HTTP>
     </DCPType>
    </GetMap>
    <GetFeatureInfo>
-    <Format>text/xml</Format>
-    <Format>text/plain</Format>
+    <Format>application/json</Format>
+    <Format>application/json; subtype=geojson</Format>
+    <Format>application/vnd.ogc.gml</Format>
     <Format>text/html</Format>
+    <Format>text/plain</Format>
+    <Format>text/xml</Format>
+    <Format>text/xml; subtype=gml/3.1.1</Format>
     <DCPType>
      <HTTP>
       <Get>
-       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path?"/>
+       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/?"/>
       </Get>
+      <Post>
+       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/"/>
+      </Post>
      </HTTP>
     </DCPType>
    </GetFeatureInfo>
