@@ -1,4 +1,4 @@
-FROM golang:1.16.2-alpine3.14 AS build-env
+FROM golang:1.16.2-alpine3.13 AS build-env
 
 RUN apk update && apk upgrade && \
    apk add --no-cache bash git pkgconfig gcc g++ libc-dev libxml2 libxml2-dev
@@ -22,11 +22,11 @@ ENV CGO_ENABLED=1
 # compile linux only
 ENV GOOS=linux
 # run tests
-RUN go test ./... -covermode=atomic
+RUN XML_CATALOG_FILES=/go/src/app/xml-catalog/ogc-catalog.xml go test ./... -covermode=atomic
 
 RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create create.go
 
-FROM alpine:3.14
+FROM alpine:3.13
 
 RUN /sbin/apk update && /sbin/apk upgrade && /sbin/apk add --no-cache libxml2
 
