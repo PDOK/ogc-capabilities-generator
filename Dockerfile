@@ -22,11 +22,13 @@ ENV CGO_ENABLED=1
 # compile linux only
 ENV GOOS=linux
 # run tests
-RUN go test ./... -covermode=atomic
+RUN XML_CATALOG_FILES=/go/src/app/xml-catalog/ogc-catalog.xml go test ./... -covermode=atomic
 
 RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create create.go
 
-FROM scratch
+FROM alpine:3.13
+
+RUN /sbin/apk update && /sbin/apk upgrade && /sbin/apk add --no-cache libxml2
 
 # important for time conversion
 ENV TZ Europe/Amsterdam
@@ -37,8 +39,11 @@ ENV SERVICECONFIG=/
 
 # Import from builder.
 COPY --from=build-env /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build-env /go/src/app/xml-catalog /etc/xml-catalog
 COPY --from=build-env /create /
 
 ADD /base /base
+
+ENV XML_CATALOG_FILES=/etc/xml-catalog/ogc-catalog.xml
 
 CMD ["create"]

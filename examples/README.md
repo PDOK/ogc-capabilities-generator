@@ -18,8 +18,8 @@ Missing examples:
 
 To only run the tests generating the examples run:
 
-```go
-go test -run TestIntegrationW -v
+```bash
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go test -run TestIntegrationW -v
 ```
 
 > **NOTE:** For each example an integration test case should be present in the 
