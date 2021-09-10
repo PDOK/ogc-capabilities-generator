@@ -35,15 +35,15 @@ configuration in two ways:
 2. setting the ENV var SERVICECONFIG={path/to/config.yaml}
 
 ```sh
-XML_CATALOG_FILES=./resources/xsd/catalog.xml ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
 ```
 
 In dev mode through `go run`:
 
 ```sh
-XML_CATALOG_FILES=./resources/xsd/catalog.xml go run . -c ./examples/config/wms_1_3_0.yaml
-XML_CATALOG_FILES=./resources/xsd/catalog.xml go run . -c ./examples/config/wfs_2_0_0.yaml
-XML_CATALOG_FILES=./resources/xsd/catalog.xml go run . -c ./examples/config/wmts_1_0_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go run . -c ./examples/config/wms_1_3_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go run . -c ./examples/config/wfs_2_0_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go run . -c ./examples/config/wmts_1_0_0.yaml
 ```
 
 ## How to configure
@@ -54,7 +54,7 @@ The ogc-capabilities-generator makes usage of the
 ## Test
 
 ```sh
-XML_CATALOG_FILES=./resources/xsd/catalog.xml go test ./... -covermode=atomic -v
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go test ./... -covermode=atomic -v
 ```
 
 ## Docker
@@ -92,5 +92,5 @@ Execute it:
 Now you can use the command with the catalog:
 
 ```
-XML_CATALOG_FILES=./resources/xsd/catalog.xml ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
 ```
