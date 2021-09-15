@@ -1,0 +1,106 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inspire.ec.europa.eu/schemas/common/1.0" targetNamespace="http://inspire.ec.europa.eu/schemas/common/1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.1">
+	<xs:complexType name="inspireTheme_cze">
+		<xs:complexContent>
+			<xs:restriction base="inspireTheme">
+				<xs:sequence>
+					<xs:element name="OriginatingControlledVocabulary" type="originatingControlledVocabularyGemetInspireThemes" minOccurs="1"/>
+					<xs:element name="KeywordValue">
+						<xs:simpleType>
+							<xs:restriction base="keywordValue">
+								<xs:enumeration value="Adresy"/>
+								<xs:enumeration value="Bioregiony"/>
+								<xs:enumeration value="Budovy"/>
+								<xs:enumeration value="Chr&#225;n&#283;n&#225; &#250;zem&#237;"/>
+								<xs:enumeration value="Dopravn&#237; s&#237;t&#283;"/>
+								<xs:enumeration value="Energetick&#233; zdroje"/>
+								<xs:enumeration value="Geologie"/>
+								<xs:enumeration value="Katastr&#225;ln&#237; parcely"/>
+								<xs:enumeration value="Krajinn&#253; pokryv"/>
+								<xs:enumeration value="Lidsk&#233; zdrav&#237; a bezpe&#269;nost"/>
+								<xs:enumeration value="Mo&#345;sk&#233; oblasti"/>
+								<xs:enumeration value="Nadmo&#345;sk&#225; v&#253;&#353;ka"/>
+								<xs:enumeration value="Nerostn&#233; suroviny"/>
+								<xs:enumeration value="Oblasti ohro&#382;en&#233; p&#345;&#237;rodn&#237;mi riziky"/>
+								<xs:enumeration value="Ortofotosn&#237;mky"/>
+								<xs:enumeration value="P&#367;da"/>
+								<xs:enumeration value="Rozlo&#382;en&#237; druh&#367;"/>
+								<xs:enumeration value="Rozlo&#382;en&#237; obyvatelstva &#8211; demografie"/>
+								<xs:enumeration value="Sou&#345;adnicov&#233; referen&#269;n&#237; syst&#233;my"/>
+								<xs:enumeration value="Spr&#225;vn&#237; jednotky"/>
+								<xs:enumeration value="Spr&#225;vn&#237; oblasti/chr&#225;n&#283;n&#225; p&#225;sma/regulovan&#225; &#250;zem&#237; a jednotky pod&#225;vaj&#237;c&#237; hl&#225;&#353;en&#237;"/>
+								<xs:enumeration value="Stanovi&#353;t&#283; a biotopy"/>
+								<xs:enumeration value="Statistick&#233; jednotky"/>
+								<xs:enumeration value="Stav ovzdu&#353;&#237;"/>
+								<xs:enumeration value="Ve&#345;ejn&#233; slu&#382;by a slu&#382;by ve&#345;ejn&#233; spr&#225;vy"/>
+								<xs:enumeration value="Vodopis"/>
+								<xs:enumeration value="V&#253;robn&#237; a pr&#367;myslov&#225; za&#345;&#237;zen&#237;"/>
+								<xs:enumeration value="Vyu&#382;it&#237; &#250;zem&#237;"/>
+								<xs:enumeration value="Za&#345;&#237;zen&#237; pro sledov&#225;n&#237; &#382;ivotn&#237;ho prost&#345;ed&#237;"/>
+								<xs:enumeration value="Zem&#283;d&#283;lsk&#225; a akvakulturn&#237; za&#345;&#237;zen&#237;"/>
+								<xs:enumeration value="Zem&#283;pisn&#233; meteorologick&#233; prvky"/>
+								<xs:enumeration value="Zem&#283;pisn&#233; n&#225;zvy"/>
+								<xs:enumeration value="Zem&#283;pisn&#233; oce&#225;nografick&#233; prvky"/>
+								<xs:enumeration value="Zem&#283;pisn&#233; soustavy sou&#345;adnicov&#253;ch s&#237;t&#237;"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="resLocInspireInteroperabilityRegulation_cze">
+		<xs:complexContent>
+			<xs:restriction base="resourceLocatorType">
+				<xs:sequence>
+					<xs:element name="URL">
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:enumeration value="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2010:323:0011:0102:CS:PDF"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="MediaType">
+						<xs:simpleType>
+							<xs:restriction base="mediaType">
+								<xs:enumeration value="application/pdf"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="citationInspireInteroperabilityRegulation_cze">
+		<xs:complexContent>
+			<xs:restriction base="citationConformity">
+				<xs:sequence>
+					<xs:element name="Title">
+						<xs:simpleType>
+							<xs:restriction base="notEmptyString">
+								<xs:enumeration value="NA&#344;&#205;ZEN&#205; KOMISE (EU) &#269;. 1089/2010 ze dne 23. listopadu 2010, kter&#253;m se prov&#225;d&#237; sm&#283;rnice Evropsk&#233;ho parlamentu a Rady 2007/2/ES, pokud jde o interoperabilitu sad prostorov&#253;ch dat a slu&#382;eb prostorov&#253;ch dat"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:choice>
+						<xs:element name="DateOfPublication">
+							<xs:simpleType>
+								<xs:restriction base="iso8601Date">
+									<xs:enumeration value="2010-12-08"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="URI" minOccurs="1" maxOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:enumeration value="OJ:L:2010:323:0011:0102:CS:PDF"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ResourceLocator" type="resLocInspireInteroperabilityRegulation_cze" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

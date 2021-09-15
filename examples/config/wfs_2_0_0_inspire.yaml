@@ -3,6 +3,7 @@ global:
   namespace: http://www.BlueOx.org/BlueOx
   onlineresourceurl: http://www.BlueOx.org
   path: /wfs/wfs.cgi
+  additionalschemalocations: "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd"
 services:
   wfs200:
     filename: ./output/wfs_capabilities_2_0_0_inspire.xml
@@ -18,7 +19,8 @@ services:
             - NSDI
             - Framework Data Layer
             - BlueOx
-          type: string
+          type:
+            text: string
         fees: NONE
         accesscontraints: NONE
       serviceprovider:
@@ -56,17 +58,21 @@ services:
               title: kadastralegrens
               abstract: Een Kadastrale Grens is de weergave van een grens op de kadastrale kaart die door de dienst van het Kadaster tussen percelen vastgesteld wordt, op basis van inlichtingen van belanghebbenden en met gebruikmaking van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven.
               keywords:
-                keyword:
-                  - Kadastrale grenzen
-                  - Grenzen
-                  - infoFeatureAccessService
+              - keyword:
+                - Kadastrale grenzen
+                - Grenzen
+                - infoFeatureAccessService
+              - keyword:
+                - bos
+                type:
+                  text: INSPIRETheme
+                  codespace: inspireTheme
               metadataurl:
                 href: https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=a29917b9-3426-4041-a11b-69bcb2256904
         operationsmetadata:
           extendedcapabilities:
             extendedcapabilities:
               metadataurl:
-                type: simple
                 url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
                 mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
               supportedlanguages:
@@ -248,21 +254,26 @@ services:
                   - wfs:StoredQuery
         featuretypelist:
           featuretype:
-            - name: "{{.Prefix}}:Wood"
+            - name: "{{.Prefix}}:Woods"
               title: The Great Northern Forest
               abstract: Describes the arborial diversity of the Great Northern Forest.
               keywords:
-                keyword:
+              - keyword:
                   - forest
                   - north
                   - woods
                   - arborial
                   - diversity
+              - keyword:
+                  - forest
+                type:
+                  text: INSPIRETheme
+                  codespace: inspireTheme
               metadataurl:
                 href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:4ee8b2d3-9409-4a1d-b26b-6782e4fa3d59
               defaultcrs: urn:ogc:def:crs:EPSG::6269
               othercrs:
-                - urn:ogc:def:crs:EPSG::32615
+                - EPSG:32615
                 - urn:ogc:def:crs:EPSG::32616
                 - urn:ogc:def:crs:EPSG::32617
                 - urn:ogc:def:crs:EPSG::32618
@@ -281,7 +292,7 @@ services:
               abstract: Lake boundaries for all lakes in the 
                Great Northern Forest.
               keywords:
-                keyword:
+              - keyword:
                   - lakes
                   - boundaries
                   - water

@@ -43,7 +43,6 @@ services:
         wmscapabilities:
           extendedcapabilities:
             metadataurl:
-              type: simple
               url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
               mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
             supportedlanguages:
@@ -51,38 +50,6 @@ services:
                 language: dut
             responselanguage:
               language: dut
-          request:
-            getcapabilities:
-              format:
-                - text/xml
-              dcptype:
-                http:
-                  get:
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      href: "{{.Onlineresourceurl}}{{.Path}}?"
-            getmap:
-              format:
-                - image/gif
-                - image/png
-                - image/jpeg
-              dcptype:
-                http:
-                  get:
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      href: "{{.Onlineresourceurl}}{{.Path}}?"
-            getfeatureinfo:
-              format:
-                - text/xml
-                - text/plain
-                - text/html
-              dcptype:
-                http:
-                  get:
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      href: "{{.Onlineresourceurl}}{{.Path}}?"
           layer:
             - title: Acme Corp. Map Server
               abstract: 

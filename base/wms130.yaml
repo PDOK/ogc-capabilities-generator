@@ -10,7 +10,7 @@ service:
   name: WMS
   onlineresource:
     xlink: http://www.w3.org/1999/xlink
-    href: "{{.Onlineresourceurl}}"
+    href: "{{.Onlineresourceurl}}/"
   contactinformation:
     contactpersonprimary:
       contactperson: KlantContactCenter PDOK
@@ -36,7 +36,7 @@ capability:
     request:
       getcapabilities:
         format:
-          - text/xml   
+          - text/xml
         dcptype:
           http:
             get:

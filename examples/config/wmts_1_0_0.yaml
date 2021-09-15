@@ -16,7 +16,7 @@ services:
         xsi: http://www.w3.org/2001/XMLSchema-instance
         gml: http://www.opengis.net/gml
         version: 1.0.0
-        schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd
+        schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmts.xsd
       serviceidentification:
         title: Web Map Tile Service
         abstract: Service that contrains the map access interface to some TileMatrixSets
@@ -92,6 +92,13 @@ services:
               tileheight: 256
               matrixwidth: 18
               matrixheight: 12
+          - identifier: "EPSG:28992"
+            tilematrix:
+              - identifier: "00"
+              - identifier: "01"
+              - identifier: "02"
+          - identifier: "EPSG:3857"
+          - identifier: "Unlinked"
         layer:
           - title: Coastlines
             abstract: Coastline/shorelines (BA010)
@@ -113,5 +120,6 @@ services:
               - image/png
               - image/gif
             tilematrixsetlink:
-              - tilematrixset: "BigWorld"        
-        
+              - tilematrixset: "BigWorld"
+              - tilematrixset: "EPSG:28992"
+              - tilematrixset: "EPSG:3857"

@@ -1,0 +1,106 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inspire.ec.europa.eu/schemas/common/1.0" targetNamespace="http://inspire.ec.europa.eu/schemas/common/1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.1">
+	<xs:complexType name="inspireTheme_slv">
+		<xs:complexContent>
+			<xs:restriction base="inspireTheme">
+				<xs:sequence>
+					<xs:element name="OriginatingControlledVocabulary" type="originatingControlledVocabularyGemetInspireThemes"/>
+					<xs:element name="KeywordValue">
+						<xs:simpleType>
+							<xs:restriction base="keywordValue">
+								<xs:enumeration value="Biogeografske regije"/>
+								<xs:enumeration value="Digitalni model vi&#353;in"/>
+								<xs:enumeration value="Energetski viri"/>
+								<xs:enumeration value="Geografska koordinatna mre&#382;a"/>
+								<xs:enumeration value="Geologija"/>
+								<xs:enumeration value="Habitati in biotopi"/>
+								<xs:enumeration value="Hidrografija"/>
+								<xs:enumeration value="Katastrske parcele"/>
+								<xs:enumeration value="Komunalne in javne storitve"/>
+								<xs:enumeration value="Meteorolo&#353;ke zna&#269;ilnosti"/>
+								<xs:enumeration value="Mineralni viri"/>
+								<xs:enumeration value="Morske regije"/>
+								<xs:enumeration value="Namenska raba tal"/>
+								<xs:enumeration value="Naprave in objekti za monitoring okolja"/>
+								<xs:enumeration value="Naslovi"/>
+								<xs:enumeration value="Objekti in naprave za kmetijstvo in ribogojstvo"/>
+								<xs:enumeration value="Obmo&#269;ja nevarnosti naravnih nesre&#269;"/>
+								<xs:enumeration value="Obmo&#269;ja upravljanja/zaprta obmo&#269;ja/regulirana obmo&#269;ja in poro&#269;evalske enote"/>
+								<xs:enumeration value="Oceanogeografske zna&#269;ilnosti"/>
+								<xs:enumeration value="Ortofoto"/>
+								<xs:enumeration value="Ozra&#269;je"/>
+								<xs:enumeration value="Pokrovnost tal"/>
+								<xs:enumeration value="Porazdelitev prebivalstva &#8211; demografski podatki"/>
+								<xs:enumeration value="Porazdelitev vrst"/>
+								<xs:enumeration value="Proizvodni in industrijski objekti in naprave"/>
+								<xs:enumeration value="Prometna omre&#382;ja"/>
+								<xs:enumeration value="Referen&#269;ni koordinatni sistemi"/>
+								<xs:enumeration value="Statisti&#269;ni okoli&#353;i"/>
+								<xs:enumeration value="Stavbe"/>
+								<xs:enumeration value="Tla"/>
+								<xs:enumeration value="Upravne enote"/>
+								<xs:enumeration value="Zavarovana obmo&#269;ja"/>
+								<xs:enumeration value="Zdravje in varnost prebivalstva"/>
+								<xs:enumeration value="Zemljepisna imena"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="resLocInspireInteroperabilityRegulation_slv">
+		<xs:complexContent>
+			<xs:restriction base="resourceLocatorType">
+				<xs:sequence>
+					<xs:element name="URL">
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:enumeration value="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2010:323:0011:0102:SL:PDF"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="MediaType">
+						<xs:simpleType>
+							<xs:restriction base="mediaType">
+								<xs:enumeration value="application/pdf"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="citationInspireInteroperabilityRegulation_slv">
+		<xs:complexContent>
+			<xs:restriction base="citationConformity">
+				<xs:sequence>
+					<xs:element name="Title">
+						<xs:simpleType>
+							<xs:restriction base="notEmptyString">
+								<xs:enumeration value="UREDBA KOMISIJE (EU) &#353;t. 1089/2010 z dne 23. novembra 2010 o izvajanju Direktive 2007/2/ES Evropskega parlamenta in Sveta glede medopravilnosti zbirk prostorskih podatkov in storitev v zvezi s prostorskimi podatki"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:choice>
+						<xs:element name="DateOfPublication">
+							<xs:simpleType>
+								<xs:restriction base="iso8601Date">
+									<xs:enumeration value="2010-12-08"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="URI" minOccurs="1" maxOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:enumeration value="OJ:L:2010:323:0011:0102:SL:PDF"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ResourceLocator" type="resLocInspireInteroperabilityRegulation_slv" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

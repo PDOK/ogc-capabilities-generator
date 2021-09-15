@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN" "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <system systemId="http://schemas.opengis.net/wfs/2.0/wfs.xsd" uri="schemas/schemas.opengis.net/wfs/2.0/wfs.xsd"/>
+  <system systemId="http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd" uri="schemas/schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd"/>
+  <system systemId="http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd" uri="schemas/schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd"/>
+  <system systemId="http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd" uri="schemas/inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"/>
+  <system systemId="http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd" uri="schemas/inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd"/>
+  <system systemId="http://schemas.opengis.net/wmts/1.0/wmts.xsd" uri="schemas/schemas.opengis.net/wmts/1.0/wmts.xsd"/>
+</catalog>

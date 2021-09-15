@@ -15,9 +15,6 @@ services:
             - bird
             - roadrunner
             - ambush
-        onlineresource:
-          xlink: http://www.w3.org/1999/xlink
-          href: "{{.Onlineresourceurl}}/"
         fees: none
         accessconstraints: none
         contactinformation: 
@@ -41,38 +38,6 @@ services:
 
       capability:
         wmscapabilities:
-          request:
-            getcapabilities:
-              format:
-                - text/xml   
-              dcptype:
-                http:
-                  get:
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      href: "{{.Onlineresourceurl}}{{.Path}}?"
-            getmap:
-              format:
-                - image/gif
-                - image/png
-                - image/jpeg
-              dcptype:
-                http:
-                  get:
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      href: "{{.Onlineresourceurl}}{{.Path}}?"
-            getfeatureinfo:
-              format:
-                - text/xml
-                - text/plain
-                - text/html
-              dcptype:
-                http:
-                  get:
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      href: "{{.Onlineresourceurl}}{{.Path}}?"
           layer:
             - title: Acme Corp. Map Server
               abstract: 

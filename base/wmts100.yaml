@@ -5,7 +5,7 @@ namespaces:
   xsi: http://www.w3.org/2001/XMLSchema-instance
   gml: http://www.opengis.net/gml
   version: 1.0.0
-  schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd
+  schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmts.xsd
 
 serviceidentification:
   servicetype: OGC WMTS

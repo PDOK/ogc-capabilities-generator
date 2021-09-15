@@ -35,15 +35,15 @@ configuration in two ways:
 2. setting the ENV var SERVICECONFIG={path/to/config.yaml}
 
 ```sh
-./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
 ```
 
 In dev mode through `go run`:
 
 ```sh
-go run . -c ./examples/config/wms_1_3_0.yaml
-go run . -c ./examples/config/wfs_2_0_0.yaml
-go run . -c ./examples/config/wmts_1_0_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go run . -c ./examples/config/wms_1_3_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go run . -c ./examples/config/wfs_2_0_0.yaml
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go run . -c ./examples/config/wmts_1_0_0.yaml
 ```
 
 ## How to configure
@@ -54,7 +54,7 @@ The ogc-capabilities-generator makes usage of the
 ## Test
 
 ```sh
-go test ./... -covermode=atomic -v
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go test ./... -covermode=atomic -v
 ```
 
 ## Docker
@@ -64,4 +64,33 @@ docker build -t pdok/ogc-capabilities-generator .
 
 docker run --rm -d -v `pwd`/examples/config:/config -v `pwd`:/output \
 -e SERVICECONFIG=/config/wfs_2_0_0.yaml --name ogc pdok/ogc-capabilities-generator
+```
+
+
+## XML catalog
+
+### Install
+You should have libxml2-utils installed: 
+
+```shell
+apt-get install libxml2-dev libxml2-utils
+```
+
+### Build
+
+Download the relevant xsd schemas and its children into the `xml-catalog/schemas` directory
+([this tool](https://github.com/n-a-t-e/xsd_download) does the job).
+
+Add a line to the `build-catalog.sh` script for each downloaded schema url and its relative file location.
+Execute it:
+
+```shell
+./build-catalog.sh
+```
+
+### Usage
+Now you can use the command with the catalog:
+
+```
+XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml ./ogc-capabilities-generator -c ./examples/config/wmts_1_0_0.yaml
 ```

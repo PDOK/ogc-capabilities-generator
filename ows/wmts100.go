@@ -38,37 +38,68 @@ func (t WMTS100Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.V
 	if typ == reflect.TypeOf(wmts100.Contents{}) {
 		return func(dst, src reflect.Value) error {
 			// collect all tilematrixset references from Layer/TileMatrixSetLink
-			tms_links := make(map[string]bool)
-			src_contents := src.Interface().(wmts100.Contents)
+			tmsLinks := make(map[string]bool)
+			srcContents := src.Interface().(wmts100.Contents)
 			contents := dst.Interface().(wmts100.Contents)
 			for _, lyr := range contents.Layer {
 				for _, tmsl := range lyr.TileMatrixSetLink {
-					tms_links[tmsl.TileMatrixSet] = true
+					tmsLinks[tmsl.TileMatrixSet] = true
 				}
 			}
-			// generate set of all tilematrixset definitions in both base and overlay
-			tms_set := make(map[string]wmts100.TileMatrixSet)
-			// overwrite tilematrixsets from src by dst; note the order of `append()`
-			for _, tms := range append(src_contents.TileMatrixSet, contents.TileMatrixSet...) {
-				tms_set[tms.Identifier] = tms
-			}
-			// iterate over the set of all tilematrixset definitions and check if a layer refers
-			// to this tilematrixset definition, if so include this tilematrix set in the output
-			merged := []wmts100.TileMatrixSet{}
-			for _, tms := range tms_set {
-				tmsCopy := tms
-				if _, ok := tms_links[tms.Identifier]; ok {
-					tmsCopy.TileMatrix = []wmts100.TileMatrix{}
-					for _, tm := range tms.TileMatrix {
-						tmsCopy.TileMatrix = append(tmsCopy.TileMatrix, tm)
-					}
-					merged = append(merged, tmsCopy)
-				}
-			}
-			contents.TileMatrixSet = merged
+			contents.TileMatrixSet = mergeTilematrixSets(contents.TileMatrixSet, srcContents.TileMatrixSet, tmsLinks)
 			dst.Set(reflect.ValueOf(contents))
 			return nil
 		}
 	}
 	return nil
+}
+
+// mergeTilematrixSets selectively includes TileMatrixSet and TileMatrix definitions when:
+// - TileMatrixSet is in dst, but not in src, dst TileMatrixSet is included
+// - dst TileMatrixSet exists, but is empty, src TileMatrixSet is included completely
+// - dst TileMatrixSet has a subset of TileMatrices identified, those TileMatrices are included from src
+// - TileMatrixSet in src, but not in dst, src TileMatrixSet is _not_ included
+func mergeTilematrixSets(dst []wmts100.TileMatrixSet, src []wmts100.TileMatrixSet, tmsLinks map[string]bool) []wmts100.TileMatrixSet {
+	content := make(map[string]map[string]bool)
+	for _, tms := range dst {
+		if tms.TileMatrix != nil {
+			content[tms.Identifier] = make(map[string]bool)
+			for _, tm := range tms.TileMatrix {
+				content[tms.Identifier][tm.Identifier] = true
+			}
+		} else {
+			content[tms.Identifier] = nil
+		}
+	}
+
+	// obtain TileMatrixSet and TileMatrix items from 'src'
+	srcTileMatrices := make(map[string]wmts100.TileMatrixSet)
+	for _, tms := range src {
+		tmsCopy := tms
+		if dstTmMap, ok := content[tms.Identifier]; ok {
+			if dstTmMap != nil {
+				tmsCopy.TileMatrix = []wmts100.TileMatrix{}
+				for _, tm := range tms.TileMatrix {
+					if _, ok := dstTmMap[tm.Identifier]; ok {
+						tmsCopy.TileMatrix = append(tmsCopy.TileMatrix, tm)
+					}
+				}
+			}
+			srcTileMatrices[tms.Identifier] = tmsCopy
+		}
+	}
+
+	var merged []wmts100.TileMatrixSet
+	for _, tms := range dst {
+		// keep dst order and filter linked tms
+		if _, ok := tmsLinks[tms.Identifier]; ok {
+			if srcTms, ok := srcTileMatrices[tms.Identifier]; ok {
+				merged = append(merged, srcTms)
+			} else {
+				merged = append(merged, tms)
+			}
+		}
+	}
+
+	return merged
 }
