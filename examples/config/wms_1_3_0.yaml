@@ -53,26 +53,6 @@ services:
                 name: ROADS_RIVERS
                 crs: 
                   - "EPSG:26986"
-                exgeographicboundingbox:
-                  westboundlongitude: -71.63
-                  eastboundlongitude: -70.78
-                  southboundlatitude: 41.75
-                  northboundlatitude: 42.90
-                boundingbox:
-                - crs: CRS:84
-                  minx: -71.63
-                  miny: 41.75
-                  maxx: -70.78
-                  maxy: 42.90
-                  resx: 0.1
-                  resy: 0.1
-                - crs: EPSG:26986
-                  minx: 189000
-                  miny: 834000
-                  maxx: 285000
-                  maxy: 962000
-                  resx: 1.0
-                  resy: 1.0
                 attribution:
                   title: State College University
                   onlineresource:
