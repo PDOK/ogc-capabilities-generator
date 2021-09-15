@@ -90,12 +90,12 @@ capability:
           - EPSG:4258
           - EPSG:4326
           - CRS:84
-        exgeographicboundingbox:
+        exgeographicboundingbox:       # without this Qgis cannot use the wms
           westboundlongitude: 2.52713
           eastboundlongitude: 7.37403
           southboundlatitude: 50.2129
           northboundlatitude: 55.7212
-        boundingbox:
+        boundingbox:                   # without this Qgis cannot use the wms
           - crs: EPSG:28992
             minx: -25000
             miny: 250000
