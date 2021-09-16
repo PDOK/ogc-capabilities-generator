@@ -4,8 +4,6 @@ github.com/ajankovic/xdiff v0.0.1 h1:V1cj8t5xwYzm6ZGPqPOlAc9AIajXuTEn41D/1MJBWMM
 github.com/ajankovic/xdiff v0.0.1/go.mod h1:SUmEZ67uB97I0zkiuQ+lb+LOms9ipn8X+p+2RdJV710=
 github.com/imdario/mergo v0.3.12 h1:b6R2BslTbIEToALKP7LxUvijTsNI9TAe80pLWN2g/HU=
 github.com/imdario/mergo v0.3.12/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
-github.com/pdok/ogc-specifications v0.2.12 h1:K0oqtFYjAHrillmjcWi++ABG7YoVX0hb4DHahXDELAY=
-github.com/pdok/ogc-specifications v0.2.12/go.mod h1:rkrIwIBIUl4oyn3aMVtJLipDRtFHp3oa9dSu/MyDt1o=
 github.com/pdok/ogc-specifications v0.2.13 h1:FV/k6svDp63bZ7BCOUBvTyLgObGU9AnktWIn683Utqs=
 github.com/pdok/ogc-specifications v0.2.13/go.mod h1:rkrIwIBIUl4oyn3aMVtJLipDRtFHp3oa9dSu/MyDt1o=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
