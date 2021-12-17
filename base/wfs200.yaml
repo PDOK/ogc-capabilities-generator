@@ -259,6 +259,7 @@ capabilities:
         - name: PropertyIsGreaterThanOrEqualTo
         - name: PropertyIsLike
         - name: PropertyIsBetween
+        - name: PropertyIsNull
   
     spatialcapabilities:
       geometryoperands:
