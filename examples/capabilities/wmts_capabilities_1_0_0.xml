@@ -52,14 +52,26 @@
   <ows:Operation name="GetTile">
    <ows:DCP>
     <ows:HTTP>
-     <ows:Get xlink:type="simple" xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi?"/>
+     <ows:Get xlink:type="simple" xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi?">
+      <ows:Constraint name="GetEncoding">
+       <ows:AllowedValues>
+        <ows:Value>KVP</ows:Value>
+       </ows:AllowedValues>
+      </ows:Constraint>
+     </ows:Get>
     </ows:HTTP>
    </ows:DCP>
   </ows:Operation>
   <ows:Operation name="GetFeatureInfo">
    <ows:DCP>
     <ows:HTTP>
-     <ows:Get xlink:type="simple" xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi?"/>
+     <ows:Get xlink:type="simple" xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi?">
+      <ows:Constraint name="GetEncoding">
+       <ows:AllowedValues>
+        <ows:Value>KVP</ows:Value>
+       </ows:AllowedValues>
+      </ows:Constraint>
+     </ows:Get>
     </ows:HTTP>
    </ows:DCP>
   </ows:Operation>
@@ -333,4 +345,5 @@
    </TileMatrix>
   </TileMatrixSet>
  </Contents>
+ <ServiceMetadataURL xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi/WMTSCapabilities.xml"/>
 </Capabilities>

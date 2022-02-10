@@ -29,6 +29,8 @@ services:
         servicetypeversion: 1.0.0
         fees: none
         accessconstraints: none
+      servicemetadataurl:
+        href: "{{.Onlineresourceurl}}{{.Path}}/WMTSCapabilities.xml"
       serviceprovider:
         providername: MiraMon
         providersite: 
@@ -67,12 +69,22 @@ services:
                   get:
                     type: simple
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
+                    constraint:
+                      - name: GetEncoding
+                        allowedvalues:
+                          value:
+                            - KVP
             - name: GetFeatureInfo
               dcp:
                 http:
                   get:
                     type: simple
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
+                    constraint:
+                      - name: GetEncoding
+                        allowedvalues:
+                          value:
+                            - KVP
       contents:
         tilematrixset:
           - identifier: "BigWorld"
@@ -123,3 +135,4 @@ services:
               - tilematrixset: "BigWorld"
               - tilematrixset: "EPSG:28992"
               - tilematrixset: "EPSG:3857"
+

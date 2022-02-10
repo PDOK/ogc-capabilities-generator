@@ -43,7 +43,7 @@ func buildCapabilities(v interface{}, g config.Global) ([]byte, error) {
 		return nil, errors.New("no dataset prefix defined")
 	}
 
-	si, _ := xml.MarshalIndent(v, "", " ")
+	si, _ := xml.MarshalIndent(v, "", "\t")
 	t := template.Must(template.New("capabilities").Parse(string(si)))
 	buf := &bytes.Buffer{}
 	err := t.Execute(buf, g)

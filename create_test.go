@@ -19,12 +19,12 @@ type dummy struct {
 
 var expectedresult = `<?xml version="1.0" encoding="UTF-8"?>
 <dummy>
- <namespace>namespace</namespace>
- <prefix>prefix</prefix>
- <onlineresourceurl>onlineresourceurl</onlineresourceurl>
- <path>path</path>
- <version>version</version>
- <empty/>
+	<namespace>namespace</namespace>
+	<prefix>prefix</prefix>
+	<onlineresourceurl>onlineresourceurl</onlineresourceurl>
+	<path>path</path>
+	<version>version</version>
+	<empty/>
 </dummy>`
 
 func TestBuildCapabilities(t *testing.T) {
