@@ -1,13 +1,6 @@
 # ogc-capabilities-generator
 
-![GitHub
-license](https://img.shields.io/github/license/PDOK/ogc-capabilities-generator)
-[![GitHub
-release](https://img.shields.io/github/release/PDOK/ogc-capabilities-generator.svg)](https://github.com/PDOK/ogc-capabilities-generator/releases)
-[![Go Report
-Card](https://goreportcard.com/badge/PDOK/ogc-capabilities-generator)](https://goreportcard.com/report/PDOK/ogc-capabilities-generator)
-[![Docker
-Pulls](https://img.shields.io/docker/pulls/pdok/ogc-capabilities-gen.svg)](https://hub.docker.com/r/pdok/ogc-capabilities-gen)
+[![Build Status](https://dev.kadaster.nl/jenkins-pdok/buildStatus/icon?job=pdok-gitea%2Fogc-capabilities-generator%2Fmaster)](https://dev.kadaster.nl/jenkins-pdok/job/pdok-gitea/job/ogc-capabilities-generator/job/master/)
 
 ## What will it do
 
