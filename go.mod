@@ -1,6 +1,6 @@
 module ogc-capabilities-generator
 
-go 1.16
+go 1.20
 
 require (
 	bitbucket.org/jazzserve/go-xsd-validate v1.0.0
