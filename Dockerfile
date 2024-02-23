@@ -1,6 +1,4 @@
-ARG REGISTRY="docker.io"
-
-FROM ${REGISTRY}/golang:1.16.2-alpine3.13 AS build-env
+FROM golang:1.16.2-alpine3.13 AS build-env
 
 RUN apk update && apk upgrade && \
    apk add --no-cache bash git pkgconfig gcc g++ libc-dev libxml2 libxml2-dev
@@ -28,7 +26,7 @@ RUN XML_CATALOG_FILES=/go/src/app/xml-catalog/ogc-catalog.xml go test ./... -cov
 
 RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create create.go
 
-FROM ${REGISTRY}/alpine:3.13
+FROM alpine:3.13
 
 RUN /sbin/apk update && /sbin/apk upgrade && /sbin/apk add --no-cache libxml2
 
