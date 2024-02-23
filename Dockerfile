@@ -26,7 +26,7 @@ RUN XML_CATALOG_FILES=/go/src/app/xml-catalog/ogc-catalog.xml go test ./... -cov
 
 RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create create.go
 
-FROM alpine:3.13
+FROM alpine:3.19
 
 RUN /sbin/apk update && /sbin/apk upgrade && /sbin/apk add --no-cache libxml2
 
