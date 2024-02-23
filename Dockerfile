@@ -1,4 +1,4 @@
-FROM golang:1.16.2-alpine3.13 AS build-env
+FROM golang:1.17.3-alpine3.13 AS build-env
 
 RUN apk update && apk upgrade && \
    apk add --no-cache bash git pkgconfig gcc g++ libc-dev libxml2 libxml2-dev
