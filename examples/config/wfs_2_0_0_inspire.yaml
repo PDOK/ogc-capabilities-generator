@@ -52,23 +52,6 @@ services:
                page of our web site.
           role: PointOfContact
       capabilities:
-        featuretypelist:
-          featuretype:
-            - name: kadastralekaartv4:kadastralegrens
-              title: kadastralegrens
-              abstract: Een Kadastrale Grens is de weergave van een grens op de kadastrale kaart die door de dienst van het Kadaster tussen percelen vastgesteld wordt, op basis van inlichtingen van belanghebbenden en met gebruikmaking van de aan de kadastrale kaart ten grondslag liggende bescheiden die in elk geval de landmeetkundige gegevens bevatten van hetgeen op die kaart wordt weergegeven.
-              keywords:
-              - keyword:
-                - Kadastrale grenzen
-                - Grenzen
-                - infoFeatureAccessService
-              - keyword:
-                - bos
-                type:
-                  text: INSPIRETheme
-                  codespace: inspireTheme
-              metadataurl:
-                href: https://www.nationaalgeoregister.nl/geonetwork/srv/dut/xml.metadata.get?uuid=a29917b9-3426-4041-a11b-69bcb2256904
         operationsmetadata:
           extendedcapabilities:
             extendedcapabilities:
@@ -94,12 +77,12 @@ services:
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
               parameter:
                 - name: AcceptVersions
-                  allowedvalues: 
-                    value: 
+                  allowedvalues:
+                    value:
                     - 2.0.0
                 - name: AcceptFormats
-                  allowedvalues: 
-                    value: 
+                  allowedvalues:
+                    value:
                     - text/xml
             - name: DescribeFeatureType
               dcp:
@@ -166,10 +149,10 @@ services:
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
               constraints:
               - name: AutomaticDataLocking
-                novalues: 
+                novalues:
                 defaultvalue: TRUE
               - name: PreservesSiblingOrder
-                novalues: 
+                novalues:
                 defaultvalue: TRUE
             - name: LockFeature
               dcp:
@@ -374,5 +357,3 @@ services:
               - name: gml:MultiGeometry
               - name: gml:Box
               - name: gml:Envelope  
-
-        

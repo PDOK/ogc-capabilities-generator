@@ -343,6 +343,15 @@
     <MatrixWidth>524288</MatrixWidth>
     <MatrixHeight>524288</MatrixHeight>
    </TileMatrix>
+   <TileMatrix>
+    <ows:Identifier>20</ows:Identifier>
+    <ScaleDenominator>533.182395962445</ScaleDenominator>
+    <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+    <TileWidth>256</TileWidth>
+    <TileHeight>256</TileHeight>
+    <MatrixWidth>1048576</MatrixWidth>
+    <MatrixHeight>1048576</MatrixHeight>
+   </TileMatrix>
   </TileMatrixSet>
  </Contents>
  <ServiceMetadataURL xlink:href="http://www.miramon.uab.es/cgi-bin/MiraMon5_0.cgi/WMTSCapabilities.xml"/>

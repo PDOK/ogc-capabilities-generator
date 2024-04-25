@@ -1,10 +1,10 @@
 package ows
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 
 	"github.com/pdok/ogc-specifications/pkg/wcs201"
 )
@@ -14,7 +14,7 @@ var WCS201Base wcs201.GetCapabilitiesResponse
 
 func init() {
 	wcs201Response := wcs201.GetCapabilitiesResponse{}
-	base, err := ioutil.ReadFile("./base/wcs201.yaml")
+	base, err := os.ReadFile("./base/wcs201.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
