@@ -1,11 +1,11 @@
 package ows
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 	"reflect"
 
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 
 	"github.com/pdok/ogc-specifications/pkg/wms130"
 )
@@ -15,7 +15,7 @@ var WMS130Base wms130.GetCapabilitiesResponse
 
 func init() {
 	wms130Response := wms130.GetCapabilitiesResponse{}
-	base, err := ioutil.ReadFile("./base/wms130.yaml")
+	base, err := os.ReadFile("./base/wms130.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -27,11 +27,6 @@ func init() {
 
 // WMS130Transfomer struct
 type WMS130Transfomer struct {
-}
-
-func setNilPtr2(i interface{}) {
-	v := reflect.ValueOf(i)
-	v.Elem().Set(reflect.Zero(v.Elem().Type()))
 }
 
 // Transformer skip LayerList when merging Base to config, this is a custom operation
