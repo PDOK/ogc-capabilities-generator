@@ -110,6 +110,28 @@ services:
               - identifier: "01"
               - identifier: "02"
           - identifier: "EPSG:3857"
+            tilematrix:
+              - identifier: 00
+              - identifier: 01
+              - identifier: 02
+              - identifier: 03
+              - identifier: 04
+              - identifier: 05
+              - identifier: 06
+              - identifier: 07
+              - identifier: 08
+              - identifier: 09
+              - identifier: 10
+              - identifier: 11
+              - identifier: 12
+              - identifier: 13
+              - identifier: 14
+              - identifier: 15
+              - identifier: 16
+              - identifier: 17
+              - identifier: 18
+              - identifier: 19
+              - identifier: 20
           - identifier: "Unlinked"
         layer:
           - title: Coastlines
