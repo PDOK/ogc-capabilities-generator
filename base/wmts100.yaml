@@ -121,6 +121,20 @@ contents:
       tileheight: 256
       matrixwidth: 180000
       matrixheight: 120000
+    - identifier: 15
+      scaledenominator: 250.0
+      topleftcorner: -2404683.40739 8298457.58466
+      tilewidth: 256
+      tileheight: 256
+      matrixwidth: 360000
+      matrixheight: 240000
+    - identifier: 16
+      scaledenominator: 100.0
+      topleftcorner: -2404683.40739 8298457.58466
+      tilewidth: 256
+      tileheight: 256
+      matrixwidth: 900000
+      matrixheight: 600000
   - identifier: EPSG:28992
     supportedcrs: urn:ogc:def:crs:EPSG::28992
     tilematrix:
@@ -393,3 +407,31 @@ contents:
       tileheight: 256
       matrixwidth: 1048576
       matrixheight: 1048576
+    - identifier: 21
+      scaledenominator: 266.591197981222
+      topleftcorner: -20037508.3428 20037508.3428
+      tilewidth: 256
+      tileheight: 256
+      matrixwidth: 2097152
+      matrixheight: 2097152
+    - identifier: 22
+      scaledenominator: 133.295598990611
+      topleftcorner: -20037508.3428 20037508.3428
+      tilewidth: 256
+      tileheight: 256
+      matrixwidth: 4194304
+      matrixheight: 4194304
+    - identifier: 23
+      scaledenominator: 66.6477994953056
+      topleftcorner: -20037508.3428 20037508.3428
+      tilewidth: 256
+      tileheight: 256
+      matrixwidth: 8388608
+      matrixheight: 8388608
+    - identifier: 24
+      scaledenominator: 33.3238997476528
+      topleftcorner: -20037508.3428 20037508.3428
+      tilewidth: 256
+      tileheight: 256
+      matrixwidth: 16777216
+      matrixheight: 16777216
