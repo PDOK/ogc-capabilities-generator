@@ -1,11 +1,11 @@
-bitbucket.org/jazzserve/go-xsd-validate v1.0.0 h1:2HZjr4yQO5Vgi6qbcz2eYPwH/rTWPk/3KsJ8xwNhv/k=
-bitbucket.org/jazzserve/go-xsd-validate v1.0.0/go.mod h1:xX9zUC8Y2+/Gl5Pz+QIs5+kxXYbByOymE3vxXbpdKbw=
 dario.cat/mergo v1.0.0 h1:AGCNq9Evsj31mOgNPcLyXc+4PNABt905YmuqPYYpBWk=
 dario.cat/mergo v1.0.0/go.mod h1:uNxQE+84aUszobStD9th8a29P2fMDhsBdgRYvZOxGmk=
 github.com/ajankovic/xdiff v0.0.1 h1:V1cj8t5xwYzm6ZGPqPOlAc9AIajXuTEn41D/1MJBWMM=
 github.com/ajankovic/xdiff v0.0.1/go.mod h1:SUmEZ67uB97I0zkiuQ+lb+LOms9ipn8X+p+2RdJV710=
 github.com/pdok/ogc-specifications v0.3.0 h1:tR6WhGntk+508UQk+vPIL/4HIqcTF09FnszY0/91aP0=
 github.com/pdok/ogc-specifications v0.3.0/go.mod h1:rkrIwIBIUl4oyn3aMVtJLipDRtFHp3oa9dSu/MyDt1o=
+github.com/terminalstatic/go-xsd-validate v0.1.6 h1:TenYeQ3eY631qNi1/cTmLH/s2slHPRKTTHT+XSHkepo=
+github.com/terminalstatic/go-xsd-validate v0.1.6/go.mod h1:18lsvYFofBflqCrvo1umpABZ99+GneNTw2kEEc8UPJw=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
