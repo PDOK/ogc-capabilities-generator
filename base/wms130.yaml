@@ -49,7 +49,7 @@ capability:
           - image/jpeg
           - image/png; mode=8bit
           - image/vnd.jpeg-png
-          - image/vnd.jpeg-png8  
+          - image/vnd.jpeg-png8
         dcptype:
           http:
             get:
@@ -62,13 +62,13 @@ capability:
                 href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}"
       getfeatureinfo:
         format:
-        - application/json
-        - application/json; subtype=geojson
-        - application/vnd.ogc.gml
-        - text/html
-        - text/plain
-        - text/xml
-        - text/xml; subtype=gml/3.1.1
+          - application/json
+          - application/json; subtype=geojson
+          - application/vnd.ogc.gml
+          - text/html
+          - text/plain
+          - text/xml
+          - text/xml; subtype=gml/3.1.1
         dcptype:
           http:
             get:

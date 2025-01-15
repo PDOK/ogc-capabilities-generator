@@ -17,7 +17,7 @@ services:
             - ambush
         fees: none
         accessconstraints: none
-        contactinformation: 
+        contactinformation:
           contactpersonprimary:
             contactperson: Jeff Smith
             contactorganization: NASA
@@ -40,163 +40,162 @@ services:
         wmscapabilities:
           layer:
             - title: Acme Corp. Map Server
-              abstract: 
+              abstract:
               crs:
                 - "CRS:84"
               authorityurl:
-                  name: "DIF_ID"
-                  onlineresource:
-                    href: "http://gcmd.gsfc.nasa.gov/difguide/whatisadif.html"
+                name: "DIF_ID"
+                onlineresource:
+                  href: "http://gcmd.gsfc.nasa.gov/difguide/whatisadif.html"
               layer:
-              - queryable: 0
-                title: Roads and River
-                name: ROADS_RIVERS
-                crs: 
-                  - "EPSG:26986"
-                attribution:
-                  title: State College University
-                  onlineresource:
-                    xlink: http://www.w3.org/1999/xlink
-                    type: simple
-                    href: "http://www.university.edu/"
-                  logourl:
-                    format: image/gif
+                - queryable: 0
+                  title: Roads and River
+                  name: ROADS_RIVERS
+                  crs:
+                    - "EPSG:26986"
+                  attribution:
+                    title: State College University
                     onlineresource:
                       xlink: http://www.w3.org/1999/xlink
                       type: simple
-                      href: "http://www.university.edu/icons/logo.gif"
-                identifier:
-                  authority: DIF_ID
-                  value: 123456
-                featurelisturl:
-                  format: XML
-                  onlineresource:
+                      href: "http://www.university.edu/"
+                    logourl:
+                      format: image/gif
+                      onlineresource:
+                        xlink: http://www.w3.org/1999/xlink
+                        type: simple
+                        href: "http://www.university.edu/icons/logo.gif"
+                  identifier:
+                    authority: DIF_ID
+                    value: 123456
+                  featurelisturl:
+                    format: XML
+                    onlineresource:
                       xlink: http://www.w3.org/1999/xlink
                       type: simple
                       href: "http://www.university.edu/data/roads_rivers.gml"
-                style:
-                  - name: USGS
-                    title: USGS Topo Map Style
-                    abstract: Features are shown in a style like that used in USGS topographic maps.
-                    legendurl:
-                      width: 72
-                      height: 72
-                      format: image/gif
+                  style:
+                    - name: USGS
+                      title: USGS Topo Map Style
+                      abstract: Features are shown in a style like that used in USGS topographic maps.
+                      legendurl:
+                        width: 72
+                        height: 72
+                        format: image/gif
+                        onlineresource:
+                          xlink: http://www.w3.org/1999/xlink
+                          type: simple
+                          href: "http://www.university.edu/legends/usgs.gif"
+                      stylesheeturl:
+                        format: text/xsl
+                        onlineresource:
+                          xlink: http://www.w3.org/1999/xlink
+                          type: simple
+                          href: "http://www.university.edu/stylesheets/usgs.xsl"
+                - queryable: 1
+                  title: Roads at 1:1M scale
+                  name: ROADS_1MM
+                  abstract: Roads at a scale of 1 to 1 million.
+                  keywordlist:
+                    keyword:
+                      - road
+                      - transportation
+                      - atlas
+                  crs:
+                    - "EPSG:26986"
+                  identifier:
+                    authority: DIF_ID
+                    value: 123456
+                  metadataurl:
+                    - type: "FGDC:1998"
+                      format: text/plain
                       onlineresource:
                         xlink: http://www.w3.org/1999/xlink
                         type: simple
-                        href: "http://www.university.edu/legends/usgs.gif"
-                    stylesheeturl:
-                      format: text/xsl
+                        href: "http://www.university.edu/metadata/roads.txt"
+                    - type: ISO19115:2003
+                      format: text/xml
                       onlineresource:
                         xlink: http://www.w3.org/1999/xlink
                         type: simple
-                        href: "http://www.university.edu/stylesheets/usgs.xsl"
-              - queryable: 1
-                title: Roads at 1:1M scale
-                name: ROADS_1MM
-                abstract: Roads at a scale of 1 to 1 million.
-                keywordlist:
-                  keyword:
-                    - road
-                    - transportation
-                    - atlas
-                crs: 
-                  - "EPSG:26986"
-                identifier:
-                  authority: DIF_ID
-                  value: 123456
-                metadataurl:
-                  - type: "FGDC:1998"
-                    format: text/plain
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      type: simple
-                      href: "http://www.university.edu/metadata/roads.txt"
-                  - type: ISO19115:2003
-                    format: text/xml
-                    onlineresource:
-                      xlink: http://www.w3.org/1999/xlink
-                      type: simple
-                      href: "http://www.university.edu/metadata/roads.xml"
-                style:
-                  - name: ATLAS
-                    title: Road atlas style
-                    abstract: Roads are shown in a style like that used in a commercial road atlas.
-                    legendurl:
-                      width: 72
-                      height: 72
-                      format: image/gif
-                      onlineresource:
-                        xlink: http://www.w3.org/1999/xlink
-                        type: simple
-                        href: "http://www.university.edu/legends/atlas.gif"
-              - queryable: 1
-                title: Weather Forecast Data
-                crs: 
-                  - "CRS:84"
-                exgeographicboundingbox:
-                  westboundlongitude: -180
-                  eastboundlongitude: 180
-                  southboundlatitude: -90
-                  northboundlatitude: 90
-                dimension:
-                  - name: time
-                    units: ISO8601
-                    default: "2000-08-22"
-                    value: 1999-01-01/2000-08-22/P1D
-                layer:
-                  - name: Clouds
-                    title: Forecast cloud cover
-                    crs: 
-                      - "CRS:84"
-                  - name: Temperature
-                    title: Forecast temperature
-                    crs: 
-                      - "CRS:84"
-                  - name: Pressure
-                    title: Forecast barometric pressure
-                    crs: 
-                      - "CRS:84"
-                    dimension:
-                    - name: elevation
-                      units: EPSG:5030
+                        href: "http://www.university.edu/metadata/roads.xml"
+                  style:
+                    - name: ATLAS
+                      title: Road atlas style
+                      abstract: Roads are shown in a style like that used in a commercial road atlas.
+                      legendurl:
+                        width: 72
+                        height: 72
+                        format: image/gif
+                        onlineresource:
+                          xlink: http://www.w3.org/1999/xlink
+                          type: simple
+                          href: "http://www.university.edu/legends/atlas.gif"
+                - queryable: 1
+                  title: Weather Forecast Data
+                  crs:
+                    - "CRS:84"
+                  exgeographicboundingbox:
+                    westboundlongitude: -180
+                    eastboundlongitude: 180
+                    southboundlatitude: -90
+                    northboundlatitude: 90
+                  dimension:
                     - name: time
                       units: ISO8601
                       default: "2000-08-22"
                       value: 1999-01-01/2000-08-22/P1D
-                    - name: elevation
-                      units: CRS:88
-                      default: "0"
-                      nearestvalue: "1"
-                      value: 0,1000,3000,5000,10000
-              - opaque: 1
-                name: ozone_image
-                title: Global ozone distribution (1992)
-                crs: 
-                  - "CRS:84"
-                exgeographicboundingbox:
-                  westboundlongitude: -180
-                  eastboundlongitude: 180
-                  southboundlatitude: -90
-                  northboundlatitude: 90
-                dimension:
-                  - name: time
-                    units: ISO8601
-                    default: "1992"
-                    value: 1992
-              - name: population
-                title: World population, annual
-                crs: 
-                  - "CRS:84"
-                exgeographicboundingbox:
-                  westboundlongitude: -180
-                  eastboundlongitude: 180
-                  southboundlatitude: -90
-                  northboundlatitude: 90
-                dimension:
-                  - name: time
-                    units: ISO8601
-                    default: "2000"
-                    value: 1990/2000/P1Y
-               
+                  layer:
+                    - name: Clouds
+                      title: Forecast cloud cover
+                      crs:
+                        - "CRS:84"
+                    - name: Temperature
+                      title: Forecast temperature
+                      crs:
+                        - "CRS:84"
+                    - name: Pressure
+                      title: Forecast barometric pressure
+                      crs:
+                        - "CRS:84"
+                      dimension:
+                        - name: elevation
+                          units: EPSG:5030
+                        - name: time
+                          units: ISO8601
+                          default: "2000-08-22"
+                          value: 1999-01-01/2000-08-22/P1D
+                        - name: elevation
+                          units: CRS:88
+                          default: "0"
+                          nearestvalue: "1"
+                          value: 0,1000,3000,5000,10000
+                - opaque: 1
+                  name: ozone_image
+                  title: Global ozone distribution (1992)
+                  crs:
+                    - "CRS:84"
+                  exgeographicboundingbox:
+                    westboundlongitude: -180
+                    eastboundlongitude: 180
+                    southboundlatitude: -90
+                    northboundlatitude: 90
+                  dimension:
+                    - name: time
+                      units: ISO8601
+                      default: "1992"
+                      value: 1992
+                - name: population
+                  title: World population, annual
+                  crs:
+                    - "CRS:84"
+                  exgeographicboundingbox:
+                    westboundlongitude: -180
+                    eastboundlongitude: 180
+                    southboundlatitude: -90
+                    northboundlatitude: 90
+                  dimension:
+                    - name: time
+                      units: ISO8601
+                      default: "2000"
+                      value: 1990/2000/P1Y

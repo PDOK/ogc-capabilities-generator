@@ -10,28 +10,28 @@ namespaces:
   crs: http://www.opengis.net/wcs/crs/1.0
   int: http://www.opengis.net/wcs/interpolation/1.0
   inspirecommon:
-  inspiredls: 
+  inspiredls:
   version: 2.0.1
   schemalocation: http://www.opengis.net/wcs/2.0 https://geodata.nationaalgeoregister.nl/wcs/2.0/wcsAll.xsd http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd
 
 serviceidentification:
-  servicetype: 
+  servicetype:
     text: OGC WCS
     codespace: OGC
   servicetypeversion:
-  - 2.0.1
+    - 2.0.1
   profile:
-  - http://www.opengis.net/spec/WCS/2.0/conf/core
-  - http://www.opengis.net/spec/WCS_protocol-binding_get-kvp/1.0/conf/get-kvp
-  - http://www.opengis.net/spec/WCS_protocol-binding_post-xml/1.0/conf/post-xml
-  - http://www.opengis.net/spec/GMLCOV/1.0/conf/gml-coverage
-  - http://www.opengis.net/spec/GMLCOV/1.0/conf/multipart
-  - http://www.opengis.net/spec/GMLCOV/1.0/conf/special-format
-  - http://www.opengis.net/spec/GMLCOV_geotiff-coverages/1.0/conf/geotiff-coverage
-  - http://www.opengis.net/spec/WCS_service-extension_crs/1.0/conf/crs
-  - http://www.opengis.net/spec/WCS_service-extension_scaling/1.0/conf/scaling
-  - http://www.opengis.net/spec/WCS_service-extension_range-subsetting/1.0/conf/record-subsetting
-  - http://www.opengis.net/spec/WCS_service-extension_interpolation/1.0/conf/interpolation
+    - http://www.opengis.net/spec/WCS/2.0/conf/core
+    - http://www.opengis.net/spec/WCS_protocol-binding_get-kvp/1.0/conf/get-kvp
+    - http://www.opengis.net/spec/WCS_protocol-binding_post-xml/1.0/conf/post-xml
+    - http://www.opengis.net/spec/GMLCOV/1.0/conf/gml-coverage
+    - http://www.opengis.net/spec/GMLCOV/1.0/conf/multipart
+    - http://www.opengis.net/spec/GMLCOV/1.0/conf/special-format
+    - http://www.opengis.net/spec/GMLCOV_geotiff-coverages/1.0/conf/geotiff-coverage
+    - http://www.opengis.net/spec/WCS_service-extension_crs/1.0/conf/crs
+    - http://www.opengis.net/spec/WCS_service-extension_scaling/1.0/conf/scaling
+    - http://www.opengis.net/spec/WCS_service-extension_range-subsetting/1.0/conf/record-subsetting
+    - http://www.opengis.net/spec/WCS_service-extension_interpolation/1.0/conf/interpolation
 
 serviceprovider:
   providername: PDOK
@@ -60,7 +60,7 @@ serviceprovider:
     role: "{{ .Empty}}"
 
 operationsmetadata:
-  operation: 
+  operation:
     - name: GetCapabilities
       dcp:
         http:
@@ -78,9 +78,9 @@ operationsmetadata:
             href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}"
             constraint:
               name: PostEncoding
-              allowedvalues: 
-                value: 
-                - XML
+              allowedvalues:
+                value:
+                  - XML
     - name: GetCoverage
       dcp:
         http:
@@ -92,9 +92,9 @@ operationsmetadata:
             href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}"
             constraint:
               name: PostEncoding
-              allowedvalues: 
-                value: 
-                - XML                  
+              allowedvalues:
+                value:
+                  - XML
 
 # servicemetadata
 
