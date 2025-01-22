@@ -19,7 +19,7 @@ services:
         schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmts.xsd
       serviceidentification:
         title: Web Map Tile Service
-        abstract: Service that contrains the map access interface to some TileMatrixSets
+        abstract: Service that contains the map access interface to some TileMatrixSets
         keywords:
           keyword:
             - tile
@@ -33,10 +33,10 @@ services:
         href: "{{.Onlineresourceurl}}{{.Path}}/WMTSCapabilities.xml"
       serviceprovider:
         providername: MiraMon
-        providersite: 
+        providersite:
           type: simple
           href: http://www.creaf.uab.es/miramon
-        servicecontact: 
+        servicecontact:
           individualname: Joan Maso Pau
           positionname: Senior Software Engineer
           contactinfo:
@@ -51,59 +51,59 @@ services:
               country: Spain
               electronicmailaddress: joan.maso@uab.es
       operationsmetadata:
-          operation:
-            - name: GetCapabilities
-              dcp:
-                http:
-                  get:
-                    type: simple
-                    href: "{{.Onlineresourceurl}}{{.Path}}?"
-                    constraint:
-                      - name: GetEncoding
-                        allowedvalues:
-                          value:
-                            - KVP
-            - name: GetTile
-              dcp:
-                http:
-                  get:
-                    type: simple
-                    href: "{{.Onlineresourceurl}}{{.Path}}?"
-                    constraint:
-                      - name: GetEncoding
-                        allowedvalues:
-                          value:
-                            - KVP
-            - name: GetFeatureInfo
-              dcp:
-                http:
-                  get:
-                    type: simple
-                    href: "{{.Onlineresourceurl}}{{.Path}}?"
-                    constraint:
-                      - name: GetEncoding
-                        allowedvalues:
-                          value:
-                            - KVP
+        operation:
+          - name: GetCapabilities
+            dcp:
+              http:
+                get:
+                  type: simple
+                  href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  constraint:
+                    - name: GetEncoding
+                      allowedvalues:
+                        value:
+                          - KVP
+          - name: GetTile
+            dcp:
+              http:
+                get:
+                  type: simple
+                  href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  constraint:
+                    - name: GetEncoding
+                      allowedvalues:
+                        value:
+                          - KVP
+          - name: GetFeatureInfo
+            dcp:
+              http:
+                get:
+                  type: simple
+                  href: "{{.Onlineresourceurl}}{{.Path}}?"
+                  constraint:
+                    - name: GetEncoding
+                      allowedvalues:
+                        value:
+                          - KVP
       contents:
         tilematrixset:
           - identifier: "BigWorld"
             supportedcrs: urn:ogc:def:crs:EPSG::25831
             tilematrix:
-            - identifier: 00
-              scaledenominator: 10000000.0
-              topleftcorner: -2404683.40739 8298457.58466
-              tilewidth: 256
-              tileheight: 256
-              matrixwidth: 9
-              matrixheight: 6
-            - identifier: 01
-              scaledenominator: 5000000.0
-              topleftcorner: -2404683.40739 8298457.58466
-              tilewidth: 256
-              tileheight: 256
-              matrixwidth: 18
-              matrixheight: 12
+              - identifier: 00
+                scaledenominator: 10000000.0
+                topleftcorner: -2404683.40739 8298457.58466
+                tilewidth: 256
+                tileheight: 256
+                matrixwidth: 9
+                matrixheight: 6
+              - identifier: 01
+                scaledenominator: 5000000.0
+                topleftcorner: -2404683.40739 8298457.58466
+                tilewidth: 256
+                tileheight: 256
+                matrixwidth: 18
+                matrixheight: 12
           - identifier: "EPSG:28992"
             tilematrix:
               - identifier: "00"
@@ -150,11 +150,10 @@ services:
               - identifier: thickAndRed
                 title: Thick And Red
                 abstract: Specify this style if you want your maps to have thick red coastlines.
-            format: 
+            format:
               - image/png
               - image/gif
             tilematrixsetlink:
               - tilematrixset: "BigWorld"
               - tilematrixset: "EPSG:28992"
               - tilematrixset: "EPSG:3857"
-

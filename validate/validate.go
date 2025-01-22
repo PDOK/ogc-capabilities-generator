@@ -1,7 +1,6 @@
 package validate
 
 import (
-	xsdvalidate "bitbucket.org/jazzserve/go-xsd-validate"
 	"bytes"
 	"encoding/xml"
 	"fmt"
@@ -9,6 +8,8 @@ import (
 	"ogc-capabilities-generator/config"
 	"strings"
 	"text/template"
+
+	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 )
 
 type schemaImport struct {

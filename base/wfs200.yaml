@@ -7,7 +7,7 @@ namespaces:
   fes: http://www.opengis.net/fes/2.0
   inspirecommon:
   inspiredls:
-  prefix: "{{.Namespace}}" #namespace_uri  # don't edit! maybe different solution in code....?
+  prefix: "{{.Namespace}}"  # namespace_uri  # don't edit! maybe different solution in code....?
   version: 2.0.0
   schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd {{.AdditionalSchemaLocations}}
 
@@ -19,14 +19,14 @@ serviceidentification:
     codespace: OGC
   servicetypeversion: 2.0.0
   fees: none
-  accesscontraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
+  accessconstraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
 
 serviceprovider:
   providername: PDOK
-  providersite: 
+  providersite:
     type: simple
     href: https://pdok.nl
-  servicecontact: 
+  servicecontact:
     individualname: KlantContactCenter PDOK
     positionname: pointOfContact
     contactinfo:
@@ -47,7 +47,7 @@ serviceprovider:
       contactinstructions: "{{ .Empty}}"
     role: "{{ .Empty}}"
 
-capabilities:    
+capabilities:
   featuretypelist:
     featuretype:
       - defaultcrs: urn:ogc:def:crs:EPSG::28992
@@ -80,40 +80,40 @@ capabilities:
             get:
               type: simple
               href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
-            #POST: no POST for GetCapabilities
+              # POST: no POST for GetCapabilities
         parameter:
           - name: AcceptVersions
-            allowedvalues: 
-              value: 
-              - 2.0.0
-              # - 1.1.0
-              # - 1.0.0
+            allowedvalues:
+              value:
+                - 2.0.0
+                # - 1.1.0
+                # - 1.0.0
           - name: AcceptFormats
-            allowedvalues: 
-              value: 
-              - text/xml
+            allowedvalues:
+              value:
+                - text/xml
           - name: Sections
-            allowedvalues: 
-              value: 
-              - ServiceIdentification
-              - ServiceProvider
-              - OperationsMetadata
-              - FeatureTypeList
-              - Filter_Capabilities
+            allowedvalues:
+              value:
+                - ServiceIdentification
+                - ServiceProvider
+                - OperationsMetadata
+                - FeatureTypeList
+                - Filter_Capabilities
       - name: DescribeFeatureType
         dcp:
           http:
             get:
               type: simple
               href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
-            # post: no POST for DescribeFeatureType
+              # post: no POST for DescribeFeatureType
         parameter:
           - name: outputFormat
-            allowedvalues: 
-              value: 
-              - application/gml+xml; version=3.2
-              - text/xml; subtype=gml/3.2.1
-              - text/xml; subtype=gml/3.1.1
+            allowedvalues:
+              value:
+                - application/gml+xml; version=3.2
+                - text/xml; subtype=gml/3.2.1
+                - text/xml; subtype=gml/3.1.1
       - name: GetFeature
         dcp:
           http:
@@ -125,13 +125,13 @@ capabilities:
               href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}"
         parameter:
           - name: outputFormat
-            allowedvalues: 
-              value: 
-              - application/gml+xml; version=3.2
-              - text/xml; subtype=gml/3.2.1
-              - text/xml; subtype=gml/3.1.1
-              - application/json; subtype=geojson
-              - application/json
+            allowedvalues:
+              value:
+                - application/gml+xml; version=3.2
+                - text/xml; subtype=gml/3.2.1
+                - text/xml; subtype=gml/3.1.1
+                - application/json; subtype=geojson
+                - application/json
       # - name: GetPropertyValue no GetPropertyValue
       - name: ListStoredQueries
         dcp:
@@ -139,156 +139,156 @@ capabilities:
             get:
               type: simple
               href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
-            # post: no POST for ListStoredQueries
+              # post: no POST for ListStoredQueries
       - name: DescribeStoredQueries
         dcp:
           http:
             get:
               type: simple
               href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
-            # post: no POST for DescribeStoredQueries
-  
+              # post: no POST for DescribeStoredQueries
+
     parameter:
       name: version
-      allowedvalues: 
-        value: 
-        - 2.0.0
-  
-    constraint:
-    - name: ImplementsBasicWFS
-      novalue: "{{ .Empty }}"
-      defaultvalue: "TRUE"
-    - name: ImplementsTransactionalWFS
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ImplementsLockingWFS
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: KVPEncoding
-      novalue: "{{ .Empty }}"
-      defaultvalue: "TRUE"
-    - name: XMLEncoding
-      novalue: "{{ .Empty }}"
-      defaultvalue: "TRUE"
-    - name: SOAPEncoding
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ImplementsInheritance
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ImplementsRemoteResolve
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ImplementsResultPaging
-      novalue: "{{ .Empty }}"
-      defaultvalue: "TRUE"
-    - name: ImplementsStandardJoins
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ImplementsSpatialJoins
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ImplementsTemporalJoins
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ImplementsFeatureVersioning
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: ManageStoredQueries
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: PagingIsTransactionSafe
-      novalue: "{{ .Empty }}"
-      defaultvalue: "FALSE"
-    - name: CountDefault
-      novalue: "{{ .Empty }}"
-      defaultvalue: 1000
-    - name: QueryExpressions
       allowedvalues:
         value:
-        - wfs:Query
-        - wfs:StoredQuery
-  
+          - 2.0.0
+
+    constraint:
+      - name: ImplementsBasicWFS
+        novalue: "{{ .Empty }}"
+        defaultvalue: "TRUE"
+      - name: ImplementsTransactionalWFS
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ImplementsLockingWFS
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: KVPEncoding
+        novalue: "{{ .Empty }}"
+        defaultvalue: "TRUE"
+      - name: XMLEncoding
+        novalue: "{{ .Empty }}"
+        defaultvalue: "TRUE"
+      - name: SOAPEncoding
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ImplementsInheritance
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ImplementsRemoteResolve
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ImplementsResultPaging
+        novalue: "{{ .Empty }}"
+        defaultvalue: "TRUE"
+      - name: ImplementsStandardJoins
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ImplementsSpatialJoins
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ImplementsTemporalJoins
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ImplementsFeatureVersioning
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: ManageStoredQueries
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: PagingIsTransactionSafe
+        novalue: "{{ .Empty }}"
+        defaultvalue: "FALSE"
+      - name: CountDefault
+        novalue: "{{ .Empty }}"
+        defaultvalue: 1000
+      - name: QueryExpressions
+        allowedvalues:
+          value:
+            - wfs:Query
+            - wfs:StoredQuery
+
   filtercapabilities:
     conformance:
       constraint:
-      - name: ImplementsQuery
-        defaultvalue: "TRUE"
-      - name: ImplementsAdHocQuery
-        defaultvalue: "TRUE"
-      - name: ImplementsFunctions
-        defaultvalue: "FALSE"
-      - name: ImplementsResourceId
-        defaultvalue: "TRUE"
-      - name: ImplementsMinStandardFilter
-        defaultvalue: "TRUE"
-      - name: ImplementsStandardFilter
-        defaultvalue: "TRUE"
-      - name: ImplementsMinSpatialFilter
-        defaultvalue: "TRUE"
-      - name: ImplementsSpatialFilter
-        defaultvalue: "FALSE"
-      - name: ImplementsMinTemporalFilter
-        defaultvalue: "TRUE"
-      - name: ImplementsTemporalFilter
-        defaultvalue: "FALSE"
-      - name: ImplementsVersionNav
-        defaultvalue: "FALSE"
-      - name: ImplementsSorting
-        defaultvalue: "TRUE"
-      - name: ImplementsExtendedOperators
-        defaultvalue: "FALSE"
-      - name: ImplementsMinimumXPath
-        defaultvalue: "TRUE"
-      - name: ImplementsSchemaElementFunc
-        defaultvalue: "FALSE"
-  
+        - name: ImplementsQuery
+          defaultvalue: "TRUE"
+        - name: ImplementsAdHocQuery
+          defaultvalue: "TRUE"
+        - name: ImplementsFunctions
+          defaultvalue: "FALSE"
+        - name: ImplementsResourceId
+          defaultvalue: "TRUE"
+        - name: ImplementsMinStandardFilter
+          defaultvalue: "TRUE"
+        - name: ImplementsStandardFilter
+          defaultvalue: "TRUE"
+        - name: ImplementsMinSpatialFilter
+          defaultvalue: "TRUE"
+        - name: ImplementsSpatialFilter
+          defaultvalue: "FALSE"
+        - name: ImplementsMinTemporalFilter
+          defaultvalue: "TRUE"
+        - name: ImplementsTemporalFilter
+          defaultvalue: "FALSE"
+        - name: ImplementsVersionNav
+          defaultvalue: "FALSE"
+        - name: ImplementsSorting
+          defaultvalue: "TRUE"
+        - name: ImplementsExtendedOperators
+          defaultvalue: "FALSE"
+        - name: ImplementsMinimumXPath
+          defaultvalue: "TRUE"
+        - name: ImplementsSchemaElementFunc
+          defaultvalue: "FALSE"
+
     idcapabilities:
       resourceidentifier:
         name: fes:ResourceId
-  
+
     scalarcapabilities:
       logicaloperators:
       comparisonoperators:
         comparisonoperator:
-        - name: PropertyIsEqualTo
-        - name: PropertyIsNotEqualTo
-        - name: PropertyIsLessThan
-        - name: PropertyIsGreaterThan
-        - name: PropertyIsLessThanOrEqualTo
-        - name: PropertyIsGreaterThanOrEqualTo
-        - name: PropertyIsLike
-        - name: PropertyIsBetween
-        - name: PropertyIsNull
-  
+          - name: PropertyIsEqualTo
+          - name: PropertyIsNotEqualTo
+          - name: PropertyIsLessThan
+          - name: PropertyIsGreaterThan
+          - name: PropertyIsLessThanOrEqualTo
+          - name: PropertyIsGreaterThanOrEqualTo
+          - name: PropertyIsLike
+          - name: PropertyIsBetween
+          - name: PropertyIsNull
+
     spatialcapabilities:
       geometryoperands:
         geometryoperand:
-        - name: gml:Point
-        - name: gml:MultiPoint
-        - name: gml:LineString
-        - name: gml:MultiLineString
-        - name: gml:Curve
-        - name: gml:MultiCurve
-        - name: gml:Polygon
-        - name: gml:MultiPolygon
-        - name: gml:Surface
-        - name: gml:MultiSurface
-        - name: gml:Box
-        - name: gml:Envelope
+          - name: gml:Point
+          - name: gml:MultiPoint
+          - name: gml:LineString
+          - name: gml:MultiLineString
+          - name: gml:Curve
+          - name: gml:MultiCurve
+          - name: gml:Polygon
+          - name: gml:MultiPolygon
+          - name: gml:Surface
+          - name: gml:MultiSurface
+          - name: gml:Box
+          - name: gml:Envelope
       spatialoperators:
         spatialoperator:
-        - name: Equals
-        - name: Disjoint
-        - name: Touches
-        - name: Within
-        - name: Overlaps
-        - name: Crosses
-        - name: Intersects
-        - name: Contains
-        - name: DWithin
-        - name: Beyond
-        - name: BBOX
+          - name: Equals
+          - name: Disjoint
+          - name: Touches
+          - name: Within
+          - name: Overlaps
+          - name: Crosses
+          - name: Intersects
+          - name: Contains
+          - name: DWithin
+          - name: Beyond
+          - name: BBOX
     temporalcapabilities:
       temporaloperands:
         temporaloperand:

@@ -21,13 +21,13 @@ services:
           type:
             text: string
         fees: NONE
-        accesscontraints: NONE
+        accessconstraints: NONE
       serviceprovider:
         providername: BlueOx Inc.
-        providersite: 
+        providersite:
           type: simple
           href: http://www.cubewerx.com
-        servicecontact: 
+        servicecontact:
           individualname: Paul Bunyon
           positionname: Mythology Manager
           contactinfo:
@@ -228,12 +228,12 @@ services:
               title: The Great Northern Forest
               abstract: Describes the arborial diversity of the Great Northern Forest.
               keywords:
-              - keyword:
-                - forest
-                - north
-                - woods
-                - arborial
-                - diversity
+                - keyword:
+                    - forest
+                    - north
+                    - woods
+                    - arborial
+                    - diversity
               metadataurl:
                 href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:4ee8b2d3-9409-4a1d-b26b-6782e4fa3d59
               defaultcrs: urn:ogc:def:crs:EPSG::6269
@@ -257,11 +257,11 @@ services:
               abstract: Lake boundaries for all lakes in the
                Great Northern Forest.
               keywords:
-              - keyword:
-                - lakes
-                - boundaries
-                - water
-                - hydro
+                - keyword:
+                    - lakes
+                    - boundaries
+                    - water
+                    - hydro
               metadataurl:
                 href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:57973502-29cb-4114-8d64-9939627a0414
               defaultcrs: urn:ogc:def:crs:EPSG::6269
@@ -283,61 +283,59 @@ services:
         filtercapabilities:
           conformance:
             constraint:
-            - name: ImplementsQuery
-              defaultvalue: "TRUE"
-            - name: ImplementsAdHocQuery
-              defaultvalue: "TRUE"
-            - name: ImplementsFunctions
-              defaultvalue: "TRUE"
-            - name: ImplementsResourceId
-              defaultvalue: "TRUE"
-            - name: ImplementsMinStandardFilter
-              defaultvalue: "TRUE"
-            - name: ImplementsStandardFilter
-              defaultvalue: "TRUE"
-            - name: ImplementsMinSpatialFilter
-              defaultvalue: "TRUE"
-            - name: ImplementsSpatialFilter
-              defaultvalue: "TRUE"
-            - name: ImplementsMinTemporalFilter
-              defaultvalue: "TRUE"
-            - name: ImplementsTemporalFilter
-              defaultvalue: "TRUE"
-            - name: ImplementsVersionNav
-              defaultvalue: "FALSE"
-            - name: ImplementsSorting
-              defaultvalue: "FALSE"
-            - name: ImplementsExtendedOperators
-              defaultvalue: "FALSE"
+              - name: ImplementsQuery
+                defaultvalue: "TRUE"
+              - name: ImplementsAdHocQuery
+                defaultvalue: "TRUE"
+              - name: ImplementsFunctions
+                defaultvalue: "TRUE"
+              - name: ImplementsResourceId
+                defaultvalue: "TRUE"
+              - name: ImplementsMinStandardFilter
+                defaultvalue: "TRUE"
+              - name: ImplementsStandardFilter
+                defaultvalue: "TRUE"
+              - name: ImplementsMinSpatialFilter
+                defaultvalue: "TRUE"
+              - name: ImplementsSpatialFilter
+                defaultvalue: "TRUE"
+              - name: ImplementsMinTemporalFilter
+                defaultvalue: "TRUE"
+              - name: ImplementsTemporalFilter
+                defaultvalue: "TRUE"
+              - name: ImplementsVersionNav
+                defaultvalue: "FALSE"
+              - name: ImplementsSorting
+                defaultvalue: "FALSE"
+              - name: ImplementsExtendedOperators
+                defaultvalue: "FALSE"
           scalarcapabilities:
             logicaloperators:
             comparisonoperators:
               comparisonoperator:
-              - name: PropertyIsEqualTo
-              - name: PropertyIsNotEqualTo
-              - name: PropertyIsLessThan
-              - name: PropertyIsGreaterThan
-              - name: PropertyIsLessThanOrEqualTo
-              - name: PropertyIsGreaterThanOrEqualTo
-              - name: PropertyIsLike
-              - name: PropertyIsBetween
-              - name: PropertyIsNull
-              - name: PropertyIsNil
+                - name: PropertyIsEqualTo
+                - name: PropertyIsNotEqualTo
+                - name: PropertyIsLessThan
+                - name: PropertyIsGreaterThan
+                - name: PropertyIsLessThanOrEqualTo
+                - name: PropertyIsGreaterThanOrEqualTo
+                - name: PropertyIsLike
+                - name: PropertyIsBetween
+                - name: PropertyIsNull
+                - name: PropertyIsNil
           spatialcapabilities:
             geometryoperands:
               geometryoperand:
-              - name: gml:Point
-              - name: gml:MultiPoint
-              - name: gml:LineString
-              - name: gml:MultiLineString
-              - name: gml:Curve
-              - name: gml:MultiCurve
-              - name: gml:Polygon
-              - name: gml:MultiPolygon
-              - name: gml:Surface
-              - name: gml:MultiSurface
-              - name: gml:MultiGeometry
-              - name: gml:Box
-              - name: gml:Envelope  
-
-        
+                - name: gml:Point
+                - name: gml:MultiPoint
+                - name: gml:LineString
+                - name: gml:MultiLineString
+                - name: gml:Curve
+                - name: gml:MultiCurve
+                - name: gml:Polygon
+                - name: gml:MultiPolygon
+                - name: gml:Surface
+                - name: gml:MultiSurface
+                - name: gml:MultiGeometry
+                - name: gml:Box
+                - name: gml:Envelope
