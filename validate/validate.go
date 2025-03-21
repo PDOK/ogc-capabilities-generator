@@ -3,8 +3,8 @@ package validate
 import (
 	"bytes"
 	"encoding/xml"
+	"errors"
 	"fmt"
-	"log"
 	"ogc-capabilities-generator/config"
 	"strings"
 	"text/template"
@@ -55,41 +55,43 @@ func generateXsd(schemaLocations string, global config.Global) (*schema, error) 
 	}, nil
 }
 
-func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLocations string) {
+func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLocations string) error {
+	xsdvalidate.Cleanup()
 	err := xsdvalidate.Init()
 	if err != nil {
-		log.Fatalf("Error initializing validation with error: %s", err)
+		return err
 	}
 
 	xsd, err := generateXsd(schemaLocations, config.Global)
 	if err != nil {
-		log.Fatalf("Error initializing validation with error: %s", err)
+		return err
 	}
 
 	defer xsdvalidate.Cleanup()
 	var xsdHandler *xsdvalidate.XsdHandler
 	if len(xsd.Import) <= 0 {
-		log.Fatalf("Error parsing schemas, no xsd schema found, error: %s", err)
+		return errors.New("error parsing schemas, no xsd schema found")
 	} else if len(xsd.Import) == 1 {
 		xsdUrl := xsd.Import[0].SchemaLocation
 		xsdHandler, err = xsdvalidate.NewXsdHandlerUrl(xsdUrl, xsdvalidate.ParsErrVerbose)
 		if err != nil {
-			log.Fatalf("Error parsing xsd from url: %s error: %s", xsdUrl, err)
+			return err
 		}
 	} else {
 		schema, err := xml.MarshalIndent(xsd, "", " ")
 		if err != nil {
-			log.Fatalf("Error unmarshaling xsd schema with error: %s", err)
+			return err
 		}
 		xsdHandler, err = xsdvalidate.NewXsdHandlerMem(schema, xsdvalidate.ParsErrVerbose)
 		if err != nil {
-			log.Fatalf("Error parsing xsd schema with error: %s", err)
+			return err
 		}
 	}
 
 	err = xsdHandler.ValidateMem(capabilities, xsdvalidate.ValidErrDefault)
 	xsdHandler.Free()
 	if err != nil {
-		log.Fatalf("Error validating capabilities error: %s", err)
+		return err
 	}
+	return nil
 }

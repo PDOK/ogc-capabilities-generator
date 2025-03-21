@@ -28,12 +28,13 @@ func envString(key, defaultValue string) string {
 	return defaultValue
 }
 
-func writeFile(filename string, buffer []byte) {
+func writeFile(filename string, buffer []byte) error {
 	makeDirIfNotExists(filename)
 	err := os.WriteFile(filename, buffer, 0777)
 	if err != nil {
-		log.Fatalf("Could not write to file %s : %v ", filename, err)
+		return err
 	}
+	return nil
 }
 
 func buildCapabilities(v interface{}, g config.Global) ([]byte, error) {
@@ -47,7 +48,7 @@ func buildCapabilities(v interface{}, g config.Global) ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := t.Execute(buf, g)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		return nil, err
 	}
 
 	re := regexp.MustCompile(`><.*>`)
@@ -84,9 +85,15 @@ func buildWFS2_0_0(cfg config.Config) error {
 		return err
 	}
 
-	validate.ValidateCapabilities(&cfg, buf, cfg.Services.WFS200Config.Wfs200.SchemaLocation)
+	err = validate.ValidateCapabilities(&cfg, buf, cfg.Services.WFS200Config.Wfs200.SchemaLocation)
+	if err != nil {
+		return err
+	}
 
-	writeFile(cfg.Services.WFS200Config.Filename, buf)
+	err = writeFile(cfg.Services.WFS200Config.Filename, buf)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -120,7 +127,10 @@ func buildWMS1_3_0(cfg config.Config) error {
 		return err
 	}
 
-	validate.ValidateCapabilities(&cfg, buf, cfg.Services.WMS130Config.Wms130.SchemaLocation)
+	err = validate.ValidateCapabilities(&cfg, buf, cfg.Services.WMS130Config.Wms130.SchemaLocation)
+	if err != nil {
+		return err
+	}
 
 	writeFile(cfg.Services.WMS130Config.Filename, buf)
 
@@ -182,7 +192,10 @@ func buildWCS2_0_1(cfg config.Config) error {
 		return err
 	}
 
-	validate.ValidateCapabilities(&cfg, buf, cfg.Services.WCS201Config.Wcs201.SchemaLocation)
+	err = validate.ValidateCapabilities(&cfg, buf, cfg.Services.WCS201Config.Wcs201.SchemaLocation)
+	if err != nil {
+		return err
+	}
 
 	writeFile(cfg.Services.WCS201Config.Filename, buf)
 
