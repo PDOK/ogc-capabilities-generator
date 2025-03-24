@@ -7,7 +7,7 @@ services:
   wfs200:
     filename: ./output/wfs_capabilities_2_0_0.xml
     definition:
-      serviceidentification:
+      serviceIdentification:
         title: OGC Member WFS
         abstract: "Web Feature Service maintained by NSDI data provider, serving FGDC framework layer XXX; contact Paul.Bunyon@BlueOx.org"
         keywords:
@@ -21,37 +21,37 @@ services:
           type:
             text: string
         fees: NONE
-        accessconstraints: NONE
-      serviceprovider:
-        providername: BlueOx Inc.
-        providersite:
+        accessConstraints: NONE
+      serviceProvider:
+        providerName: BlueOx Inc.
+        providerSite:
           type: simple
           href: http://www.cubewerx.com
-        servicecontact:
-          individualname: Paul Bunyon
-          positionname: Mythology Manager
-          contactinfo:
+        serviceContact:
+          individualName: Paul Bunyon
+          positionName: Mythology Manager
+          contactInfo:
             phone:
               voice: 1.800.BIG.WOOD
-              facsmile: 1.800.FAX.WOOD
+              facsimile: 1.800.FAX.WOOD
             address:
-              deliverypoint: North Country
+              deliveryPoint: North Country
               city: Small Town
-              administrativearea: Rural County
-              postalcode: 12345
+              administrativeArea: Rural County
+              postalCode: 12345
               country: USA
-              electronicmailaddress: Paul.Bunyon@BlueOx.org
-            onlineresource:
+              electronicMailAddress: Paul.Bunyon@BlueOx.org
+            onlineResource:
               type: simple
               href: http://www.BlueOx.org/contactUs
-            hoursofservice: 24x7
-            contactinstructions: eMail Paul with normal requsts; Phone Paul for emergency
+            hoursOfService: 24x7
+            contactInstructions: eMail Paul with normal requsts; Phone Paul for emergency
                requests; if you get voice mail and your request can't wait,
                contact another mythological figure listed on the contactUs
                page of our web site.
           role: PointOfContact
       capabilities:
-        operationsmetadata:
+        operationsMetadata:
           operation:
             - name: GetCapabilities
               dcp:
@@ -64,11 +64,11 @@ services:
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
               parameter:
                 - name: AcceptVersions
-                  allowedvalues:
+                  allowedValues:
                     value:
                       - 2.0.0
                 - name: AcceptFormats
-                  allowedvalues:
+                  allowedValues:
                     value:
                       - text/xml
             - name: DescribeFeatureType
@@ -170,60 +170,60 @@ services:
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
           constraint:
             - name: ImplementsBasicWFS
-              novalue:
-              defaultvalue: TRUE
+              noValue:
+              defaultValue: TRUE
             - name: ImplementsTransactionalWFS
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ImplementsLockingWFS
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: KVPEncoding
-              novalue:
-              defaultvalue: TRUE
+              noValue:
+              defaultValue: TRUE
             - name: XMLEncoding
-              novalue:
-              defaultvalue: TRUE
+              noValue:
+              defaultValue: TRUE
             - name: SOAPEncoding
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ImplementsInheritance
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ImplementsRemoteResolve
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ImplementsResultPaging
-              novalue:
-              defaultvalue: TRUE
+              noValue:
+              defaultValue: TRUE
             - name: ImplementsStandardJoins
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ImplementsSpatialJoins
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ImplementsTemporalJoins
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ImplementsFeatureVersioning
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: ManageStoredQueries
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: PagingIsTransactionSafe
-              novalue:
-              defaultvalue: FALSE
+              noValue:
+              defaultValue: FALSE
             - name: CountDefault
-              novalue:
-              defaultvalue: 1000
+              noValue:
+              defaultValue: "1000"
             - name: QueryExpressions
-              allowedvalues:
+              allowedValues:
                 value:
                   - wfs:Query
                   - wfs:StoredQuery
-        featuretypelist:
-          featuretype:
+        featureTypeList:
+          featureType:
             - name: "{{.Prefix}}:Wood"
               title: The Great Northern Forest
               abstract: Describes the arborial diversity of the Great Northern Forest.
@@ -234,24 +234,24 @@ services:
                     - woods
                     - arborial
                     - diversity
-              metadataurl:
+              metadataUrl:
                 href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:4ee8b2d3-9409-4a1d-b26b-6782e4fa3d59
-              defaultcrs: urn:ogc:def:crs:EPSG::6269
-              othercrs:
+              defaultCrs: urn:ogc:def:crs:EPSG::6269
+              otherCrs:
                 - urn:ogc:def:crs:EPSG::32615
                 - urn:ogc:def:crs:EPSG::32616
                 - urn:ogc:def:crs:EPSG::32617
                 - urn:ogc:def:crs:EPSG::32618
-              outputformats:
+              outputFormats:
                 format:
                   - application/gml+xml; version=3.2
                   - text/xml; subtype=gml/3.2.1
                   - text/xml; subtype=gml/3.1.1
                   - application/json; subtype=geojson
                   - application/json
-              wgs84boundingbox:
-                lowercorner: "-180 -90"
-                uppercorner: "180 90"
+              wgs84BoundingBox:
+                lowerCorner: "-180 -90"
+                upperCorner: "180 90"
             - name: "{{.Prefix}}:Lakes"
               title: The Great Northern Lakes
               abstract: Lake boundaries for all lakes in the
@@ -262,57 +262,57 @@ services:
                     - boundaries
                     - water
                     - hydro
-              metadataurl:
+              metadataUrl:
                 href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:57973502-29cb-4114-8d64-9939627a0414
-              defaultcrs: urn:ogc:def:crs:EPSG::6269
-              othercrs:
+              defaultCrs: urn:ogc:def:crs:EPSG::6269
+              otherCrs:
                 - urn:ogc:def:crs:EPSG::32615
                 - urn:ogc:def:crs:EPSG::32616
                 - urn:ogc:def:crs:EPSG::32617
                 - urn:ogc:def:crs:EPSG::32618
-              outputformats:
+              outputFormats:
                 format:
                   - application/gml+xml; version=3.2
                   - text/xml; subtype=gml/3.2.1
                   - text/xml; subtype=gml/3.1.1
                   - application/json; subtype=geojson
                   - application/json
-              wgs84boundingbox:
-                lowercorner: "-180 -90"
-                uppercorner: "180 90"
-        filtercapabilities:
+              wgs84BoundingBox:
+                lowerCorner: "-180 -90"
+                upperCorner: "180 90"
+        filterCapabilities:
           conformance:
             constraint:
               - name: ImplementsQuery
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsAdHocQuery
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsFunctions
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsResourceId
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsMinStandardFilter
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsStandardFilter
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsMinSpatialFilter
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsSpatialFilter
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsMinTemporalFilter
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsTemporalFilter
-                defaultvalue: "TRUE"
+                defaultValue: "TRUE"
               - name: ImplementsVersionNav
-                defaultvalue: "FALSE"
+                defaultValue: "FALSE"
               - name: ImplementsSorting
-                defaultvalue: "FALSE"
+                defaultValue: "FALSE"
               - name: ImplementsExtendedOperators
-                defaultvalue: "FALSE"
-          scalarcapabilities:
-            logicaloperators:
-            comparisonoperators:
-              comparisonoperator:
+                defaultValue: "FALSE"
+          scalarCapabilities:
+            logicalOperators:
+            comparisonOperators:
+              comparisonOperator:
                 - name: PropertyIsEqualTo
                 - name: PropertyIsNotEqualTo
                 - name: PropertyIsLessThan
@@ -323,9 +323,9 @@ services:
                 - name: PropertyIsBetween
                 - name: PropertyIsNull
                 - name: PropertyIsNil
-          spatialcapabilities:
-            geometryoperands:
-              geometryoperand:
+          spatialCapabilities:
+            geometryOperands:
+              geometryOperand:
                 - name: gml:Point
                 - name: gml:MultiPoint
                 - name: gml:LineString
