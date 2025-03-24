@@ -21,7 +21,7 @@ serviceIdentification:
   fees: none
   accessConstraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
 
-serviceprovider:
+serviceProvider:
   providerName: PDOK
   providerSite:
     type: simple

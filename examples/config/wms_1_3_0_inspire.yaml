@@ -1,7 +1,7 @@
 global:
   prefix: prefix
   namespace: http://namespace.geonovum.nl
-  onlineresourceurl: http://hostname
+  onlineResourceUrl: http://hostname
   path: /path
 services:
   wms130:
@@ -10,54 +10,54 @@ services:
       service:
         title: Acme Corp. Map Server
         abstract: "Map Server maintained by Acme Corporation.  Contact: webmaster@wmt.acme.com.  High-quality maps showing roadrunner nests and possible ambush locations."
-        keywordlist:
+        keywordList:
           keyword:
             - bird
             - roadrunner
             - ambush
-        onlineresource:
+        onlineResource:
           xlink: http://www.w3.org/1999/xlink
           href: "{{.Onlineresourceurl}}/"
         fees: none
-        accessconstraints: none
-        contactinformation:
-          contactpersonprimary:
-            contactperson: Jeff Smith
-            contactorganization: NASA
-          contactposition: Computer Scientist
-          contactaddress:
-            addresstype: postal
+        accessConstraints: none
+        contactInformation:
+          contactPersonPrimary:
+            contactPerson: Jeff Smith
+            contactOrganization: NASA
+          contactPosition: Computer Scientist
+          contactAddress:
+            addressType: postal
             address: NASA Goddard Space Flight Center
             city: Greenbelt
-            stateorprovince: MD
+            stateOrProvince: MD
             postcode: 20771
             country: USA
-          contactvoicetelephone: +1 301 555-1212
-          contactelectronicmailaddress: user@host.com
-        optionalconstraints:
-          layerlimit: 16
-          maxwidth: 2048
-          maxheight: 2048
+          contactVoiceTelephone: +1 301 555-1212
+          contactElectronicMailAddress: user@host.com
+        optionalConstraints:
+          layerLimit: 16
+          maxWidth: 2048
+          maxHeight: 2048
 
       capability:
-        wmscapabilities:
-          extendedcapabilities:
-            metadataurl:
+        wmsCapabilities:
+          extendedCapabilities:
+            metadataUrl:
               url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
               mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
-            supportedlanguages:
-              defaultlanguage:
+            supportedLanguages:
+              defaultLanguage:
                 language: dut
-            responselanguage:
+            responseLanguage:
               language: dut
           layer:
             - title: Acme Corp. Map Server
               abstract:
               crs:
                 - "CRS:84"
-              authorityurl:
+              authorityUrl:
                 name: "DIF_ID"
-                onlineresource:
+                onlineResource:
                   href: "http://gcmd.gsfc.nasa.gov/difguide/whatisadif.html"
               layer:
                 - queryable: 0
@@ -67,22 +67,22 @@ services:
                     - "EPSG:26986"
                   attribution:
                     title: State College University
-                    onlineresource:
+                    onlineResource:
                       xlink: http://www.w3.org/1999/xlink
                       type: simple
                       href: "http://www.university.edu/"
-                    logourl:
+                    logoUrl:
                       format: image/gif
-                      onlineresource:
+                      onlineResource:
                         xlink: http://www.w3.org/1999/xlink
                         type: simple
                         href: "http://www.university.edu/icons/logo.gif"
                   identifier:
                     authority: DIF_ID
                     value: 123456
-                  featurelisturl:
+                  featureListUrl:
                     format: XML
-                    onlineresource:
+                    onlineResource:
                       xlink: http://www.w3.org/1999/xlink
                       type: simple
                       href: "http://www.university.edu/data/roads_rivers.gml"
@@ -90,17 +90,17 @@ services:
                     - name: USGS
                       title: USGS Topo Map Style
                       abstract: Features are shown in a style like that used in USGS topographic maps.
-                      legendurl:
+                      legendUrl:
                         width: 72
                         height: 72
                         format: image/gif
-                        onlineresource:
+                        onlineResource:
                           xlink: http://www.w3.org/1999/xlink
                           type: simple
                           href: "http://www.university.edu/legends/usgs.gif"
-                      stylesheeturl:
+                      stylesheetUrl:
                         format: text/xsl
-                        onlineresource:
+                        onlineResource:
                           xlink: http://www.w3.org/1999/xlink
                           type: simple
                           href: "http://www.university.edu/stylesheets/usgs.xsl"
@@ -108,7 +108,7 @@ services:
                   title: Roads at 1:1M scale
                   name: ROADS_1MM
                   abstract: Roads at a scale of 1 to 1 million.
-                  keywordlist:
+                  keywordList:
                     keyword:
                       - road
                       - transportation
@@ -118,16 +118,16 @@ services:
                   identifier:
                     authority: DIF_ID
                     value: 123456
-                  metadataurl:
+                  metadataUrl:
                     - type: "FGDC:1998"
                       format: text/plain
-                      onlineresource:
+                      onlineResource:
                         xlink: http://www.w3.org/1999/xlink
                         type: simple
                         href: "http://www.university.edu/metadata/roads.txt"
                     - type: ISO19115:2003
                       format: text/xml
-                      onlineresource:
+                      onlineResource:
                         xlink: http://www.w3.org/1999/xlink
                         type: simple
                         href: "http://www.university.edu/metadata/roads.xml"
@@ -135,11 +135,11 @@ services:
                     - name: ATLAS
                       title: Road atlas style
                       abstract: Roads are shown in a style like that used in a commercial road atlas.
-                      legendurl:
+                      legendUrl:
                         width: 72
                         height: 72
                         format: image/gif
-                        onlineresource:
+                        onlineResource:
                           xlink: http://www.w3.org/1999/xlink
                           type: simple
                           href: "http://www.university.edu/legends/atlas.gif"
@@ -175,7 +175,7 @@ services:
                         - name: elevation
                           units: CRS:88
                           default: "0"
-                          nearestvalue: "1"
+                          nearestValue: "1"
                           value: 0,1000,3000,5000,10000
                 - opaque: 1
                   name: ozone_image
