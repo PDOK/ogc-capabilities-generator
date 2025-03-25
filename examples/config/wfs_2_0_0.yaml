@@ -1,7 +1,7 @@
 global:
   prefix: bo
   namespace: http://www.BlueOx.org/BlueOx
-  onlineresourceurl: http://www.BlueOx.org
+  onlineResourceUrl: http://www.BlueOx.org
   path: /wfs/wfs.cgi
 services:
   wfs200:
@@ -136,11 +136,11 @@ services:
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
               constraints:
                 - name: AutomaticDataLocking
-                  novalues:
-                  defaultvalue: TRUE
+                  noValues:
+                  defaultValue: TRUE
                 - name: PreservesSiblingOrder
-                  novalues:
-                  defaultvalue: TRUE
+                  noValues:
+                  defaultValue: TRUE
             - name: LockFeature
               dcp:
                 http:
@@ -170,52 +170,52 @@ services:
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
           constraint:
             - name: ImplementsBasicWFS
-              noValue:
+              noValues:
               defaultValue: TRUE
             - name: ImplementsTransactionalWFS
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsLockingWFS
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: KVPEncoding
-              noValue:
+              noValues:
               defaultValue: TRUE
             - name: XMLEncoding
               noValue:
               defaultValue: TRUE
             - name: SOAPEncoding
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsInheritance
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsRemoteResolve
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsResultPaging
-              noValue:
+              noValues:
               defaultValue: TRUE
             - name: ImplementsStandardJoins
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsSpatialJoins
               noValue:
               defaultValue: FALSE
             - name: ImplementsTemporalJoins
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsFeatureVersioning
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ManageStoredQueries
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: PagingIsTransactionSafe
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: CountDefault
-              noValue:
+              noValues:
               defaultValue: "1000"
             - name: QueryExpressions
               allowedValues:

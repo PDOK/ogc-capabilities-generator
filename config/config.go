@@ -17,10 +17,10 @@ type Config struct {
 type Global struct {
 	Prefix                    string `yaml:"prefix"`
 	Namespace                 string `yaml:"namespace"`
-	Onlineresourceurl         string `yaml:"onlineresourceurl"`
+	Onlineresourceurl         string `yaml:"onlineResourceUrl"`
 	Path                      string `yaml:"path"`
 	Version                   string `yaml:"version"`
-	AdditionalSchemaLocations string `yaml:"additionalschemalocations"`
+	AdditionalSchemaLocations string `yaml:"additionalSchemaLocations"`
 	Empty                     string
 }
 

@@ -30,7 +30,7 @@ services:
             address: NASA Goddard Space Flight Center
             city: Greenbelt
             stateOrProvince: MD
-            postcode: 20771
+            postalCode: 20771
             country: USA
           contactVoiceTelephone: +1 301 555-1212
           contactElectronicMailAddress: user@host.com

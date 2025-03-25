@@ -16,7 +16,7 @@ serviceIdentification:
   abstract:
   serviceType:
     text: WFS
-    codespace: OGC
+    codeSpace: OGC
   serviceTypeVersion: 2.0.0
   fees: none
   accessConstraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
@@ -37,7 +37,7 @@ serviceProvider:
         deliveryPoint: "{{ .Empty}}"
         city: Apeldoorn
         administrativeArea: "{{ .Empty}}"
-        postalcode: "{{ .Empty}}"
+        postalCode: "{{ .Empty}}"
         country: Netherlands
         electronicMailAddress: BeheerPDOK@kadaster.nl
       onlineResource:

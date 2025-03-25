@@ -39,7 +39,7 @@ services:
               deliveryPoint: North Country
               city: Small Town
               administrativeArea: Rural County
-              postalcode: 12345
+              postalCode: 12345
               country: USA
               electronicMailAddress: Paul.Bunyon@BlueOx.org
             onlineResource:
@@ -57,13 +57,13 @@ services:
             extendedCapabilities:
               metadataUrl:
                 url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
-                mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
+                mediaType: application/vnd.ogc.csw.GetRecordByIdResponse_xml
               supportedLanguages:
                 defaultLanguage:
                   language: dut
               responseLanguage:
                 language: dut
-              spatialDatasetIdentifier:
+              spatialDataSetIdentifier:
                 code: 9ec26b36-84b0-4c39-a273-c2701d6c3087
           operation:
             - name: GetCapabilities
@@ -183,55 +183,55 @@ services:
                     href: "{{.Onlineresourceurl}}{{.Path}}?"
           constraint:
             - name: ImplementsBasicWFS
-              noValue:
+              noValues:
               defaultValue: TRUE
             - name: ImplementsTransactionalWFS
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsLockingWFS
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: KVPEncoding
-              noValue:
+              noValues:
               defaultValue: TRUE
             - name: XMLEncoding
-              noValue:
+              noValues:
               defaultValue: TRUE
             - name: SOAPEncoding
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsInheritance
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsRemoteResolve
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsResultPaging
-              noValue:
+              noValues:
               defaultValue: TRUE
             - name: ImplementsStandardJoins
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsSpatialJoins
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsTemporalJoins
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ImplementsFeatureVersioning
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: ManageStoredQueries
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: PagingIsTransactionSafe
-              noValue:
+              noValues:
               defaultValue: FALSE
             - name: CountDefault
-              noValue:
+              noValues:
               defaultValue: "1000"
             - name: QueryExpressions
-              allowedvalues:
+              allowedValues:
                 value:
                   - wfs:Query
                   - wfs:StoredQuery
@@ -251,7 +251,7 @@ services:
                     - forest
                   type:
                     text: INSPIRETheme
-                    codespace: inspireTheme
+                    codeSpace: inspireTheme
               metadataUrl:
                 href: http://www.ogccatservice.example.com/csw.cgi?service=CSW&amp;version=2.0.2&amp;request=GetRecords&amp;constraintlanguage=CQL&amp;recordid=urn:uuid:4ee8b2d3-9409-4a1d-b26b-6782e4fa3d59
               defaultCrs: urn:ogc:def:crs:EPSG::6269
@@ -268,8 +268,8 @@ services:
                   - application/json; subtype=geojson
                   - application/json
               wgs84BoundingBox:
-                lowercorner: "-180 -90"
-                uppercorner: "180 90"
+                lowerCorner: "-180 -90"
+                upperCorner: "180 90"
             - name: "{{.Prefix}}:Lakes"
               title: The Great Northern Lakes
               abstract: Lake boundaries for all lakes in the
@@ -295,7 +295,7 @@ services:
                   - text/xml; subtype=gml/3.1.1
                   - application/json; subtype=geojson
                   - application/json
-              wgs84Boundingbox:
+              wgs84BoundingBox:
                 lowerCorner: "-180 -90"
                 upperCorner: "180 90"
         filterCapabilities:

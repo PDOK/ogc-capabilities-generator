@@ -17,7 +17,7 @@ namespaces:
 serviceIdentification:
   serviceType:
     text: OGC WCS
-    codespace: OGC
+    codeSpace: OGC
   serviceTypeVersion:
     - 2.0.1
   profile:

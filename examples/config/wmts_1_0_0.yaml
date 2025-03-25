@@ -47,7 +47,7 @@ services:
               deliveryPoint: Fac Ciencies UAB
               city: Bellaterra
               administrativeArea: Barcelona
-              postalcode: 08193
+              postalCode: 08193
               country: Spain
               electronicMailAddress: joan.maso@uab.es
       operationsMetadata:
