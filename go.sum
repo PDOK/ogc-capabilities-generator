@@ -8,6 +8,10 @@ github.com/pdok/ogc-specifications v1.0.0-alpha10 h1:JJjl9asDnYHSKdlS3JE4pALwXFy
 github.com/pdok/ogc-specifications v1.0.0-alpha10/go.mod h1:YDngwkwrWOfc5MYnEYseiv97K1Y9bZXlVzwi/8EaIl8=
 github.com/pdok/ogc-specifications v1.0.0-alpha11 h1:mdn6k5QNOymZBnBSp0Pz6LbQOiPwtM1KJPD3sHwCLGc=
 github.com/pdok/ogc-specifications v1.0.0-alpha11/go.mod h1:YDngwkwrWOfc5MYnEYseiv97K1Y9bZXlVzwi/8EaIl8=
+github.com/pdok/ogc-specifications v1.0.0-alpha12 h1:aqmzKU96n4v5BDWrOnIMkFWaXvGdtj4KHSmZVtZKRl0=
+github.com/pdok/ogc-specifications v1.0.0-alpha12/go.mod h1:YDngwkwrWOfc5MYnEYseiv97K1Y9bZXlVzwi/8EaIl8=
+github.com/pdok/ogc-specifications v1.0.0-alpha13 h1:y4T0gesFcATa5MG16dZx5eWqhYrciLwlWylZjec1Ya0=
+github.com/pdok/ogc-specifications v1.0.0-alpha13/go.mod h1:YDngwkwrWOfc5MYnEYseiv97K1Y9bZXlVzwi/8EaIl8=
 github.com/pdok/ogc-specifications v1.0.0-alpha9 h1:xkJm/7oOzgnTRLuPp8HAaq1w7+FZNEI9ouS+kCwpNP8=
 github.com/pdok/ogc-specifications v1.0.0-alpha9/go.mod h1:YDngwkwrWOfc5MYnEYseiv97K1Y9bZXlVzwi/8EaIl8=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

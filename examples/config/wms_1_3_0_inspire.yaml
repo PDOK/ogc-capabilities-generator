@@ -34,10 +34,9 @@ services:
             country: USA
           contactVoiceTelephone: +1 301 555-1212
           contactElectronicMailAddress: user@host.com
-        optionalConstraints:
-          layerLimit: 16
-          maxWidth: 2048
-          maxHeight: 2048
+        layerLimit: 16
+        maxWidth: 2048
+        maxHeight: 2048
 
       capability:
         wmsCapabilities:

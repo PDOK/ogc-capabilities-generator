@@ -17,6 +17,9 @@ services:
             - ambush
         fees: none
         accessConstraints: none
+        layerLimit: 16
+        maxWidth: 2048
+        maxHeight: 2048
         contactInformation:
           contactPersonPrimary:
             contactPerson: Jeff Smith
@@ -30,11 +33,7 @@ services:
             postalCode: 20771
             country: USA
           contactVoiceTelephone: +1 301 555-1212
-          contactElectronicMailaddress: user@host.com
-        optionalConstraints:
-          layerLimit: 16
-          maxWidth: 2048
-          maxHeight: 2048
+          contactElectronicMailAddress: user@host.com
 
       capability:
         wmsCapabilities:
