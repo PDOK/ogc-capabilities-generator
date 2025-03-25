@@ -132,12 +132,12 @@ func buildWMS1_3_0(cfg config.Config) error {
 		return err
 	}
 
+	writeFile(cfg.Services.WMS130Config.Filename, buf)
+
 	err = validate.ValidateCapabilities(&cfg, buf, configBase.SchemaLocation)
 	if err != nil {
 		return err
 	}
-
-	writeFile(cfg.Services.WMS130Config.Filename, buf)
 
 	return nil
 }

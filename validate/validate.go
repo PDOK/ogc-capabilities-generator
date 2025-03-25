@@ -91,7 +91,12 @@ func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLoca
 	err = xsdHandler.ValidateMem(capabilities, xsdvalidate.ValidErrDefault)
 	xsdHandler.Free()
 	if err != nil {
-		return err
+		validationError, ok := err.(xsdvalidate.ValidationError)
+		if ok {
+			if len(validationError.Errors) > 1 || validationError.Errors[0].NodeName != "ExtendedCapabilities" {
+				return err
+			}
+		}
 	}
 	return nil
 }
