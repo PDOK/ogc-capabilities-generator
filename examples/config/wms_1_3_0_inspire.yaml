@@ -43,7 +43,7 @@ services:
           extendedCapabilities:
             metadataUrl:
               url: https://host/csw?service=CSW&version=2.0.2&request=GetRecordById&outputschema=http://www.isotc211.org/2005/gmd&elementsetname=full&id=bb652948-517e-4a61-8b7a-db61959da497
-              mediatype: application/vnd.ogc.csw.GetRecordByIdResponse_xml
+              mediaType: application/vnd.ogc.csw.GetRecordByIdResponse_xml
             supportedLanguages:
               defaultLanguage:
                 language: dut
@@ -97,7 +97,7 @@ services:
                           xlink: http://www.w3.org/1999/xlink
                           type: simple
                           href: "http://www.university.edu/legends/usgs.gif"
-                      stylesheetUrl:
+                      styleSheetUrl:
                         format: text/xsl
                         onlineResource:
                           xlink: http://www.w3.org/1999/xlink

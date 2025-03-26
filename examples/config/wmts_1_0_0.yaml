@@ -31,7 +31,7 @@ services:
         accessConstraints: none
       serviceMetadataUrl:
         href: "{{.Onlineresourceurl}}{{.Path}}/WMTSCapabilities.xml"
-      serviceprovider:
+      serviceProvider:
         providerName: MiraMon
         providerSite:
           type: simple
@@ -60,7 +60,7 @@ services:
                   href: "{{.Onlineresourceurl}}{{.Path}}?"
                   constraint:
                     - name: GetEncoding
-                      allowedvalues:
+                      allowedValues:
                         value:
                           - KVP
           - name: GetTile
@@ -86,10 +86,10 @@ services:
                         value:
                           - KVP
       contents:
-        tilematrixSet:
+        tileMatrixSet:
           - identifier: "BigWorld"
             supportedCrs: urn:ogc:def:crs:EPSG::25831
-            tilematrix:
+            tileMatrix:
               - identifier: 00
                 scaleDenominator: 10000000.0
                 topLeftCorner: -2404683.40739 8298457.58466
@@ -105,12 +105,12 @@ services:
                 matrixWidth: 18
                 matrixHeight: 12
           - identifier: "EPSG:28992"
-            tilematrix:
+            tileMatrix:
               - identifier: "00"
               - identifier: "01"
               - identifier: "02"
           - identifier: "EPSG:3857"
-            tilematrix:
+            tileMatrix:
               - identifier: 00
               - identifier: 01
               - identifier: 02
