@@ -1,10 +1,10 @@
 global:
   prefix: prefix
   namespace: http://namespace.geonovum.nl
-  onlineresourceurl: http://www.miramon.uab.es
+  onlineResourceUrl: http://www.miramon.uab.es
   path: /cgi-bin/MiraMon5_0.cgi
   version: v1_0
-  additionalschemalocations: http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd http://inspire.ec.europa.eu/schemas/common/1.0 http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd
+  additionalSchemaLocations: http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd http://inspire.ec.europa.eu/schemas/common/1.0 http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd
 services:
   wmts100:
     filename: ./output/wmts_capabilities_1_0_0.xml
@@ -16,8 +16,8 @@ services:
         xsi: http://www.w3.org/2001/XMLSchema-instance
         gml: http://www.opengis.net/gml
         version: 1.0.0
-        schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmts.xsd
-      serviceidentification:
+        schemaLocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmts.xsd
+      serviceIdentification:
         title: Web Map Tile Service
         abstract: Service that contains the map access interface to some TileMatrixSets
         keywords:
@@ -25,32 +25,32 @@ services:
             - tile
             - tile matrix set
             - map
-        servicetype: OGC WMTS
-        servicetypeversion: 1.0.0
+        serviceType: OGC WMTS
+        serviceTypeVersion: 1.0.0
         fees: none
-        accessconstraints: none
-      servicemetadataurl:
+        accessConstraints: none
+      serviceMetadataUrl:
         href: "{{.Onlineresourceurl}}{{.Path}}/WMTSCapabilities.xml"
-      serviceprovider:
-        providername: MiraMon
-        providersite:
+      serviceProvider:
+        providerName: MiraMon
+        providerSite:
           type: simple
           href: http://www.creaf.uab.es/miramon
-        servicecontact:
-          individualname: Joan Maso Pau
-          positionname: Senior Software Engineer
-          contactinfo:
+        serviceContact:
+          individualName: Joan Maso Pau
+          positionName: Senior Software Engineer
+          contactInfo:
             phone:
               voice: +34 93 581 1312
-              facsmile: +34 93 581 4151
+              facsimile: +34 93 581 4151
             address:
-              deliverypoint: Fac Ciencies UAB
+              deliveryPoint: Fac Ciencies UAB
               city: Bellaterra
-              administrativearea: Barcelona
-              postalcode: 08193
+              administrativeArea: Barcelona
+              postalCode: 08193
               country: Spain
-              electronicmailaddress: joan.maso@uab.es
-      operationsmetadata:
+              electronicMailAddress: joan.maso@uab.es
+      operationsMetadata:
         operation:
           - name: GetCapabilities
             dcp:
@@ -60,7 +60,7 @@ services:
                   href: "{{.Onlineresourceurl}}{{.Path}}?"
                   constraint:
                     - name: GetEncoding
-                      allowedvalues:
+                      allowedValues:
                         value:
                           - KVP
           - name: GetTile
@@ -71,7 +71,7 @@ services:
                   href: "{{.Onlineresourceurl}}{{.Path}}?"
                   constraint:
                     - name: GetEncoding
-                      allowedvalues:
+                      allowedValues:
                         value:
                           - KVP
           - name: GetFeatureInfo
@@ -82,35 +82,35 @@ services:
                   href: "{{.Onlineresourceurl}}{{.Path}}?"
                   constraint:
                     - name: GetEncoding
-                      allowedvalues:
+                      allowedValues:
                         value:
                           - KVP
       contents:
-        tilematrixset:
+        tileMatrixSet:
           - identifier: "BigWorld"
-            supportedcrs: urn:ogc:def:crs:EPSG::25831
-            tilematrix:
+            supportedCrs: urn:ogc:def:crs:EPSG::25831
+            tileMatrix:
               - identifier: 00
-                scaledenominator: 10000000.0
-                topleftcorner: -2404683.40739 8298457.58466
-                tilewidth: 256
-                tileheight: 256
-                matrixwidth: 9
-                matrixheight: 6
+                scaleDenominator: 10000000.0
+                topLeftCorner: -2404683.40739 8298457.58466
+                tileWidth: 256
+                tileHeight: 256
+                matrixWidth: 9
+                matrixHeight: 6
               - identifier: 01
-                scaledenominator: 5000000.0
-                topleftcorner: -2404683.40739 8298457.58466
-                tilewidth: 256
-                tileheight: 256
-                matrixwidth: 18
-                matrixheight: 12
+                scaleDenominator: 5000000.0
+                topLeftCorner: -2404683.40739 8298457.58466
+                tileWidth: 256
+                tileHeight: 256
+                matrixWidth: 18
+                matrixHeight: 12
           - identifier: "EPSG:28992"
-            tilematrix:
+            tileMatrix:
               - identifier: "00"
               - identifier: "01"
               - identifier: "02"
           - identifier: "EPSG:3857"
-            tilematrix:
+            tileMatrix:
               - identifier: 00
               - identifier: 01
               - identifier: 02
@@ -136,24 +136,24 @@ services:
         layer:
           - title: Coastlines
             abstract: Coastline/shorelines (BA010)
-            wgs84boundingbox:
-              lowercorner: -180 -90
-              uppercorner: 180 90
+            wgs84BoundingBox:
+              lowerCorner: -180 -90
+              upperCorner: 180 90
             identifier: coastlines
             style:  # identifier is the only required field, the rest are optional
               - identifier: DarkBlue
                 title: Dark Blue
-                legendurl:
+                legendUrl:
                   - format: image/png
                     href: http://www.miramon.uab.es/wmts/Coastlines/coastlines_darkBlue.png
-                isdefault: true
+                isDefault: true
               - identifier: thickAndRed
                 title: Thick And Red
                 abstract: Specify this style if you want your maps to have thick red coastlines.
             format:
               - image/png
               - image/gif
-            tilematrixsetlink:
-              - tilematrixset: "BigWorld"
-              - tilematrixset: "EPSG:28992"
-              - tilematrixset: "EPSG:3857"
+            tileMatrixSetLink:
+              - tileMatrixSet: "BigWorld"
+              - tileMatrixSet: "EPSG:28992"
+              - tileMatrixSet: "EPSG:3857"

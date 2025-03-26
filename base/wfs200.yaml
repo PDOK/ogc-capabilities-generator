@@ -5,53 +5,53 @@ namespaces:
   xlink: http://www.w3.org/1999/xlink
   xsi: http://www.w3.org/2001/XMLSchema-instance
   fes: http://www.opengis.net/fes/2.0
-  inspirecommon:
-  inspiredls:
+  inspireCommon:
+  inspireDls:
   prefix: "{{.Namespace}}"  # namespace_uri  # don't edit! maybe different solution in code....?
   version: 2.0.0
-  schemalocation: http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd {{.AdditionalSchemaLocations}}
+  schemaLocation: "http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd {{.AdditionalSchemaLocations}}"
 
-serviceidentification:
+serviceIdentification:
   title:
   abstract:
-  servicetype:
+  serviceType:
     text: WFS
-    codespace: OGC
-  servicetypeversion: 2.0.0
+    codeSpace: OGC
+  serviceTypeVersion: 2.0.0
   fees: none
-  accessconstraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
+  accessConstraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
 
-serviceprovider:
-  providername: PDOK
-  providersite:
+serviceProvider:
+  providerName: PDOK
+  providerSite:
     type: simple
     href: https://pdok.nl
-  servicecontact:
-    individualname: KlantContactCenter PDOK
-    positionname: pointOfContact
-    contactinfo:
+  serviceContact:
+    individualName: KlantContactCenter PDOK
+    positionName: pointOfContact
+    contactInfo:
       phone:
         voice: "{{ .Empty}}"
-        facsmile: "{{ .Empty}}"
+        facsimile: "{{ .Empty}}"
       address:
-        deliverypoint: "{{ .Empty}}"
+        deliveryPoint: "{{ .Empty}}"
         city: Apeldoorn
-        administrativearea: "{{ .Empty}}"
-        postalcode: "{{ .Empty}}"
+        administrativeArea: "{{ .Empty}}"
+        postalCode: "{{ .Empty}}"
         country: Netherlands
-        electronicmailaddress: BeheerPDOK@kadaster.nl
-      onlineresource:
+        electronicMailAddress: BeheerPDOK@kadaster.nl
+      onlineResource:
         type: simple
         href: "{{.Onlineresourceurl}}"
-      hoursofservice: "{{ .Empty}}"
-      contactinstructions: "{{ .Empty}}"
+      hoursOfService: "{{ .Empty}}"
+      contactInstructions: "{{ .Empty}}"
     role: "{{ .Empty}}"
 
 capabilities:
-  featuretypelist:
-    featuretype:
-      - defaultcrs: urn:ogc:def:crs:EPSG::28992
-        othercrs:
+  featureTypeList:
+    featureType:
+      - defaultCrs: urn:ogc:def:crs:EPSG::28992
+        otherCrs:
           - urn:ogc:def:crs:EPSG::25831
           - urn:ogc:def:crs:EPSG::25832
           - urn:ogc:def:crs:EPSG::3034
@@ -61,25 +61,25 @@ capabilities:
           - urn:ogc:def:crs:EPSG::3857
           - urn:ogc:def:crs:EPSG::4258
           - urn:ogc:def:crs:EPSG::4326
-        outputformats:
+        outputFormats:
           format:
             - application/gml+xml; version=3.2
             - text/xml; subtype=gml/3.2.1
             - text/xml; subtype=gml/3.1.1
             - application/json; subtype=geojson
             - application/json
-        wgs84boundingbox:
-          lowercorner: 2.52712538742158 50.2128625669452
-          uppercorner: 7.37402550506231 55.7211602557705
+        wgs84BoundingBox:
+          lowerCorner: 2.52712538742158 50.2128625669452
+          upperCorner: 7.37402550506231 55.7211602557705
 
-  operationsmetadata:
+  operationsMetadata:
     operation:
       - name: GetCapabilities
         dcp:
           http:
             get:
               type: simple
-              href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
+              href: "{{.Onlineresourceurl}}{{.Path}}"
               # POST: no POST for GetCapabilities
         parameter:
           - name: AcceptVersions
@@ -105,7 +105,7 @@ capabilities:
           http:
             get:
               type: simple
-              href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
+              href: "{{.Onlineresourceurl}}{{.Path}}"
               # post: no POST for DescribeFeatureType
         parameter:
           - name: outputFormat
@@ -119,10 +119,10 @@ capabilities:
           http:
             get:
               type: simple
-              href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
+              href: "{{.Onlineresourceurl}}{{.Path}}"
             post:
               type: simple
-              href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}"
+              href: "{{.Onlineresourceurl}}{{.Path}}"
         parameter:
           - name: outputFormat
             allowedvalues:
@@ -138,119 +138,119 @@ capabilities:
           http:
             get:
               type: simple
-              href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
+              href: "{{.Onlineresourceurl}}{{.Path}}"
               # post: no POST for ListStoredQueries
       - name: DescribeStoredQueries
         dcp:
           http:
             get:
               type: simple
-              href: "{{.Onlineresourceurl}}{{.Path}}/wfs/{{.Version}}?"
+              href: "{{.Onlineresourceurl}}{{.Path}}"
               # post: no POST for DescribeStoredQueries
 
     parameter:
       name: version
-      allowedvalues:
+      allowedValues:
         value:
           - 2.0.0
 
     constraint:
       - name: ImplementsBasicWFS
-        novalue: "{{ .Empty }}"
-        defaultvalue: "TRUE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "TRUE"
       - name: ImplementsTransactionalWFS
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ImplementsLockingWFS
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: KVPEncoding
-        novalue: "{{ .Empty }}"
-        defaultvalue: "TRUE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "TRUE"
       - name: XMLEncoding
-        novalue: "{{ .Empty }}"
-        defaultvalue: "TRUE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "TRUE"
       - name: SOAPEncoding
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ImplementsInheritance
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ImplementsRemoteResolve
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ImplementsResultPaging
-        novalue: "{{ .Empty }}"
-        defaultvalue: "TRUE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "TRUE"
       - name: ImplementsStandardJoins
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ImplementsSpatialJoins
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ImplementsTemporalJoins
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ImplementsFeatureVersioning
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: ManageStoredQueries
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: PagingIsTransactionSafe
-        novalue: "{{ .Empty }}"
-        defaultvalue: "FALSE"
+        noValue: "{{ .Empty }}"
+        defaultValue: "FALSE"
       - name: CountDefault
-        novalue: "{{ .Empty }}"
-        defaultvalue: 1000
+        noValue: "{{ .Empty }}"
+        defaultValue: "1000"
       - name: QueryExpressions
-        allowedvalues:
+        allowedValues:
           value:
             - wfs:Query
             - wfs:StoredQuery
 
-  filtercapabilities:
+  filterCapabilities:
     conformance:
       constraint:
         - name: ImplementsQuery
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsAdHocQuery
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsFunctions
-          defaultvalue: "FALSE"
+          defaultValue: "FALSE"
         - name: ImplementsResourceId
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsMinStandardFilter
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsStandardFilter
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsMinSpatialFilter
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsSpatialFilter
-          defaultvalue: "FALSE"
+          defaultValue: "FALSE"
         - name: ImplementsMinTemporalFilter
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsTemporalFilter
-          defaultvalue: "FALSE"
+          defaultValue: "FALSE"
         - name: ImplementsVersionNav
-          defaultvalue: "FALSE"
+          defaultValue: "FALSE"
         - name: ImplementsSorting
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsExtendedOperators
-          defaultvalue: "FALSE"
+          defaultValue: "FALSE"
         - name: ImplementsMinimumXPath
-          defaultvalue: "TRUE"
+          defaultValue: "TRUE"
         - name: ImplementsSchemaElementFunc
-          defaultvalue: "FALSE"
+          defaultValue: "FALSE"
 
-    idcapabilities:
-      resourceidentifier:
+    idCapabilities:
+      resourceIdentifier:
         name: fes:ResourceId
 
-    scalarcapabilities:
-      logicaloperators:
-      comparisonoperators:
-        comparisonoperator:
+    scalarCapabilities:
+      logicalOperators:
+      comparisonOperators:
+        comparisonOperator:
           - name: PropertyIsEqualTo
           - name: PropertyIsNotEqualTo
           - name: PropertyIsLessThan
@@ -261,9 +261,9 @@ capabilities:
           - name: PropertyIsBetween
           - name: PropertyIsNull
 
-    spatialcapabilities:
-      geometryoperands:
-        geometryoperand:
+    spatialCapabilities:
+      geometryOperands:
+        geometryOperand:
           - name: gml:Point
           - name: gml:MultiPoint
           - name: gml:LineString
@@ -276,8 +276,8 @@ capabilities:
           - name: gml:MultiSurface
           - name: gml:Box
           - name: gml:Envelope
-      spatialoperators:
-        spatialoperator:
+      spatialOperators:
+        spatialOperator:
           - name: Equals
           - name: Disjoint
           - name: Touches
@@ -289,11 +289,11 @@ capabilities:
           - name: DWithin
           - name: Beyond
           - name: BBOX
-    temporalcapabilities:
-      temporaloperands:
-        temporaloperand:
+    temporalCapabilities:
+      temporalOperands:
+        temporalOperand:
           - name: gml:TimePeriod
           - name: gml:TimeInstant
-      temporaloperators:
-        temporaloperator:
+      temporalOperators:
+        temporalOperator:
           - name: During

@@ -5,62 +5,62 @@ namespaces:
   xlink: http://www.w3.org/1999/xlink
   xsi: http://www.w3.org/2001/XMLSchema-instance
   version: 1.3.0
-  schemalocation: http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd
+  schemaLocation: http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd
 service:
   name: WMS
-  onlineresource:
+  onlineResource:
     xlink: http://www.w3.org/1999/xlink
     href: "{{.Onlineresourceurl}}/"
-  contactinformation:
-    contactpersonprimary:
-      contactperson: KlantContactCenter PDOK
-      contactorganization: PDOK
-    contactposition: pointOfContact
-    contactaddress:
-      addresstype: Work
+  contactInformation:
+    contactPersonPrimary:
+      contactPerson: KlantContactCenter PDOK
+      contactOrganization: PDOK
+    contactPosition: pointOfContact
+    contactAddress:
+      addressType: Work
       address: "{{ .Empty}}"
       city: Apeldoorn
-      stateorprovince: "{{ .Empty}}"
-      postalcode: "{{ .Empty}}"
+      stateOrProvince: "{{ .Empty}}"
+      postalCode: "{{ .Empty}}"
       country: Netherlands
-    contactvoicetelephone: "{{ .Empty}}"
-    contactfacsimiletelephone: "{{ .Empty}}"
-    contactelectronicmailaddress: BeheerPDOK@kadaster.nl
+    contactVoiceTelephone: "{{ .Empty}}"
+    contactFacsimileTelephone: "{{ .Empty}}"
+    contactElectronicMailAddress: BeheerPDOK@kadaster.nl
   fees: NONE
-  accessconstraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
-  optionalconstraints:
-    maxwidth: 4000
-    maxheight: 4000
+  accessConstraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
+  optionalConstraints:
+    maxWidth: 4000
+    maxHeight: 4000
 capability:
-  wmscapabilities:
+  wmsCapabilities:
     request:
-      getcapabilities:
+      getCapabilities:
         format:
           - text/xml
-        dcptype:
+        dcpType:
           http:
             get:
-              onlineresource:
+              onlineResource:
                 xlink: http://www.w3.org/1999/xlink
-                href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?"
-      getmap:
+                href: "{{.Onlineresourceurl}}{{.Path}}?"
+      getMap:
         format:
           - image/png
           - image/jpeg
           - image/png; mode=8bit
           - image/vnd.jpeg-png
           - image/vnd.jpeg-png8
-        dcptype:
+        dcpType:
           http:
             get:
-              onlineresource:
+              onlineResource:
                 xlink: http://www.w3.org/1999/xlink
-                href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?"
+                href: "{{.Onlineresourceurl}}{{.Path}}?"
             post:
-              onlineresource:
+              onlineResource:
                 xlink: http://www.w3.org/1999/xlink
-                href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}"
-      getfeatureinfo:
+                href: "{{.Onlineresourceurl}}{{.Path}}?"
+      getFeatureInfo:
         format:
           - application/json
           - application/json; subtype=geojson
@@ -69,16 +69,16 @@ capability:
           - text/plain
           - text/xml
           - text/xml; subtype=gml/3.1.1
-        dcptype:
+        dcpType:
           http:
             get:
-              onlineresource:
+              onlineResource:
                 xlink: http://www.w3.org/1999/xlink
-                href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}?"
+                href: "{{.Onlineresourceurl}}{{.Path}}?"
             post:
-              onlineresource:
+              onlineResource:
                 xlink: http://www.w3.org/1999/xlink
-                href: "{{.Onlineresourceurl}}{{.Path}}/wms/{{.Version}}"
+                href: "{{.Onlineresourceurl}}{{.Path}}?"
     layer:
       - crs:
           - EPSG:28992
@@ -90,12 +90,12 @@ capability:
           - EPSG:4258
           - EPSG:4326
           - CRS:84
-        exgeographicboundingbox:       # without this Qgis cannot use the wms
-          westboundlongitude: 2.52713
-          eastboundlongitude: 7.37403
-          southboundlatitude: 50.2129
-          northboundlatitude: 55.7212
-        boundingbox:                   # without this Qgis cannot use the wms
+        exGeographicBoundingBox:       # without this Qgis cannot use the wms
+          westBoundLongitude: 2.52713
+          eastBoundLongitude: 7.37403
+          southBoundLatitude: 50.2129
+          northBoundLatitude: 55.7212
+        boundingBox:                   # without this Qgis cannot use the wms
           - crs: EPSG:28992
             minx: -25000
             miny: 250000
