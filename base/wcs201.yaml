@@ -66,16 +66,16 @@ operationsMetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?"
+            href: "{{.Onlineresourceurl}}{{.Path}}"
     - name: DescribeCoverage
       dcp:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?"
+            href: "{{.Onlineresourceurl}}{{.Path}}"
           post:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}"
+            href: "{{.Onlineresourceurl}}{{.Path}}"
             constraint:
               name: PostEncoding
               allowedValues:
@@ -86,10 +86,10 @@ operationsMetadata:
         http:
           get:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}?"
+            href: "{{.Onlineresourceurl}}{{.Path}}"
           post:
             type: simple
-            href: "{{.Onlineresourceurl}}{{.Path}}/wcs/{{.Version}}"
+            href: "{{.Onlineresourceurl}}{{.Path}}"
             constraint:
               name: PostEncoding
               allowedValues:

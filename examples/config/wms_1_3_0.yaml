@@ -2,7 +2,7 @@ global:
   prefix: prefix
   namespace: http://namespace.geonovum.nl
   onlineResourceUrl: http://hostname
-  path: /path
+  path: /path/wms/
 services:
   wms130:
     filename: ./output/wms_capabilities_1_3_0.xml
