@@ -37,9 +37,9 @@ func writeFile(filename string, buffer []byte) error {
 	return nil
 }
 
-func buildCapabilities(v interface{}, g config.Global) ([]byte, error) {
+func buildCapabilities(v interface{}, g config.Global, checkPrefix bool) ([]byte, error) {
 
-	if g.Prefix == `` {
+	if checkPrefix && g.Prefix == `` {
 		return nil, errors.New("no dataset prefix defined")
 	}
 
@@ -84,7 +84,7 @@ func buildWFS2_0_0(cfg config.Config) error {
 		target.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
 	}
 
-	buf, err := buildCapabilities(target, cfg.Global)
+	buf, err := buildCapabilities(target, cfg.Global, true)
 	if err != nil {
 		return err
 	}
@@ -127,7 +127,7 @@ func buildWMS1_3_0(cfg config.Config) error {
 		configBase.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
 	}
 
-	buf, err := buildCapabilities(configBase, cfg.Global)
+	buf, err := buildCapabilities(configBase, cfg.Global, false)
 	if err != nil {
 		return err
 	}
@@ -172,7 +172,7 @@ func buildWMTS1_0_0(cfg config.Config) error {
 		return err
 	}
 
-	buf, err := buildCapabilities(cfg.Services.WMTS100Config.Wmts100, cfg.Global)
+	buf, err := buildCapabilities(cfg.Services.WMTS100Config.Wmts100, cfg.Global, false)
 	if err != nil {
 		return err
 	}
@@ -192,7 +192,7 @@ func buildWCS2_0_1(cfg config.Config) error {
 		return err
 	}
 
-	buf, err := buildCapabilities(cfg.Services.WCS201Config.Wcs201, cfg.Global)
+	buf, err := buildCapabilities(cfg.Services.WCS201Config.Wcs201, cfg.Global, false)
 	if err != nil {
 		return err
 	}
