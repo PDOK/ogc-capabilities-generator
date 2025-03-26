@@ -104,37 +104,37 @@ func buildWFS2_0_0(cfg config.Config) error {
 
 func buildWMS1_3_0(cfg config.Config) error {
 	wms130base := ows.WMS130Base
-	configBase := cfg.Services.WMS130Config.Wms130
+	target := cfg.Services.WMS130Config.Wms130
 
 	// merge with specific set skipping layer, this is a custom operation
-	err := mergo.Merge(&configBase, wms130base, mergo.WithTransformers(ows.WMS130Transfomer{}))
+	err := mergo.Merge(&target, wms130base, mergo.WithTransformers(ows.WMS130Transfomer{}))
 	if err != nil {
 		return err
 	}
 
 	if len(wms130base.Capabilities.Layer) > 0 {
-		for index := range configBase.Capabilities.Layer {
-			err = merge(&configBase.Capabilities.Layer[index], wms130base.Capabilities.Layer[0])
+		for index := range target.Capabilities.Layer {
+			err = merge(&target.Capabilities.Layer[index], wms130base.Capabilities.Layer[0])
 			if err != nil {
 				return err
 			}
 		}
 	}
 
-	if configBase.Capabilities.WMSCapabilities.ExtendedCapabilities != nil {
-		configBase.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-		configBase.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
-		configBase.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
+	if target.Capabilities.WMSCapabilities.ExtendedCapabilities != nil {
+		target.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		target.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+		target.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
 	}
 
-	buf, err := buildCapabilities(configBase, cfg.Global, false)
+	buf, err := buildCapabilities(target, cfg.Global, false)
 	if err != nil {
 		return err
 	}
 
 	writeFile(cfg.Services.WMS130Config.Filename, buf)
 
-	err = validate.ValidateCapabilities(&cfg, buf, configBase.SchemaLocation)
+	err = validate.ValidateCapabilities(&cfg, buf, target.SchemaLocation)
 	if err != nil {
 		return err
 	}
@@ -166,18 +166,17 @@ func makeDirIfNotExists(filename string) {
 
 func buildWMTS1_0_0(cfg config.Config) error {
 	wmts100base := ows.WMTS100Base
+	target := cfg.Services.WMTS100Config.Wmts100
 
-	err := mergo.Merge(&cfg.Services.WMTS100Config.Wmts100, wmts100base, mergo.WithTransformers(ows.WMTS100Transfomer{}))
+	err := mergo.Merge(&target, wmts100base, mergo.WithTransformers(ows.WMTS100Transfomer{}))
 	if err != nil {
 		return err
 	}
 
-	buf, err := buildCapabilities(cfg.Services.WMTS100Config.Wmts100, cfg.Global, false)
+	buf, err := buildCapabilities(target, cfg.Global, false)
 	if err != nil {
 		return err
 	}
-
-	//validate.ValidateCapabilities(&cfg, buf, cfg.Services.WMTS100Config.Wmts100.SchemaLocation)
 
 	writeFile(cfg.Services.WMTS100Config.Filename, buf)
 
@@ -186,18 +185,19 @@ func buildWMTS1_0_0(cfg config.Config) error {
 
 func buildWCS2_0_1(cfg config.Config) error {
 	wcs201base := ows.WCS201Base
+	target := cfg.Services.WCS201Config.Wcs201
 
-	err := mergo.Merge(&cfg.Services.WCS201Config.Wcs201, wcs201base)
+	err := mergo.Merge(&target, wcs201base)
 	if err != nil {
 		return err
 	}
 
-	buf, err := buildCapabilities(cfg.Services.WCS201Config.Wcs201, cfg.Global, false)
+	buf, err := buildCapabilities(target, cfg.Global, false)
 	if err != nil {
 		return err
 	}
 
-	err = validate.ValidateCapabilities(&cfg, buf, cfg.Services.WCS201Config.Wcs201.SchemaLocation)
+	err = validate.ValidateCapabilities(&cfg, buf, target.SchemaLocation)
 	if err != nil {
 		return err
 	}
