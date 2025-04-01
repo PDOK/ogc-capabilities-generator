@@ -15,7 +15,7 @@ var WMS130Base wms130.GetCapabilitiesResponse
 
 func init() {
 	wms130Response := wms130.GetCapabilitiesResponse{}
-	base, err := os.ReadFile("./base/wms130.yaml")
+	base, err := os.ReadFile("../base/wms130.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}

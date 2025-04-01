@@ -15,7 +15,7 @@ var WFS200Base wfs200.GetCapabilitiesResponse
 
 func init() {
 	wfs200Response := wfs200.GetCapabilitiesResponse{}
-	base, err := os.ReadFile("./base/wfs200.yaml")
+	base, err := os.ReadFile("../base/wfs200.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}

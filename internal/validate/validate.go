@@ -5,7 +5,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"ogc-capabilities-generator/config"
+	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 	"strings"
 	"text/template"
 

@@ -14,7 +14,7 @@ var WCS201Base wcs201.GetCapabilitiesResponse
 
 func init() {
 	wcs201Response := wcs201.GetCapabilitiesResponse{}
-	base, err := os.ReadFile("./base/wcs201.yaml")
+	base, err := os.ReadFile("../base/wcs201.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
