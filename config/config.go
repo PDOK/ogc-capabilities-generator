@@ -21,15 +21,15 @@ type Global struct {
 	Path                      string `yaml:"path"`
 	Version                   string `yaml:"version"`
 	AdditionalSchemaLocations string `yaml:"additionalSchemaLocations"`
-	Empty                     string
+	Empty                     string `yaml:"-"`
 }
 
 // Services contain a single service struct for every service type
 type Services struct {
-	WFS200Config  WFS200Config  `yaml:"wfs200"`
-	WMS130Config  WMS130Config  `yaml:"wms130"`
-	WMTS100Config WMTS100Config `yaml:"wmts100"`
-	WCS201Config  WCS201Config  `yaml:"wcs201"`
+	WFS200Config  *WFS200Config  `yaml:"wfs200,omitempty"`
+	WMS130Config  *WMS130Config  `yaml:"wms130,omitempty"`
+	WMTS100Config *WMTS100Config `yaml:"wmts100,omitempty"`
+	WCS201Config  *WCS201Config  `yaml:"wcs201,omitempty"`
 }
 
 // The WFS200Config service struct
