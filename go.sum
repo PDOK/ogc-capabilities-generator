@@ -4,8 +4,8 @@ github.com/ajankovic/xdiff v0.0.1 h1:V1cj8t5xwYzm6ZGPqPOlAc9AIajXuTEn41D/1MJBWMM
 github.com/ajankovic/xdiff v0.0.1/go.mod h1:SUmEZ67uB97I0zkiuQ+lb+LOms9ipn8X+p+2RdJV710=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/pdok/ogc-specifications v1.0.0-beta1 h1:gFS+jnIFQcGYwTdYfzdukhBFjsmqXcLYvNj+Ct1SIcE=
-github.com/pdok/ogc-specifications v1.0.0-beta1/go.mod h1:YDngwkwrWOfc5MYnEYseiv97K1Y9bZXlVzwi/8EaIl8=
+github.com/pdok/ogc-specifications v1.0.0-beta4 h1:/Dgi6ArgR0YPCkErpNyCQTCYMkH/cIfWe+VCoUUZZN0=
+github.com/pdok/ogc-specifications v1.0.0-beta4/go.mod h1:YDngwkwrWOfc5MYnEYseiv97K1Y9bZXlVzwi/8EaIl8=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=
