@@ -1,4 +1,4 @@
-module ogc-capabilities-generator
+module github.com/pdok/ogc-capabilities-generator
 
 go 1.24
 
