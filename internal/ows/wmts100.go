@@ -15,7 +15,7 @@ var WMTS100Base wmts100.GetCapabilitiesResponse
 
 func init() {
 	wmts100Response := wmts100.GetCapabilitiesResponse{}
-	base, err := os.ReadFile("./base/wmts100.yaml")
+	base, err := os.ReadFile("../base/wmts100.yaml")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}

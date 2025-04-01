@@ -2,9 +2,9 @@ package main
 
 import (
 	"bytes"
+	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 	"github.com/stretchr/testify/assert"
 	"log"
-	"ogc-capabilities-generator/config"
 	"os"
 	"path"
 	"testing"
@@ -14,8 +14,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const configBasePath = "./examples/config"
-const expectedBasePath = "./examples/capabilities"
+const configBasePath = "../examples/config"
+const expectedBasePath = "../examples/capabilities"
 
 func compareXML(testResult string, expectedResult string) ([]xdiff.Delta, error) {
 	p := parser.New()
