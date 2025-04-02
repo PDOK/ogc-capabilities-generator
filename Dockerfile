@@ -24,7 +24,7 @@ ENV GOOS=linux
 # run tests
 RUN XML_CATALOG_FILES=/go/src/app/xml-catalog/ogc-catalog.xml go test ./... -covermode=atomic
 
-RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create create.go
+RUN go build -v -ldflags='-s -w -linkmode auto' -a -installsuffix cgo -o /create cmd/create.go
 
 FROM alpine:3
 
