@@ -36,7 +36,7 @@
     </ows:Address>
     <ows:OnlineResource xlink:type="simple" xlink:href="http://www.BlueOx.org/contactUs"/>
     <ows:HoursOfService>24x7</ows:HoursOfService>
-    <ows:ContactInstructions>eMail Paul with normal requsts; Phone Paul for emergency requests; if you get voice mail and your request can&#39;t wait, contact another mythological figure listed on the contactUs page of our web site.</ows:ContactInstructions>
+    <ows:ContactInstructions>eMail Paul with normal requests; Phone Paul for emergency requests; if you get voice mail and your request can&#39;t wait, contact another mythological figure listed on the contactUs page of our web site.</ows:ContactInstructions>
    </ows:ContactInfo>
    <ows:Role>PointOfContact</ows:Role>
   </ows:ServiceContact>
