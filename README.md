@@ -1,7 +1,5 @@
 # ogc-capabilities-generator
 
-[![Build Status](https://dev.kadaster.nl/jenkins-pdok/buildStatus/icon?job=pdok-gitea%2Fogc-capabilities-generator%2Fmaster)](https://dev.kadaster.nl/jenkins-pdok/job/pdok-gitea/job/ogc-capabilities-generator/job/master/)
-
 ## What will it do
 
 This application will give the user/developer 'full' control in the generation
