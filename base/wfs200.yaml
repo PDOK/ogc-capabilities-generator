@@ -22,24 +22,24 @@ serviceIdentification:
   accessConstraints: https://creativecommons.org/publicdomain/zero/1.0/deed.nl
 
 serviceProvider:
-  providerName: PDOK
+  providerName: "{{ .Empty}}"
   providerSite:
     type: simple
-    href: https://pdok123.nl
+    href: "{{ .Empty}}"
   serviceContact:
-    individualName: KlantContactCenter PDOK
-    positionName: pointOfContact
+    individualName: "{{ .Empty}}"
+    positionName: "{{ .Empty}}"
     contactInfo:
       phone:
         voice: "{{ .Empty}}"
         facsimile: "{{ .Empty}}"
       address:
         deliveryPoint: "{{ .Empty}}"
-        city: Apeldoorn
+        city: "{{ .Empty}}"
         administrativeArea: "{{ .Empty}}"
         postalCode: "{{ .Empty}}"
-        country: Netherlands
-        electronicMailAddress: BeheerPDOK@kadaster.nl
+        country: "{{ .Empty}}"
+        electronicMailAddress: "{{ .Empty}}"
       onlineResource:
         type: simple
         href: "{{.Onlineresourceurl}}"
