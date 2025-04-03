@@ -13,8 +13,6 @@ services:
         abstract: "Web Feature Service maintained by NSDI data provider, serving FGDC framework layer XXX; contact Paul.Bunyon@BlueOx.org"
         keywords:
           keyword:
-            - Kadaster
-            - Kadastrale percelen
             - FGDC
             - NSDI
             - Framework Data Layer

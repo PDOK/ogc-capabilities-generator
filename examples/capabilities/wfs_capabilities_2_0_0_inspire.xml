@@ -4,8 +4,6 @@
   <ows:Title>OGC Member WFS</ows:Title>
   <ows:Abstract>Web Feature Service maintained by NSDI data provider, serving FGDC framework layer XXX; contact Paul.Bunyon@BlueOx.org</ows:Abstract>
   <ows:Keywords>
-   <ows:Keyword>Kadaster</ows:Keyword>
-   <ows:Keyword>Kadastrale percelen</ows:Keyword>
    <ows:Keyword>FGDC</ows:Keyword>
    <ows:Keyword>NSDI</ows:Keyword>
    <ows:Keyword>Framework Data Layer</ows:Keyword>

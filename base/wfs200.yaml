@@ -25,7 +25,7 @@ serviceProvider:
   providerName: PDOK
   providerSite:
     type: simple
-    href: https://pdok.nl
+    href: https://pdok123.nl
   serviceContact:
     individualName: KlantContactCenter PDOK
     positionName: pointOfContact
