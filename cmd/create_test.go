@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/xml"
-	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 	"strings"
 	"testing"
+
+	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 )
 
 type dummy struct {

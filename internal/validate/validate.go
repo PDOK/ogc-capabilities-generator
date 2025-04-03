@@ -5,9 +5,10 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 	"strings"
 	"text/template"
+
+	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 
 	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 )
@@ -29,7 +30,7 @@ func generateXsd(schemaLocations string, global config.Global) (*schema, error) 
 	var schemaLocationsBuffer bytes.Buffer
 	err := schemaTemplate.Execute(&schemaLocationsBuffer, global)
 	if err != nil {
-		return nil, fmt.Errorf("cannot parse schemaLocations")
+		return nil, errors.New("cannot parse schemaLocations")
 	}
 
 	schemas := strings.Split(strings.TrimSpace(schemaLocationsBuffer.String()), " ")
@@ -55,6 +56,7 @@ func generateXsd(schemaLocations string, global config.Global) (*schema, error) 
 	}, nil
 }
 
+//nolint:revive
 func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLocations string) error {
 	xsdvalidate.Cleanup()
 	err := xsdvalidate.Init()
@@ -69,15 +71,16 @@ func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLoca
 
 	defer xsdvalidate.Cleanup()
 	var xsdHandler *xsdvalidate.XsdHandler
-	if len(xsd.Import) <= 0 {
+	switch nrOfSchemas := len(xsd.Import); {
+	case nrOfSchemas <= 0:
 		return errors.New("error parsing schemas, no xsd schema found")
-	} else if len(xsd.Import) == 1 {
-		xsdUrl := xsd.Import[0].SchemaLocation
-		xsdHandler, err = xsdvalidate.NewXsdHandlerUrl(xsdUrl, xsdvalidate.ParsErrVerbose)
+	case nrOfSchemas == 1:
+		xsdURL := xsd.Import[0].SchemaLocation
+		xsdHandler, err = xsdvalidate.NewXsdHandlerUrl(xsdURL, xsdvalidate.ParsErrVerbose)
 		if err != nil {
 			return err
 		}
-	} else {
+	default:
 		schema, err := xml.MarshalIndent(xsd, "", " ")
 		if err != nil {
 			return err
@@ -91,7 +94,8 @@ func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLoca
 	err = xsdHandler.ValidateMem(capabilities, xsdvalidate.ValidErrDefault)
 	xsdHandler.Free()
 	if err != nil {
-		validationError, ok := err.(xsdvalidate.ValidationError)
+		var validationError xsdvalidate.ValidationError
+		ok := errors.As(err, &validationError)
 		if ok {
 			if len(validationError.Errors) > 1 || validationError.Errors[0].NodeName != "ExtendedCapabilities" {
 				return err
