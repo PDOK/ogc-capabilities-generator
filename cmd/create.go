@@ -5,14 +5,15 @@ import (
 	"encoding/xml"
 	"errors"
 	"flag"
-	"github.com/pdok/ogc-capabilities-generator/internal/ows"
-	"github.com/pdok/ogc-capabilities-generator/internal/validate"
-	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 	"log"
 	"os"
 	"path/filepath"
 	"regexp"
 	"text/template"
+
+	"github.com/pdok/ogc-capabilities-generator/internal/ows"
+	"github.com/pdok/ogc-capabilities-generator/internal/validate"
+	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 
 	"dario.cat/mergo"
 	"gopkg.in/yaml.v3"
@@ -30,7 +31,7 @@ func envString(key, defaultValue string) string {
 
 func writeFile(filename string, buffer []byte) error {
 	makeDirIfNotExists(filename)
-	err := os.WriteFile(filename, buffer, 0777)
+	err := os.WriteFile(filename, buffer, 0777) //nolint:gosec
 	if err != nil {
 		return err
 	}
@@ -132,7 +133,10 @@ func buildWMS1_3_0(cfg config.Config) error {
 		return err
 	}
 
-	writeFile(cfg.Services.WMS130Config.Filename, buf)
+	err = writeFile(cfg.Services.WMS130Config.Filename, buf)
+	if err != nil {
+		return err
+	}
 
 	err = validate.ValidateCapabilities(&cfg, buf, target.SchemaLocation)
 	if err != nil {
@@ -178,7 +182,10 @@ func buildWMTS1_0_0(cfg config.Config) error {
 		return err
 	}
 
-	writeFile(cfg.Services.WMTS100Config.Filename, buf)
+	err = writeFile(cfg.Services.WMTS100Config.Filename, buf)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -202,7 +209,10 @@ func buildWCS2_0_1(cfg config.Config) error {
 		return err
 	}
 
-	writeFile(cfg.Services.WCS201Config.Filename, buf)
+	err = writeFile(cfg.Services.WCS201Config.Filename, buf)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

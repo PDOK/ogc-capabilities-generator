@@ -32,6 +32,7 @@ type WFS200Transfomer struct {
 // Transformer skip FeatureTypeList when merging Base to config, this is a custom operation
 func (t WFS200Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
 	if typ == reflect.TypeOf(wfs200.FeatureTypeList{}) {
+		//nolint:revive
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil

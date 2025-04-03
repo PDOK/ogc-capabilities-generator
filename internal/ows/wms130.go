@@ -32,12 +32,14 @@ type WMS130Transfomer struct {
 // Transformer skip LayerList when merging Base to config, this is a custom operation
 func (t WMS130Transfomer) Transformer(typ reflect.Type) func(dst, src reflect.Value) error {
 	if typ == reflect.TypeOf(wms130.Layer{}) {
+		//nolint:revive
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil
 		}
 	}
 	if typ == reflect.TypeOf(wms130.DCPType{}) {
+		//nolint:revive
 		return func(dst, src reflect.Value) error {
 			// NOOP
 			return nil
