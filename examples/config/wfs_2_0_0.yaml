@@ -12,8 +12,6 @@ services:
         abstract: "Web Feature Service maintained by NSDI data provider, serving FGDC framework layer XXX; contact Paul.Bunyon@BlueOx.org"
         keywords:
           keyword:
-            - Kadaster
-            - Kadastrale percelen
             - FGDC
             - NSDI
             - Framework Data Layer
@@ -45,7 +43,7 @@ services:
               type: simple
               href: http://www.BlueOx.org/contactUs
             hoursOfService: 24x7
-            contactInstructions: eMail Paul with normal requsts; Phone Paul for emergency
+            contactInstructions: eMail Paul with normal requests; Phone Paul for emergency
                requests; if you get voice mail and your request can't wait,
                contact another mythological figure listed on the contactUs
                page of our web site.

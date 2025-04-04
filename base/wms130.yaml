@@ -13,19 +13,19 @@ service:
     href: "{{.Onlineresourceurl}}/"
   contactInformation:
     contactPersonPrimary:
-      contactPerson: KlantContactCenter PDOK
-      contactOrganization: PDOK
+      contactPerson: "{{ .Empty}}"
+      contactOrganization: "{{ .Empty}}"
     contactPosition: pointOfContact
     contactAddress:
       addressType: Work
       address: "{{ .Empty}}"
-      city: Apeldoorn
+      city: "{{ .Empty}}"
       stateOrProvince: "{{ .Empty}}"
       postalCode: "{{ .Empty}}"
-      country: Netherlands
+      country: "{{ .Empty}}"
     contactVoiceTelephone: "{{ .Empty}}"
     contactFacsimileTelephone: "{{ .Empty}}"
-    contactElectronicMailAddress: BeheerPDOK@kadaster.nl
+    contactElectronicMailAddress: "{{ .Empty}}"
   fees: NONE
   accessConstraints: http://creativecommons.org/publicdomain/zero/1.0/deed.nl
   optionalConstraints:

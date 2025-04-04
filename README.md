@@ -1,6 +1,10 @@
 # ogc-capabilities-generator
 
-[![Build Status](https://dev.kadaster.nl/jenkins-pdok/buildStatus/icon?job=pdok-gitea%2Fogc-capabilities-generator%2Fmaster)](https://dev.kadaster.nl/jenkins-pdok/job/pdok-gitea/job/ogc-capabilities-generator/job/master/)
+[![Build](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/build-and-publish-image.yml/badge.svg)](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/build-and-publish-image.yml)
+[![Lint](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/lint.yml/badge.svg)](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/lint.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/PDOK/ogc-capabilities-generator)](https://goreportcard.com/report/github.com/PDOK/ogc-capabilities-generator)
+[![GitHub license](https://img.shields.io/github/license/PDOK/ogc-capabilities-generator)](https://github.com/PDOK/ogc-capabilities-generator/blob/master/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/pdok/ogc-capabilities-generator.svg)](https://hub.docker.com/r/pdok/ogc-capabilities-generator)
 
 ## What will it do
 
