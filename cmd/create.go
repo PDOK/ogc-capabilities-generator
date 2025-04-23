@@ -231,25 +231,22 @@ func main() {
 		log.Fatalf("error: %v", err)
 	}
 
-	if cfg.Services.WFS200Config.Filename != "" {
+	if cfg.Services.WFS200Config != nil && cfg.Services.WFS200Config.Filename != "" {
 		if err := buildWFS2_0_0(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
 	}
-
-	if cfg.Services.WMS130Config.Filename != "" {
+	if cfg.Services.WMS130Config != nil && cfg.Services.WMS130Config.Filename != "" {
 		if err := buildWMS1_3_0(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
 	}
-
-	if cfg.Services.WMTS100Config.Filename != "" {
+	if cfg.Services.WMTS100Config != nil && cfg.Services.WMTS100Config.Filename != "" {
 		if err := buildWMTS1_0_0(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
 	}
-
-	if cfg.Services.WCS201Config.Filename != "" {
+	if cfg.Services.WCS201Config != nil && cfg.Services.WCS201Config.Filename != "" {
 		if err := buildWCS2_0_1(cfg); err != nil {
 			log.Fatalf("error: %v", err)
 		}
