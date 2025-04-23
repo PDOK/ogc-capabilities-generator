@@ -83,17 +83,17 @@ capabilities:
               # POST: no POST for GetCapabilities
         parameter:
           - name: AcceptVersions
-            allowedvalues:
+            allowedValues:
               value:
                 - 2.0.0
                 # - 1.1.0
                 # - 1.0.0
           - name: AcceptFormats
-            allowedvalues:
+            allowedValues:
               value:
                 - text/xml
           - name: Sections
-            allowedvalues:
+            allowedValues:
               value:
                 - ServiceIdentification
                 - ServiceProvider
@@ -109,7 +109,7 @@ capabilities:
               # post: no POST for DescribeFeatureType
         parameter:
           - name: outputFormat
-            allowedvalues:
+            allowedValues:
               value:
                 - application/gml+xml; version=3.2
                 - text/xml; subtype=gml/3.2.1
@@ -125,7 +125,7 @@ capabilities:
               href: "{{.Onlineresourceurl}}{{.Path}}"
         parameter:
           - name: outputFormat
-            allowedvalues:
+            allowedValues:
               value:
                 - application/gml+xml; version=3.2
                 - text/xml; subtype=gml/3.2.1
