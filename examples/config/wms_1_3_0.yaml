@@ -17,9 +17,10 @@ services:
             - ambush
         fees: none
         accessConstraints: none
-        layerLimit: 16
-        maxWidth: 2048
-        maxHeight: 2048
+        optionalConstraints:
+          layerLimit: 16
+          maxWidth: 2048
+          maxHeight: 2048
         contactInformation:
           contactPersonPrimary:
             contactPerson: Jeff Smith

@@ -106,6 +106,9 @@ func buildWFS2_0_0(cfg config.Config) error {
 func buildWMS1_3_0(cfg config.Config) error {
 	wms130base := ows.WMS130Base
 	target := cfg.Services.WMS130Config.Wms130
+	if target.Namespaces == nil {
+		target.Namespaces = &wms130.Namespaces{}
+	}
 
 	// merge with specific set skipping layer, this is a custom operation
 	err := mergo.Merge(&target, wms130base, mergo.WithTransformers(ows.WMS130Transfomer{}))
@@ -138,7 +141,7 @@ func buildWMS1_3_0(cfg config.Config) error {
 		return err
 	}
 
-	err = validate.ValidateCapabilities(&cfg, buf, target.SchemaLocation)
+	err = validate.ValidateCapabilities(&cfg, buf, target.Namespaces.SchemaLocation)
 	if err != nil {
 		return err
 	}
