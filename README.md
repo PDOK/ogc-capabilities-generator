@@ -1,5 +1,11 @@
 # ogc-capabilities-generator
 
+[![Build](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/build-and-publish-image.yml/badge.svg)](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/build-and-publish-image.yml)
+[![Lint](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/lint.yml/badge.svg)](https://github.com/PDOK/ogc-capabilities-generator/actions/workflows/lint.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/PDOK/ogc-capabilities-generator)](https://goreportcard.com/report/github.com/PDOK/ogc-capabilities-generator)
+[![GitHub license](https://img.shields.io/github/license/PDOK/ogc-capabilities-generator)](https://github.com/PDOK/ogc-capabilities-generator/blob/master/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/pdok/ogc-capabilities-generator.svg)](https://hub.docker.com/r/pdok/ogc-capabilities-generator)
+
 ## What will it do
 
 This application will give the user/developer 'full' control in the generation

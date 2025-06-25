@@ -21,7 +21,7 @@
     <Address>NASA Goddard Space Flight Center</Address>
     <City>Greenbelt</City>
     <StateOrProvince>MD</StateOrProvince>
-    <PostCode/>
+    <PostCode>20771</PostCode>
     <Country>USA</Country>
    </ContactAddress>
    <ContactVoiceTelephone>+1 301 555-1212</ContactVoiceTelephone>
@@ -58,7 +58,7 @@
        <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/?"/>
       </Get>
       <Post>
-       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/"/>
+       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/?"/>
       </Post>
      </HTTP>
     </DCPType>
@@ -77,7 +77,7 @@
        <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/?"/>
       </Get>
       <Post>
-       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/"/>
+       <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hostname/path/wms/?"/>
       </Post>
      </HTTP>
     </DCPType>

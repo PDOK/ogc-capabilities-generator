@@ -3,11 +3,12 @@ package validate
 import (
 	"bytes"
 	"encoding/xml"
+	"errors"
 	"fmt"
-	"log"
-	"ogc-capabilities-generator/config"
 	"strings"
 	"text/template"
+
+	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 
 	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 )
@@ -29,7 +30,7 @@ func generateXsd(schemaLocations string, global config.Global) (*schema, error) 
 	var schemaLocationsBuffer bytes.Buffer
 	err := schemaTemplate.Execute(&schemaLocationsBuffer, global)
 	if err != nil {
-		return nil, fmt.Errorf("cannot parse schemaLocations")
+		return nil, errors.New("cannot parse schemaLocations")
 	}
 
 	schemas := strings.Split(strings.TrimSpace(schemaLocationsBuffer.String()), " ")
@@ -55,41 +56,51 @@ func generateXsd(schemaLocations string, global config.Global) (*schema, error) 
 	}, nil
 }
 
-func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLocations string) {
+//nolint:revive
+func ValidateCapabilities(config *config.Config, capabilities []byte, schemaLocations string) error {
+	xsdvalidate.Cleanup()
 	err := xsdvalidate.Init()
 	if err != nil {
-		log.Fatalf("Error initializing validation with error: %s", err)
+		return err
 	}
 
 	xsd, err := generateXsd(schemaLocations, config.Global)
 	if err != nil {
-		log.Fatalf("Error initializing validation with error: %s", err)
+		return err
 	}
 
 	defer xsdvalidate.Cleanup()
 	var xsdHandler *xsdvalidate.XsdHandler
-	if len(xsd.Import) <= 0 {
-		log.Fatalf("Error parsing schemas, no xsd schema found, error: %s", err)
-	} else if len(xsd.Import) == 1 {
-		xsdUrl := xsd.Import[0].SchemaLocation
-		xsdHandler, err = xsdvalidate.NewXsdHandlerUrl(xsdUrl, xsdvalidate.ParsErrVerbose)
+	switch nrOfSchemas := len(xsd.Import); {
+	case nrOfSchemas <= 0:
+		return errors.New("error parsing schemas, no xsd schema found")
+	case nrOfSchemas == 1:
+		xsdURL := xsd.Import[0].SchemaLocation
+		xsdHandler, err = xsdvalidate.NewXsdHandlerUrl(xsdURL, xsdvalidate.ParsErrVerbose)
 		if err != nil {
-			log.Fatalf("Error parsing xsd from url: %s error: %s", xsdUrl, err)
+			return err
 		}
-	} else {
+	default:
 		schema, err := xml.MarshalIndent(xsd, "", " ")
 		if err != nil {
-			log.Fatalf("Error unmarshaling xsd schema with error: %s", err)
+			return err
 		}
 		xsdHandler, err = xsdvalidate.NewXsdHandlerMem(schema, xsdvalidate.ParsErrVerbose)
 		if err != nil {
-			log.Fatalf("Error parsing xsd schema with error: %s", err)
+			return err
 		}
 	}
 
 	err = xsdHandler.ValidateMem(capabilities, xsdvalidate.ValidErrDefault)
 	xsdHandler.Free()
 	if err != nil {
-		log.Fatalf("Error validating capabilities error: %s", err)
+		var validationError xsdvalidate.ValidationError
+		ok := errors.As(err, &validationError)
+		if ok {
+			if len(validationError.Errors) > 1 || validationError.Errors[0].NodeName != "ExtendedCapabilities" {
+				return err
+			}
+		}
 	}
+	return nil
 }

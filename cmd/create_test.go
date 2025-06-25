@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/xml"
-	"ogc-capabilities-generator/config"
 	"strings"
 	"testing"
+
+	"github.com/pdok/ogc-capabilities-generator/pkg/config"
 )
 
 type dummy struct {
@@ -32,7 +33,7 @@ func TestBuildCapabilities(t *testing.T) {
 	g := config.Global{Namespace: "namespace", Prefix: "prefix", Onlineresourceurl: "onlineresourceurl", Path: "path", Version: "version"}
 	d := dummy{Namespace: "{{.Namespace}}", Prefix: "{{.Prefix}}", Onlineresourceurl: "{{.Onlineresourceurl}}", Path: "{{.Path}}", Version: "{{.Version}}", Empty: "{{.Empty}}"}
 
-	buf, _ := buildCapabilities(d, g)
+	buf, _ := buildCapabilities(d, g, false)
 
 	if expectedresult != string(buf) {
 		t.Errorf("Expected %s but was not, got: %s", expectedresult, string(buf))
@@ -51,7 +52,7 @@ func TestBuildPrefixCapabilities(t *testing.T) {
 	g := config.Global{Namespace: "namespace", Prefix: "prefix"}
 	d := prefixtest{Prefix: "{{.Namespace}}"}
 
-	buf, _ := buildCapabilities(d, g)
+	buf, _ := buildCapabilities(d, g, false)
 
 	if expected != string(buf) {
 		t.Errorf("Expected %s but was not, got: %s", expected, string(buf))
@@ -70,7 +71,7 @@ func TestBuildPrefixCapabilitiesWeirdCharacter(t *testing.T) {
 	g := config.Global{Namespace: "namespace", Prefix: "prefix-prefix"}
 	d := prefixtest{Prefix: "{{.Namespace}}"}
 
-	buf, _ := buildCapabilities(d, g)
+	buf, _ := buildCapabilities(d, g, false)
 
 	if expected != string(buf) {
 		t.Errorf("Expected %s but was not, got: %s", expected, string(buf))
@@ -89,7 +90,7 @@ func TestBuildEmptyPrefixCapabilities(t *testing.T) {
 	g := config.Global{}
 	d := prefixtest{Prefix: "{{.Namespace}}"}
 
-	_, err := buildCapabilities(d, g)
+	_, err := buildCapabilities(d, g, true)
 
 	if err == nil {
 		t.Errorf("Expected %s but was not, got: %s", expected, err.Error())
@@ -107,7 +108,7 @@ func TestBuildCapabilitiesMissingEmpty(t *testing.T) {
 	g := config.Global{Namespace: "namespace", Prefix: "prefix", Onlineresourceurl: "onlineresourceurl", Path: "path", Version: "version"}
 	d := dummy{Namespace: "{{.Namespace}}", Prefix: "{{.Prefix}}", Onlineresourceurl: "{{.Onlineresourceurl}}", Path: "{{.Path}}", Version: "{{.Version}}"}
 
-	buf, _ := buildCapabilities(d, g)
+	buf, _ := buildCapabilities(d, g, false)
 
 	result := string(buf)
 

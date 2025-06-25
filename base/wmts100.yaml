@@ -5,433 +5,433 @@ namespaces:
   xsi: http://www.w3.org/2001/XMLSchema-instance
   gml: http://www.opengis.net/gml
   version: 1.0.0
-  schemalocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmts.xsd
+  schemaLocation: http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmts.xsd
 
-serviceidentification:
-  servicetype: OGC WMTS
-  servicetypeversion: 1.0.0
+serviceIdentification:
+  serviceType: OGC WMTS
+  serviceTypeVersion: 1.0.0
 
 contents:
-  tilematrixset:
+  tileMatrixSet:
     - identifier: EPSG:25831
-      supportedcrs: urn:ogc:def:crs:EPSG::25831
-      tilematrix:
+      supportedCrs: urn:ogc:def:crs:EPSG::25831
+      tileMatrix:
         - identifier: 00
-          scaledenominator: 10000000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 9
-          matrixheight: 6
+          scaleDenominator: 10000000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 9
+          matrixHeight: 6
         - identifier: 01
-          scaledenominator: 5000000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 18
-          matrixheight: 12
+          scaleDenominator: 5000000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 18
+          matrixHeight: 12
         - identifier: 02
-          scaledenominator: 2500000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 36
-          matrixheight: 24
+          scaleDenominator: 2500000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 36
+          matrixHeight: 24
         - identifier: 03
-          scaledenominator: 1000000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 90
-          matrixheight: 60
+          scaleDenominator: 1000000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 90
+          matrixHeight: 60
         - identifier: 04
-          scaledenominator: 500000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 180
-          matrixheight: 120
+          scaleDenominator: 500000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 180
+          matrixHeight: 120
         - identifier: 05
-          scaledenominator: 250000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 360
-          matrixheight: 240
+          scaleDenominator: 250000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 360
+          matrixHeight: 240
         - identifier: 06
-          scaledenominator: 100000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 900
-          matrixheight: 600
+          scaleDenominator: 100000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 900
+          matrixHeight: 600
         - identifier: 07
-          scaledenominator: 75000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 1200
-          matrixheight: 800
+          scaleDenominator: 75000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 1200
+          matrixHeight: 800
         - identifier: 08
-          scaledenominator: 50000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 1800
-          matrixheight: 1200
+          scaleDenominator: 50000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 1800
+          matrixHeight: 1200
         - identifier: 09
-          scaledenominator: 25000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 3600
-          matrixheight: 2400
+          scaleDenominator: 25000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 3600
+          matrixHeight: 2400
         - identifier: 10
-          scaledenominator: 10000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 9000
-          matrixheight: 6000
+          scaleDenominator: 10000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 9000
+          matrixHeight: 6000
         - identifier: 11
-          scaledenominator: 5000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 18000
-          matrixheight: 12000
+          scaleDenominator: 5000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 18000
+          matrixHeight: 12000
         - identifier: 12
-          scaledenominator: 2500.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 36000
-          matrixheight: 24000
+          scaleDenominator: 2500.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 36000
+          matrixHeight: 24000
         - identifier: 13
-          scaledenominator: 1000.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 90000
-          matrixheight: 60000
+          scaleDenominator: 1000.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 90000
+          matrixHeight: 60000
         - identifier: 14
-          scaledenominator: 500.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 180000
-          matrixheight: 120000
+          scaleDenominator: 500.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 180000
+          matrixHeight: 120000
         - identifier: 15
-          scaledenominator: 250.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 360000
-          matrixheight: 240000
+          scaleDenominator: 250.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 360000
+          matrixHeight: 240000
         - identifier: 16
-          scaledenominator: 100.0
-          topleftcorner: -2404683.40739 8298457.58466
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 900000
-          matrixheight: 600000
+          scaleDenominator: 100.0
+          topLeftCorner: -2404683.40739 8298457.58466
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 900000
+          matrixHeight: 600000
     - identifier: EPSG:28992
-      supportedcrs: urn:ogc:def:crs:EPSG::28992
-      tilematrix:
+      supportedCrs: urn:ogc:def:crs:EPSG::28992
+      tileMatrix:
         - identifier: 00
-          scaledenominator: 12288000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 1
-          matrixheight: 1
+          scaleDenominator: 12288000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 1
+          matrixHeight: 1
         - identifier: 01
-          scaledenominator: 6144000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 2
-          matrixheight: 2
+          scaleDenominator: 6144000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 2
+          matrixHeight: 2
         - identifier: 02
-          scaledenominator: 3072000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 4
-          matrixheight: 4
+          scaleDenominator: 3072000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 4
+          matrixHeight: 4
         - identifier: 03
-          scaledenominator: 1536000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 8
-          matrixheight: 8
+          scaleDenominator: 1536000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 8
+          matrixHeight: 8
         - identifier: 04
-          scaledenominator: 768000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 16
-          matrixheight: 16
+          scaleDenominator: 768000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 16
+          matrixHeight: 16
         - identifier: 05
-          scaledenominator: 384000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 32
-          matrixheight: 32
+          scaleDenominator: 384000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 32
+          matrixHeight: 32
         - identifier: 06
-          scaledenominator: 192000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 64
-          matrixheight: 64
+          scaleDenominator: 192000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 64
+          matrixHeight: 64
         - identifier: 07
-          scaledenominator: 96000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 128
-          matrixheight: 128
+          scaleDenominator: 96000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 128
+          matrixHeight: 128
         - identifier: 08
-          scaledenominator: 48000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 256
-          matrixheight: 256
+          scaleDenominator: 48000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 256
+          matrixHeight: 256
         - identifier: 09
-          scaledenominator: 24000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 512
-          matrixheight: 512
+          scaleDenominator: 24000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 512
+          matrixHeight: 512
         - identifier: 10
-          scaledenominator: 12000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 1024
-          matrixheight: 1024
+          scaleDenominator: 12000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 1024
+          matrixHeight: 1024
         - identifier: 11
-          scaledenominator: 6000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 2048
-          matrixheight: 2048
+          scaleDenominator: 6000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 2048
+          matrixHeight: 2048
         - identifier: 12
-          scaledenominator: 3000.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 4096
-          matrixheight: 4096
+          scaleDenominator: 3000.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 4096
+          matrixHeight: 4096
         - identifier: 13
-          scaledenominator: 1500.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 8192
-          matrixheight: 8192
+          scaleDenominator: 1500.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 8192
+          matrixHeight: 8192
         - identifier: 14
-          scaledenominator: 750.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 16384
-          matrixheight: 16384
+          scaleDenominator: 750.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 16384
+          matrixHeight: 16384
         - identifier: 15
-          scaledenominator: 375.0
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 32768
-          matrixheight: 32768
+          scaleDenominator: 375.0
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 32768
+          matrixHeight: 32768
         - identifier: 16
-          scaledenominator: 187.5
-          topleftcorner: -285401.92 903401.92
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 65536
-          matrixheight: 65536
+          scaleDenominator: 187.5
+          topLeftCorner: -285401.92 903401.92
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 65536
+          matrixHeight: 65536
     - identifier: EPSG:3857
-      supportedcrs: urn:ogc:def:crs:EPSG::3857
-      tilematrix:
+      supportedCrs: urn:ogc:def:crs:EPSG::3857
+      tileMatrix:
         - identifier: 00
-          scaledenominator: 559082264.029
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 1
-          matrixheight: 1
+          scaleDenominator: 559082264.029
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 1
+          matrixHeight: 1
         - identifier: 01
-          scaledenominator: 279541132.014
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 2
-          matrixheight: 2
+          scaleDenominator: 279541132.014
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 2
+          matrixHeight: 2
         - identifier: 02
-          scaledenominator: 139770566.007
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 4
-          matrixheight: 4
+          scaleDenominator: 139770566.007
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 4
+          matrixHeight: 4
         - identifier: 03
-          scaledenominator: 69885283.0036
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 8
-          matrixheight: 8
+          scaleDenominator: 69885283.0036
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 8
+          matrixHeight: 8
         - identifier: 04
-          scaledenominator: 34942641.5018
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 16
-          matrixheight: 16
+          scaleDenominator: 34942641.5018
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 16
+          matrixHeight: 16
         - identifier: 05
-          scaledenominator: 17471320.7509
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 32
-          matrixheight: 32
+          scaleDenominator: 17471320.7509
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 32
+          matrixHeight: 32
         - identifier: 06
-          scaledenominator: 8735660.37545
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 64
-          matrixheight: 64
+          scaleDenominator: 8735660.37545
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 64
+          matrixHeight: 64
         - identifier: 07
-          scaledenominator: 4367830.18772
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 128
-          matrixheight: 128
+          scaleDenominator: 4367830.18772
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 128
+          matrixHeight: 128
         - identifier: 08
-          scaledenominator: 2183915.09386
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 256
-          matrixheight: 256
+          scaleDenominator: 2183915.09386
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 256
+          matrixHeight: 256
         - identifier: 09
-          scaledenominator: 1091957.54693
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 512
-          matrixheight: 512
+          scaleDenominator: 1091957.54693
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 512
+          matrixHeight: 512
         - identifier: 10
-          scaledenominator: 545978.773466
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 1024
-          matrixheight: 1024
+          scaleDenominator: 545978.773466
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 1024
+          matrixHeight: 1024
         - identifier: 11
-          scaledenominator: 272989.386733
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 2048
-          matrixheight: 2048
+          scaleDenominator: 272989.386733
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 2048
+          matrixHeight: 2048
         - identifier: 12
-          scaledenominator: 136494.693366
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 4096
-          matrixheight: 4096
+          scaleDenominator: 136494.693366
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 4096
+          matrixHeight: 4096
         - identifier: 13
-          scaledenominator: 68247.3466832
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 8192
-          matrixheight: 8192
+          scaleDenominator: 68247.3466832
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 8192
+          matrixHeight: 8192
         - identifier: 14
-          scaledenominator: 34123.6733416
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 16384
-          matrixheight: 16384
+          scaleDenominator: 34123.6733416
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 16384
+          matrixHeight: 16384
         - identifier: 15
-          scaledenominator: 17061.8366708
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 32768
-          matrixheight: 32768
+          scaleDenominator: 17061.8366708
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 32768
+          matrixHeight: 32768
         - identifier: 16
-          scaledenominator: 8530.9183354
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 65536
-          matrixheight: 65536
+          scaleDenominator: 8530.9183354
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 65536
+          matrixHeight: 65536
         - identifier: 17
-          scaledenominator: 4265.4591677
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 131072
-          matrixheight: 131072
+          scaleDenominator: 4265.4591677
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 131072
+          matrixHeight: 131072
         - identifier: 18
-          scaledenominator: 2132.72958385
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 262144
-          matrixheight: 262144
+          scaleDenominator: 2132.72958385
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 262144
+          matrixHeight: 262144
         - identifier: 19
-          scaledenominator: 1066.36479192
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 524288
-          matrixheight: 524288
+          scaleDenominator: 1066.36479192
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 524288
+          matrixHeight: 524288
         - identifier: 20
-          scaledenominator: 533.182395962445
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 1048576
-          matrixheight: 1048576
+          scaleDenominator: 533.182395962445
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 1048576
+          matrixHeight: 1048576
         - identifier: 21
-          scaledenominator: 266.591197981222
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 2097152
-          matrixheight: 2097152
+          scaleDenominator: 266.591197981222
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 2097152
+          matrixHeight: 2097152
         - identifier: 22
-          scaledenominator: 133.295598990611
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 4194304
-          matrixheight: 4194304
+          scaleDenominator: 133.295598990611
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 4194304
+          matrixHeight: 4194304
         - identifier: 23
-          scaledenominator: 66.6477994953056
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 8388608
-          matrixheight: 8388608
+          scaleDenominator: 66.6477994953056
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 8388608
+          matrixHeight: 8388608
         - identifier: 24
-          scaledenominator: 33.3238997476528
-          topleftcorner: -20037508.3428 20037508.3428
-          tilewidth: 256
-          tileheight: 256
-          matrixwidth: 16777216
-          matrixheight: 16777216
+          scaleDenominator: 33.3238997476528
+          topLeftCorner: -20037508.3428 20037508.3428
+          tileWidth: 256
+          tileHeight: 256
+          matrixWidth: 16777216
+          matrixHeight: 16777216
