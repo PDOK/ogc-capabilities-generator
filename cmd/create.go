@@ -38,7 +38,7 @@ func writeFile(filename string, buffer []byte) error {
 	return nil
 }
 
-func buildCapabilities(v interface{}, g config.Global, checkPrefix bool) ([]byte, error) {
+func buildCapabilities(v any, g config.Global, checkPrefix bool) ([]byte, error) {
 
 	if checkPrefix && g.Prefix == `` {
 		return nil, errors.New("no dataset prefix defined")
@@ -71,18 +71,18 @@ func buildWFS2_0_0(cfg config.Config) error {
 	}
 
 	// can we apply generic base feature template to config ?
-	if len(wfs200base.Capabilities.FeatureTypeList.FeatureType) > 0 {
+	if len(wfs200base.FeatureTypeList.FeatureType) > 0 {
 		for index := range target.FeatureTypeList.FeatureType {
-			err := mergo.Merge(&target.FeatureTypeList.FeatureType[index], wfs200base.Capabilities.FeatureTypeList.FeatureType[0])
+			err := mergo.Merge(&target.FeatureTypeList.FeatureType[index], wfs200base.FeatureTypeList.FeatureType[0])
 			if err != nil {
 				return err
 			}
 		}
 	}
 
-	if target.Capabilities.OperationsMetadata.ExtendedCapabilities != nil {
-		target.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-		target.Namespaces.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+	if target.OperationsMetadata.ExtendedCapabilities != nil {
+		target.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		target.XmlnsInspireDls = "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
 	}
 
 	buf, err := buildCapabilities(target, cfg.Global, true)
@@ -125,10 +125,10 @@ func buildWMS1_3_0(cfg config.Config) error {
 		}
 	}
 
-	if target.Capabilities.WMSCapabilities.ExtendedCapabilities != nil {
-		target.Namespaces.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
-		target.Namespaces.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
-		target.Namespaces.SchemaLocation = wms130base.Namespaces.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
+	if target.Capabilities.ExtendedCapabilities != nil {
+		target.XmlnsInspireCommon = "http://inspire.ec.europa.eu/schemas/common/1.0"
+		target.XmlnsInspireVs = "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+		target.SchemaLocation = wms130base.SchemaLocation + " " + "http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd"
 	}
 
 	buf, err := buildCapabilities(target, cfg.Global, false)
@@ -141,7 +141,7 @@ func buildWMS1_3_0(cfg config.Config) error {
 		return err
 	}
 
-	err = validate.ValidateCapabilities(&cfg, buf, target.Namespaces.SchemaLocation)
+	err = validate.ValidateCapabilities(&cfg, buf, target.SchemaLocation)
 	if err != nil {
 		return err
 	}
