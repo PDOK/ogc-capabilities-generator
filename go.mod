@@ -1,6 +1,6 @@
 module github.com/pdok/ogc-capabilities-generator
 
-go 1.24
+go 1.26.3
 
 require (
 	dario.cat/mergo v1.0.1
