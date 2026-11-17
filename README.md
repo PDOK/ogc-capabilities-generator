@@ -58,7 +58,7 @@ XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go test ./... -covermode=atomic 
 ```sh
 docker build -t pdok/ogc-capabilities-generator .
 
-docker run --rm -d -v `pwd`/examples/config:/config -v `pwd`:/output \
+docker run --rm -d -v "$PWD/examples/config":/config -v "$PWD":/output \
 -e SERVICECONFIG=/config/wfs_2_0_0.yaml --name ogc pdok/ogc-capabilities-generator
 ```
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-start=`date +%s`
+start=$(date +%s)
 
 # debug all the things:
 # export XML_DEBUG_CATALOG=
@@ -45,7 +45,7 @@ then
   success_state=FAILURE
 fi
 
-end=`date +%s`
+end=$(date +%s)
 runtime=$((end-start))
 
 if [ "$runtime" -gt "0" ]
