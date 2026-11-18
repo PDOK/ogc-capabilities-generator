@@ -20,4 +20,4 @@ jobs:
       - name: Running Tests
         run: |
           go mod tidy
-          XML_CATALOG_FILES=./xml-catalog/ogc-catalog.xml go test ./... -covermode=atomic -v
+          XML_CATALOG_FILES="$PWD/xml-catalog/ogc-catalog.xml" go test ./... -covermode=atomic -v
